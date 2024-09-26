@@ -2,53 +2,55 @@
 
 internal static partial class Classes
 {
-    public const string SimpleTemplate = """
+    public const string GenericsTemplate = """
         namespace Valuify.Classes.Testing
         {
             [Valuify]
-            public sealed partial class Simple
+            public sealed partial class Generics<T1, T2>
+                where T1 : struct
+                where T2 : class
         __BODY__
         }
         """;
 
-    public static readonly Declared Simple;
+    public static readonly Declared Generics;
 
-    public static readonly Generated SimpleEquality = new(
-        SimpleEqualityContent,
+    public static readonly Generated GenericsEquality = new(
+        GenericsEqualityContent,
         typeof(ClassGenerator),
-        "Valuify.Classes.Testing.Simple.Equality");
+        "Valuify.Classes.Testing.Generics.Equality");
 
-    public static readonly Generated SimpleEquals = new(
-        SimpleEqualsContent,
+    public static readonly Generated GenericsEquals = new(
+        GenericsEqualsContent,
         typeof(ClassGenerator),
-        "Valuify.Classes.Testing.Simple.Equals");
+        "Valuify.Classes.Testing.Generics.Equals");
 
-    public static readonly Generated SimpleEquatableContract = new(
-        SimpleEquatableContractContent,
+    public static readonly Generated GenericsEquatableContract = new(
+        GenericsEquatableContractContent,
         typeof(ClassGenerator),
-        "Valuify.Classes.Testing.Simple.IEquatable");
+        "Valuify.Classes.Testing.Generics.IEquatable");
 
-    public static readonly Generated SimpleEquatableImplementation = new(
-        SimpleEquatableImplementationContent,
+    public static readonly Generated GenericsEquatableImplementation = new(
+        GenericsEquatableImplementationContent,
         typeof(ClassGenerator),
-        "Valuify.Classes.Testing.Simple.IEquatable.Equals");
+        "Valuify.Classes.Testing.Generics.IEquatable.Equals");
 
-    public static readonly Generated SimpleGetHashCode = new(
-        SimpleGetHashCodeContent,
+    public static readonly Generated GenericsGetHashCode = new(
+        GenericsGetHashCodeContent,
         typeof(ClassGenerator),
-        "Valuify.Classes.Testing.Simple.GetHashCode");
+        "Valuify.Classes.Testing.Generics.GetHashCode");
 
-    public static readonly Generated SimpleInequality = new(
-        SimpleInequalityContent,
+    public static readonly Generated GenericsInequality = new(
+        GenericsInequalityContent,
         typeof(ClassGenerator),
-        "Valuify.Classes.Testing.Simple.Inequality");
+        "Valuify.Classes.Testing.Generics.Inequality");
 
-    public static readonly Generated SimpleToString = new(
-        SimpleToStringContent,
+    public static readonly Generated GenericsToString = new(
+        GenericsToStringContent,
         typeof(ClassGenerator),
-        "Valuify.Classes.Testing.Simple.ToString");
+        "Valuify.Classes.Testing.Generics.ToString");
 
-    private const string SimpleEqualityContent = """
+    private const string GenericsEqualityContent = """
         namespace Valuify.Classes.Testing
         {
             using System;
@@ -58,11 +60,11 @@ internal static partial class Classes
             #nullable disable
             #endif
 
-            partial class Simple
+            partial class Generics<T1, T2>
             {
-                public static bool operator ==(Simple left, Simple right)
+                public static bool operator ==(Generics<T1, T2> left, Generics<T1, T2> right)
                 {
-                    return EqualityComparer<Simple>.Default.Equals(left, right);
+                    return EqualityComparer<Generics<T1, T2>>.Default.Equals(left, right);
                 }
             }
 
@@ -72,7 +74,7 @@ internal static partial class Classes
         }
         """;
 
-    private const string SimpleEqualsContent = """
+    private const string GenericsEqualsContent = """
         namespace Valuify.Classes.Testing
         {
             using System;
@@ -82,11 +84,11 @@ internal static partial class Classes
             #nullable disable
             #endif
 
-            partial class Simple
+            partial class Generics<T1, T2>
             {
                 public sealed override bool Equals(object other)
                 {
-                    return Equals(other as Simple);
+                    return Equals(other as Generics<T1, T2>);
                 }
             }
 
@@ -96,7 +98,7 @@ internal static partial class Classes
         }
         """;
 
-    private const string SimpleEquatableContractContent = """
+    private const string GenericsEquatableContractContent = """
         namespace Valuify.Classes.Testing
         {
             using System;
@@ -106,8 +108,8 @@ internal static partial class Classes
             #nullable disable
             #endif
 
-            partial class Simple
-                : IEquatable<Simple>
+            partial class Generics<T1, T2>
+                : IEquatable<Generics<T1, T2>>
             {
             }
 
@@ -117,7 +119,7 @@ internal static partial class Classes
         }
         """;
 
-    private const string SimpleEquatableImplementationContent = """
+    private const string GenericsEquatableImplementationContent = """
         namespace Valuify.Classes.Testing
         {
             using System;
@@ -127,11 +129,11 @@ internal static partial class Classes
             #nullable disable
             #endif
 
-            partial class Simple
+            partial class Generics<T1, T2>
             {
-                public bool Equals(Simple other)
+                public bool Equals(Generics<T1, T2> other)
                 {
-                    return EqualityComparer<Simple>.Default.Equals(this, other);
+                    return EqualityComparer<Generics<T1, T2>>.Default.Equals(this, other);
                 }
             }
 
@@ -141,7 +143,7 @@ internal static partial class Classes
         }
         """;
 
-    private const string SimpleGetHashCodeContent = """
+    private const string GenericsGetHashCodeContent = """
         namespace Valuify.Classes.Testing
         {
             using System;
@@ -151,11 +153,11 @@ internal static partial class Classes
             #nullable disable
             #endif
         
-            partial class Simple
+            partial class Generics<T1, T2>
             {
                 public sealed override int GetHashCode()
                 {
-                    return Valuify.Internal.HashCode.Combine(Age, IsAdult, Name);
+                    return Valuify.Internal.HashCode.Combine(Age, Name);
                 }
             }
 
@@ -165,7 +167,7 @@ internal static partial class Classes
         }
         """;
 
-    private const string SimpleInequalityContent = """
+    private const string GenericsInequalityContent = """
         namespace Valuify.Classes.Testing
         {
             using System;
@@ -175,11 +177,11 @@ internal static partial class Classes
             #nullable disable
             #endif
 
-            partial class Simple
+            partial class Generics<T1, T2>
             {
-                public static bool operator !=(Simple left, Simple right)
+                public static bool operator !=(Generics<T1, T2> left, Generics<T1, T2> right)
                 {
-                    return !EqualityComparer<Simple>.Default.Equals(left, right);
+                    return !EqualityComparer<Generics<T1, T2>>.Default.Equals(left, right);
                 }
             }
         
@@ -189,7 +191,7 @@ internal static partial class Classes
         }
         """;
 
-    private const string SimpleToStringContent = """
+    private const string GenericsToStringContent = """
         namespace Valuify.Classes.Testing
         {
             using System;
@@ -199,11 +201,11 @@ internal static partial class Classes
             #nullable disable
             #endif
 
-            partial class Simple
+            partial class Generics<T1, T2>
             {
                 public sealed override string ToString()
                 {
-                    return string.Format("Simple { Age = {0}, IsAdult = {1}, Name = {2} }", Age, IsAdult, Name);
+                    return string.Format("Generics { Age = {0}, Name = {1} }", Age, Name);
                 }
             }
         

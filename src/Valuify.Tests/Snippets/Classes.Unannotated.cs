@@ -2,17 +2,13 @@
 
 internal static partial class Classes
 {
-    public const string UnannotatedContent = """
+    public const string UnannotatedTemplate = """
+        // CSharp1 is supported due to the absence of auto-properties
+
         namespace Valuify.Classes.Testing
         {
-            public sealed partial class Unannotated
-            {
-                public int Age { get; }
-        
-                public bool IsAdult => Age >= 18;
-        
-                public string Name { get; }
-            }
+            public sealed class Unannotated
+        __BODY__
         }
         """;
 

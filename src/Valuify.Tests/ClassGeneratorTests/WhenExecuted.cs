@@ -1,9 +1,10 @@
 ﻿namespace Valuify.ClassGeneratorTests;
 
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Testing;
 using Valuify.Snippets;
 
 public sealed class WhenExecuted
-    : GeneratorTests<ClassGenerator>
 {
     private static readonly Type[] generators =
     [
@@ -12,22 +13,23 @@ public sealed class WhenExecuted
         typeof(HashCodeGenerator),
     ];
 
-    public WhenExecuted()
-        : base(generators)
-    {
-    }
-
     [Theory]
-    [Declared(typeof(Classes))]
-    public async Task GivenAClassTheExpectedSourceIsGenerated(Declared declared)
+    [Declared]
+    [Trait("Category", "Integration")]
+    public async Task GivenAClassTheExpectedSourceIsGenerated(ReferenceAssemblies assembly, string content, Declared declared, LanguageVersion language)
     {
         // Arrange
-        declared.IsDeclaredIn(TestState);
+        var test = new GeneratorTest<ClassGenerator>(assembly, language, generators);
 
-        Attributes.Valuify.IsExpectedIn(TestState);
-        Internal.HashCode.IsExpectedIn(TestState);
+        declared.IsDeclaredIn(content, test.TestState);
 
-        // Act & Assert
-        await ActAndAssertAsync();
+        Attributes.Valuify.IsExpectedIn(test.TestState);
+        Internal.HashCode.IsExpectedIn(test.TestState);
+
+        // Act
+        Func<Task> act = () => test.RunAsync();
+
+        // Assert
+        _ = await act.Should().NotThrowAsync();
     }
 }

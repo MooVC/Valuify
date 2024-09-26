@@ -14,15 +14,20 @@ internal sealed class ToStringStrategy
             yield break;
         }
 
-        string value = $"{{nameof({subject.Name})}}";
+        string value = $"\"{subject.Name}\"";
 
         if (subject.Properties.Any())
         {
             IEnumerable<string> values = subject
                 .Properties
-                .Select(property => $"{{nameof({property.Name})}} = {{{property.Name}}}");
+                .Select((property, index) => $"{property.Name} = {{{index}}}");
 
-            value = $"{value} {{{{ {string.Join(", ", values)} }}}}";
+            value = $"{subject.Name} {{ {string.Join(", ", values)} }}";
+
+            IEnumerable<string> properties = subject.Properties.Select(property => property.Name);
+            string parameters = string.Join(", ", properties);
+
+            value = $"string.Format(\"{value}\", {parameters})";
         }
 
         string code = $$"""
@@ -30,7 +35,7 @@ internal sealed class ToStringStrategy
             {
                 public sealed override string ToString()
                 {
-                    return $"{{value}}";
+                    return {{value}};
                 }
             }
             """;

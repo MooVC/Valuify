@@ -2,18 +2,14 @@
 
 internal static partial class Classes
 {
-    public const string UnsupportedContent = """
+    public const string UnsupportedTemplate = """
+        // CSharp6 is needed due to the read-only auto-properties
+
         namespace Valuify.Classes.Testing
         {
             [Valuify]
             public sealed class Unsupported
-            {
-                public int Age { get; }
-
-                public bool IsAdult => Age >= 18;
-
-                public string Name { get; }
-            }
+        __BODY__
         }
         """;
 

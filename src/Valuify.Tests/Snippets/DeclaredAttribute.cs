@@ -1,32 +1,42 @@
 ﻿namespace Valuify.Snippets;
 
 using System.Reflection;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Testing;
 using Xunit.Sdk;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public sealed class DeclaredAttribute
     : DataAttribute
 {
-    public DeclaredAttribute(Type source)
-    {
-        Source = source;
-    }
-
-    public Type Source { get; }
-
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {
-        FieldInfo[] fields = Source.GetFields(BindingFlags.Public | BindingFlags.Static);
+        FieldInfo[] fields = typeof(Classes).GetFields(BindingFlags.Public | BindingFlags.Static);
 
-        foreach (FieldInfo field in fields)
+        foreach (FieldInfo field in fields.Where(field => field.FieldType == typeof(Declared)))
         {
-            if (field.FieldType == typeof(Declared))
-            {
-                object? value = field.GetValue(default);
+            object? value = field.GetValue(default);
 
-                if (value is not null)
+            if (value is Declared declared)
+            {
+                IEnumerable<Content> contents = declared.Render();
+
+                foreach (Content content in contents)
                 {
-                    yield return new object[] { value };
+                    object[]? Prepare(ReferenceAssemblies assembly, LanguageVersion language)
+                    {
+                        if (language >= content.Minimum)
+                        {
+                            return [assembly, content.Body, declared, language];
+                        }
+
+                        return default;
+                    }
+
+                    foreach (object[] theory in Frameworks.All(Prepare))
+                    {
+                        yield return theory;
+                    }
                 }
             }
         }

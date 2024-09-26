@@ -2,91 +2,166 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Testing;
 
 internal static partial class Classes
 {
-    public static readonly ReferenceAssemblies[] AllFrameworks =
+    public const string GenericCSharp2Body = """
+            {
+                private T1 age;
+                private T2 name;
+
+                public T1 Age
+                {
+                    get { return age; }
+                    set { age = value; }
+                }
+        
+                public T2 Name
+                {
+                    get { return name; }
+                    set { name = value; }
+                }
+            }
+        """;
+
+    public const string GenericCSharp3Body = """
+            {
+                public T1 Age { get; set; }
+        
+                public T2 Name { get; set; }
+            }
+        """;
+
+    public const string GenericCSharp6Body = """
+            {
+                public T1 Age { get; }
+        
+                public T2 Name { get; }
+            }
+        """;
+
+    public const string GenericCSharp9Body = """
+            {
+                public T1 Age { get; init; }
+        
+                public T2 Name { get; init; }
+            }
+        """;
+
+    public const string StandardCSharp1Body = """
+            {
+                private int age;
+                private string name;
+
+                public int Age
+                {
+                    get { return age; }
+                    set { age = value; }
+                }
+        
+                public bool IsAdult
+                {
+                    get { return Age >= 18; }
+                }
+        
+                public string Name
+                {
+                    get { return name; }
+                    set { name = value; }
+                }
+            }
+        """;
+
+    public const string StandardCSharp3Body = """
+            {
+                public int Age { get; set; }
+        
+                public bool IsAdult
+                {
+                    get { return Age >= 18; }
+                }
+        
+                public string Name { get; set; }
+            }
+        """;
+
+    public const string StandardCSharp6Body = """
+            {
+                public int Age { get; }
+        
+                public bool IsAdult => Age >= 18;
+        
+                public string Name { get; }
+            }
+        """;
+
+    public const string StandardCSharp9Body = """
+            {
+                public int Age { get; init; }
+        
+                public bool IsAdult => Age >= 18;
+        
+                public string Name { get; init; }
+            }
+        """;
+
+    public static readonly Content[] Generic =
     [
-        ReferenceAssemblies.Net.Net50,
-        ReferenceAssemblies.Net.Net60,
-        ReferenceAssemblies.Net.Net70,
-        ReferenceAssemblies.Net.Net80,
-        ReferenceAssemblies.NetCore.NetCoreApp10,
-        ReferenceAssemblies.NetCore.NetCoreApp11,
-        ReferenceAssemblies.NetCore.NetCoreApp20,
-        ReferenceAssemblies.NetCore.NetCoreApp21,
-        ReferenceAssemblies.NetCore.NetCoreApp30,
-        ReferenceAssemblies.NetCore.NetCoreApp31,
-        ReferenceAssemblies.NetFramework.Net20.Default,
-        ReferenceAssemblies.NetFramework.Net35.Default,
-        ReferenceAssemblies.NetFramework.Net40.Default,
-        ReferenceAssemblies.NetFramework.Net45.Default,
-        ReferenceAssemblies.NetFramework.Net451.Default,
-        ReferenceAssemblies.NetFramework.Net452.Default,
-        ReferenceAssemblies.NetFramework.Net46.Default,
-        ReferenceAssemblies.NetFramework.Net461.Default,
-        ReferenceAssemblies.NetFramework.Net462.Default,
-        ReferenceAssemblies.NetFramework.Net47.Default,
-        ReferenceAssemblies.NetFramework.Net471.Default,
-        ReferenceAssemblies.NetFramework.Net472.Default,
-        ReferenceAssemblies.NetFramework.Net48.Default,
-        ReferenceAssemblies.NetStandard.NetStandard10,
-        ReferenceAssemblies.NetStandard.NetStandard11,
-        ReferenceAssemblies.NetStandard.NetStandard12,
-        ReferenceAssemblies.NetStandard.NetStandard13,
-        ReferenceAssemblies.NetStandard.NetStandard14,
-        ReferenceAssemblies.NetStandard.NetStandard15,
-        ReferenceAssemblies.NetStandard.NetStandard16,
-        ReferenceAssemblies.NetStandard.NetStandard20,
-        ReferenceAssemblies.NetStandard.NetStandard21,
+        new(GenericCSharp2Body, LanguageVersion.CSharp2),
+        new(GenericCSharp3Body, LanguageVersion.CSharp3),
+        new(GenericCSharp6Body, LanguageVersion.CSharp6),
+        new(GenericCSharp9Body, LanguageVersion.CSharp9),
     ];
 
-    public static readonly LanguageVersion[] AllVersions =
+    public static readonly Content[] Standard =
     [
-        LanguageVersion.CSharp1,
-        LanguageVersion.CSharp2,
-        LanguageVersion.CSharp3,
-        LanguageVersion.CSharp4,
-        LanguageVersion.CSharp5,
-        LanguageVersion.CSharp6,
-        LanguageVersion.CSharp7,
-        LanguageVersion.CSharp7_1,
-        LanguageVersion.CSharp7_2,
-        LanguageVersion.CSharp7_3,
-        LanguageVersion.CSharp8,
-        LanguageVersion.CSharp9,
-        LanguageVersion.CSharp10,
-        LanguageVersion.CSharp11,
-        LanguageVersion.CSharp12,
+        new(StandardCSharp1Body, LanguageVersion.CSharp1),
+        new(StandardCSharp3Body, LanguageVersion.CSharp3),
+        new(StandardCSharp6Body, LanguageVersion.CSharp6),
+        new(StandardCSharp9Body, LanguageVersion.CSharp9),
     ];
 
     [SuppressMessage("Minor Code Smell", "S3963:\"static\" fields should be initialized inline", Justification = "Needed due to order constraint.")]
     static Classes()
     {
+        Generics = new(
+            Generic,
+            [
+                GenericsEquality,
+                GenericsEquals,
+                GenericsEquatableContract,
+                GenericsEquatableImplementation,
+                GenericsGetHashCode,
+                GenericsInequality,
+                GenericsToString,
+            ],
+            nameof(Generics),
+            new(GenericsTemplate, LanguageVersion.CSharp2));
+
         Simple = new(
-            SimpleContent,
-            LanguageVersion.CSharp1,
-            LanguageVersion.Latest,
+            Standard,
+            [
+                SimpleEquality,
+                SimpleEquals,
+                SimpleEquatableContract,
+                SimpleEquatableImplementation,
+                SimpleGetHashCode,
+                SimpleInequality,
+                SimpleToString,
+            ],
             nameof(Simple),
-            SimpleEquality,
-            SimpleEquals,
-            SimpleEquatableContract,
-            SimpleEquatableImplementation,
-            SimpleGetHashCode,
-            SimpleInequality,
-            SimpleToString);
+            new(SimpleTemplate, LanguageVersion.CSharp2));
 
         Unannotated = new(
-            UnannotatedContent,
-            LanguageVersion.CSharp1,
-            LanguageVersion.Latest,
-            nameof(Unannotated));
+            Standard,
+            [],
+            nameof(Unannotated),
+            new(UnannotatedTemplate, LanguageVersion.CSharp2));
 
         Unsupported = new(
-            UnsupportedContent,
-            LanguageVersion.CSharp1,
-            LanguageVersion.Latest,
-            nameof(Unsupported));
+            Standard,
+            [],
+            nameof(Unsupported),
+            new(UnsupportedTemplate, LanguageVersion.CSharp2));
     }
 }
