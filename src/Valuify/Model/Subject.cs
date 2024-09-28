@@ -64,9 +64,11 @@ internal sealed class Subject
     /// <inheritdoc/>
     protected override IEnumerable<object> GetProperties()
     {
+        yield return HasEqualityOperator;
         yield return HasEqualsOverride;
         yield return HasEquatable;
         yield return HasGetHashCodeOverride;
+        yield return HasInequalityOperator;
         yield return HasToStringOverride;
         yield return IsEquatable;
         yield return Name;

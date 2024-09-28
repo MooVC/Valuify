@@ -42,9 +42,9 @@ internal static partial class Classes
 
     public const string GenericCSharp9Body = """
             {
-                public T1 Age { get; init; }
+                public T1? Age { get; init; }
         
-                public T2 Name { get; init; }
+                public T2? Name { get; init; }
             }
         """;
 
@@ -95,13 +95,23 @@ internal static partial class Classes
             }
         """;
 
-    public const string StandardCSharp9Body = """
+    public const string StandardCSharp8Body = """
             {
-                public int Age { get; init; }
+                public int? Age { get; }
         
                 public bool IsAdult => Age >= 18;
         
-                public string Name { get; init; }
+                public string? Name { get; }
+            }
+        """;
+
+    public const string StandardCSharp9Body = """
+            {
+                public int? Age { get; init; }
+        
+                public bool IsAdult => Age >= 18;
+        
+                public string? Name { get; init; }
             }
         """;
 
@@ -118,6 +128,7 @@ internal static partial class Classes
         new(StandardCSharp1Body, LanguageVersion.CSharp1),
         new(StandardCSharp3Body, LanguageVersion.CSharp3),
         new(StandardCSharp6Body, LanguageVersion.CSharp6),
+        new(StandardCSharp8Body, LanguageVersion.CSharp8),
         new(StandardCSharp9Body, LanguageVersion.CSharp9),
     ];
 
@@ -151,6 +162,19 @@ internal static partial class Classes
             ],
             nameof(Simple),
             new(SimpleTemplate, LanguageVersion.CSharp2));
+
+        SimpleWithEqualityOperator = new(
+            Standard,
+            [
+                SimpleEquals,
+                SimpleEquatableContract,
+                SimpleEquatableImplementation,
+                SimpleGetHashCode,
+                SimpleInequality,
+                SimpleToString,
+            ],
+            nameof(SimpleWithEqualityOperator),
+            new(SimpleWithEqualityOperatorTemplate, LanguageVersion.CSharp2));
 
         Unannotated = new(
             Standard,
