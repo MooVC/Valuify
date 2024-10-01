@@ -1,0 +1,21 @@
+﻿namespace Valuify.Snippets.Declarations;
+
+using Microsoft.CodeAnalysis.CSharp;
+
+internal static class Unannotated
+{
+    public static readonly Snippets Declaration = new(
+        Simple.Declaration.Body,
+        new(
+            """
+            namespace Valuify.Classes.Testing
+            {
+                public sealed class Unannotated
+            __BODY__
+            }
+            """,
+            LanguageVersion.CSharp1),
+        [],
+        [],
+        nameof(Unannotated));
+}

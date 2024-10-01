@@ -27,7 +27,7 @@ internal static partial class INamedTypeSymbolExtensions
         {
             return @interface.ConstructedFrom.Equals(equatable, SymbolEqualityComparer.Default)
                 && @interface.TypeArguments.Length == 1
-                && @interface.TypeArguments[0].Equals(equatable, SymbolEqualityComparer.Default);
+                && @interface.TypeArguments[0].Equals(@class, SymbolEqualityComparer.Default);
         }
 
         return @class.AllInterfaces.Any(IsEquatable);

@@ -2,7 +2,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
-using Valuify.Snippets;
+using Valuify.Snippets.Declarations;
 
 public sealed class WhenExecuted
 {

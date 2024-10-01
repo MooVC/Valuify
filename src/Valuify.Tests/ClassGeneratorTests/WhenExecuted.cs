@@ -3,6 +3,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
 using Valuify.Snippets;
+using Valuify.Snippets.Declarations;
 
 public sealed class WhenExecuted
 {
@@ -14,14 +15,14 @@ public sealed class WhenExecuted
     ];
 
     [Theory]
-    [Declared]
+    [Snippets]
     [Trait("Category", "Integration")]
-    public async Task GivenAClassTheExpectedSourceIsGenerated(ReferenceAssemblies assembly, string content, Declared declared, LanguageVersion language)
+    public async Task GivenAClassTheExpectedSourceIsGenerated(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
         var test = new GeneratorTest<ClassGenerator>(assembly, language, generators);
 
-        declared.IsDeclaredIn(content, test.TestState);
+        expectations.IsDeclaredIn(test.TestState);
 
         Attributes.Valuify.IsExpectedIn(test.TestState);
         Internal.HashCode.IsExpectedIn(test.TestState);

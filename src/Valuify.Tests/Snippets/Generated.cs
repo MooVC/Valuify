@@ -4,10 +4,12 @@ using System.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 
 [DebuggerDisplay("{Hint,nq}")]
-public sealed record Generated(string Content, Type Generator, string Hint)
+public sealed record Generated(string Content, Extensions Extensions, string Hint, Type? Generator = default)
 {
     public void IsExpectedIn(SolutionState state)
     {
-        state.GeneratedSources.Add((sourceGeneratorType: Generator, filename: $"{Hint}.g.cs", content: Content));
+        Type generator = Generator ?? typeof(ClassGenerator);
+
+        state.GeneratedSources.Add((sourceGeneratorType: generator, filename: $"{Hint}.g.cs", content: Content));
     }
 }
