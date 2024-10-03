@@ -14,7 +14,7 @@ internal static class Unannotated
             __BODY__
             }
             """,
-            LanguageVersion.CSharp1),
+            LanguageVersion.CSharp2),
         [],
         [],
         nameof(Unannotated));
