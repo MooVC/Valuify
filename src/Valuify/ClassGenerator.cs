@@ -48,7 +48,7 @@ public sealed class ClassGenerator
                 foreach (Source source in sources)
                 {
                     string code = Wrap(source.Code, subject);
-                    string hint = $"{subject.Namespace}.{subject.Name}.{source.Hint}.g.cs";
+                    string hint = GetHint(source, subject);
 
                     context.AddSource(hint, code);
                 }
@@ -56,7 +56,24 @@ public sealed class ClassGenerator
         }
     }
 
-    private static bool IsMatch(SyntaxNode node, CancellationToken token)
+    private static string GetHint(Source source, Subject subject)
+    {
+        string name = subject.Name;
+
+        if (subject.Nesting.Count > 0)
+        {
+            IEnumerable<string> names = subject.Nesting
+                .Reverse()
+                .Select(parent => parent.Name)
+                .Union([name]);
+
+            name = string.Join(".", names);
+        }
+
+        return $"{subject.Namespace}.{name}.{source.Hint}.g.cs";
+    }
+
+    private static bool IsMatch(SyntaxNode node, CancellationToken cancellationToken)
     {
         return node is ClassDeclarationSyntax @class && @class.AttributeLists.Count > 0;
     }
@@ -68,12 +85,12 @@ public sealed class ClassGenerator
 
     private static string Nest(string code, Subject subject)
     {
-        foreach (string parent in subject.Nesting)
+        foreach (Nesting parent in subject.Nesting)
         {
             code = code.Indent();
 
             code = $$"""
-                {{parent}}
+                partial {{parent.Type}} {{parent.Qualification}}
                 {
                     {{code}}
                 }

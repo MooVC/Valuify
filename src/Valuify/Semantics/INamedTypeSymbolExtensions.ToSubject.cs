@@ -11,7 +11,7 @@ internal static partial class INamedTypeSymbolExtensions
     /// <param name="compilation">The <see cref="Compilation"/> used to source related symbol for semantic extraction.</param>
     /// <param name="nesting">The declaration syntax for the parents of the <paramref name="syntax"/>.</param>
     /// <returns>An instance of <see cref="Subject"/> containing the required semantics.</returns>
-    public static Subject ToSubject(this INamedTypeSymbol @class, Compilation compilation, IReadOnlyList<string> nesting)
+    public static Subject ToSubject(this INamedTypeSymbol @class, Compilation compilation, IReadOnlyList<Nesting> nesting)
     {
         string @namespace = @class.ContainingNamespace.IsGlobalNamespace
            ? string.Empty

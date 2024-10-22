@@ -8,25 +8,10 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 internal static partial class TypeDeclarationSyntaxExtensions
 {
     /// <summary>Determines whether or not the <paramref name="syntax"/> provided is annotated with the partial keyword.</summary>
-    /// <param name="syntax">The symbol for the type to be checked for the presence of the partial keyword.</param>
-    /// <param name="nesting">The declaration syntax for the parents of the <paramref name="syntax"/>.</param>
+    /// <param name="syntax">The declaration for the type to be checked for the presence of the partial keyword.</param>
     /// <returns>True if the partial keyword is present on the <paramref name="syntax"/>, otherwise False.</returns>
-    public static bool IsPartial(this TypeDeclarationSyntax syntax, Stack<string> nesting)
+    public static bool IsPartial(this TypeDeclarationSyntax syntax)
     {
-        if (syntax.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PartialKeyword)))
-        {
-            var parent = syntax.Parent as TypeDeclarationSyntax;
-
-            if (parent is not null)
-            {
-                nesting.Push(parent.ToFullString());
-
-                return parent.IsPartial(nesting);
-            }
-
-            return true;
-        }
-
-        return false;
+        return syntax.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PartialKeyword));
     }
 }

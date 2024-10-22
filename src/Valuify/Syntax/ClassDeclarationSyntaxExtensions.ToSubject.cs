@@ -24,9 +24,9 @@ internal static partial class ClassDeclarationSyntaxExtensions
     /// </returns>
     public static Subject? ToSubject(this ClassDeclarationSyntax? syntax, Compilation compilation, CancellationToken cancellationToken)
     {
-        Stack<string> nesting = new();
+        Stack<Nesting> nesting = new();
 
-        if (syntax is null || !syntax.IsPartial(nesting))
+        if (syntax is null || !syntax.IsPartial())
         {
             return default;
         }
@@ -34,7 +34,7 @@ internal static partial class ClassDeclarationSyntaxExtensions
         SemanticModel model = compilation.GetSemanticModel(syntax.SyntaxTree);
         ISymbol? symbol = model.GetDeclaredSymbol(syntax, cancellationToken: cancellationToken);
 
-        if (symbol is not INamedTypeSymbol @class || !@class.HasValuify())
+        if (symbol is not INamedTypeSymbol @class || !@class.IsSupported(nesting))
         {
             return default;
         }

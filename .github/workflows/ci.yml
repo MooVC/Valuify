@@ -47,7 +47,7 @@ jobs:
       run: dotnet restore ${{ env.solution }}
 
     - name: Build Solution
-      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
+      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} -p:DefineConstants="CI" --no-restore
 
     - name: Test Solution
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build

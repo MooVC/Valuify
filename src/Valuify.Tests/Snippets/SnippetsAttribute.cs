@@ -37,7 +37,7 @@ public sealed class SnippetsAttribute
                         return default;
                     }
 
-                    foreach (object[] theory in Frameworks.All(Prepare))
+                    foreach (object[] theory in Frameworks.InScope(Prepare))
                     {
                         yield return theory;
                     }

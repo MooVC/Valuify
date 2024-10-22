@@ -51,7 +51,7 @@ internal sealed class Subject
 
     /// <summary>Gets or sets the declarations associated with the parent types in order of declaration.</summary>
     /// <value>The declarations associated with the parent types in order of declaration.</value>
-    public IReadOnlyList<string> Nesting { get; set; } = [];
+    public IReadOnlyList<Nesting> Nesting { get; set; } = [];
 
     /// <summary>Gets or sets the properties declared within the subject.</summary>
     /// <value>The properties declared within the subject.</value>
@@ -74,7 +74,7 @@ internal sealed class Subject
         yield return Name;
         yield return Namespace;
 
-        foreach (string nesting in Nesting)
+        foreach (Nesting nesting in Nesting)
         {
             yield return nesting;
         }

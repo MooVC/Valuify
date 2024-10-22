@@ -146,7 +146,7 @@ public abstract class WhenEqualityIsChecked
     public void GivenADifferentNestingThenTheyAreNotDeemedEqual()
     {
         // Arrange
-        Subject instance1 = Create(subject => subject.Nesting = ["public sealed class Parent"]);
+        Subject instance1 = Create(subject => subject.Nesting = [new() { Qualification = "Outter", Type = "class" }]);
         Subject instance2 = Create(subject => subject.Nesting = []);
 
         // Act
@@ -242,7 +242,7 @@ public abstract class WhenEqualityIsChecked
             IsEquatable = true,
             Name = "SubjectName",
             Namespace = "Valuify.Testing",
-            Nesting = ["Parent"],
+            Nesting = [new() { Qualification = "Outter", Type = "class" }],
             Properties = [property],
             Qualification = "SubjectName<T>",
         };
