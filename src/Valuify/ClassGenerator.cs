@@ -90,7 +90,7 @@ public sealed class ClassGenerator
             code = code.Indent();
 
             code = $$"""
-                partial {{parent.Type}} {{parent.Qualification}}
+                {{parent.Declaration}} {{parent.Qualification}}
                 {
                     {{code}}
                 }

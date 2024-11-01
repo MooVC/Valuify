@@ -8,16 +8,16 @@ public abstract class WhenEqualityIsChecked
         // Arrange
         var instance1 = new Nesting
         {
+            Declaration = "partial class",
             Name = "Simple",
             Qualification = "Complex",
-            Type = "class",
         };
 
         var instance2 = new Nesting
         {
+            Declaration = "partial class",
             Name = "Simple",
             Qualification = "Complex",
-            Type = "class",
         };
 
         // Act
@@ -33,16 +33,16 @@ public abstract class WhenEqualityIsChecked
         // Arrange
         var instance1 = new Nesting
         {
+            Declaration = "partial class",
             Name = "Simple1",
             Qualification = "Complex",
-            Type = "class",
         };
 
         var instance2 = new Nesting
         {
+            Declaration = "partial class",
             Name = "Simple2",
             Qualification = "Complex",
-            Type = "class",
         };
 
         // Act
@@ -58,16 +58,16 @@ public abstract class WhenEqualityIsChecked
         // Arrange
         var instance1 = new Nesting
         {
+            Declaration = "partial class",
             Name = "Simple",
             Qualification = "Complex1",
-            Type = "class",
         };
 
         var instance2 = new Nesting
         {
+            Declaration = "partial class",
             Name = "Simple",
             Qualification = "Complex2",
-            Type = "class",
         };
 
         // Act
@@ -83,16 +83,16 @@ public abstract class WhenEqualityIsChecked
         // Arrange
         var instance1 = new Nesting
         {
+            Declaration = "partial class",
             Name = "Simple",
             Qualification = "Complex",
-            Type = "class",
         };
 
         var instance2 = new Nesting
         {
+            Declaration = "struct",
             Name = "Simple",
             Qualification = "Complex",
-            Type = "struct",
         };
 
         // Act
@@ -108,9 +108,9 @@ public abstract class WhenEqualityIsChecked
         // Arrange
         var instance = new Nesting
         {
+            Declaration = "partial class",
             Name = "Simple",
             Qualification = "Complex",
-            Type = "class",
         };
 
         // Act
@@ -140,9 +140,9 @@ public abstract class WhenEqualityIsChecked
         // Arrange
         var instance1 = new Nesting
         {
+            Declaration = "partial class",
             Name = "Simple",
             Qualification = "Complex",
-            Type = "class",
         };
 
         Nesting instance2 = instance1;

@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 internal static partial class Nested
 {
-    public static partial class InStruct
+    public static partial class InRecord
     {
         public static class Declarations
         {
@@ -12,7 +12,7 @@ internal static partial class Nested
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    public readonly ref partial struct Outter<T1>
+                    public sealed partial record Outter<T1>
                         where T1 : struct
                     {
                         [Valuify]
@@ -22,7 +22,7 @@ internal static partial class Nested
                     }
                 }
                 """,
-                LanguageVersion.CSharp7_2);
+                LanguageVersion.CSharp9);
         }
     }
 }

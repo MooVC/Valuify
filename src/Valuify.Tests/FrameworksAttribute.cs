@@ -9,6 +9,10 @@ public sealed class FrameworksAttribute
 {
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {
-        return Frameworks.InScope();
+#if CI
+        return Frameworks.All();
+#else
+        return Frameworks.Supported();
+#endif
     }
 }

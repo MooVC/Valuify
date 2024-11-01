@@ -3,6 +3,7 @@
 using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
+using Valuify.Snippets.Declarations;
 using Xunit.Sdk;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
@@ -13,6 +14,14 @@ public sealed class SnippetsAttribute
 
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {
+        Extensions extensions = Extensions.None;
+        Func<Func<ReferenceAssemblies, LanguageVersion, object[]?>?, IEnumerable<object[]>> frameworks = Frameworks.Supported;
+
+#if CI
+        extensions = Extensions.All;
+        frameworks = Frameworks.All;
+#endif
+
         FieldInfo[] fields = declarations.Value
             .SelectMany(type => type.GetFields(BindingFlags.Public | BindingFlags.Static))
             .ToArray();
@@ -23,7 +32,7 @@ public sealed class SnippetsAttribute
 
             if (value is Snippets snippets)
             {
-                IEnumerable<Expectations> expectations = snippets.Render();
+                IEnumerable<Expectations> expectations = snippets.Render(extensions);
 
                 foreach (Expectations expectation in expectations)
                 {
@@ -37,7 +46,7 @@ public sealed class SnippetsAttribute
                         return default;
                     }
 
-                    foreach (object[] theory in Frameworks.InScope(Prepare))
+                    foreach (object[] theory in frameworks(Prepare))
                     {
                         yield return theory;
                     }

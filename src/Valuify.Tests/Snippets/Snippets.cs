@@ -9,11 +9,11 @@ public sealed record Snippets(Content[] Body, Content Declaration, Generated[] E
 {
     public const string BodyTag = "__BODY__";
 
-    public IEnumerable<Expectations> Render()
+    public IEnumerable<Expectations> Render(Arrangements target)
     {
         IEnumerable<Content> declarations = Compose();
 
-        for (Arrangements arrangement = Arrangements.None; arrangement <= Arrangements.All; arrangement++)
+        for (Arrangements arrangement = Arrangements.None; arrangement <= target; arrangement++)
         {
             foreach (Expectations expectation in Expect(arrangement, declarations))
             {

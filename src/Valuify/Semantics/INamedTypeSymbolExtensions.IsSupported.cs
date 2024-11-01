@@ -35,16 +35,16 @@ internal static partial class INamedTypeSymbolExtensions
                 .OfType<TypeDeclarationSyntax>()
                 .All(type => type.IsPartial());
 
-            if (!(isPartial && current.IsSupported(out string type)))
+            if (!(isPartial && current.IsSupported(out string declaration)))
             {
                 return false;
             }
 
             var parent = new Nesting
             {
+                Declaration = declaration,
                 Name = current.Name,
                 Qualification = current.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
-                Type = type,
             };
 
             nesting.Push(parent);
@@ -52,36 +52,45 @@ internal static partial class INamedTypeSymbolExtensions
         while (true);
     }
 
-    private static string IdentifyType(this INamedTypeSymbol symbol)
+    private static string IdentifyPrefix(this INamedTypeSymbol symbol)
     {
-        switch (symbol.TypeKind)
-        {
-            case TypeKind.Class:
+        string @ref = symbol.IsRefLikeType
+            ? "ref"
+            : string.Empty;
 
-                if (symbol.IsRecord)
-                {
-                    return symbol.IsValueType
-                        ? "record struct"
-                        : "record";
-                }
+        string @readonly = symbol.IsReadOnly
+            ? "readonly"
+            : string.Empty;
 
-                return "class";
-
-            case TypeKind.Struct:
-                return "struct";
-
-            case TypeKind.Interface:
-                return "interface";
-
-            default:
-                return string.Empty;
-        }
+        return string
+            .Join(" ", @readonly, @ref)
+            .Trim();
     }
 
-    private static bool IsSupported(this INamedTypeSymbol symbol, out string type)
+    private static string IdentifyType(this INamedTypeSymbol symbol)
     {
-        type = symbol.IdentifyType();
+        return symbol.TypeKind switch
+        {
+            TypeKind.Class => symbol.IsRecord
+                ? "record"
+                : "class",
+            TypeKind.Struct => symbol.IsRecord
+                ? "record struct"
+                : "struct",
+            TypeKind.Interface => "interface",
+            _ => string.Empty,
+        };
+    }
 
-        return !string.IsNullOrEmpty(type);
+    private static bool IsSupported(this INamedTypeSymbol symbol, out string declaration)
+    {
+        string prefix = symbol.IdentifyPrefix();
+        string type = symbol.IdentifyType();
+
+        declaration = string
+            .Join(" ", prefix, "partial", type)
+            .TrimStart();
+
+        return !string.IsNullOrEmpty(declaration);
     }
 }

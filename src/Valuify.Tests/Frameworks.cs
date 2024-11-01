@@ -38,15 +38,6 @@ internal static class Frameworks
         return Filter(frameworks, maximum => languages.Where(language => language <= maximum), prepare);
     }
 
-    public static IEnumerable<object[]> InScope(Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare = default)
-    {
-#if CI
-        return Frameworks.All(prepare);
-#else
-        return Frameworks.Supported(prepare);
-#endif
-    }
-
     public static IEnumerable<object[]> Supported(Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare = default)
     {
         var today = DateOnly.FromDateTime(DateTime.UtcNow);

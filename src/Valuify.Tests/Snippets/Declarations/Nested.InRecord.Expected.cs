@@ -2,7 +2,7 @@
 
 internal static partial class Nested
 {
-    public static partial class InStruct
+    public static partial class InRecord
     {
         public static class Expected
         {
@@ -17,7 +17,7 @@ internal static partial class Nested
                     #nullable disable
                     #endif
 
-                    readonly ref partial struct Outter<T1>
+                    partial record Outter<T1>
                     {
                         partial class Inner<T2>
                         {
@@ -47,7 +47,7 @@ internal static partial class Nested
                     #nullable disable
                     #endif
 
-                    readonly ref partial struct Outter<T1>
+                    partial record Outter<T1>
                     {
                         partial class Inner<T2>
                         {
@@ -77,7 +77,7 @@ internal static partial class Nested
                     #nullable disable
                     #endif
 
-                    readonly ref partial struct Outter<T1>
+                    partial record Outter<T1>
                     {
                         partial class Inner<T2>
                             : IEquatable<Inner<T2>>
@@ -104,7 +104,7 @@ internal static partial class Nested
                     #nullable disable
                     #endif
 
-                    readonly ref partial struct Outter<T1>
+                    partial record Outter<T1>
                     {
                         partial class Inner<T2>
                         {
@@ -134,7 +134,7 @@ internal static partial class Nested
                     #nullable disable
                     #endif
         
-                    readonly ref partial struct Outter<T1>
+                    partial record Outter<T1>
                     {
                         partial class Inner<T2>
                         {
@@ -164,7 +164,7 @@ internal static partial class Nested
                     #nullable disable
                     #endif
 
-                    readonly ref partial struct Outter<T1>
+                    partial record Outter<T1>
                     {
                         partial class Inner<T2>
                         {
@@ -194,7 +194,7 @@ internal static partial class Nested
                     #nullable disable
                     #endif
 
-                    readonly ref partial struct Outter<T1>
+                    partial record Outter<T1>
                     {
                         partial class Inner<T2>
                         {
