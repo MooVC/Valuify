@@ -20,6 +20,8 @@ public sealed class SnippetsAttribute
         Languages = languages ?? SnippetsAttribute.languages;
     }
 
+    private delegate IEnumerable<object[]> GetFrameworks(LanguageVersion minimum, Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare);
+
     public IReadOnlyList<ReferenceAssemblies> Assemblies { get; }
 
     public IReadOnlyList<Type> Declarations { get; }
@@ -28,7 +30,7 @@ public sealed class SnippetsAttribute
 
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {
-        GetConfiguration(out Extensions extensions, out Func<Func<ReferenceAssemblies, LanguageVersion, object[]?>?, IEnumerable<object[]>> frameworks);
+        GetConfiguration(out Extensions extensions, out GetFrameworks frameworks);
 
         FieldInfo[] fields = Declarations
             .SelectMany(type => type.GetFields(BindingFlags.Public | BindingFlags.Static))
@@ -46,7 +48,7 @@ public sealed class SnippetsAttribute
                 {
                     object[]? Prepare(ReferenceAssemblies assembly, LanguageVersion language)
                     {
-                        if (language >= expectation.Minimum && Languages.Contains(language) && Assemblies.Contains(assembly))
+                        if (Languages.Contains(language) && Assemblies.Contains(assembly))
                         {
                             return [assembly, expectation, language];
                         }
@@ -54,7 +56,7 @@ public sealed class SnippetsAttribute
                         return default;
                     }
 
-                    foreach (object[] theory in frameworks(Prepare))
+                    foreach (object[] theory in frameworks(expectation.Minimum, Prepare))
                     {
                         yield return theory;
                     }
@@ -63,9 +65,7 @@ public sealed class SnippetsAttribute
         }
     }
 
-    private static void GetConfiguration(
-        out Extensions extensions,
-        out Func<Func<ReferenceAssemblies, LanguageVersion, object[]?>?, IEnumerable<object[]>> frameworks)
+    private static void GetConfiguration(out Extensions extensions, out GetFrameworks frameworks)
     {
 #if CI
 
