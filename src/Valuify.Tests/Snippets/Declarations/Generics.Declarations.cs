@@ -50,9 +50,9 @@ internal static partial class Generics
         public static readonly Content CSharp9Body = new(
             """
                 {
-                    public T1? Age { get; init; }
+                    public T1 Age { get; init; }
         
-                    public T2? Name { get; init; }
+                    public T2 Name { get; init; }
                 }
             """,
             LanguageVersion.CSharp9);

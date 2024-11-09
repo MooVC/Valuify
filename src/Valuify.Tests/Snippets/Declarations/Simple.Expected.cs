@@ -19,7 +19,19 @@ internal static partial class Simple
                     {
                         public static bool operator ==(Simple left, Simple right)
                         {
-                            return EqualityComparer<Simple>.Default.Equals(left, right);
+                            if (ReferenceEquals(left, right))
+                            {
+                                return true;
+                            }
+                
+                            if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+                            {
+                                return false;
+                            }
+                
+                            return EqualityComparer<int>.Default.Equals(left.Age, right.Age)
+                                && EqualityComparer<bool>.Default.Equals(left.IsAdult, right.IsAdult)
+                                && EqualityComparer<string>.Default.Equals(left.Name, right.Name);
                         }
                     }
 
@@ -97,7 +109,7 @@ internal static partial class Simple
                     {
                         public bool Equals(Simple other)
                         {
-                            return EqualityComparer<Simple>.Default.Equals(this, other);
+                            return this == other;
                         }
                     }
 
@@ -151,7 +163,7 @@ internal static partial class Simple
                     {
                         public static bool operator !=(Simple left, Simple right)
                         {
-                            return !EqualityComparer<Simple>.Default.Equals(left, right);
+                            return !(left == right);
                         }
                     }
         

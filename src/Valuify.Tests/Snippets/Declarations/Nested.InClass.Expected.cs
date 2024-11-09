@@ -23,7 +23,18 @@ internal static partial class Nested
                         {
                             public static bool operator ==(Inner<T2> left, Inner<T2> right)
                             {
-                                return EqualityComparer<Inner<T2>>.Default.Equals(left, right);
+                                if (ReferenceEquals(left, right))
+                                {
+                                    return true;
+                                }
+                
+                                if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+                                {
+                                    return false;
+                                }
+
+                                return EqualityComparer<T1>.Default.Equals(left.Age, right.Age)
+                                    && EqualityComparer<T2>.Default.Equals(left.Name, right.Name);
                             }
                         }
                     }
@@ -110,7 +121,7 @@ internal static partial class Nested
                         {
                             public bool Equals(Inner<T2> other)
                             {
-                                return EqualityComparer<Inner<T2>>.Default.Equals(this, other);
+                                return this == other;
                             }
                         }
                     }
@@ -170,7 +181,7 @@ internal static partial class Nested
                         {
                             public static bool operator !=(Inner<T2> left, Inner<T2> right)
                             {
-                                return !EqualityComparer<Inner<T2>>.Default.Equals(left, right);
+                                return !(left == right);
                             }
                         }
                     }

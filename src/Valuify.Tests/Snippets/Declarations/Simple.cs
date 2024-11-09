@@ -7,7 +7,6 @@ internal static partial class Simple
             Declarations.CSharp1Body,
             Declarations.CSharp3Body,
             Declarations.CSharp6Body,
-            Declarations.CSharp8Body,
             Declarations.CSharp9Body,
         ],
         Declarations.Main,

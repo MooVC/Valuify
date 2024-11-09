@@ -1,31 +1,24 @@
-﻿namespace Valuify.ClassGeneratorTests;
+﻿namespace Valuify.SequenceEqualityComparerGeneratorTests;
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.Text;
-using Valuify.Snippets;
 using Valuify.Snippets.Declarations;
 
 public sealed class WhenExecuted
 {
     private static readonly Type[] generators =
     [
-        typeof(AttributeGenerator),
-        typeof(ClassGenerator),
         typeof(HashCodeGenerator),
         typeof(SequenceEqualityComparerGenerator),
     ];
 
     [Theory]
-    [Snippets]
-    public async Task GivenAClassTheExpectedSourceIsGenerated(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
+    [Frameworks]
+    public async Task GivenAnAssemblyThenTheClassIsGenerated(ReferenceAssemblies assemblies, LanguageVersion language)
     {
         // Arrange
-        var test = new GeneratorTest<ClassGenerator>(assembly, language, generators);
+        var test = new GeneratorTest<SequenceEqualityComparerGenerator>(assemblies, language, generators: generators);
 
-        expectations.IsDeclaredIn(test.TestState);
-
-        Attributes.Valuify.IsExpectedIn(test.TestState);
         Internal.HashCode.IsExpectedIn(test.TestState);
         Internal.SequenceEqualityComparer.IsExpectedIn(test.TestState);
 

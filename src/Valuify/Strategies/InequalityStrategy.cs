@@ -19,7 +19,7 @@ internal sealed class InequalityStrategy
             {
                 public static bool operator !=({{subject.Qualification}} left, {{subject.Qualification}} right)
                 {
-                    return !EqualityComparer<{{subject.Qualification}}>.Default.Equals(left, right);
+                    return !(left == right);
                 }
             }
             """;

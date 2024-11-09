@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Testing;
 
 internal static class Frameworks
 {
-    private static readonly (ReferenceAssemblies Assembly, LanguageVersion Maximum, DateOnly SupportTo)[] frameworks =
+    public static readonly IReadOnlyList<(ReferenceAssemblies Assembly, LanguageVersion Maximum, DateOnly SupportTo)> InScope =
     [
         (ReferenceAssemblies.Net.Net50, LanguageVersion.CSharp9, new DateOnly(2022, 5, 10)),
         (ReferenceAssemblies.Net.Net60, LanguageVersion.CSharp10, new DateOnly(2024, 11, 12)),
@@ -35,14 +35,14 @@ internal static class Frameworks
 
     public static IEnumerable<object[]> All(Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare = default)
     {
-        return Filter(frameworks, maximum => languages.Where(language => language <= maximum), prepare);
+        return Filter(InScope, maximum => languages.Where(language => language <= maximum), prepare);
     }
 
     public static IEnumerable<object[]> Supported(Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare = default)
     {
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
 
-        return Filter(frameworks.Where(framework => framework.SupportTo >= today), maximum => [maximum], prepare);
+        return Filter(InScope.Where(framework => framework.SupportTo >= today), maximum => [maximum], prepare);
     }
 
     private static IEnumerable<object[]> Filter(

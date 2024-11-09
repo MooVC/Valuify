@@ -59,26 +59,14 @@ internal static partial class Simple
             """,
             LanguageVersion.CSharp6);
 
-        public static readonly Content CSharp8Body = new(
-            """
-                {
-                    public int? Age { get; }
-        
-                    public bool IsAdult => Age >= 18;
-        
-                    public string? Name { get; }
-                }
-            """,
-            LanguageVersion.CSharp8);
-
         public static readonly Content CSharp9Body = new(
             """
                 {
-                    public int? Age { get; init; }
+                    public int Age { get; init; }
         
                     public bool IsAdult => Age >= 18;
         
-                    public string? Name { get; init; }
+                    public string Name { get; init; }
                 }
             """,
             LanguageVersion.CSharp9);

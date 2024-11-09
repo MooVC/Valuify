@@ -1,4 +1,4 @@
-﻿namespace Valuify.AttributeGeneratorTests;
+﻿namespace Valuify.HashCodeGeneratorTests;
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
@@ -8,12 +8,12 @@ public sealed class WhenExecuted
 {
     [Theory]
     [Frameworks]
-    public async Task GivenAnAssemblyThenTheAttributeIsGenerated(ReferenceAssemblies assemblies, LanguageVersion language)
+    public async Task GivenAnAssemblyThenTheClassIsGenerated(ReferenceAssemblies assemblies, LanguageVersion language)
     {
         // Arrange
-        var test = new GeneratorTest<AttributeGenerator>(assemblies, language);
+        var test = new GeneratorTest<HashCodeGenerator>(assemblies, language);
 
-        Attributes.Valuify.IsExpectedIn(test.TestState);
+        Internal.HashCode.IsExpectedIn(test.TestState);
 
         // Act
         Func<Task> act = () => test.RunAsync();

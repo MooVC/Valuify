@@ -3,26 +3,34 @@
 using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
-using Valuify.Snippets.Declarations;
 using Xunit.Sdk;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public sealed class SnippetsAttribute
     : DataAttribute
 {
-    private static readonly Lazy<Type[]> declarations = new(GetDeclarations);
+    private static readonly ReferenceAssemblies[] assemblies = FindAssemblies();
+    private static readonly Type[] declarations = FindDeclarations();
+    private static readonly LanguageVersion[] languages = FindLanguages();
+
+    public SnippetsAttribute(Type[]? declarations = default, LanguageVersion[]? languages = default)
+    {
+        Assemblies = assemblies;
+        Declarations = declarations ?? SnippetsAttribute.declarations;
+        Languages = languages ?? SnippetsAttribute.languages;
+    }
+
+    public IReadOnlyList<ReferenceAssemblies> Assemblies { get; }
+
+    public IReadOnlyList<Type> Declarations { get; }
+
+    public IReadOnlyList<LanguageVersion> Languages { get; }
 
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {
-        Extensions extensions = Extensions.None;
-        Func<Func<ReferenceAssemblies, LanguageVersion, object[]?>?, IEnumerable<object[]>> frameworks = Frameworks.Supported;
+        GetConfiguration(out Extensions extensions, out Func<Func<ReferenceAssemblies, LanguageVersion, object[]?>?, IEnumerable<object[]>> frameworks);
 
-#if CI
-        extensions = Extensions.All;
-        frameworks = Frameworks.All;
-#endif
-
-        FieldInfo[] fields = declarations.Value
+        FieldInfo[] fields = Declarations
             .SelectMany(type => type.GetFields(BindingFlags.Public | BindingFlags.Static))
             .ToArray();
 
@@ -38,7 +46,7 @@ public sealed class SnippetsAttribute
                 {
                     object[]? Prepare(ReferenceAssemblies assembly, LanguageVersion language)
                     {
-                        if (language >= expectation.Minimum)
+                        if (language >= expectation.Minimum && Languages.Contains(language) && Assemblies.Contains(assembly))
                         {
                             return [assembly, expectation, language];
                         }
@@ -55,12 +63,41 @@ public sealed class SnippetsAttribute
         }
     }
 
-    private static Type[] GetDeclarations()
+    private static void GetConfiguration(
+        out Extensions extensions,
+        out Func<Func<ReferenceAssemblies, LanguageVersion, object[]?>?, IEnumerable<object[]>> frameworks)
+    {
+#if CI
+
+        extensions = Extensions.All;
+        frameworks = Frameworks.All;
+
+#else
+
+        extensions = Extensions.None;
+        frameworks = Frameworks.Supported;
+
+#endif
+    }
+
+    private static ReferenceAssemblies[] FindAssemblies()
+    {
+        return Frameworks.InScope
+            .Select(framework => framework.Assembly)
+            .ToArray();
+    }
+
+    private static Type[] FindDeclarations()
     {
         return Assembly
             .GetAssembly(typeof(SnippetsAttribute))!
             .GetTypes()
             .Where(type => type.Namespace == "Valuify.Snippets.Declarations")
             .ToArray();
+    }
+
+    private static LanguageVersion[] FindLanguages()
+    {
+        return Enum.GetValues<LanguageVersion>();
     }
 }

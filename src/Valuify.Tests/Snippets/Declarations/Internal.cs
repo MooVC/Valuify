@@ -7,4 +7,10 @@ public static class Internal
         Extensions.None,
         "Valuify.Internal.HashCode",
         Generator: typeof(HashCodeGenerator));
+
+    public static readonly Generated SequenceEqualityComparer = new(
+        SequenceEqualityComparerGenerator.Content,
+        Extensions.None,
+        "Valuify.Internal.SequenceEqualityComparer",
+        Generator: typeof(SequenceEqualityComparerGenerator));
 }

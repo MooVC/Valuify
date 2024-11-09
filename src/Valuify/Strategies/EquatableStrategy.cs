@@ -39,7 +39,7 @@ internal sealed class EquatableStrategy
             {
                 public bool Equals({{subject.Qualification}} other)
                 {
-                    return EqualityComparer<{{subject.Qualification}}>.Default.Equals(this, other);
+                    return this == other;
                 }
             }
             """;
