@@ -8,14 +8,16 @@ public abstract class WhenInequalityIsChecked
         // Arrange
         var instance1 = new Property
         {
+            IsSequence = true,
             Name = "PropertyName",
-            Type = "string",
+            Type = "string[]",
         };
 
         var instance2 = new Property
         {
+            IsSequence = true,
             Name = "PropertyName",
-            Type = "string",
+            Type = "string[]",
         };
 
         // Act
@@ -31,14 +33,16 @@ public abstract class WhenInequalityIsChecked
         // Arrange
         var instance1 = new Property
         {
+            IsSequence = true,
             Name = "PropertyName1",
-            Type = "string",
+            Type = "string[]",
         };
 
         var instance2 = new Property
         {
+            IsSequence = true,
             Name = "PropertyName2",
-            Type = "string",
+            Type = "string[]",
         };
 
         // Act
@@ -54,14 +58,16 @@ public abstract class WhenInequalityIsChecked
         // Arrange
         var instance1 = new Property
         {
+            IsSequence = true,
             Name = "PropertyName",
-            Type = "string",
+            Type = "string[]",
         };
 
         var instance2 = new Property
         {
+            IsSequence = true,
             Name = "PropertyName",
-            Type = "Name",
+            Type = "Name[]",
         };
 
         // Act
@@ -77,8 +83,9 @@ public abstract class WhenInequalityIsChecked
         // Arrange
         var instance = new Property
         {
+            IsSequence = true,
             Name = "PropertyName",
-            Type = "string",
+            Type = "string[]",
         };
 
         // Act
@@ -108,8 +115,9 @@ public abstract class WhenInequalityIsChecked
         // Arrange
         var instance1 = new Property
         {
+            IsSequence = true,
             Name = "PropertyName",
-            Type = "string",
+            Type = "string[]",
         };
 
         Property instance2 = instance1;

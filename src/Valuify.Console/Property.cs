@@ -1,13 +1,11 @@
-﻿namespace Valuify.Model;
-
-using System.Collections.Generic;
+﻿namespace Valuify.Console;
 
 /// <summary>
 /// The definition of the <see cref="Property"/> type, which is used to capture information relating to a property that
 /// forms part of the equality calculation for the type.
 /// </summary>
-internal sealed class Property
-    : Value<Property>
+[Valuify]
+internal sealed partial class Property
 {
     /// <summary>Gets or sets a value indicating whether or not the type associated with the property is deemed to be a sequence.</summary>
     /// <value>The value indicating whether or not the type associated with the property is deemed to be a sequence.</value>
@@ -20,12 +18,4 @@ internal sealed class Property
     /// <summary>Gets or sets the fully qualified name of the property type.</summary>
     /// <value>The fully qualified name of the property type.</value>
     public string Type { get; set; } = string.Empty;
-
-    /// <inheritdoc/>
-    protected override IEnumerable<object> GetProperties()
-    {
-        yield return IsSequence;
-        yield return Name;
-        yield return Type;
-    }
 }

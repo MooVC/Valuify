@@ -22,7 +22,7 @@ internal sealed class GetHashCodeStrategy
             {
                 public sealed override int GetHashCode()
                 {
-                    return Valuify.Internal.HashCode.Combine({{combine}});
+                    return global::Valuify.Internal.HashCode.Combine({{combine}});
                 }
             }
             """;

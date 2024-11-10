@@ -33,8 +33,8 @@ internal static partial class Nested
                                     return false;
                                 }
                 
-                                return EqualityComparer<T1>.Default.Equals(left.Age, right.Age)
-                                    && EqualityComparer<T2>.Default.Equals(left.Name, right.Name);
+                                return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(left.Age, right.Age)
+                                    && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(left.Name, right.Name);
                             }
                         }
                     }
@@ -151,7 +151,7 @@ internal static partial class Nested
                         {
                             public sealed override int GetHashCode()
                             {
-                                return Valuify.Internal.HashCode.Combine(Age, Name);
+                                return global::Valuify.Internal.HashCode.Combine(Age, Name);
                             }
                         }
                     }

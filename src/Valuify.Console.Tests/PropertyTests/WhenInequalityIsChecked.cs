@@ -1,6 +1,6 @@
-﻿namespace Valuify.Model.PropertyTests;
+﻿namespace Valuify.Console.PropertyTests;
 
-public abstract class WhenEqualityIsChecked
+public abstract class WhenInequalityIsChecked
 {
     [Fact]
     public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
@@ -21,35 +21,10 @@ public abstract class WhenEqualityIsChecked
         };
 
         // Act
-        bool areEqual = AreEqual(instance1, instance2);
+        bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areEqual.Should().BeTrue();
-    }
-
-    [Fact]
-    public void GivenADifferentIsSequenceThenTheyAreNotDeemedEqual()
-    {
-        // Arrange
-        var instance1 = new Property
-        {
-            IsSequence = true,
-            Name = "PropertyName",
-            Type = "string[]",
-        };
-
-        var instance2 = new Property
-        {
-            IsSequence = false,
-            Name = "PropertyName",
-            Type = "string[]",
-        };
-
-        // Act
-        bool areEqual = AreEqual(instance1, instance2);
-
-        // Assert
-        _ = areEqual.Should().BeFalse();
+        _ = areNotEqual.Should().BeFalse();
     }
 
     [Fact]
@@ -71,10 +46,10 @@ public abstract class WhenEqualityIsChecked
         };
 
         // Act
-        bool areEqual = AreEqual(instance1, instance2);
+        bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areEqual.Should().BeFalse();
+        _ = areNotEqual.Should().BeTrue();
     }
 
     [Fact]
@@ -96,10 +71,10 @@ public abstract class WhenEqualityIsChecked
         };
 
         // Act
-        bool areEqual = AreEqual(instance1, instance2);
+        bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areEqual.Should().BeFalse();
+        _ = areNotEqual.Should().BeTrue();
     }
 
     [Fact]
@@ -114,10 +89,10 @@ public abstract class WhenEqualityIsChecked
         };
 
         // Act
-        bool areEqual = AreEqual(instance, default);
+        bool areNotEqual = AreNotEqual(instance, default);
 
         // Assert
-        _ = areEqual.Should().BeFalse();
+        _ = areNotEqual.Should().BeTrue();
     }
 
     [Fact]
@@ -128,10 +103,10 @@ public abstract class WhenEqualityIsChecked
         Property? instance2 = default;
 
         // Act
-        bool areEqual = AreEqual(instance1, instance2);
+        bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areEqual.Should().BeTrue();
+        _ = areNotEqual.Should().BeFalse();
     }
 
     [Fact]
@@ -148,11 +123,11 @@ public abstract class WhenEqualityIsChecked
         Property instance2 = instance1;
 
         // Act
-        bool areEqual = AreEqual(instance1, instance2);
+        bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areEqual.Should().BeTrue();
+        _ = areNotEqual.Should().BeFalse();
     }
 
-    private protected abstract bool AreEqual(Property? instance1, Property? instance2);
+    private protected abstract bool AreNotEqual(Property? instance1, Property? instance2);
 }

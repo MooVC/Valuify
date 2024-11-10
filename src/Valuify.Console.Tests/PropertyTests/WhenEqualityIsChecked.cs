@@ -1,4 +1,4 @@
-﻿namespace Valuify.Model.PropertyTests;
+﻿namespace Valuify.Console.PropertyTests;
 
 public abstract class WhenEqualityIsChecked
 {

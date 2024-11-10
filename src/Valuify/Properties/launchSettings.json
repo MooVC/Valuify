@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Default": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\Valuify.Console\\Valuify.Console.csproj"
+    }
+  }
+}

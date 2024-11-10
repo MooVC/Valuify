@@ -1,5 +1,6 @@
 ﻿namespace Valuify.Strategies;
 
+using System.Collections.Generic;
 using Valuify.Model;
 
 /// <summary>Generates the source needed to support the equality operator.</summary>
@@ -51,6 +52,8 @@ internal sealed class EqualityStrategy
 
     private static string GetComparer(Property property)
     {
-        return $"EqualityComparer<{property.Type}>";
+        return property.IsSequence
+            ? $"global::Valuify.Internal.SequenceEqualityComparer"
+            : $"global::System.Collections.Generic.EqualityComparer<{property.Type}>";
     }
 }

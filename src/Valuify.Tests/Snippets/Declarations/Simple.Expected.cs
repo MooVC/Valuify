@@ -29,9 +29,9 @@ internal static partial class Simple
                                 return false;
                             }
                 
-                            return EqualityComparer<int>.Default.Equals(left.Age, right.Age)
-                                && EqualityComparer<bool>.Default.Equals(left.IsAdult, right.IsAdult)
-                                && EqualityComparer<string>.Default.Equals(left.Name, right.Name);
+                            return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(left.Age, right.Age)
+                                && global::System.Collections.Generic.EqualityComparer<bool>.Default.Equals(left.IsAdult, right.IsAdult)
+                                && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(left.Name, right.Name);
                         }
                     }
 
@@ -136,7 +136,7 @@ internal static partial class Simple
                     {
                         public sealed override int GetHashCode()
                         {
-                            return Valuify.Internal.HashCode.Combine(Age, IsAdult, Name);
+                            return global::Valuify.Internal.HashCode.Combine(Age, IsAdult, Name);
                         }
                     }
 
