@@ -198,7 +198,7 @@ Valuify includes several analyzers to assist engineers with its usage. These are
 Rule ID                          | Category | Severity | Notes
 :--------------------------------|:---------|:---------|:-------------------------------------------------------------------------
 [VALFY01](docs/rules/VALFY01.md) | Usage    | Warning  | Type is not a class
-[VALFY02](docs/rules/VALFY02.md) | Usage    | Warning  | Class is not marked as partial
+[VALFY02](docs/rules/VALFY02.md) | Usage    | Warning  | Type is not marked as partial
 [VALFY03](docs/rules/VALFY02.md) | Design   | Info     | Type does not declare any properties
 
 ## Contributing

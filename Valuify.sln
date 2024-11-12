@@ -61,6 +61,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valuify.Console", "src\Valu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valuify.Console.Tests", "src\Valuify.Console.Tests\Valuify.Console.Tests.csproj", "{30AF6070-4A2E-4E32-B330-A299C7F841E7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rules", "Rules", "{DF5E2435-C5BD-47B6-A6F6-7F31BB639562}"
+	ProjectSection(SolutionItems) = preProject
+		docs\rules\VALFY01.md = docs\rules\VALFY01.md
+		docs\rules\VALFY02.md = docs\rules\VALFY02.md
+		docs\rules\VALFY03.md = docs\rules\VALFY03.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +93,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DF5E2435-C5BD-47B6-A6F6-7F31BB639562} = {3F85F26E-E1E6-4DFE-A4F8-C71ADCB466F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57EA882A-D965-4378-9B4A-1BA78464C2F9}

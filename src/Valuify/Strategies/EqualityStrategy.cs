@@ -17,7 +17,7 @@ internal sealed class EqualityStrategy
             yield break;
         }
 
-        string conditions = string.Empty;
+        string conditions = "true";
 
         if (subject.Properties.Count > 0)
         {
