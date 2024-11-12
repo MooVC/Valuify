@@ -3,4 +3,10 @@
     <Description>A .NET Roslyn source generator that enables record-like behavior for classes in projects using C# versions prior to 9.0.</Description>
     <Version>0.1.0-unstable</Version>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.CodeAnalysis.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

@@ -2,7 +2,6 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.Text;
 using Valuify.Snippets;
 using Valuify.Snippets.Declarations;
 
