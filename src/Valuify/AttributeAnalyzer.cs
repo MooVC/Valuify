@@ -82,43 +82,48 @@ public sealed class AttributeAnalyzer
         context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.Attribute);
     }
 
-    private static void Analyze(AttributeSyntax attribute, SyntaxNodeAnalysisContext context, Location location, IMethodSymbol symbol)
+    private static void Raise(SyntaxNodeAnalysisContext context, DiagnosticDescriptor descriptor, Location location, params object?[] messageArgs)
     {
-        void Raise(DiagnosticDescriptor descriptor, params object[] messageArgs)
-        {
-            var diagnostic = Diagnostic.Create(descriptor, location, messageArgs);
+        var diagnostic = Diagnostic.Create(descriptor, location, messageArgs);
 
-            context.ReportDiagnostic(diagnostic);
-        }
+        context.ReportDiagnostic(diagnostic);
+    }
 
-        if (attribute.Parent?.Parent is not ClassDeclarationSyntax @class)
+    private static void Analyze(AttributeSyntax attribute, SyntaxNodeAnalysisContext context, Location location)
+    {
+        if (IsViolatingCompatibleTargetTypeRule(attribute, out ClassDeclarationSyntax? @class))
         {
-            Raise(CompatibleTargetTypeRule);
+            Raise(context, CompatibleTargetTypeRule, location);
 
             return;
         }
 
-        TypeDeclarationSyntax? parent = @class;
-
-        do
+        if (IsViolatingPartialTypeRule(@class, out string? identifier))
         {
-            if (!parent.IsPartial())
-            {
-                Raise(PartialTypeRule, parent.Identifier.Text);
-
-                return;
-            }
-
-            parent = parent.Parent as TypeDeclarationSyntax;
-        }
-        while (parent is not null);
-
-        if (!symbol.ContainingType.HasProperties())
-        {
-            Raise(DefinesPropertiesRule, @class.Identifier);
+            Raise(context, PartialTypeRule, location, identifier);
 
             return;
         }
+
+        if (IsViolatingDefinesPropertiesRule(context, @class, out identifier))
+        {
+            Raise(context, DefinesPropertiesRule, location, identifier);
+        }
+    }
+
+    private static bool IsViolatingDefinesPropertiesRule(SyntaxNodeAnalysisContext context, ClassDeclarationSyntax? @class, out string? identifier)
+    {
+        identifier = default;
+
+        if (@class is null)
+        {
+            return true;
+        }
+
+        identifier = @class.Identifier.Text;
+        INamedTypeSymbol? symbol = context.SemanticModel.GetDeclaredSymbol(@class, cancellationToken: context.CancellationToken);
+
+        return symbol is null || !symbol.HasProperties();
     }
 
     private static void AnalyzeNode(SyntaxNodeAnalysisContext context)
@@ -137,7 +142,7 @@ public sealed class AttributeAnalyzer
 
         Location location = attribute.GetLocation();
 
-        Analyze(attribute, context, location, symbol);
+        Analyze(attribute, context, location);
     }
 
     private static string GetHelpLinkUri(string ruleId)
@@ -156,6 +161,32 @@ public sealed class AttributeAnalyzer
             .SemanticModel
             .GetSymbolInfo(syntax, cancellationToken: context.CancellationToken)
             .Symbol as IMethodSymbol;
+    }
+
+    private static bool IsViolatingCompatibleTargetTypeRule(AttributeSyntax attribute, out ClassDeclarationSyntax? @class)
+    {
+        @class = attribute.Parent?.Parent as ClassDeclarationSyntax;
+
+        return @class is null;
+    }
+
+    private static bool IsViolatingPartialTypeRule(TypeDeclarationSyntax? parent, out string? identifier)
+    {
+        identifier = default;
+
+        while (parent is not null)
+        {
+            if (!parent.IsPartial())
+            {
+                identifier = parent.Identifier.Text;
+
+                return true;
+            }
+
+            parent = parent.Parent as TypeDeclarationSyntax;
+        }
+
+        return false;
     }
 
     private static bool IsValuify(IMethodSymbol symbol)

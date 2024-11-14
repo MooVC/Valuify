@@ -8,7 +8,7 @@ using Xunit.Sdk;
 public sealed class FrameworksAttribute
     : DataAttribute
 {
-    public LanguageVersion Language { get; } = LanguageVersion.CSharp2;
+    public LanguageVersion Language { get; set; } = LanguageVersion.CSharp2;
 
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {

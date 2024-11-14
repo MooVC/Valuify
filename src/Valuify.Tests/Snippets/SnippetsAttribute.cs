@@ -13,11 +13,19 @@ public sealed class SnippetsAttribute
     private static readonly Type[] declarations = FindDeclarations();
     private static readonly LanguageVersion[] languages = FindLanguages();
 
-    public SnippetsAttribute(Type[]? declarations = default, LanguageVersion[]? languages = default)
+    public SnippetsAttribute(Type[]? exclusions = default, Type[]? inclusions = default, LanguageVersion[]? languages = default)
     {
         Assemblies = assemblies;
-        Declarations = declarations ?? SnippetsAttribute.declarations;
         Languages = languages ?? SnippetsAttribute.languages;
+
+        Declarations = inclusions is null
+            ? declarations
+            : inclusions.Intersect(declarations).ToArray();
+
+        if (exclusions is not null)
+        {
+            Declarations = Declarations.Except(exclusions).ToArray();
+        }
     }
 
     private delegate IEnumerable<object[]> GetFrameworks(LanguageVersion minimum, Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare);
