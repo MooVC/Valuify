@@ -10,7 +10,7 @@ using AnalyzerTest = Valuify.AnalyzerTest<Valuify.AttributeAnalyzer>;
 public sealed class WhenExecuted
 {
     [Theory]
-    [Snippets(exclusions: [typeof(Unsupported)])]
+    [Snippets(exclusions: [typeof(Unsupported)], extensions: Extensions.None)]
     public async Task GivenAClassWhenCompliantTheNoDiagnosticsAreRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange

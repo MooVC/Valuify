@@ -4,18 +4,36 @@ using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit.Sdk;
+using static Valuify.Snippets.Extensions;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public sealed class SnippetsAttribute
     : DataAttribute
 {
+#if CI
+
+    private const Extensions DefaultExtensions = All;
+    private static readonly GetFrameworks frameworks = Frameworks.All;
+
+#else
+
+    private const Extensions DefaultExtensions = None;
+    private static readonly GetFrameworks frameworks = Frameworks.Supported;
+
+#endif
+
     private static readonly ReferenceAssemblies[] assemblies = FindAssemblies();
     private static readonly Type[] declarations = FindDeclarations();
     private static readonly LanguageVersion[] languages = FindLanguages();
 
-    public SnippetsAttribute(Type[]? exclusions = default, Type[]? inclusions = default, LanguageVersion[]? languages = default)
+    public SnippetsAttribute(
+        Type[]? exclusions = default,
+        Extensions extensions = DefaultExtensions,
+        Type[]? inclusions = default,
+        LanguageVersion[]? languages = default)
     {
         Assemblies = assemblies;
+        Extensions = extensions;
         Languages = languages ?? SnippetsAttribute.languages;
 
         Declarations = inclusions is null
@@ -34,12 +52,12 @@ public sealed class SnippetsAttribute
 
     public IReadOnlyList<Type> Declarations { get; }
 
+    public Extensions Extensions { get; }
+
     public IReadOnlyList<LanguageVersion> Languages { get; }
 
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {
-        GetConfiguration(out Extensions extensions, out GetFrameworks frameworks);
-
         FieldInfo[] fields = Declarations
             .SelectMany(type => type.GetFields(BindingFlags.Public | BindingFlags.Static))
             .ToArray();
@@ -50,7 +68,7 @@ public sealed class SnippetsAttribute
 
             if (value is Snippets snippets)
             {
-                IEnumerable<Expectations> expectations = snippets.Render(extensions);
+                IEnumerable<Expectations> expectations = snippets.Render(Extensions);
 
                 foreach (Expectations expectation in expectations)
                 {
@@ -71,21 +89,6 @@ public sealed class SnippetsAttribute
                 }
             }
         }
-    }
-
-    private static void GetConfiguration(out Extensions extensions, out GetFrameworks frameworks)
-    {
-#if CI
-
-        extensions = Extensions.All;
-        frameworks = Frameworks.All;
-
-#else
-
-        extensions = Extensions.None;
-        frameworks = Frameworks.Supported;
-
-#endif
     }
 
     private static ReferenceAssemblies[] FindAssemblies()
