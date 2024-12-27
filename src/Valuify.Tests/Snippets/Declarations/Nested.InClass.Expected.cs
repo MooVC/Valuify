@@ -62,7 +62,7 @@ internal static partial class Nested
                     {
                         partial class Inner<T2>
                         {
-                            public sealed override bool Equals(object other)
+                            public override bool Equals(object other)
                             {
                                 return Equals(other as Inner<T2>);
                             }
@@ -149,7 +149,7 @@ internal static partial class Nested
                     {
                         partial class Inner<T2>
                         {
-                            public sealed override int GetHashCode()
+                            public override int GetHashCode()
                             {
                                 return global::Valuify.Internal.HashCode.Combine(Age, Name);
                             }
@@ -209,7 +209,7 @@ internal static partial class Nested
                     {
                         partial class Inner<T2>
                         {
-                            public sealed override string ToString()
+                            public override string ToString()
                             {
                                 return string.Format("Inner { Age = {0}, Name = {1} }", Age, Name);
                             }

@@ -55,7 +55,7 @@ internal static partial class Generics
 
                 partial class Generics<T1, T2>
                 {
-                    public sealed override bool Equals(object other)
+                    public override bool Equals(object other)
                     {
                         return Equals(other as Generics<T1, T2>);
                     }
@@ -133,7 +133,7 @@ internal static partial class Generics
         
                 partial class Generics<T1, T2>
                 {
-                    public sealed override int GetHashCode()
+                    public override int GetHashCode()
                     {
                         return global::Valuify.Internal.HashCode.Combine(Age, Name);
                     }
@@ -187,7 +187,7 @@ internal static partial class Generics
 
                 partial class Generics<T1, T2>
                 {
-                    public sealed override string ToString()
+                    public override string ToString()
                     {
                         return string.Format("Generics { Age = {0}, Name = {1} }", Age, Name);
                     }

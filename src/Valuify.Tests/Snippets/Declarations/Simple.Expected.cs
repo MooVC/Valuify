@@ -56,7 +56,7 @@ internal static partial class Simple
 
                     partial class Simple
                     {
-                        public sealed override bool Equals(object other)
+                        public override bool Equals(object other)
                         {
                             return Equals(other as Simple);
                         }
@@ -134,7 +134,7 @@ internal static partial class Simple
         
                     partial class Simple
                     {
-                        public sealed override int GetHashCode()
+                        public override int GetHashCode()
                         {
                             return global::Valuify.Internal.HashCode.Combine(Age, IsAdult, Name);
                         }
@@ -188,7 +188,7 @@ internal static partial class Simple
 
                     partial class Simple
                     {
-                        public sealed override string ToString()
+                        public override string ToString()
                         {
                             return string.Format("Simple { Age = {0}, IsAdult = {1}, Name = {2} }", Age, IsAdult, Name);
                         }

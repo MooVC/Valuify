@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Fixed
 
 - Base properties are now included.
+- Object.Equals, Object.GetHashCode and Object.ToString overrides are no longer sealed.
  
 ## [1.1.0] - 2024-12-12
 
