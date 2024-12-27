@@ -29,9 +29,7 @@ internal static partial class Simple
                                 return false;
                             }
                 
-                            return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(left.Age, right.Age)
-                                && global::System.Collections.Generic.EqualityComparer<bool>.Default.Equals(left.IsAdult, right.IsAdult)
-                                && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(left.Name, right.Name);
+                            return left.Equals(right);
                         }
                     }
 
@@ -109,7 +107,19 @@ internal static partial class Simple
                     {
                         public bool Equals(Simple other)
                         {
-                            return this == other;
+                            if (ReferenceEquals(this, other))
+                            {
+                                return true;
+                            }
+                
+                            if (ReferenceEquals(other, null))
+                            {
+                                return false;
+                            }
+                
+                            return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(Age, other.Age)
+                                && global::System.Collections.Generic.EqualityComparer<bool>.Default.Equals(IsAdult, other.IsAdult)
+                                && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Name, other.Name);
                         }
                     }
 

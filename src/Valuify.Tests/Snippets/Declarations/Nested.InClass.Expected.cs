@@ -33,8 +33,7 @@ internal static partial class Nested
                                     return false;
                                 }
 
-                                return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(left.Age, right.Age)
-                                    && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(left.Name, right.Name);
+                                return left.Equals(right);
                             }
                         }
                     }
@@ -121,7 +120,18 @@ internal static partial class Nested
                         {
                             public bool Equals(Inner<T2> other)
                             {
-                                return this == other;
+                                if (ReferenceEquals(this, other))
+                                {
+                                    return true;
+                                }
+                
+                                if (ReferenceEquals(other, null))
+                                {
+                                    return false;
+                                }
+                
+                                return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(Age, other.Age)
+                                    && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(Name, other.Name);
                             }
                         }
                     }

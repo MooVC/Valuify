@@ -50,8 +50,7 @@ partial class Property
             return false;
         }
 
-        return global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(left.Name, right.Name)
-            && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(left.Type, right.Type);
+        return left.Equals(right);
     }
 }
 ```
@@ -114,7 +113,18 @@ partial class Property
 {
     public bool Equals(Property other)
     {
-        return this == other;
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        if (ReferenceEquals(other, null))
+        {
+            return false;
+        }
+
+        return global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Name, other.Name)
+            && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Type, other.Type);
     }
 }
 ```
