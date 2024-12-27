@@ -11,8 +11,7 @@ internal static partial class INamedTypeSymbolExtensions
     public static bool HasProperties(this INamedTypeSymbol @class)
     {
         return @class
-            .GetMembers()
-            .OfType<IPropertySymbol>()
+            .GetAllProperties()
             .Any();
     }
 }

@@ -11,7 +11,7 @@ public sealed class WhenExecuted
 {
     [Theory]
     [Snippets(exclusions: [typeof(Unsupported)], extensions: Extensions.None)]
-    public async Task GivenAClassWhenCompliantTheNoDiagnosticsAreRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
+    public async Task GivenAClassWhenCompliantThenNoDiagnosticsAreRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
         var test = new AnalyzerTest(assembly, language);
@@ -27,7 +27,7 @@ public sealed class WhenExecuted
 
     [Theory]
     [Frameworks(Language = LanguageVersion.CSharp9)]
-    public async Task GivenATypeWhenIncompatibleTheCompatibleTargetTypeRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
+    public async Task GivenATypeWhenIncompatibleThenCompatibleTargetTypeRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
     {
         // Arrange
         var test = new AnalyzerTest(assembly, language)
@@ -51,7 +51,7 @@ public sealed class WhenExecuted
 
     [Theory]
     [Snippets(inclusions: [typeof(Unsupported)])]
-    public async Task GivenATypeWhenNotPartialThePartialTypeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
+    public async Task GivenATypeWhenNotPartialThenPartialTypeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
         var test = new AnalyzerTest(assembly, language);
@@ -68,7 +68,7 @@ public sealed class WhenExecuted
 
     [Theory]
     [Frameworks]
-    public async Task GivenATypeWhenMissingPropertiesTheDefinesPropertiesRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
+    public async Task GivenATypeWhenMissingPropertiesThenDefinesPropertiesRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
     {
         // Arrange
         var test = new AnalyzerTest(assembly, language)
