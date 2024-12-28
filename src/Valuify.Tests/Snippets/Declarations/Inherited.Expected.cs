@@ -1,6 +1,6 @@
 ﻿namespace Valuify.Snippets.Declarations;
 
-internal static partial class Simple
+internal static partial class Inherited
 {
     public static class Expected
     {
@@ -15,9 +15,9 @@ internal static partial class Simple
                     #nullable disable
                     #endif
 
-                    partial class Simple
+                    partial class Inherited
                     {
-                        public static bool operator ==(Simple left, Simple right)
+                        public static bool operator ==(Inherited left, Inherited right)
                         {
                             if (ReferenceEquals(left, right))
                             {
@@ -39,7 +39,7 @@ internal static partial class Simple
                 }
                 """,
             Extensions.HasEqualityOperator,
-            "Valuify.Classes.Testing.Simple.Equality");
+            "Valuify.Classes.Testing.Inherited.Equality");
 
         public static new readonly Generated Equals = new(
             """
@@ -52,11 +52,11 @@ internal static partial class Simple
                     #nullable disable
                     #endif
 
-                    partial class Simple
+                    partial class Inherited
                     {
                         public override bool Equals(object other)
                         {
-                            return Equals(other as Simple);
+                            return Equals(other as Inherited);
                         }
                     }
 
@@ -66,7 +66,7 @@ internal static partial class Simple
                 }
                 """,
             Extensions.HasEqualsOverride,
-            "Valuify.Classes.Testing.Simple.Equals");
+            "Valuify.Classes.Testing.Inherited.Equals");
 
         public static readonly Generated EquatableContract = new(
             """
@@ -79,8 +79,8 @@ internal static partial class Simple
                     #nullable disable
                     #endif
 
-                    partial class Simple
-                        : IEquatable<Simple>
+                    partial class Inherited
+                        : IEquatable<Inherited>
                     {
                     }
 
@@ -90,7 +90,7 @@ internal static partial class Simple
                 }
                 """,
             Extensions.IsEquatable,
-            "Valuify.Classes.Testing.Simple.IEquatable");
+            "Valuify.Classes.Testing.Inherited.IEquatable");
 
         public static readonly Generated EquatableImplementation = new(
             """
@@ -103,9 +103,9 @@ internal static partial class Simple
                     #nullable disable
                     #endif
 
-                    partial class Simple
+                    partial class Inherited
                     {
-                        public bool Equals(Simple other)
+                        public bool Equals(Inherited other)
                         {
                             if (ReferenceEquals(this, other))
                             {
@@ -129,7 +129,7 @@ internal static partial class Simple
                 }
                 """,
             Extensions.HasEquatable,
-            "Valuify.Classes.Testing.Simple.IEquatable.Equals");
+            "Valuify.Classes.Testing.Inherited.IEquatable.Equals");
 
         public static new readonly Generated GetHashCode = new(
             """
@@ -142,7 +142,7 @@ internal static partial class Simple
                     #nullable disable
                     #endif
         
-                    partial class Simple
+                    partial class Inherited
                     {
                         public override int GetHashCode()
                         {
@@ -156,7 +156,7 @@ internal static partial class Simple
                 }
                 """,
             Extensions.HasGetHashCodeOverride,
-            "Valuify.Classes.Testing.Simple.GetHashCode");
+            "Valuify.Classes.Testing.Inherited.GetHashCode");
 
         public static readonly Generated Inequality = new(
             """
@@ -169,9 +169,9 @@ internal static partial class Simple
                     #nullable disable
                     #endif
 
-                    partial class Simple
+                    partial class Inherited
                     {
-                        public static bool operator !=(Simple left, Simple right)
+                        public static bool operator !=(Inherited left, Inherited right)
                         {
                             return !(left == right);
                         }
@@ -183,7 +183,7 @@ internal static partial class Simple
                 }
                 """,
             Extensions.HasInequalityOperator,
-            "Valuify.Classes.Testing.Simple.Inequality");
+            "Valuify.Classes.Testing.Inherited.Inequality");
 
         public static new readonly Generated ToString = new(
             """
@@ -196,11 +196,11 @@ internal static partial class Simple
                     #nullable disable
                     #endif
 
-                    partial class Simple
+                    partial class Inherited
                     {
                         public override string ToString()
                         {
-                            return string.Format("Simple { Age = {0}, IsAdult = {1}, Name = {2} }", Age, IsAdult, Name);
+                            return string.Format("Inherited { Age = {0}, IsAdult = {1}, Name = {2} }", Age, IsAdult, Name);
                         }
                     }
         
@@ -210,6 +210,6 @@ internal static partial class Simple
                 }
                 """,
             Extensions.HasToStringOverride,
-            "Valuify.Classes.Testing.Simple.ToString");
+            "Valuify.Classes.Testing.Inherited.ToString");
     }
 }

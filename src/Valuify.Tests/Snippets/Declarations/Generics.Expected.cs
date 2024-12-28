@@ -29,8 +29,7 @@ internal static partial class Generics
                             return false;
                         }
             
-                        return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(left.Age, right.Age)
-                            && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(left.Name, right.Name);
+                        return left.Equals(right);
                     }
                 }
 
@@ -55,7 +54,7 @@ internal static partial class Generics
 
                 partial class Generics<T1, T2>
                 {
-                    public sealed override bool Equals(object other)
+                    public override bool Equals(object other)
                     {
                         return Equals(other as Generics<T1, T2>);
                     }
@@ -108,7 +107,18 @@ internal static partial class Generics
                 {
                     public bool Equals(Generics<T1, T2> other)
                     {
-                        return this == other;
+                        if (ReferenceEquals(this, other))
+                        {
+                            return true;
+                        }
+            
+                        if (ReferenceEquals(other, null))
+                        {
+                            return false;
+                        }
+
+                        return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(Age, other.Age)
+                            && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(Name, other.Name);
                     }
                 }
 
@@ -133,7 +143,7 @@ internal static partial class Generics
         
                 partial class Generics<T1, T2>
                 {
-                    public sealed override int GetHashCode()
+                    public override int GetHashCode()
                     {
                         return global::Valuify.Internal.HashCode.Combine(Age, Name);
                     }
@@ -187,7 +197,7 @@ internal static partial class Generics
 
                 partial class Generics<T1, T2>
                 {
-                    public sealed override string ToString()
+                    public override string ToString()
                     {
                         return string.Format("Generics { Age = {0}, Name = {1} }", Age, Name);
                     }

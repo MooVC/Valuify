@@ -20,7 +20,7 @@ internal sealed class GetHashCodeStrategy
         string code = $$"""
             partial class {{subject.Qualification}}
             {
-                public sealed override int GetHashCode()
+                public override int GetHashCode()
                 {
                     return global::Valuify.Internal.HashCode.Combine({{combine}});
                 }

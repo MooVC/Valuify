@@ -50,8 +50,7 @@ partial class Property
             return false;
         }
 
-        return global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(left.Name, right.Name)
-            && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(left.Type, right.Type);
+        return left.Equals(right);
     }
 }
 ```
@@ -71,7 +70,7 @@ The following demonstrates the Equals Method Override code generated for `Proper
 ```csharp
 partial class Property
 {
-    public sealed override bool Equals(object other)
+    public override bool Equals(object other)
     {
         return Equals(other as Property);
     }
@@ -114,7 +113,18 @@ partial class Property
 {
     public bool Equals(Property other)
     {
-        return this == other;
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        if (ReferenceEquals(other, null))
+        {
+            return false;
+        }
+
+        return global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Name, other.Name)
+            && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Type, other.Type);
     }
 }
 ```
@@ -134,7 +144,7 @@ The following demonstrates the GetHashCode Method Override code generated for `P
 ```csharp
 partial class Property
 {
-    public sealed override int GetHashCode()
+    public override int GetHashCode()
     {
         return global::Valuify.Internal.HashCode.Combine(Name, Type);
     }
@@ -178,7 +188,7 @@ The following demonstrates the ToString Method Override code generated for `Prop
 ```csharp
 partial class Property
 {
-    public sealed override string ToString()
+    public override string ToString()
     {
         return string.Format("Property { Name = {0}, Type = {1} }", Name, Type);
     }

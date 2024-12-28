@@ -17,7 +17,7 @@ internal sealed class EqualsStrategy
         string code = $$"""
             partial class {{subject.Qualification}}
             {
-                public sealed override bool Equals(object other)
+                public override bool Equals(object other)
                 {
                     return Equals(other as {{subject.Qualification}});
                 }

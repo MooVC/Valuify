@@ -33,7 +33,7 @@ internal sealed class ToStringStrategy
         string code = $$"""
             partial class {{subject.Qualification}}
             {
-                public sealed override string ToString()
+                public override string ToString()
                 {
                     return {{value}};
                 }

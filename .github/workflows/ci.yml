@@ -12,6 +12,7 @@ on:
       - hotfix/*
   schedule:
     - cron: '0 3 * * *'
+  workflow_dispatch:
 
 env:
   configuration: 'Debug'
@@ -28,11 +29,11 @@ jobs:
       uses: actions/checkout@v4.1.1
       with:
         fetch-depth: 0
-        
+
     - name: Use .NET SDKs
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: | 
+        dotnet-version: |
           9.0.x
 
     - name: Cache NuGet Packages
@@ -43,16 +44,22 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-nuget-
     
-    - name: Restore Nuget Packages for Solution
+    - name: Restore NuGet Packages for Solution
       run: dotnet restore ${{ env.solution }}
 
     - name: Build Solution
-      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} -p:DefineConstants="CI" --no-restore
+      shell: bash
+      run: |
+        if [ "$GITHUB_EVENT_NAME" = "pull_request" ] || [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+          dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} -p:DefineConstants="CI" --no-restore
+        else
+          dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
+        fi
 
     - name: Test Solution
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
 
     - name: Upload Code Coverage
-      uses: codecov/codecov-action@v4.1.0
+      uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}

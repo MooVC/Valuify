@@ -7,24 +7,12 @@ using Valuify.Model;
 internal sealed class EqualityStrategy
     : IStrategy
 {
-    private const string Conditional = "\r\n            && ";
-
     /// <inheritdoc/>
     public IEnumerable<Source> Generate(Subject subject)
     {
         if (subject.HasEqualityOperator)
         {
             yield break;
-        }
-
-        string conditions = "true";
-
-        if (subject.Properties.Count > 0)
-        {
-            IEnumerable<string> properties = subject.Properties
-                .Select(property => $"{GetComparer(property)}.Default.Equals(left.{property.Name}, right.{property.Name})");
-
-            conditions = string.Join(Conditional, properties);
         }
 
         string code = $$"""
@@ -42,18 +30,11 @@ internal sealed class EqualityStrategy
                         return false;
                     }
 
-                    return {{conditions}};
+                    return left.Equals(right);
                 }
             }
             """;
 
         yield return new Source(code, "Equality");
-    }
-
-    private static string GetComparer(Property property)
-    {
-        return property.IsSequence
-            ? $"global::Valuify.Internal.SequenceEqualityComparer"
-            : $"global::System.Collections.Generic.EqualityComparer<{property.Type}>";
     }
 }
