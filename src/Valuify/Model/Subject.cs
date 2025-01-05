@@ -33,7 +33,6 @@ internal sealed class Subject
     /// <value>A value indicating whether or not the subject declares an inequality operator.</value>
     public bool HasInequalityOperator { get; set; }
 
-
     /// <summary>Gets or sets a value indicating whether or not the subject implements <see cref="IEquatable{T}"/>.</summary>
     /// <value>A value indicating whether or not the subject implements <see cref="IEquatable{T}"/>.</value>
     public bool IsEquatable { get; set; }
