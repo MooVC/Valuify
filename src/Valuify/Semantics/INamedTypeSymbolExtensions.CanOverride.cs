@@ -1,7 +1,6 @@
 ﻿namespace Valuify.Semantics;
 
 using System.Collections.Immutable;
-using System.Reflection.Metadata;
 using Microsoft.CodeAnalysis;
 
 /// <summary>
@@ -16,7 +15,7 @@ internal static partial class INamedTypeSymbolExtensions
     /// <param name="return">The return type for the method denoted by <paramref name="name"/>.</param>
     /// <returns>True if the <paramref name="class"/> overrides the method denoted by <paramref name="name"/>, otherwise False.</returns>
     /// <remarks>When no <paramref name="predicate"/> is specified, it is assumed that the method accepts no parameters.</remarks>
-    public static bool HasOverride(
+    public static bool CanOverride(
         this INamedTypeSymbol @class,
         string name,
         SpecialType @return,
@@ -24,12 +23,7 @@ internal static partial class INamedTypeSymbolExtensions
     {
         predicate ??= method => method.Parameters.Length == 0;
 
-        return @class
-            .GetMembers(name)
-            .OfType<IMethodSymbol>()
-            .Any(method => method.IsOverride
-                        && method.ReturnType.SpecialType == @return
-                        && SymbolEqualityComparer.Default.Equals(method.ContainingType, @class)
-                        && predicate(method));
+        return !(@class.HasOverride(name, @return, predicate: predicate)
+              || @class.InheritsSealed(name, @return, predicate: predicate));
     }
 }

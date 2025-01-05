@@ -9,7 +9,7 @@ internal sealed class ToStringStrategy
     /// <inheritdoc/>
     public IEnumerable<Source> Generate(Subject subject)
     {
-        if (subject.HasToStringOverride)
+        if (!subject.CanOverrideToString)
         {
             yield break;
         }

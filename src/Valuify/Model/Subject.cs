@@ -9,29 +9,30 @@ using System.Collections.Generic;
 internal sealed class Subject
     : Value<Subject>
 {
+    /// <summary>Gets or sets a value indicating whether or not the subject can override <see cref="object.Equals(object)"/>.</summary>
+    /// <value>A value indicating whether or not the subject can override <see cref="object.Equals(object)"/>.</value>
+    public bool CanOverrideEquals { get; set; }
+
+    /// <summary>Gets or sets a value indicating whether or not the subject can override <see cref="object.GetHashCode()"/>.</summary>
+    /// <value>A value indicating whether or not the subject can override <see cref="object.GetHashCode()"/>.</value>
+    public bool CanOverrideGetHashCode { get; set; }
+
+    /// <summary>Gets or sets a value indicating whether or not the subject can override <see cref="object.ToString()"/>.</summary>
+    /// <value>A value indicating whether or not the subject can override <see cref="object.ToString()"/>.</value>
+    public bool CanOverrideToString { get; set; }
+
     /// <summary>Gets or sets a value indicating whether or not the subject declares an equality operator.</summary>
     /// <value>A value indicating whether or not the subject declares an equality operator.</value>
     public bool HasEqualityOperator { get; set; }
-
-    /// <summary>Gets or sets a value indicating whether or not the subject overrides <see cref="object.Equals(object)"/>.</summary>
-    /// <value>A value indicating whether or not the subject overrides <see cref="object.Equals(object)"/>.</value>
-    public bool HasEqualsOverride { get; set; }
 
     /// <summary>Gets or sets a value indicating whether or not the subject implements <see cref="IEquatable{T}.Equals(T)"/>.</summary>
     /// <value>A value indicating whether or not the subject implements <see cref="IEquatable{T}.Equals(T)"/>.</value>
     public bool HasEquatable { get; set; }
 
-    /// <summary>Gets or sets a value indicating whether or not the subject overrides <see cref="object.GetHashCode()"/>.</summary>
-    /// <value>A value indicating whether or not the subject overrides <see cref="object.GetHashCode()"/>.</value>
-    public bool HasGetHashCodeOverride { get; set; }
-
     /// <summary>Gets or sets a value indicating whether or not the subject declares an inequality operator.</summary>
     /// <value>A value indicating whether or not the subject declares an inequality operator.</value>
     public bool HasInequalityOperator { get; set; }
 
-    /// <summary>Gets or sets a value indicating whether or not the subject overrides <see cref="object.ToString()"/>.</summary>
-    /// <value>A value indicating whether or not the subject overrides <see cref="object.ToString()"/>.</value>
-    public bool HasToStringOverride { get; set; }
 
     /// <summary>Gets or sets a value indicating whether or not the subject implements <see cref="IEquatable{T}"/>.</summary>
     /// <value>A value indicating whether or not the subject implements <see cref="IEquatable{T}"/>.</value>
@@ -64,12 +65,12 @@ internal sealed class Subject
     /// <inheritdoc/>
     protected override IEnumerable<object> GetProperties()
     {
+        yield return CanOverrideEquals;
+        yield return CanOverrideGetHashCode;
+        yield return CanOverrideToString;
         yield return HasEqualityOperator;
-        yield return HasEqualsOverride;
         yield return HasEquatable;
-        yield return HasGetHashCodeOverride;
         yield return HasInequalityOperator;
-        yield return HasToStringOverride;
         yield return IsEquatable;
         yield return Name;
         yield return Namespace;

@@ -9,7 +9,7 @@ internal sealed class EqualsStrategy
     /// <inheritdoc/>
     public IEnumerable<Source> Generate(Subject subject)
     {
-        if (subject.HasEqualsOverride)
+        if (!subject.CanOverrideEquals)
         {
             yield break;
         }

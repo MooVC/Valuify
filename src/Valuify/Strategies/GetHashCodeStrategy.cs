@@ -9,7 +9,7 @@ internal sealed class GetHashCodeStrategy
     /// <inheritdoc/>
     public IEnumerable<Source> Generate(Subject subject)
     {
-        if (subject.HasGetHashCodeOverride)
+        if (!subject.CanOverrideGetHashCode)
         {
             yield break;
         }
