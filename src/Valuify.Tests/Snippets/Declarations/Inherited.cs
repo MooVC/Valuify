@@ -1,32 +1,71 @@
 ﻿namespace Valuify.Snippets.Declarations;
 
+using Microsoft.CodeAnalysis.CSharp;
+
 internal static partial class Inherited
 {
-    public static readonly Snippets Declaration = new(
-        [
-            Declarations.CSharp1Body,
-            Declarations.CSharp3Body,
-            Declarations.CSharp6Body,
-            Declarations.CSharp9Body,
-        ],
-        Declarations.Main,
-        [
-            Expected.Equality,
-            Expected.Equals,
-            Expected.EquatableContract,
-            Expected.EquatableImplementation,
-            Expected.GetHashCode,
-            Expected.Inequality,
-            Expected.ToString,
-        ],
-        [
-            new(Expected.Equality.Content, Extensions.HasEqualityOperator),
-            new(Expected.Equals.Content, Extensions.HasEqualsOverride),
-            new(Expected.EquatableContract.Content, Extensions.IsEquatable),
-            new(Expected.EquatableImplementation.Content, Extensions.HasEquatable),
-            new(Expected.GetHashCode.Content, Extensions.HasGetHashCodeOverride),
-            new(Expected.Inequality.Content, Extensions.HasInequalityOperator),
-            new(Expected.ToString.Content, Extensions.HasToStringOverride),
-        ],
-        nameof(Inherited));
+    public static readonly Content CSharp1Body = new(
+            """
+                {
+                    private int age;
+                    private string name;
+
+                    public int Age
+                    {
+                        get { return age; }
+                        set { age = value; }
+                    }
+        
+                    public bool IsAdult
+                    {
+                        get { return Age >= 18; }
+                    }
+        
+                    public string Name
+                    {
+                        get { return name; }
+                        set { name = value; }
+                    }
+                }
+            """,
+            LanguageVersion.CSharp1);
+
+    public static readonly Content CSharp3Body = new(
+        """
+                {
+                    public int Age { get; set; }
+        
+                    public bool IsAdult
+                    {
+                        get { return Age >= 18; }
+                    }
+        
+                    public string Name { get; set; }
+                }
+            """,
+        LanguageVersion.CSharp3);
+
+    public static readonly Content CSharp6Body = new(
+        """
+                {
+                    public int Age { get; }
+        
+                    public bool IsAdult => Age >= 18;
+        
+                    public string Name { get; }
+                }
+            """,
+        LanguageVersion.CSharp6);
+
+    public static readonly Content CSharp9Body = new(
+        """
+                {
+                    public int Age { get; init; }
+        
+                    public bool IsAdult => Age >= 18;
+        
+                    public string Name { get; init; }
+                }
+            """,
+        LanguageVersion.CSharp9);
 }

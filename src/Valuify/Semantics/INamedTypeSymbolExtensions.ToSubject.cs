@@ -19,12 +19,12 @@ internal static partial class INamedTypeSymbolExtensions
 
         return new Subject
         {
+            CanOverrideEquals = @class.CanOverrideEquals(),
+            CanOverrideGetHashCode = @class.CanOverrideGetHashCode(),
+            CanOverrideToString = @class.CanOverrideToString(),
             HasEqualityOperator = @class.HasEqualityOperator(),
             HasEquatable = @class.HasEquatable(),
-            HasEqualsOverride = @class.HasEqualsOverride(),
-            HasGetHashCodeOverride = @class.HasGetHashCodeOverride(),
             HasInequalityOperator = @class.HasInequalityOperator(),
-            HasToStringOverride = @class.HasToStringOverride(),
             IsEquatable = @class.IsEquatable(compilation),
             Name = @class.Name,
             Namespace = @namespace,

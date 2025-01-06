@@ -17,11 +17,11 @@ public abstract class WhenEqualityIsChecked
     }
 
     [Fact]
-    public void GivenADifferentHasEqualityOperatorThenTheyAreNotDeemedEqual()
+    public void GivenADifferentCanOverrideEqualsThenTheyAreNotDeemedEqual()
     {
         // Arrange
-        Subject instance1 = Create(subject => subject.HasEqualityOperator = true);
-        Subject instance2 = Create(subject => subject.HasEqualityOperator = false);
+        Subject instance1 = Create(subject => subject.CanOverrideEquals = true);
+        Subject instance2 = Create(subject => subject.CanOverrideEquals = false);
 
         // Act
         bool areEqual = AreEqual(instance1, instance2);
@@ -31,11 +31,39 @@ public abstract class WhenEqualityIsChecked
     }
 
     [Fact]
-    public void GivenADifferentHasEqualsOverrideThenTheyAreNotDeemedEqual()
+    public void GivenADifferentCanOverrideGetHashCodeThenTheyAreNotDeemedEqual()
     {
         // Arrange
-        Subject instance1 = Create(subject => subject.HasEqualsOverride = true);
-        Subject instance2 = Create(subject => subject.HasEqualsOverride = false);
+        Subject instance1 = Create(subject => subject.CanOverrideGetHashCode = true);
+        Subject instance2 = Create(subject => subject.CanOverrideGetHashCode = false);
+
+        // Act
+        bool areEqual = AreEqual(instance1, instance2);
+
+        // Assert
+        _ = areEqual.Should().BeFalse();
+    }
+
+    [Fact]
+    public void GivenADifferentCanOverrideToStringThenTheyAreNotDeemedEqual()
+    {
+        // Arrange
+        Subject instance1 = Create(subject => subject.CanOverrideToString = true);
+        Subject instance2 = Create(subject => subject.CanOverrideToString = false);
+
+        // Act
+        bool areEqual = AreEqual(instance1, instance2);
+
+        // Assert
+        _ = areEqual.Should().BeFalse();
+    }
+
+    [Fact]
+    public void GivenADifferentHasEqualityOperatorThenTheyAreNotDeemedEqual()
+    {
+        // Arrange
+        Subject instance1 = Create(subject => subject.HasEqualityOperator = true);
+        Subject instance2 = Create(subject => subject.HasEqualityOperator = false);
 
         // Act
         bool areEqual = AreEqual(instance1, instance2);
@@ -59,39 +87,11 @@ public abstract class WhenEqualityIsChecked
     }
 
     [Fact]
-    public void GivenADifferentHasGetHashCodeOverrideThenTheyAreNotDeemedEqual()
-    {
-        // Arrange
-        Subject instance1 = Create(subject => subject.HasGetHashCodeOverride = true);
-        Subject instance2 = Create(subject => subject.HasGetHashCodeOverride = false);
-
-        // Act
-        bool areEqual = AreEqual(instance1, instance2);
-
-        // Assert
-        _ = areEqual.Should().BeFalse();
-    }
-
-    [Fact]
     public void GivenADifferentHasInequalityOperatorThenTheyAreNotDeemedEqual()
     {
         // Arrange
         Subject instance1 = Create(subject => subject.HasInequalityOperator = true);
         Subject instance2 = Create(subject => subject.HasInequalityOperator = false);
-
-        // Act
-        bool areEqual = AreEqual(instance1, instance2);
-
-        // Assert
-        _ = areEqual.Should().BeFalse();
-    }
-
-    [Fact]
-    public void GivenADifferentHasToStringOverrideThenTheyAreNotDeemedEqual()
-    {
-        // Arrange
-        Subject instance1 = Create(subject => subject.HasToStringOverride = true);
-        Subject instance2 = Create(subject => subject.HasToStringOverride = false);
 
         // Act
         bool areEqual = AreEqual(instance1, instance2);
@@ -233,12 +233,12 @@ public abstract class WhenEqualityIsChecked
 
         var instance = new Subject
         {
+            CanOverrideEquals = true,
+            CanOverrideGetHashCode = true,
+            CanOverrideToString = true,
             HasEqualityOperator = true,
-            HasEqualsOverride = true,
             HasEquatable = true,
-            HasGetHashCodeOverride = true,
             HasInequalityOperator = true,
-            HasToStringOverride = true,
             IsEquatable = true,
             Name = "SubjectName",
             Namespace = "Valuify.Testing",

@@ -2,10 +2,12 @@
 
 internal static partial class Inherited
 {
-    public static class Expected
+    public static partial class FromVirtual
     {
-        public static readonly Generated Equality = new(
-            """
+        public static class Expected
+        {
+            public static readonly Generated Equality = new(
+                """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
@@ -38,11 +40,11 @@ internal static partial class Inherited
                     #endif
                 }
                 """,
-            Extensions.HasEqualityOperator,
-            "Valuify.Classes.Testing.Inherited.Equality");
+                Extensions.HasEqualityOperator,
+                "Valuify.Classes.Testing.Inherited.Equality");
 
-        public static new readonly Generated Equals = new(
-            """
+            public static new readonly Generated Equals = new(
+                """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
@@ -65,11 +67,11 @@ internal static partial class Inherited
                     #endif
                 }
                 """,
-            Extensions.HasEqualsOverride,
-            "Valuify.Classes.Testing.Inherited.Equals");
+                Extensions.HasEqualsOverride,
+                "Valuify.Classes.Testing.Inherited.Equals");
 
-        public static readonly Generated EquatableContract = new(
-            """
+            public static readonly Generated EquatableContract = new(
+                """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
@@ -89,11 +91,11 @@ internal static partial class Inherited
                     #endif
                 }
                 """,
-            Extensions.IsEquatable,
-            "Valuify.Classes.Testing.Inherited.IEquatable");
+                Extensions.IsEquatable,
+                "Valuify.Classes.Testing.Inherited.IEquatable");
 
-        public static readonly Generated EquatableImplementation = new(
-            """
+            public static readonly Generated EquatableImplementation = new(
+                """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
@@ -128,11 +130,11 @@ internal static partial class Inherited
                     #endif
                 }
                 """,
-            Extensions.HasEquatable,
-            "Valuify.Classes.Testing.Inherited.IEquatable.Equals");
+                Extensions.HasEquatable,
+                "Valuify.Classes.Testing.Inherited.IEquatable.Equals");
 
-        public static new readonly Generated GetHashCode = new(
-            """
+            public static new readonly Generated GetHashCode = new(
+                """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
@@ -155,11 +157,11 @@ internal static partial class Inherited
                     #endif
                 }
                 """,
-            Extensions.HasGetHashCodeOverride,
-            "Valuify.Classes.Testing.Inherited.GetHashCode");
+                Extensions.HasGetHashCodeOverride,
+                "Valuify.Classes.Testing.Inherited.GetHashCode");
 
-        public static readonly Generated Inequality = new(
-            """
+            public static readonly Generated Inequality = new(
+                """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
@@ -182,11 +184,11 @@ internal static partial class Inherited
                     #endif
                 }
                 """,
-            Extensions.HasInequalityOperator,
-            "Valuify.Classes.Testing.Inherited.Inequality");
+                Extensions.HasInequalityOperator,
+                "Valuify.Classes.Testing.Inherited.Inequality");
 
-        public static new readonly Generated ToString = new(
-            """
+            public static new readonly Generated ToString = new(
+                """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
@@ -209,7 +211,8 @@ internal static partial class Inherited
                     #endif
                 }
                 """,
-            Extensions.HasToStringOverride,
-            "Valuify.Classes.Testing.Inherited.ToString");
+                Extensions.HasToStringOverride,
+                "Valuify.Classes.Testing.Inherited.ToString");
+        }
     }
 }
