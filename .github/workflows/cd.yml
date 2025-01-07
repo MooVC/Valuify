@@ -65,15 +65,8 @@ jobs:
           echo "::set-output name=semantic::$semantic"
 
       - name: Build Solution
-        run: dotnet build ${{ env.solution }} \
-          --configuration ${{ env.configuration }} \
-          --no-restore \
-          -p:AssemblyVersion=${{ env.version }} \
-          -p:FileVersion=${{ env.version }} \
-          -p:InformationalVersion=${{ env.informational }} \
-          -p:PackageVersion=${{ env.semantic }} \
-          -p:Version=${{ env.version }}
-
+        run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore -p:AssemblyVersion=${{ env.version }} -p:FileVersion=${{ env.version }}   -p:InformationalVersion=${{ env.informational }} -p:PackageVersion=${{ env.semantic }} -p:Version=${{ env.version }}
+  
       - name: Test Solution
         run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
 
@@ -81,27 +74,17 @@ jobs:
         uses: codecov/codecov-action@1e68e06f1dbfde0e4cefc87efeba9e4643565303
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
+          
       - name: Pack Solution
-        run: dotnet pack ${{ env.solution }} \
-          --configuration ${{ env.configuration }} \
-          --no-build \
-          --output ./artifacts \
-          -p:Version=${{ env.semantic }}
-
+        run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts -p:Version=${{ env.semantic }}
+  
       - name: Publish Packages to GitHub
+        run: dotnet nuget push **/Valuify*.nupkg --source "https://nuget.pkg.github.com/MooVC/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: dotnet nuget push **/Valuify*.nupkg \
-          --source "https://nuget.pkg.github.com/MooVC/index.json" \
-          --api-key ${{ secrets.GITHUB_TOKEN }} \
-          --skip-duplicate
-
+          
       - name: Publish Packages to NuGet
-        run: dotnet nuget push **/Valuify*.nupkg \
-          --api-key ${{ secrets.NUGET_API_KEY }} \
-          --source https://api.nuget.org/v3/index.json \
-          --skip-duplicate
+        run: dotnet nuget push **/Valuify*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
   post-deployment:
     name: Post Deployment
