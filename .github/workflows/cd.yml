@@ -5,6 +5,11 @@ on:
     tags:
       - '*'
   workflow_dispatch:
+    inputs:
+      run_pack_and_publish:
+        description: 'Execute Pack and Publish?'
+        required: false
+        type: boolean
 
 env:
   configuration: 'Release'
@@ -86,22 +91,21 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Pack Solution
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_pack_and_publish  == 'true') }}
         run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts -p:Version=${{ env.semantic }}
 
       - name: Publish Packages to GitHub
-        if: ${{ github.event_name == 'push' }}
-        run: dotnet nuget push **/{{ env.PACKAGE_ID }}*.nupkg --source "https://nuget.pkg.github.com/MooVC/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_pack_and_publish  == 'true') }}
+        run: dotnet nuget push **/${{ env.PACKAGE_ID }}*.nupkg --source "https://nuget.pkg.github.com/MooVC/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
       - name: Publish Packages to NuGet
-        if: ${{ github.event_name == 'push' }}
-        run: dotnet nuget push **/{{ env.PACKAGE_ID }}*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_pack_and_publish  == 'true') }}
+        run: dotnet nuget push **/${{ env.PACKAGE_ID }}*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
   post-deployment:
     name: Post Deployment
-    if: false ## Disabled Temporarily
     needs: [build]
     runs-on: ubuntu-latest
 
@@ -151,7 +155,7 @@ jobs:
           fi
 
           # Get registration info
-          registrationJson=$(curl -s "https://api.nuget.org/v3/registration5-semver1/${PACKAGE_ID}/index.json")
+          registrationJson=$(curl -s "https://api.nuget.org/v3/registration5-gz-semver2/${PACKAGE_ID}/index.json")
           if [ -z "$registrationJson" ]; then
             echo "No data returned from registration endpoint."
             exit 0
