@@ -13,7 +13,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeFalse();
+        areNotEqual.ShouldBeFalse();
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -55,7 +55,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -83,7 +83,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -97,7 +97,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -111,7 +111,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -125,7 +125,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -139,7 +139,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -153,7 +153,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -167,7 +167,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -181,7 +181,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -194,7 +194,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance, default);
 
         // Assert
-        _ = areNotEqual.Should().BeTrue();
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]
@@ -208,7 +208,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeFalse();
+        areNotEqual.ShouldBeFalse();
     }
 
     [Fact]
@@ -222,7 +222,7 @@ public abstract class WhenInequalityIsChecked
         bool areNotEqual = AreNotEqual(instance1, instance2);
 
         // Assert
-        _ = areNotEqual.Should().BeFalse();
+        areNotEqual.ShouldBeFalse();
     }
 
     private protected abstract bool AreNotEqual(Subject? instance1, Subject? instance2);
