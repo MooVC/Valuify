@@ -3,7 +3,9 @@
 using Microsoft.CodeAnalysis;
 using Valuify.Model;
 
-/// <summary>Provides extensions relating to <see cref="INamedTypeSymbol"/>.</summary>
+/// <summary>
+/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
+/// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
     private static IEnumerable<Property> GetAllProperties(this INamedTypeSymbol @class)
@@ -32,6 +34,7 @@ internal static partial class INamedTypeSymbolExtensions
             {
                 yield return new Property
                 {
+                    IsIgnored = property.HasIgnore(),
                     IsSequence = IsSequence(property.Type),
                     Name = property.Name,
                     Type = property.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),

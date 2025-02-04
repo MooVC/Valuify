@@ -2,12 +2,16 @@
 
 using Microsoft.CodeAnalysis;
 
-/// <summary>Generates an internal HashCode static class that is used to support hash code generation.</summary>
+/// <summary>
+/// Generates an internal HashCode static class that is used to support hash code generation.
+/// </summary>
 [Generator(LanguageNames.CSharp)]
 public sealed class HashCodeGenerator
     : IIncrementalGenerator
 {
-    /// <summary>The source code that will be output by the generator.</summary>
+    /// <summary>
+    /// The source code that will be output by the generator.
+    /// </summary>
     public const string Content = $$"""
         namespace Valuify.Internal
         {

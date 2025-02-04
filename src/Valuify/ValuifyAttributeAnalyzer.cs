@@ -7,13 +7,13 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Valuify.Semantics;
 using Valuify.Syntax;
-using static Valuify.AttributeAnalyzer_Resources;
+using static Valuify.ValuifyAttributeAnalyzer_Resources;
 
 /// <summary>
 /// Analyzes usage of the ValuifyAttribute when applied to a class, ensuring the class adheres to the known constraints.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class AttributeAnalyzer
+public sealed class ValuifyAttributeAnalyzer
     : DiagnosticAnalyzer
 {
     private const string Branch = "master";
@@ -152,7 +152,7 @@ public sealed class AttributeAnalyzer
 
     private static LocalizableResourceString GetResourceString(string name)
     {
-        return new(name, ResourceManager, typeof(AttributeAnalyzer_Resources));
+        return new(name, ResourceManager, typeof(ValuifyAttributeAnalyzer_Resources));
     }
 
     private static IMethodSymbol? GetSymbol(SyntaxNodeAnalysisContext context, AttributeSyntax syntax)

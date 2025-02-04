@@ -7,9 +7,15 @@ using Microsoft.CodeAnalysis;
 /// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
-    /// <summary>Determines whether or not the <paramref name="class"/> declares an implementaton for Equals.</summary>
-    /// <param name="class">The <paramref name="class"/> to be checked.</param>
-    /// <returns>True if the <paramref name="class"/> implements Equals, otherwise False.</returns>
+    /// <summary>
+    /// Determines whether or not the <paramref name="class"/> declares an implementaton for Equals.
+    /// </summary>
+    /// <param name="class">
+    /// The <paramref name="class"/> to be checked.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if the <paramref name="class"/> implements Equals, otherwise <see langword="false"/>.
+    /// </returns>
     public static bool HasEquatable(this INamedTypeSymbol @class)
     {
         return @class

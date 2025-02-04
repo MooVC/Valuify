@@ -9,10 +9,11 @@ public sealed class WhenExecuted
 {
     private static readonly Type[] generators =
     [
-        typeof(AttributeGenerator),
         typeof(ClassGenerator),
         typeof(HashCodeGenerator),
+        typeof(IgnoreAttributeGenerator),
         typeof(SequenceEqualityComparerGenerator),
+        typeof(ValuifyAttributeGenerator),
     ];
 
     [Theory]
@@ -24,6 +25,7 @@ public sealed class WhenExecuted
 
         expectations.IsDeclaredIn(test.TestState);
 
+        Attributes.Ignore.IsExpectedIn(test.TestState);
         Attributes.Valuify.IsExpectedIn(test.TestState);
         Internal.HashCode.IsExpectedIn(test.TestState);
         Internal.SequenceEqualityComparer.IsExpectedIn(test.TestState);

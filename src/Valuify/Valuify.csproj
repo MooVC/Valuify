@@ -3,16 +3,16 @@
     <Description>A .NET Roslyn source generator that enables record-like behavior for classes in projects using C# versions prior to 9.0.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="AttributeAnalyzer.Resources.Designer.cs">
+    <Compile Update="ValuifyAttributeAnalyzer.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AttributeAnalyzer.Resources.resx</DependentUpon>
+      <DependentUpon>ValuifyAttributeAnalyzer.Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="AttributeAnalyzer.Resources.resx">
+    <EmbeddedResource Update="ValuifyAttributeAnalyzer.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AttributeAnalyzer.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>ValuifyAttributeAnalyzer.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

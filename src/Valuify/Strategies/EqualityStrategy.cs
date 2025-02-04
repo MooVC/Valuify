@@ -3,7 +3,9 @@
 using System.Collections.Generic;
 using Valuify.Model;
 
-/// <summary>Generates the source needed to support the equality operator.</summary>
+/// <summary>
+/// Generates the source needed to support the equality operator.
+/// </summary>
 internal sealed class EqualityStrategy
     : IStrategy
 {

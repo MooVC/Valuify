@@ -5,7 +5,9 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Valuify.Model;
 using Valuify.Semantics;
 
-/// <summary>Provides extensions relating to <see cref="ClassDeclarationSyntax"/>.</summary>
+/// <summary>
+/// Provides extensions relating to <see cref="ClassDeclarationSyntax"/>.
+/// </summary>
 internal static partial class ClassDeclarationSyntaxExtensions
 {
     /// <summary>
@@ -15,9 +17,15 @@ internal static partial class ClassDeclarationSyntaxExtensions
     /// The semantics will only be mapped if the <paramref name="syntax"/> is annotated with the Valuify attribute and it,
     /// along with its parents, are marked as partial.
     /// </summary>
-    /// <param name="syntax">The syntax for the class to be mapped.</param>
-    /// <param name="compilation">Information relating to the compilation, used to obtain the semantic model for <paramref name="syntax"/>.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
+    /// <param name="syntax">
+    /// The syntax for the class to be mapped.
+    /// </param>
+    /// <param name="compilation">
+    /// Information relating to the compilation, used to obtain the semantic model for <paramref name="syntax"/>.
+    /// </param>
+    /// <param name="cancellationToken">
+    /// A <see cref="CancellationToken" /> that can be used to cancel the operation.
+    /// </param>
     /// <returns>
     /// When the <paramref name="syntax"/> is annotated with the Valuify attribute and it, and its parents are marked as partial,
     /// the required semantics mapped from <paramref name="syntax"/> using <paramref name="compilation"/>, otherwise <see langword="null"/>.

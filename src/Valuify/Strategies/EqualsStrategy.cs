@@ -2,7 +2,9 @@
 
 using Valuify.Model;
 
-/// <summary>Generates the source needed to support <see cref="object.Equals(object)"/>.</summary>
+/// <summary>
+/// Generates the source needed to support <see cref="object.Equals(object)"/>.
+/// </summary>
 internal sealed class EqualsStrategy
     : IStrategy
 {

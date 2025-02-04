@@ -2,7 +2,9 @@
 
 using Valuify.Model;
 
-/// <summary>Generates the source needed to support <see cref="object.ToString()"/>.</summary>
+/// <summary>
+/// Generates the source needed to support <see cref="object.ToString()"/>.
+/// </summary>
 internal sealed class ToStringStrategy
     : IStrategy
 {
@@ -16,16 +18,18 @@ internal sealed class ToStringStrategy
 
         string value = $"\"{subject.Name}\"";
 
-        if (subject.Properties.Any())
+        Property[] properties = subject.Properties
+            .Where(property => !property.IsIgnored)
+            .ToArray();
+
+        if (properties.Length > 0)
         {
-            IEnumerable<string> values = subject
-                .Properties
-                .Select((property, index) => $"{property.Name} = {{{index}}}");
+            IEnumerable<string> values = properties.Select((property, index) => $"{property.Name} = {{{index}}}");
 
             value = $"{subject.Name} {{ {string.Join(", ", values)} }}";
 
-            IEnumerable<string> properties = subject.Properties.Select(property => property.Name);
-            string parameters = string.Join(", ", properties);
+            IEnumerable<string> names = properties.Select(property => property.Name);
+            string parameters = string.Join(", ", names);
 
             value = $"string.Format(\"{value}\", {parameters})";
         }

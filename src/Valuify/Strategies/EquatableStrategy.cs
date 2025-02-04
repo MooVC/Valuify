@@ -2,7 +2,9 @@
 
 using Valuify.Model;
 
-/// <summary>Generates the source needed to support <see cref="IEquatable{T}"/>.</summary>
+/// <summary>
+/// Generates the source needed to support <see cref="IEquatable{T}"/>.
+/// </summary>
 internal sealed class EquatableStrategy
     : IStrategy
 {
@@ -41,6 +43,7 @@ internal sealed class EquatableStrategy
         if (subject.Properties.Count > 0)
         {
             IEnumerable<string> properties = subject.Properties
+                .Where(property => !property.IsIgnored)
                 .Select(property => $"{GetComparer(property)}.Default.Equals({property.Name}, other.{property.Name})");
 
             conditions = string.Join(Conditional, properties);
