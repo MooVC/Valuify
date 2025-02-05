@@ -201,6 +201,71 @@ The ToString Method Override is generated with a hintname that adheres to the fo
 
 The ToString Method Override will not be generated if the type explicitly defines an alternative implementation.
 
+## Property Exclusion
+
+Specific properties can be excluded from consideration by Valuify using the `Ignore` attribute:
+
+```csharp
+using Valuify;
+
+[Valuify]
+public partial class Property
+{
+    public string Name { get; set; }
+
+    [Ignore]
+    public string Type { get; set; }
+}
+```
+
+This will change the generated code as follows:
+
+### Equatable Implementation
+
+```csharp
+partial class Property
+{
+    public bool Equals(Property other)
+    {
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        if (ReferenceEquals(other, null))
+        {
+            return false;
+        }
+
+        return global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Name, other.Name);
+    }
+}
+```
+
+### GetHashCode Method Override
+
+```csharp
+partial class Property
+{
+    public override int GetHashCode()
+    {
+        return global::Valuify.Internal.HashCode.Combine(Name);
+    }
+}
+```
+
+### ToString Method Override
+
+```csharp
+partial class Property
+{
+    public override string ToString()
+    {
+        return string.Format("Property { Name = {0} }", Name);
+    }
+}
+```
+
 ## Analyzers
 
 Valuify includes several analyzers to assist engineers with its usage. These are:
@@ -209,7 +274,7 @@ Rule ID                          | Category | Severity | Notes
 :--------------------------------|:---------|:---------|:-------------------------------------------------------------------------
 [VALFY01](docs/rules/VALFY01.md) | Usage    | Warning  | Type is not a class
 [VALFY02](docs/rules/VALFY02.md) | Usage    | Warning  | Type is not marked as partial
-[VALFY03](docs/rules/VALFY02.md) | Design   | Info     | Type does not declare any properties
+[VALFY03](docs/rules/VALFY03.md) | Design   | Info     | Type does not declare any properties
 
 ## Contributing
 
