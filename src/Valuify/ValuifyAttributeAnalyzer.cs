@@ -14,10 +14,8 @@ using static Valuify.ValuifyAttributeAnalyzer_Resources;
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ValuifyAttributeAnalyzer
-    : DiagnosticAnalyzer
+    : AttributeAnalyzer<ValuifyAttributeAnalyzer_Resources>
 {
-    private const string Branch = "master";
-
     /// <inheritdoc/>
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
     [
@@ -75,21 +73,7 @@ public sealed class ValuifyAttributeAnalyzer
         helpLinkUri: GetHelpLinkUri("VALFY03"));
 
     /// <inheritdoc/>
-    public sealed override void Initialize(AnalysisContext context)
-    {
-        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-        context.EnableConcurrentExecution();
-        context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.Attribute);
-    }
-
-    private static void Raise(SyntaxNodeAnalysisContext context, DiagnosticDescriptor descriptor, Location location, params object?[] messageArgs)
-    {
-        var diagnostic = Diagnostic.Create(descriptor, location, messageArgs);
-
-        context.ReportDiagnostic(diagnostic);
-    }
-
-    private static void Analyze(AttributeSyntax attribute, SyntaxNodeAnalysisContext context, Location location)
+    protected override void Analyze(AttributeSyntax attribute, SyntaxNodeAnalysisContext context, Location location)
     {
         if (IsViolatingCompatibleTargetTypeRule(attribute, out ClassDeclarationSyntax? @class))
         {
@@ -111,6 +95,13 @@ public sealed class ValuifyAttributeAnalyzer
         }
     }
 
+    /// <inheritdoc/>
+    protected override bool IsMatch(IMethodSymbol symbol)
+    {
+        return symbol.ContainingType is not null
+            && symbol.ContainingType.IsValuify();
+    }
+
     private static bool IsViolatingDefinesPropertiesRule(SyntaxNodeAnalysisContext context, ClassDeclarationSyntax? @class, out string? identifier)
     {
         identifier = default;
@@ -124,43 +115,6 @@ public sealed class ValuifyAttributeAnalyzer
         INamedTypeSymbol? symbol = context.SemanticModel.GetDeclaredSymbol(@class, cancellationToken: context.CancellationToken);
 
         return symbol is null || !symbol.HasProperties();
-    }
-
-    private static void AnalyzeNode(SyntaxNodeAnalysisContext context)
-    {
-        if (context.Node is not AttributeSyntax attribute)
-        {
-            return;
-        }
-
-        IMethodSymbol? symbol = GetSymbol(context, attribute);
-
-        if (symbol is null || !IsValuify(symbol))
-        {
-            return;
-        }
-
-        Location location = attribute.GetLocation();
-
-        Analyze(attribute, context, location);
-    }
-
-    private static string GetHelpLinkUri(string ruleId)
-    {
-        return $"https://github.com/MooVC/Valuify/blob/{Branch}/docs/rules/{ruleId}.md";
-    }
-
-    private static LocalizableResourceString GetResourceString(string name)
-    {
-        return new(name, ResourceManager, typeof(ValuifyAttributeAnalyzer_Resources));
-    }
-
-    private static IMethodSymbol? GetSymbol(SyntaxNodeAnalysisContext context, AttributeSyntax syntax)
-    {
-        return context
-            .SemanticModel
-            .GetSymbolInfo(syntax, cancellationToken: context.CancellationToken)
-            .Symbol as IMethodSymbol;
     }
 
     private static bool IsViolatingCompatibleTargetTypeRule(AttributeSyntax attribute, out ClassDeclarationSyntax? @class)
@@ -187,11 +141,5 @@ public sealed class ValuifyAttributeAnalyzer
         }
 
         return false;
-    }
-
-    private static bool IsValuify(IMethodSymbol symbol)
-    {
-        return symbol.ContainingType is not null
-            && symbol.ContainingType.IsValuify();
     }
 }

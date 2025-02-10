@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp;
 internal static class Unannotated
 {
     public static readonly Snippets Declaration = new(
-        Simple.Declaration.Body,
+        Ignored.Declaration.Body,
         new(
             """
             namespace Valuify.Classes.Testing
