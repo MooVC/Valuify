@@ -43,7 +43,7 @@ public sealed class WhenExecuted
 
             expectation.IsDeclaredIn(test.TestState);
 
-            test.ExpectedDiagnostics.Add(GetExpectedMissingValuifyRule(positions[expectation.Minimum]));
+            test.ExpectedDiagnostics.Add(GetExpectedMissingValuifyRule(positions[expectation.Minimum], nameof(Unannotated)));
 
             // Act
             Func<Task> act = () => test.RunAsync();
@@ -53,9 +53,10 @@ public sealed class WhenExecuted
         }
     }
 
-    private static DiagnosticResult GetExpectedMissingValuifyRule(LinePosition position)
+    private static DiagnosticResult GetExpectedMissingValuifyRule(LinePosition position, string name)
     {
         return new DiagnosticResult(IgnoreAttributeAnalyzer.MissingValuifyRule)
-            .WithLocation(position);
+            .WithLocation(position)
+            .WithArguments(name);
     }
 }
