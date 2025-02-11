@@ -104,119 +104,119 @@ jobs:
         if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_pack_and_publish  == 'true') }}
         run: dotnet nuget push **/${{ env.PACKAGE_ID }}*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
-  post-deployment:
-    name: Post Deployment
-    needs: [build]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Wait for 5 Minutes
-        if: ${{ github.event_name == 'push' }}
-        shell: bash
-        run: |
-          echo "Waiting for 5 minutes with periodic updates..."
-
-          total=300
-          interval=10
-          elapsed=0
-
-          while [ $elapsed -lt $total ]
-          do
-            echo "Elapsed $elapsed seconds..."
-            sleep $interval
-            elapsed=$((elapsed + interval))
-          done
-
-          echo "Wait complete. Checking packages..."
-
-      - name: Deprecate/Unlist Older Packages
-        shell: bash
-        env:
-          PACKAGE_ID: ${{ env.PACKAGE_ID }}
-          SKIP_VERSION: ${{ needs.build.outputs.semantic }}
-          NUGET_FEED: "https://api.nuget.org/v3/index.json"
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: |
-          set -e
-
-          # If we have "0.0.0", presumably no real tag was found during manual run
-          if [ "$SKIP_VERSION" = "0.0.0" ]; then
-            echo "No real version found, skipping deprecation/unlisting."
-            exit 0
-          fi
-
-          echo "Package ID: $PACKAGE_ID"
-          echo "Skip Version (newly published): $SKIP_VERSION"
-
-          # Decide if skip-version is release or prerelease
-          isRelease=true
-          if [[ "$SKIP_VERSION" == *"-"* ]]; then
-            isRelease=false
-          fi
-
-          # Get registration info
-          registrationJson=$(curl -s "https://api.nuget.org/v3/registration5-gz-semver2/${PACKAGE_ID}/index.json")
-          if [ -z "$registrationJson" ]; then
-            echo "No data returned from registration endpoint."
-            exit 0
-          fi
-
-          combinedData=$(echo "$registrationJson" | jq -r '
-            .items[]?.items[]? as $entry
-            | [
-                $entry.catalogEntry.version,
-                (if $entry.catalogEntry.listed then "true" else "false" end),
-                (if $entry.catalogEntry.deprecation then "deprecated" else "null" end)
-              ]
-            | join("|")
-          ')
-
-          if [ -z "$combinedData" ]; then
-            echo "No published versions found for $PACKAGE_ID."
-            exit 0
-          fi
-
-          while IFS= read -r row; do
-            ver=$(echo "$row" | cut -d'|' -f1)
-            isListed=$(echo "$row" | cut -d'|' -f2)
-            isDeprecated=$(echo "$row" | cut -d'|' -f3)
-
-            # Always skip the newly published version
-            if [ "$ver" = "$SKIP_VERSION" ]; then
-              echo "Skipping newly published version $ver."
-              continue
-            fi
-
-            if [[ "$ver" == *"-"* ]]; then
-              # Prerelease => unlist if still listed
-              if [ "$isListed" = "true" ]; then
-                echo "Unlisting older prerelease $ver..."
-                dotnet nuget delete "$PACKAGE_ID" "$ver" \
-                  --source "$NUGET_FEED" \
-                  --api-key "$NUGET_API_KEY" \
-                  --non-interactive || echo "Could not unlist $ver."
-              else
-                echo "Prerelease $ver is already unlisted."
-              fi
-            else
-              # Release => deprecate if skip-version is release
-              if [ "$isRelease" = true ]; then
-                if [ "$isDeprecated" = "null" ]; then
-                  echo "Deprecating older release $ver..."
-                  dotnet nuget deprecate "$PACKAGE_ID" \
-                    --version "$ver" \
-                    --source "$NUGET_FEED" \
-                    --api-key "$NUGET_API_KEY" \
-                    --reason Other \
-                    --message "Superseded by $SKIP_VERSION" \
-                    --non-interactive || echo "Deprecation failed for $ver."
-                else
-                  echo "Release $ver is already deprecated."
-                fi
-              else
-                echo "Found release $ver, but skip-version is prerelease => no action."
-              fi
-            fi
-          done <<< "$combinedData"
-
-          echo "Done!"
+#  post-deployment:
+#    name: Post Deployment
+#    needs: [build]
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Wait for 5 Minutes
+#        if: ${{ github.event_name == 'push' }}
+#        shell: bash
+#        run: |
+#          echo "Waiting for 5 minutes with periodic updates..."
+#
+#          total=300
+#          interval=10
+#          elapsed=0
+#
+#          while [ $elapsed -lt $total ]
+#          do
+#            echo "Elapsed $elapsed seconds..."
+#            sleep $interval
+#            elapsed=$((elapsed + interval))
+#          done
+#
+#          echo "Wait complete. Checking packages..."
+#
+#      - name: Deprecate/Unlist Older Packages
+#        shell: bash
+#        env:
+#          PACKAGE_ID: ${{ env.PACKAGE_ID }}
+#          SKIP_VERSION: ${{ needs.build.outputs.semantic }}
+#          NUGET_FEED: "https://api.nuget.org/v3/index.json"
+#          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+#        run: |
+#          set -e
+#
+#          # If we have "0.0.0", presumably no real tag was found during manual run
+#          if [ "$SKIP_VERSION" = "0.0.0" ]; then
+#            echo "No real version found, skipping deprecation/unlisting."
+#            exit 0
+#          fi
+#
+#          echo "Package ID: $PACKAGE_ID"
+#          echo "Skip Version (newly published): $SKIP_VERSION"
+#
+#          # Decide if skip-version is release or prerelease
+#          isRelease=true
+#          if [[ "$SKIP_VERSION" == *"-"* ]]; then
+#            isRelease=false
+#          fi
+#
+#          # Get registration info
+#          registrationJson=$(curl -s "https://api.nuget.org/v3/registration5-gz-semver2/${PACKAGE_ID}/index.json")
+#          if [ -z "$registrationJson" ]; then
+#            echo "No data returned from registration endpoint."
+#            exit 0
+#          fi
+#
+#          combinedData=$(echo "$registrationJson" | jq -r '
+#            .items[]?.items[]? as $entry
+#            | [
+#                $entry.catalogEntry.version,
+#                (if $entry.catalogEntry.listed then "true" else "false" end),
+#                (if $entry.catalogEntry.deprecation then "deprecated" else "null" end)
+#              ]
+#            | join("|")
+#          ')
+#
+#          if [ -z "$combinedData" ]; then
+#            echo "No published versions found for $PACKAGE_ID."
+#            exit 0
+#          fi
+#
+#          while IFS= read -r row; do
+#            ver=$(echo "$row" | cut -d'|' -f1)
+#            isListed=$(echo "$row" | cut -d'|' -f2)
+#            isDeprecated=$(echo "$row" | cut -d'|' -f3)
+#
+#            # Always skip the newly published version
+#            if [ "$ver" = "$SKIP_VERSION" ]; then
+#              echo "Skipping newly published version $ver."
+#              continue
+#            fi
+#
+#            if [[ "$ver" == *"-"* ]]; then
+#              # Prerelease => unlist if still listed
+#              if [ "$isListed" = "true" ]; then
+#                echo "Unlisting older prerelease $ver..."
+#                dotnet nuget delete "$PACKAGE_ID" "$ver" \
+#                  --source "$NUGET_FEED" \
+#                  --api-key "$NUGET_API_KEY" \
+#                  --non-interactive || echo "Could not unlist $ver."
+#              else
+#                echo "Prerelease $ver is already unlisted."
+#              fi
+#            else
+#              # Release => deprecate if skip-version is release
+#              if [ "$isRelease" = true ]; then
+#                if [ "$isDeprecated" = "null" ]; then
+#                  echo "Deprecating older release $ver..."
+#                  dotnet nuget deprecate "$PACKAGE_ID" \
+#                    --version "$ver" \
+#                    --source "$NUGET_FEED" \
+#                    --api-key "$NUGET_API_KEY" \
+#                    --reason Other \
+#                    --message "Superseded by $SKIP_VERSION" \
+#                    --non-interactive || echo "Deprecation failed for $ver."
+#                else
+#                  echo "Release $ver is already deprecated."
+#                fi
+#              else
+#                echo "Found release $ver, but skip-version is prerelease => no action."
+#              fi
+#            fi
+#          done <<< "$combinedData"
+#
+#          echo "Done!"
