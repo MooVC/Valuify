@@ -1,10 +1,10 @@
 ﻿namespace Valuify;
 
+using System.Resources;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using static Valuify.ValuifyAttributeAnalyzer_Resources;
 
 /// <summary>
 /// Serves as a base for analyzers.
@@ -64,15 +64,18 @@ public abstract class AttributeAnalyzer<TResource>
     /// <summary>
     /// Gets the localzed resource string associated with the specified <paramref name="name"/>.
     /// </summary>
+    /// <param name="manager">
+    /// The resource manager from which the string denoted by <paramref name="name"/> is to be retrieved.
+    /// </param>
     /// <param name="name">
     /// The name of the resource string to retrieve.
     /// </param>
     /// <returns>
     /// The localzed resource string associated with the specified <paramref name="name"/>.
     /// </returns>
-    protected static LocalizableResourceString GetResourceString(string name)
+    protected static LocalizableResourceString GetResourceString(ResourceManager manager, string name)
     {
-        return new(name, ResourceManager, typeof(TResource));
+        return new(name, manager, typeof(TResource));
     }
 
     /// <summary>

@@ -8,8 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Added
 
-- Added a new `Ignore` attribute that allows engineers to mark properties that should be disregarded from equality checks (#14).
-- Added a new `VALFY04` analyzer which will warn engineers whenever a property is annotated with the `Ignore` attribute but the `Valuify` attribute is missing from the `class`.
+- A new `Ignore` attribute that allows engineers to mark properties that should be disregarded from equality checks (#14).
+- A new `VALFY04` analyzer which will warn engineers whenever a property is annotated with the `Ignore` attribute but the `Valuify` attribute is missing from the `class`.
+
+## Changed
+
+- The `VALFY03` analyzer will now disregard properties annotated with `Ignore`.
 
 ## [1.2.2] - 2025-01-08
 

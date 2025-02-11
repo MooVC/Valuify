@@ -32,12 +32,12 @@ public sealed class ValuifyAttributeAnalyzer
     /// </value>
     internal static DiagnosticDescriptor CompatibleTargetTypeRule { get; } = new(
         "VALFY01",
-        GetResourceString(nameof(CompatibleTargetTypeRuleTitle)),
-        GetResourceString(nameof(CompatibleTargetTypeRuleMessageFormat)),
+        GetResourceString(ResourceManager, nameof(CompatibleTargetTypeRuleTitle)),
+        GetResourceString(ResourceManager, nameof(CompatibleTargetTypeRuleMessageFormat)),
         "Usage",
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        description: GetResourceString(nameof(CompatibleTargetTypeRuleDescription)),
+        description: GetResourceString(ResourceManager, nameof(CompatibleTargetTypeRuleDescription)),
         helpLinkUri: GetHelpLinkUri("VALFY01"));
 
     /// <summary>
@@ -48,12 +48,12 @@ public sealed class ValuifyAttributeAnalyzer
     /// </value>
     internal static DiagnosticDescriptor PartialTypeRule { get; } = new(
         "VALFY02",
-        GetResourceString(nameof(PartialTypeRuleTitle)),
-        GetResourceString(nameof(PartialTypeRuleMessageFormat)),
+        GetResourceString(ResourceManager, nameof(PartialTypeRuleTitle)),
+        GetResourceString(ResourceManager, nameof(PartialTypeRuleMessageFormat)),
         "Usage",
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        description: GetResourceString(nameof(PartialTypeRuleDescription)),
+        description: GetResourceString(ResourceManager, nameof(PartialTypeRuleDescription)),
         helpLinkUri: GetHelpLinkUri("VALFY02"));
 
     /// <summary>
@@ -64,12 +64,12 @@ public sealed class ValuifyAttributeAnalyzer
     /// </value>
     internal static DiagnosticDescriptor DefinesPropertiesRule { get; } = new(
         "VALFY03",
-        GetResourceString(nameof(DefinesPropertiesTitle)),
-        GetResourceString(nameof(DefinesPropertiesMessageFormat)),
+        GetResourceString(ResourceManager, nameof(DefinesPropertiesTitle)),
+        GetResourceString(ResourceManager, nameof(DefinesPropertiesMessageFormat)),
         "Design",
         DiagnosticSeverity.Info,
         isEnabledByDefault: true,
-        description: GetResourceString(nameof(DefinesPropertiesRuleDescription)),
+        description: GetResourceString(ResourceManager, nameof(DefinesPropertiesRuleDescription)),
         helpLinkUri: GetHelpLinkUri("VALFY03"));
 
     /// <inheritdoc/>
@@ -114,7 +114,7 @@ public sealed class ValuifyAttributeAnalyzer
         identifier = @class.Identifier.Text;
         INamedTypeSymbol? symbol = context.SemanticModel.GetDeclaredSymbol(@class, cancellationToken: context.CancellationToken);
 
-        return symbol is null || !symbol.HasProperties();
+        return symbol is null || !symbol.HasProperties(property => !property.IsIgnored);
     }
 
     private static bool IsViolatingCompatibleTargetTypeRule(AttributeSyntax attribute, out ClassDeclarationSyntax? @class)

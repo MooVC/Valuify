@@ -29,12 +29,12 @@ public sealed class IgnoreAttributeAnalyzer
     /// </value>
     internal static DiagnosticDescriptor MissingValuifyRule { get; } = new(
         "VALFY04",
-        GetResourceString(nameof(MissingValuifyRuleTitle)),
-        GetResourceString(nameof(MissingValuifyRuleMessageFormat)),
+        GetResourceString(ResourceManager, nameof(MissingValuifyRuleTitle)),
+        GetResourceString(ResourceManager, nameof(MissingValuifyRuleMessageFormat)),
         "Usage",
         DiagnosticSeverity.Info,
         isEnabledByDefault: true,
-        description: GetResourceString(nameof(MissingValuifyRuleDescription)),
+        description: GetResourceString(ResourceManager, nameof(MissingValuifyRuleDescription)),
         helpLinkUri: GetHelpLinkUri("VALFY04"));
 
     /// <inheritdoc/>

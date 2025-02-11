@@ -25,11 +25,11 @@
 
 ## Cause
 
-À `class` upon which `Valuify` is applied does not define any properties.
+A `class` upon which `Valuify` is applied does not define any properties, or the properties defined within the `class` are all annotated with the `Ignore` attribute.
 
 ## Rule Description
 
-A violation of this rule occurs when a type annotated with the `Valuify` attribute does not define any properties, either within the declaration itself or within its base type. Equality will therefore be based solely upon the type, indicating a potential flaw in the design.
+A violation of this rule occurs when a type annotated with the `Valuify` attribute does not define any properties, either within the declaration itself or within its base type, or all properties are annotated with the `Ignore` attribute. Equality will therefore be based solely upon the type, indicating a potential flaw in the design.
 
 For example:
 
@@ -40,9 +40,20 @@ public partial class Example
 }
 ```
 
+or 
+
+```csharp
+[Valuify]
+public partial class Example
+{
+    [Ignore]
+    public int Value { get; set; }
+}
+```
+
 ## How to Fix Violations
 
-Reevaluate the decision to apply the `Valuify` attribute. If the type is intended to define no properties, then usage of the `Valuify` attribute is not recommended.
+Reevaluate the decision to apply the `Valuify` attribute. If the type is intended to define no properties, or all properties are intended to be ignored, then usage of the `Valuify` attribute is not recommended.
 
 For example:
 
