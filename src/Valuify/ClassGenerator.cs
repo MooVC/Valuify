@@ -6,7 +6,9 @@ using Valuify.Model;
 using Valuify.Strategies;
 using Valuify.Syntax;
 
-/// <summary>Generates source for a class that is annotated with the Valuify attribute.</summary>
+/// <summary>
+/// Generates source for a class that is annotated with the Valuify attribute.
+/// </summary>
 [Generator(LanguageNames.CSharp)]
 public sealed class ClassGenerator
     : IIncrementalGenerator

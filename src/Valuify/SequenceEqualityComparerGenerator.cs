@@ -2,12 +2,16 @@
 
 using Microsoft.CodeAnalysis;
 
-/// <summary>Generates an internal SequenceEqualityComparer static class that is used to support enumerable enumerable checks.</summary>
+/// <summary>
+/// Generates an internal SequenceEqualityComparer static class that is used to support enumerable enumerable checks.
+/// </summary>
 [Generator(LanguageNames.CSharp)]
 public sealed class SequenceEqualityComparerGenerator
     : IIncrementalGenerator
 {
-    /// <summary>The source code that will be output by the generator.</summary>
+    /// <summary>
+    /// The source code that will be output by the generator.
+    /// </summary>
     public const string Content = $$"""
         namespace Valuify.Internal
         {

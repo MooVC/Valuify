@@ -8,16 +8,28 @@ using System.Collections.Generic;
 internal sealed class Nesting
     : Value<Nesting>
 {
-    /// <summary>Gets or sets the kind associated with the type, be it a class, record etc.</summary>
-    /// <value>The kind associated with the type, be it a class, record etc.</value>
+    /// <summary>
+    /// Gets or sets the kind associated with the type, be it a class, record etc.
+    /// </summary>
+    /// <value>
+    /// The kind associated with the type, be it a class, record etc.
+    /// </value>
     public string Declaration { get; set; } = string.Empty;
 
-    /// <summary>Gets or sets the name of the type.</summary>
-    /// <value>The name of the type.</value>
+    /// <summary>
+    /// Gets or sets the name of the type.
+    /// </summary>
+    /// <value>
+    /// The name of the type.
+    /// </value>
     public string Name { get; set; } = string.Empty;
 
-    /// <summary>Gets or sets the qualified name of the type, which includes any generic arguments.</summary>
-    /// <value>The qualified name of the type, which includes any generic arguments.</value>
+    /// <summary>
+    /// Gets or sets the qualified name of the type, which includes any generic arguments.
+    /// </summary>
+    /// <value>
+    /// The qualified name of the type, which includes any generic arguments.
+    /// </value>
     public string Qualification { get; set; } = string.Empty;
 
     /// <inheritdoc/>

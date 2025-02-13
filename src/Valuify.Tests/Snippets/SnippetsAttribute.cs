@@ -26,15 +26,10 @@ public sealed class SnippetsAttribute
     private static readonly Type[] declarations = FindDeclarations();
     private static readonly LanguageVersion[] languages = FindLanguages();
 
-    public SnippetsAttribute(
-        Type[]? exclusions = default,
-        Extensions extensions = DefaultExtensions,
-        Type[]? inclusions = default,
-        LanguageVersion[]? languages = default)
+    public SnippetsAttribute(Type[]? exclusions = default, Extensions extensions = DefaultExtensions, Type[]? inclusions = default)
     {
         Assemblies = assemblies;
         Extensions = extensions;
-        Languages = languages ?? SnippetsAttribute.languages;
 
         Declarations = inclusions is null
             ? declarations
@@ -44,6 +39,8 @@ public sealed class SnippetsAttribute
         {
             Declarations = Declarations.Except(exclusions).ToArray();
         }
+
+        Languages = languages;
     }
 
     private delegate IEnumerable<object[]> GetFrameworks(LanguageVersion minimum, Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare);

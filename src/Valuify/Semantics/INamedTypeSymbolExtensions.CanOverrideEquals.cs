@@ -7,9 +7,15 @@ using Microsoft.CodeAnalysis;
 /// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
-    /// <summary>Determines whether or not the <paramref name="class"/> can override <see cref="object.Equals(object)"/>.</summary>
-    /// <param name="class">The <paramref name="class"/> to be checked.</param>
-    /// <returns>True if the <paramref name="class"/> can override <see cref="object.Equals(object)"/>, otherwise False.</returns>
+    /// <summary>
+    /// Determines whether or not the <paramref name="class"/> can override <see cref="object.Equals(object)"/>.
+    /// </summary>
+    /// <param name="class">
+    /// The <paramref name="class"/> to be checked.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if the <paramref name="class"/> can override <see cref="object.Equals(object)"/>, otherwise <see langword="false"/>.
+    /// </returns>
     public static bool CanOverrideEquals(this INamedTypeSymbol @class)
     {
         return @class.CanOverride(

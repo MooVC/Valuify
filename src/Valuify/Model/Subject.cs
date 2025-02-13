@@ -9,56 +9,108 @@ using System.Collections.Generic;
 internal sealed class Subject
     : Value<Subject>
 {
-    /// <summary>Gets or sets a value indicating whether or not the subject can override <see cref="object.Equals(object)"/>.</summary>
-    /// <value>A value indicating whether or not the subject can override <see cref="object.Equals(object)"/>.</value>
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the subject can override <see cref="object.Equals(object)"/>.
+    /// </summary>
+    /// <value>
+    /// A value indicating whether or not the subject can override <see cref="object.Equals(object)"/>.
+    /// </value>
     public bool CanOverrideEquals { get; set; }
 
-    /// <summary>Gets or sets a value indicating whether or not the subject can override <see cref="object.GetHashCode()"/>.</summary>
-    /// <value>A value indicating whether or not the subject can override <see cref="object.GetHashCode()"/>.</value>
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the subject can override <see cref="object.GetHashCode()"/>.
+    /// </summary>
+    /// <value>
+    /// A value indicating whether or not the subject can override <see cref="object.GetHashCode()"/>.
+    /// </value>
     public bool CanOverrideGetHashCode { get; set; }
 
-    /// <summary>Gets or sets a value indicating whether or not the subject can override <see cref="object.ToString()"/>.</summary>
-    /// <value>A value indicating whether or not the subject can override <see cref="object.ToString()"/>.</value>
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the subject can override <see cref="object.ToString()"/>.
+    /// </summary>
+    /// <value>
+    /// A value indicating whether or not the subject can override <see cref="object.ToString()"/>.
+    /// </value>
     public bool CanOverrideToString { get; set; }
 
-    /// <summary>Gets or sets a value indicating whether or not the subject declares an equality operator.</summary>
-    /// <value>A value indicating whether or not the subject declares an equality operator.</value>
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the subject declares an equality operator.
+    /// </summary>
+    /// <value>
+    /// A value indicating whether or not the subject declares an equality operator.
+    /// </value>
     public bool HasEqualityOperator { get; set; }
 
-    /// <summary>Gets or sets a value indicating whether or not the subject implements <see cref="IEquatable{T}.Equals(T)"/>.</summary>
-    /// <value>A value indicating whether or not the subject implements <see cref="IEquatable{T}.Equals(T)"/>.</value>
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the subject implements <see cref="IEquatable{T}.Equals(T)"/>.
+    /// </summary>
+    /// <value>
+    /// A value indicating whether or not the subject implements <see cref="IEquatable{T}.Equals(T)"/>.
+    /// </value>
     public bool HasEquatable { get; set; }
 
-    /// <summary>Gets or sets a value indicating whether or not the subject declares an inequality operator.</summary>
-    /// <value>A value indicating whether or not the subject declares an inequality operator.</value>
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the subject declares an inequality operator.
+    /// </summary>
+    /// <value>
+    /// A value indicating whether or not the subject declares an inequality operator.
+    /// </value>
     public bool HasInequalityOperator { get; set; }
 
-    /// <summary>Gets or sets a value indicating whether or not the subject implements <see cref="IEquatable{T}"/>.</summary>
-    /// <value>A value indicating whether or not the subject implements <see cref="IEquatable{T}"/>.</value>
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the subject implements <see cref="IEquatable{T}"/>.
+    /// </summary>
+    /// <value>
+    /// A value indicating whether or not the subject implements <see cref="IEquatable{T}"/>.
+    /// </value>
     public bool IsEquatable { get; set; }
 
-    /// <summary>Gets a value indicating whether or not the subject belongs to the global namespace.</summary>
-    /// <value>A value indicating whether or not the subject belongs to the global namespace.</value>
+    /// <summary>
+    /// Gets a value indicating whether or not the subject belongs to the global namespace.
+    /// </summary>
+    /// <value>
+    /// A value indicating whether or not the subject belongs to the global namespace.
+    /// </value>
     public bool IsGlobal => string.IsNullOrEmpty(Namespace);
 
-    /// <summary>Gets or sets the name of the subject.</summary>
-    /// <value>The name of the subject.</value>
+    /// <summary>
+    /// Gets or sets the name of the subject.
+    /// </summary>
+    /// <value>
+    /// The name of the subject.
+    /// </value>
     public string Name { get; set; } = string.Empty;
 
-    /// <summary>Gets or sets the globally qualified namespace for the subject.</summary>
-    /// <value>The globally qualified namespace for the subject.</value>
+    /// <summary>
+    /// Gets or sets the globally qualified namespace for the subject.
+    /// </summary>
+    /// <value>
+    /// The globally qualified namespace for the subject.
+    /// </value>
     public string Namespace { get; set; } = string.Empty;
 
-    /// <summary>Gets or sets the declarations associated with the parent types in order of declaration.</summary>
-    /// <value>The declarations associated with the parent types in order of declaration.</value>
+    /// <summary>
+    /// Gets or sets the declarations associated with the parent types in order of declaration.
+    /// </summary>
+    /// <value>
+    /// The declarations associated with the parent types in order of declaration.
+    /// </value>
     public IReadOnlyList<Nesting> Nesting { get; set; } = [];
 
-    /// <summary>Gets or sets the properties declared within the subject.</summary>
-    /// <value>The properties declared within the subject.</value>
+    /// <summary>
+    /// Gets or sets the properties declared within the subject.
+    /// </summary>
+    /// <value>
+    /// The properties declared within the subject.
+    /// </value>
     public IReadOnlyList<Property> Properties { get; set; } = [];
 
-    /// <summary>Gets or sets the qualified name of the subject, which includes any generic arguments.</summary>
-    /// <value>The qualified name of the subject, which includes any generic arguments.</value>
+    /// <summary>
+    /// Gets or sets the qualified name of the subject, which includes any generic arguments.
+    /// </summary>
+    /// <value>
+    /// The qualified name of the subject, which includes any generic arguments.
+    /// </value>
     public string Qualification { get; set; } = string.Empty;
 
     /// <inheritdoc/>

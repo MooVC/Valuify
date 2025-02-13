@@ -7,10 +7,18 @@ using Microsoft.CodeAnalysis;
 /// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
-    /// <summary>Determines whether or not the <paramref name="class"/> declares an its own operator named <paramref name="operator"/>.</summary>
-    /// <param name="class">The <paramref name="class"/> to be checked.</param>
-    /// <param name="operator">The name of the operator to check.</param>
-    /// <returns>True if the <paramref name="class"/> declares the operator, otherwise False.</returns>
+    /// <summary>
+    /// Determines whether or not the <paramref name="class"/> declares an its own operator named <paramref name="operator"/>.
+    /// </summary>
+    /// <param name="class">
+    /// The <paramref name="class"/> to be checked.
+    /// </param>
+    /// <param name="operator">
+    /// The name of the operator to check.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if the <paramref name="class"/> declares the operator, otherwise <see langword="false"/>.
+    /// </returns>
     private static bool HasOperator(this INamedTypeSymbol @class, string @operator)
     {
         return @class

@@ -8,6 +8,7 @@ public abstract class WhenInequalityIsChecked
         // Arrange
         var instance1 = new Property
         {
+            IsIgnored = true,
             IsSequence = true,
             Name = "PropertyName",
             Type = "string[]",
@@ -15,6 +16,7 @@ public abstract class WhenInequalityIsChecked
 
         var instance2 = new Property
         {
+            IsIgnored = true,
             IsSequence = true,
             Name = "PropertyName",
             Type = "string[]",
@@ -28,11 +30,66 @@ public abstract class WhenInequalityIsChecked
     }
 
     [Fact]
+    public void GivenADifferentIsIgnoredThenTheyAreNotDeemedEqual()
+    {
+        // Arrange
+        var instance1 = new Property
+        {
+            IsIgnored = true,
+            IsSequence = true,
+            Name = "PropertyName",
+            Type = "string[]",
+        };
+
+        var instance2 = new Property
+        {
+            IsIgnored = false,
+            IsSequence = true,
+            Name = "PropertyName",
+            Type = "string[]",
+        };
+
+        // Act
+        bool areNotEqual = AreNotEqual(instance1, instance2);
+
+        // Assert
+        areNotEqual.ShouldBeTrue();
+    }
+
+    [Fact]
+    public void GivenADifferentIsSequenceThenTheyAreNotDeemedEqual()
+    {
+        // Arrange
+        var instance1 = new Property
+        {
+            IsIgnored = true,
+            IsSequence = true,
+            Name = "PropertyName",
+            Type = "string[]",
+        };
+
+        var instance2 = new Property
+        {
+            IsIgnored = true,
+            IsSequence = false,
+            Name = "PropertyName",
+            Type = "string[]",
+        };
+
+        // Act
+        bool areNotEqual = AreNotEqual(instance1, instance2);
+
+        // Assert
+        areNotEqual.ShouldBeTrue();
+    }
+
+    [Fact]
     public void GivenADifferentNameThenTheyAreNotDeemedEqual()
     {
         // Arrange
         var instance1 = new Property
         {
+            IsIgnored = true,
             IsSequence = true,
             Name = "PropertyName1",
             Type = "string[]",
@@ -40,6 +97,7 @@ public abstract class WhenInequalityIsChecked
 
         var instance2 = new Property
         {
+            IsIgnored = true,
             IsSequence = true,
             Name = "PropertyName2",
             Type = "string[]",
@@ -58,6 +116,7 @@ public abstract class WhenInequalityIsChecked
         // Arrange
         var instance1 = new Property
         {
+            IsIgnored = true,
             IsSequence = true,
             Name = "PropertyName",
             Type = "string[]",
@@ -65,6 +124,7 @@ public abstract class WhenInequalityIsChecked
 
         var instance2 = new Property
         {
+            IsIgnored = true,
             IsSequence = true,
             Name = "PropertyName",
             Type = "Name[]",
@@ -83,6 +143,7 @@ public abstract class WhenInequalityIsChecked
         // Arrange
         var instance = new Property
         {
+            IsIgnored = true,
             IsSequence = true,
             Name = "PropertyName",
             Type = "string[]",
@@ -115,6 +176,7 @@ public abstract class WhenInequalityIsChecked
         // Arrange
         var instance1 = new Property
         {
+            IsIgnored = true,
             IsSequence = true,
             Name = "PropertyName",
             Type = "string[]",

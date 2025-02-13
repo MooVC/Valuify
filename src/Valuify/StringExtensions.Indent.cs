@@ -13,10 +13,18 @@ internal static partial class StringExtensions
     /// <summary>
     /// Adds the specified <paramref name="whitespace"/> to the beginning of each non-blank line in the input string.
     /// </summary>
-    /// <param name="input">The input string to process.</param>
-    /// <param name="skip">THe number of initial lines to skip when considering the application of whitespace.</param>
-    /// <param name="whitespace">The whitespace to apply when indenting.</param>
-    /// <returns>A new string with <paramref name="whitespace"/> added to the start of each non-blank line.</returns>
+    /// <param name="input">
+    /// The input string to process.
+    /// </param>
+    /// <param name="skip">
+    /// The number of initial lines to skip when considering the application of whitespace.
+    /// </param>
+    /// <param name="whitespace">
+    /// The whitespace to apply when indenting.
+    /// </param>
+    /// <returns>
+    /// A new string with <paramref name="whitespace"/> added to the start of each non-blank line.
+    /// </returns>
     public static string Indent(this string input, int skip = 1, string whitespace = Default)
     {
         var reader = new StringReader(input);

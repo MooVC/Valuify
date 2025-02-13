@@ -6,13 +6,23 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Valuify.Model;
 using Valuify.Syntax;
 
-/// <summary>Provides extensions relating to <see cref="INamedTypeSymbol"/>.</summary>
+/// <summary>
+/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
+/// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
-    /// <summary>Determines whether or not the <paramref name="symbol"/> provided is supported by Valuify.</summary>
-    /// <param name="symbol">The symbol for the type to be checked for Valuify support.</param>
-    /// <param name="nesting">The declaration syntax for the parents of the <paramref name="syntax"/>.</param>
-    /// <returns>True if the type is annotated and partial, otherwise False.</returns>
+    /// <summary>
+    /// Determines whether or not the <paramref name="symbol"/> provided is supported by Valuify.
+    /// </summary>
+    /// <param name="symbol">
+    /// The symbol for the type to be checked for Valuify support.
+    /// </param>
+    /// <param name="nesting">
+    /// The declaration syntax for the parents of the <paramref name="syntax"/>.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if the type is annotated and partial, otherwise <see langword="false"/>.
+    /// </returns>
     public static bool IsSupported(this INamedTypeSymbol symbol, Stack<Nesting> nesting)
     {
         if (!symbol.HasValuify())

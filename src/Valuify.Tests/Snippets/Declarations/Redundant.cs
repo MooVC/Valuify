@@ -2,20 +2,21 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 
-internal static class Unannotated
+internal static class Redundant
 {
     public static readonly Snippets Declaration = new(
-        Ignored.Declaration.Body,
+        Simple.Declaration.Body,
         new(
             """
-            namespace Valuify.Classes.Testing
+            namespace Valuify.Records.Testing
             {
-                public sealed class Unannotated
+                [Valuify]
+                public sealed partial record Redundant
             __BODY__
             }
             """,
-            LanguageVersion.CSharp2),
+            LanguageVersion.CSharp9),
         [],
         [],
-        nameof(Unannotated));
+        nameof(Redundant));
 }

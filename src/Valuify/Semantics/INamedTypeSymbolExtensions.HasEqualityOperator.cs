@@ -9,9 +9,15 @@ internal static partial class INamedTypeSymbolExtensions
 {
     private const string EqualityOperatorName = "op_Equality";
 
-    /// <summary>Determines whether or not the <paramref name="class"/> declares an its own equals operator.</summary>
-    /// <param name="class">The <paramref name="class"/> to be checked.</param>
-    /// <returns>True if the <paramref name="class"/> declares the equals operator, otherwise False.</returns>
+    /// <summary>
+    /// Determines whether or not the <paramref name="class"/> declares an its own equals operator.
+    /// </summary>
+    /// <param name="class">
+    /// The <paramref name="class"/> to be checked.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if the <paramref name="class"/> declares the equals operator, otherwise <see langword="false"/>.
+    /// </returns>
     public static bool HasEqualityOperator(this INamedTypeSymbol @class)
     {
         return @class.HasOperator(EqualityOperatorName);

@@ -1,4 +1,4 @@
-﻿namespace Valuify.AttributeGeneratorTests;
+﻿namespace Valuify.ValuifyAttributeGeneratorTests;
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
@@ -11,7 +11,7 @@ public sealed class WhenExecuted
     public async Task GivenAnAssemblyThenTheAttributeIsGenerated(ReferenceAssemblies assemblies, LanguageVersion language)
     {
         // Arrange
-        var test = new GeneratorTest<AttributeGenerator>(assemblies, language);
+        var test = new GeneratorTest<ValuifyAttributeGenerator>(assemblies, language);
 
         Attributes.Valuify.IsExpectedIn(test.TestState);
 

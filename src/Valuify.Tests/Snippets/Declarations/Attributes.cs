@@ -2,9 +2,15 @@
 
 public static class Attributes
 {
-    public static readonly Generated Valuify = new(
-        AttributeGenerator.Content,
+    public static readonly Generated Ignore = new(
+        IgnoreAttributeGenerator.Content,
         Extensions.None,
-        "ValuifyAttribute",
-        typeof(AttributeGenerator));
+        $"{IgnoreAttributeGenerator.Name}Attribute",
+        typeof(IgnoreAttributeGenerator));
+
+    public static readonly Generated Valuify = new(
+        ValuifyAttributeGenerator.Content,
+        Extensions.None,
+        $"{ValuifyAttributeGenerator.Name}Attribute",
+        typeof(ValuifyAttributeGenerator));
 }

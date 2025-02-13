@@ -1,16 +1,16 @@
-﻿namespace Valuify.AttributeAnalyzerTests;
+﻿namespace Valuify.ValuifyAttributeAnalyzerTests;
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Text;
 using Valuify.Snippets;
 using Valuify.Snippets.Declarations;
-using AnalyzerTest = Valuify.AnalyzerTest<Valuify.AttributeAnalyzer>;
+using AnalyzerTest = Valuify.AnalyzerTest<Valuify.ValuifyAttributeAnalyzer>;
 
 public sealed class WhenExecuted
 {
     [Theory]
-    [Snippets(exclusions: [typeof(Unsupported)], extensions: Extensions.None)]
+    [Snippets(exclusions: [typeof(Redundant), typeof(Unsupported)], extensions: Extensions.None)]
     public async Task GivenAClassWhenCompliantThenNoDiagnosticsAreRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
@@ -94,20 +94,20 @@ public sealed class WhenExecuted
 
     private static DiagnosticResult GetExpectedCompatibleTargetTypeRule(LinePosition position)
     {
-        return new DiagnosticResult(AttributeAnalyzer.CompatibleTargetTypeRule)
+        return new DiagnosticResult(ValuifyAttributeAnalyzer.CompatibleTargetTypeRule)
             .WithLocation(position);
     }
 
     private static DiagnosticResult GetExpectedPartialThePartialTypeRule(LinePosition position, string @class)
     {
-        return new DiagnosticResult(AttributeAnalyzer.PartialTypeRule)
+        return new DiagnosticResult(ValuifyAttributeAnalyzer.PartialTypeRule)
             .WithLocation(position)
             .WithArguments(@class);
     }
 
     private static DiagnosticResult GetExpectedDefinesPropertiesRule(LinePosition position, string @class)
     {
-        return new DiagnosticResult(AttributeAnalyzer.DefinesPropertiesRule)
+        return new DiagnosticResult(ValuifyAttributeAnalyzer.DefinesPropertiesRule)
             .WithLocation(position)
             .WithArguments(@class);
     }

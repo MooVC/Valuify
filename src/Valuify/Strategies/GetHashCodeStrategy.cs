@@ -2,7 +2,9 @@
 
 using Valuify.Model;
 
-/// <summary>Generates the source needed to support <see cref="object.Equals(object)"/>.</summary>
+/// <summary>
+/// Generates the source needed to support <see cref="object.Equals(object)"/>.
+/// </summary>
 internal sealed class GetHashCodeStrategy
     : IStrategy
 {
@@ -14,7 +16,10 @@ internal sealed class GetHashCodeStrategy
             yield break;
         }
 
-        IEnumerable<string> properties = subject.Properties.Select(property => property.Name);
+        IEnumerable<string> properties = subject.Properties
+            .Where(property => !property.IsIgnored)
+            .Select(property => property.Name);
+
         string combine = string.Join(", ", properties);
 
         string code = $$"""

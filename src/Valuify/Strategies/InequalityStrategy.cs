@@ -2,7 +2,9 @@
 
 using Valuify.Model;
 
-/// <summary>Generates the source needed to support the inequality operator.</summary>
+/// <summary>
+/// Generates the source needed to support the inequality operator.
+/// </summary>
 internal sealed class InequalityStrategy
     : IStrategy
 {
