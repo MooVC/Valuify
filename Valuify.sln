@@ -67,6 +67,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rules", "Rules", "{DF5E2435
 		docs\rules\VALFY02.md = docs\rules\VALFY02.md
 		docs\rules\VALFY03.md = docs\rules\VALFY03.md
 		docs\rules\VALFY04.md = docs\rules\VALFY04.md
+		docs\rules\VALFY05.md = docs\rules\VALFY05.md
 	EndProjectSection
 EndProject
 Global
