@@ -5,12 +5,13 @@ using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Text;
 using Valuify.Snippets;
 using Valuify.Snippets.Declarations;
+using static Valuify.Snippets.Declarations.Inherited;
 using AnalyzerTest = Valuify.AnalyzerTest<Valuify.ValuifyAttributeAnalyzer>;
 
 public sealed class WhenExecuted
 {
     [Theory]
-    [Snippets(exclusions: [typeof(Redundant), typeof(Unsupported)], extensions: Extensions.None)]
+    [Snippets(exclusions: [typeof(FromSealed), typeof(Redundant), typeof(Unsupported)], extensions: Extensions.None)]
     public async Task GivenAClassWhenCompliantThenNoDiagnosticsAreRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
@@ -67,6 +68,24 @@ public sealed class WhenExecuted
     }
 
     [Theory]
+    [Snippets(inclusions: [typeof(FromSealed)])]
+    public async Task GivenATypeWhenBaseIsSealedThenEqualityGuarenteeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
+    {
+        // Arrange
+        var test = new AnalyzerTest(assembly, language);
+
+        test.ExpectedDiagnostics.Add(GetExpectedEqualityGuarenteeRule(new LinePosition(20, 5), nameof(Inherited), nameof(Equals)));
+        test.ExpectedDiagnostics.Add(GetExpectedEqualityGuarenteeRule(new LinePosition(20, 5), nameof(Inherited), nameof(GetHashCode)));
+        expectations.IsDeclaredIn(test.TestState);
+
+        // Act
+        Func<Task> act = () => test.RunAsync();
+
+        // Assert
+        await act.ShouldNotThrowAsync();
+    }
+
+    [Theory]
     [Frameworks]
     public async Task GivenATypeWhenMissingPropertiesThenDefinesPropertiesRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
     {
@@ -110,5 +129,12 @@ public sealed class WhenExecuted
         return new DiagnosticResult(ValuifyAttributeAnalyzer.DefinesPropertiesRule)
             .WithLocation(position)
             .WithArguments(@class);
+    }
+
+    private static DiagnosticResult GetExpectedEqualityGuarenteeRule(LinePosition position, string @class, string method)
+    {
+        return new DiagnosticResult(ValuifyAttributeAnalyzer.EqualityGuarenteeRule)
+            .WithLocation(position)
+            .WithArguments(@class, method);
     }
 }

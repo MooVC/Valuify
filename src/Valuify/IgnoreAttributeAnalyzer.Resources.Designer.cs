@@ -70,7 +70,7 @@ namespace Valuify {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Property &apos;{0}&apos; is not considered by Valuify, making the usage of the Ignore attribute redundant..
+        ///   Looks up a localized string similar to Property `{0}` is not considered by Valuify, making the usage of the Ignore attribute redundant..
         /// </summary>
         internal static string MissingValuifyRuleMessageFormat {
             get {

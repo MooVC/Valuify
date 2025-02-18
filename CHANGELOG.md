@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.4.0] - TBC
 
 ## Added
-
+- A new `VALFY05` analyzer which will warn engineers whenever a type inherits from a base that marks `Equals` and/or `GetHashCode` with the `sealed` keyword.
 
 ## [1.3.0] - 2025-02-13
 

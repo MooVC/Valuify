@@ -121,7 +121,7 @@
     <value>This property is not considered by Valuify because the Valuify attribute has not been applied to the type, so the usage of the Ignore attribute is redundant.</value>
   </data>
   <data name="MissingValuifyRuleMessageFormat" xml:space="preserve">
-    <value>Property '{0}' is not considered by Valuify, making the usage of the Ignore attribute redundant.</value>
+    <value>Property `{0}` is not considered by Valuify, making the usage of the Ignore attribute redundant.</value>
   </data>
   <data name="MissingValuifyRuleTitle" xml:space="preserve">
     <value>Type does not utilize Valuify</value>
