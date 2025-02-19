@@ -112,12 +112,12 @@ public sealed class ValuifyAttributeAnalyzer
             Raise(context, DefinesPropertiesRule, location, identifier);
         }
 
-        if (IsViolatingEqualityGuarenteeRule(symbol, @class => !@class.CanOverrideEquals()))
+        if (IsViolatingEqualityGuarenteeRule(symbol, @class => @class.InheritsSealedEquals()))
         {
             Raise(context, EqualityGuarenteeRule, location, identifier, nameof(Equals));
         }
 
-        if (IsViolatingEqualityGuarenteeRule(symbol, @class => !@class.CanOverrideGetHashCode()))
+        if (IsViolatingEqualityGuarenteeRule(symbol, @class => @class.InheritsSealedGetHashCode()))
         {
             Raise(context, EqualityGuarenteeRule, location, identifier, nameof(GetHashCode));
         }
