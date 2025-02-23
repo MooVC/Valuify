@@ -72,7 +72,7 @@ public sealed class WhenExecuted
     public async Task GivenATypeWhenBaseIsSealedThenEqualityGuarenteeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
-        var test = new AnalyzerTest(assembly, language);
+        var test = new AnalyzerTest(assembly, language, typeof(ClassGenerator), typeof(IgnoreAttributeGenerator), typeof(ValuifyAttributeGenerator));
 
         test.ExpectedDiagnostics.Add(GetExpectedEqualityGuarenteeRule(new LinePosition(20, 5), nameof(Inherited), nameof(Equals)));
         test.ExpectedDiagnostics.Add(GetExpectedEqualityGuarenteeRule(new LinePosition(20, 5), nameof(Inherited), nameof(GetHashCode)));
