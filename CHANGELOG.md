@@ -4,7 +4,7 @@ All notable changes to Valuify will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.0] - TBC
+## [1.4.0] - 2025-02-24
 
 ## Added
 - A new `VALFY05` analyzer which will warn engineers whenever a type inherits from a base that marks `Equals` and/or `GetHashCode` with the `sealed` keyword.

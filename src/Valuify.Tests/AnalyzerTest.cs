@@ -16,7 +16,7 @@ public sealed class AnalyzerTest<TAnalyzer>
     public AnalyzerTest(ReferenceAssemblies assemblies, LanguageVersion languageVersion, params Type[] generators)
     {
         this.generators = generators.Length == 0
-            ? [typeof(IgnoreAttributeGenerator), typeof(ValuifyAttributeGenerator)]
+            ? [typeof(ClassGenerator), typeof(IgnoreAttributeGenerator), typeof(ValuifyAttributeGenerator)]
             : generators;
 
         this.languageVersion = languageVersion;
