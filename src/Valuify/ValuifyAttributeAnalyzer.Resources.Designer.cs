@@ -36,7 +36,7 @@ namespace Valuify {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.ValuifyAttributeAnalyzer.Resources", typeof(ValuifyAttributeAnalyzer_Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Valuify {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Valuify {
         /// <summary>
         ///   Looks up a localized string similar to The Valuify attribute is only supported on class declarations..
         /// </summary>
-        internal static string CompatibleTargetTypeRuleDescription {
+        public static string CompatibleTargetTypeRuleDescription {
             get {
                 return ResourceManager.GetString("CompatibleTargetTypeRuleDescription", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Valuify {
         /// <summary>
         ///   Looks up a localized string similar to The Valuify attribute is only supported on class declarations..
         /// </summary>
-        internal static string CompatibleTargetTypeRuleMessageFormat {
+        public static string CompatibleTargetTypeRuleMessageFormat {
             get {
                 return ResourceManager.GetString("CompatibleTargetTypeRuleMessageFormat", resourceCulture);
             }
@@ -81,16 +81,16 @@ namespace Valuify {
         /// <summary>
         ///   Looks up a localized string similar to Type is not compatible with Valuify.
         /// </summary>
-        internal static string CompatibleTargetTypeRuleTitle {
+        public static string CompatibleTargetTypeRuleTitle {
             get {
                 return ResourceManager.GetString("CompatibleTargetTypeRuleTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type {0} does not define any properties to support equality checks..
+        ///   Looks up a localized string similar to Type `{0}` does not define any properties to support equality checks..
         /// </summary>
-        internal static string DefinesPropertiesMessageFormat {
+        public static string DefinesPropertiesMessageFormat {
             get {
                 return ResourceManager.GetString("DefinesPropertiesMessageFormat", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Valuify {
         /// <summary>
         ///   Looks up a localized string similar to Type does not define any properties to support equality checks..
         /// </summary>
-        internal static string DefinesPropertiesRuleDescription {
+        public static string DefinesPropertiesRuleDescription {
             get {
                 return ResourceManager.GetString("DefinesPropertiesRuleDescription", resourceCulture);
             }
@@ -108,25 +108,52 @@ namespace Valuify {
         /// <summary>
         ///   Looks up a localized string similar to Type does not define Properties.
         /// </summary>
-        internal static string DefinesPropertiesTitle {
+        public static string DefinesPropertiesTitle {
             get {
                 return ResourceManager.GetString("DefinesPropertiesTitle", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Valuify cannot guarantee equality on type `{0} `because the inherited implementation for `{1}` is sealed..
+        /// </summary>
+        public static string EqualityGuarenteeMessageFormat {
+            get {
+                return ResourceManager.GetString("EqualityGuarenteeMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valuify cannot guarantee equality because the inherited implementation has a required method..
+        /// </summary>
+        public static string EqualityGuarenteeRuleDescription {
+            get {
+                return ResourceManager.GetString("EqualityGuarenteeRuleDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valuify cannot guarantee Equality.
+        /// </summary>
+        public static string EqualityGuarenteeTitle {
+            get {
+                return ResourceManager.GetString("EqualityGuarenteeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type must be marked as Partial to facilitate code generation..
         /// </summary>
-        internal static string PartialTypeRuleDescription {
+        public static string PartialTypeRuleDescription {
             get {
                 return ResourceManager.GetString("PartialTypeRuleDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type {0} must be marked as Partial to faciliate code generation..
+        ///   Looks up a localized string similar to Type `{0}` must be marked as Partial to facilitate code generation..
         /// </summary>
-        internal static string PartialTypeRuleMessageFormat {
+        public static string PartialTypeRuleMessageFormat {
             get {
                 return ResourceManager.GetString("PartialTypeRuleMessageFormat", resourceCulture);
             }
@@ -135,7 +162,7 @@ namespace Valuify {
         /// <summary>
         ///   Looks up a localized string similar to Type is not Partial.
         /// </summary>
-        internal static string PartialTypeRuleTitle {
+        public static string PartialTypeRuleTitle {
             get {
                 return ResourceManager.GetString("PartialTypeRuleTitle", resourceCulture);
             }

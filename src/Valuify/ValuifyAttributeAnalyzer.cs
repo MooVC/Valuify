@@ -1,5 +1,6 @@
 ﻿namespace Valuify;
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -22,6 +23,7 @@ public sealed class ValuifyAttributeAnalyzer
         CompatibleTargetTypeRule,
         PartialTypeRule,
         DefinesPropertiesRule,
+        EqualityGuarenteeRule,
     ];
 
     /// <summary>
@@ -72,6 +74,22 @@ public sealed class ValuifyAttributeAnalyzer
         description: GetResourceString(ResourceManager, nameof(DefinesPropertiesRuleDescription)),
         helpLinkUri: GetHelpLinkUri("VALFY03"));
 
+    /// <summary>
+    /// Gets the descriptor associated with the equality guarentee rule (VALFY05).
+    /// </summary>
+    /// <value>
+    /// The descriptor associated with the equality guarentee rule (VALFY05).
+    /// </value>
+    internal static DiagnosticDescriptor EqualityGuarenteeRule { get; } = new(
+        "VALFY05",
+        GetResourceString(ResourceManager, nameof(EqualityGuarenteeTitle)),
+        GetResourceString(ResourceManager, nameof(EqualityGuarenteeMessageFormat)),
+        "Design",
+        DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        description: GetResourceString(ResourceManager, nameof(EqualityGuarenteeRuleDescription)),
+        helpLinkUri: GetHelpLinkUri("VALFY05"));
+
     /// <inheritdoc/>
     protected override void Analyze(AttributeSyntax attribute, SyntaxNodeAnalysisContext context, Location location)
     {
@@ -89,9 +107,19 @@ public sealed class ValuifyAttributeAnalyzer
             return;
         }
 
-        if (IsViolatingDefinesPropertiesRule(context, @class, out identifier))
+        if (IsViolatingDefinesPropertiesRule(context, @class, out identifier, out INamedTypeSymbol? symbol))
         {
             Raise(context, DefinesPropertiesRule, location, identifier);
+        }
+
+        if (IsViolatingEqualityGuarenteeRule(symbol, @class => @class.InheritsSealedEquals()))
+        {
+            Raise(context, EqualityGuarenteeRule, location, identifier, nameof(Equals));
+        }
+
+        if (IsViolatingEqualityGuarenteeRule(symbol, @class => @class.InheritsSealedGetHashCode()))
+        {
+            Raise(context, EqualityGuarenteeRule, location, identifier, nameof(GetHashCode));
         }
     }
 
@@ -102,9 +130,14 @@ public sealed class ValuifyAttributeAnalyzer
             && symbol.ContainingType.IsValuify();
     }
 
-    private static bool IsViolatingDefinesPropertiesRule(SyntaxNodeAnalysisContext context, ClassDeclarationSyntax? @class, out string? identifier)
+    private static bool IsViolatingDefinesPropertiesRule(
+        SyntaxNodeAnalysisContext context,
+        ClassDeclarationSyntax? @class,
+        out string? identifier,
+        out INamedTypeSymbol? symbol)
     {
         identifier = default;
+        symbol = default;
 
         if (@class is null)
         {
@@ -112,7 +145,7 @@ public sealed class ValuifyAttributeAnalyzer
         }
 
         identifier = @class.Identifier.Text;
-        INamedTypeSymbol? symbol = context.SemanticModel.GetDeclaredSymbol(@class, cancellationToken: context.CancellationToken);
+        symbol = context.SemanticModel.GetDeclaredSymbol(@class, cancellationToken: context.CancellationToken);
 
         return symbol is null || !symbol.HasProperties(property => !property.IsIgnored);
     }
@@ -141,5 +174,10 @@ public sealed class ValuifyAttributeAnalyzer
         }
 
         return false;
+    }
+
+    private static bool IsViolatingEqualityGuarenteeRule(INamedTypeSymbol? @class, Predicate<INamedTypeSymbol> predicate)
+    {
+        return @class is not null && predicate(@class);
     }
 }

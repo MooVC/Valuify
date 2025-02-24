@@ -276,6 +276,7 @@ Rule ID                          | Category | Severity | Notes
 [VALFY02](docs/rules/VALFY02.md) | Usage    | Warning  | Type is not marked as partial
 [VALFY03](docs/rules/VALFY03.md) | Design   | Info     | Type does not declare any properties
 [VALFY04](docs/rules/VALFY04.md) | Usage    | Info     | Type does not utilize Valuify
+[VALFY05](docs/rules/VALFY05.md) | Design   | Warning  | Valuify cannot guarantee Equality
 
 ## Contributing
 

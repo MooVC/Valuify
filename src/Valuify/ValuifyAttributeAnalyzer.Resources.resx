@@ -127,7 +127,7 @@
     <value>Type is not compatible with Valuify</value>
   </data>
   <data name="DefinesPropertiesMessageFormat" xml:space="preserve">
-    <value>Type {0} does not define any properties to support equality checks.</value>
+    <value>Type `{0}` does not define any properties to support equality checks.</value>
   </data>
   <data name="DefinesPropertiesRuleDescription" xml:space="preserve">
     <value>Type does not define any properties to support equality checks.</value>
@@ -135,11 +135,20 @@
   <data name="DefinesPropertiesTitle" xml:space="preserve">
     <value>Type does not define Properties</value>
   </data>
+  <data name="EqualityGuarenteeMessageFormat" xml:space="preserve">
+    <value>Valuify cannot guarantee equality on type `{0} `because the inherited implementation for `{1}` is sealed.</value>
+  </data>
+  <data name="EqualityGuarenteeRuleDescription" xml:space="preserve">
+    <value>Valuify cannot guarantee equality because the inherited implementation has a required method.</value>
+  </data>
+  <data name="EqualityGuarenteeTitle" xml:space="preserve">
+    <value>Valuify cannot guarantee Equality</value>
+  </data>
   <data name="PartialTypeRuleDescription" xml:space="preserve">
     <value>Type must be marked as Partial to facilitate code generation.</value>
   </data>
   <data name="PartialTypeRuleMessageFormat" xml:space="preserve">
-    <value>Type {0} must be marked as Partial to faciliate code generation.</value>
+    <value>Type `{0}` must be marked as Partial to facilitate code generation.</value>
   </data>
   <data name="PartialTypeRuleTitle" xml:space="preserve">
     <value>Type is not Partial</value>
