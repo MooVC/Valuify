@@ -9,19 +9,19 @@ internal static partial class Generics
         public static readonly Content CSharp2Body = new(
             """
                 {
-                    private T1 age;
-                    private T2 name;
+                    private T1 _age;
+                    private T2 _name;
 
                     public T1 Age
                     {
-                        get { return age; }
-                        set { age = value; }
+                        get { return _age; }
+                        set { _age = value; }
                     }
         
                     public T2 Name
                     {
-                        get { return name; }
-                        set { name = value; }
+                        get { return _name; }
+                        set { _name = value; }
                     }
                 }
             """,

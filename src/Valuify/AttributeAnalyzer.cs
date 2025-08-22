@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 public abstract class AttributeAnalyzer<TResource>
     : DiagnosticAnalyzer
 {
-    private const string Branch = "master";
+    private const string _branch = "master";
 
     /// <inheritdoc/>
     public sealed override void Initialize(AnalysisContext context)
@@ -58,7 +58,7 @@ public abstract class AttributeAnalyzer<TResource>
     /// </returns>
     protected static string GetHelpLinkUri(string ruleId)
     {
-        return $"https://github.com/MooVC/Valuify/blob/{Branch}/docs/rules/{ruleId}.md";
+        return $"https://github.com/MooVC/Valuify/blob/{_branch}/docs/rules/{ruleId}.md";
     }
 
     /// <summary>

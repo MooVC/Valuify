@@ -210,6 +210,7 @@ To ensure consistency and maintainability across the Valuify codebase, we follow
   - Follow [Microsoft's .NET Naming Guidelines](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/naming-guidelines).
   - Use PascalCase for class names, properties, and method names.
   - Use camelCase for local variables and method parameters.
+  - Prefix private fields with `_`.
   - Prefix interface names with "I" (e.g., `IService`).
   - Avoid abbreviations; prefer descriptive names that clearly convey the purpose.
   - Avoid overqualification; namespaces and type names for part of the context in which your code is authored.

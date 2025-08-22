@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 /// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
-    private const string InequalityOperatorName = "op_Inequality";
+    private const string _inequalityOperatorName = "op_Inequality";
 
     /// <summary>
     /// Determines whether or not the <paramref name="class"/> declares an its own inequality operator.
@@ -20,6 +20,6 @@ internal static partial class INamedTypeSymbolExtensions
     /// </returns>
     public static bool HasInequalityOperator(this INamedTypeSymbol @class)
     {
-        return @class.HasOperator(InequalityOperatorName);
+        return @class.HasOperator(_inequalityOperatorName);
     }
 }

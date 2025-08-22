@@ -7,7 +7,7 @@ using Valuify.Snippets.Declarations;
 
 public sealed class WhenExecuted
 {
-    private static readonly Type[] generators =
+    private static readonly Type[] _generators =
     [
         typeof(ClassGenerator),
         typeof(HashCodeGenerator),
@@ -21,7 +21,7 @@ public sealed class WhenExecuted
     public async Task GivenAClassTheExpectedSourceIsGenerated(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
-        var test = new GeneratorTest<ClassGenerator>(assembly, language, generators);
+        var test = new GeneratorTest<ClassGenerator>(assembly, language, _generators);
 
         expectations.IsDeclaredIn(test.TestState);
 

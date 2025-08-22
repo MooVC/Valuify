@@ -12,35 +12,35 @@ public sealed class SnippetsAttribute
 {
 #if CI
 
-    private const Extensions DefaultExtensions = All;
-    private static readonly GetFrameworks frameworks = Frameworks.All;
+    private const Extensions _defaultExtensions = All;
+    private static readonly GetFrameworks _frameworks = Frameworks.All;
 
 #else
 
-    private const Extensions DefaultExtensions = None;
-    private static readonly GetFrameworks frameworks = Frameworks.Supported;
+    private const Extensions _defaultExtensions = None;
+    private static readonly GetFrameworks _frameworks = Frameworks.Supported;
 
 #endif
 
-    private static readonly ReferenceAssemblies[] assemblies = FindAssemblies();
-    private static readonly Type[] declarations = FindDeclarations();
-    private static readonly LanguageVersion[] languages = FindLanguages();
+    private static readonly ReferenceAssemblies[] _assemblies = FindAssemblies();
+    private static readonly Type[] _declarations = FindDeclarations();
+    private static readonly LanguageVersion[] _languages = FindLanguages();
 
-    public SnippetsAttribute(Type[]? exclusions = default, Extensions extensions = DefaultExtensions, Type[]? inclusions = default)
+    public SnippetsAttribute(Type[]? exclusions = default, Extensions extensions = _defaultExtensions, Type[]? inclusions = default)
     {
-        Assemblies = assemblies;
+        Assemblies = _assemblies;
         Extensions = extensions;
 
         Declarations = inclusions is null
-            ? declarations
-            : inclusions.Intersect(declarations).ToArray();
+            ? _declarations
+            : inclusions.Intersect(_declarations).ToArray();
 
         if (exclusions is not null)
         {
             Declarations = Declarations.Except(exclusions).ToArray();
         }
 
-        Languages = languages;
+        Languages = _languages;
     }
 
     private delegate IEnumerable<object[]> GetFrameworks(LanguageVersion minimum, Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare);
@@ -79,7 +79,7 @@ public sealed class SnippetsAttribute
                         return default;
                     }
 
-                    foreach (object[] theory in frameworks(expectation.Minimum, Prepare))
+                    foreach (object[] theory in _frameworks(expectation.Minimum, Prepare))
                     {
                         yield return theory;
                     }
