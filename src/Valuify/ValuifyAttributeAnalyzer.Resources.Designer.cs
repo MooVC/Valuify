@@ -24,9 +24,9 @@ namespace Valuify {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ValuifyAttributeAnalyzer_Resources {
         
-        private static global::System.Resources.ResourceManager resourceMan;
-        
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        private static global::System.Resources.ResourceManager _resourceMan;
+
+        private static global::System.Globalization.CultureInfo _resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal ValuifyAttributeAnalyzer_Resources() {
@@ -38,11 +38,11 @@ namespace Valuify {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+                if (object.ReferenceEquals(_resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.ValuifyAttributeAnalyzer.Resources", typeof(ValuifyAttributeAnalyzer_Resources).Assembly);
-                    resourceMan = temp;
+                    _resourceMan = temp;
                 }
-                return resourceMan;
+                return _resourceMan;
             }
         }
         
@@ -53,10 +53,10 @@ namespace Valuify {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
             get {
-                return resourceCulture;
+                return _resourceCulture;
             }
             set {
-                resourceCulture = value;
+                _resourceCulture = value;
             }
         }
         
@@ -65,7 +65,7 @@ namespace Valuify {
         /// </summary>
         public static string CompatibleTargetTypeRuleDescription {
             get {
-                return ResourceManager.GetString("CompatibleTargetTypeRuleDescription", resourceCulture);
+                return ResourceManager.GetString("CompatibleTargetTypeRuleDescription", _resourceCulture);
             }
         }
         
@@ -74,7 +74,7 @@ namespace Valuify {
         /// </summary>
         public static string CompatibleTargetTypeRuleMessageFormat {
             get {
-                return ResourceManager.GetString("CompatibleTargetTypeRuleMessageFormat", resourceCulture);
+                return ResourceManager.GetString("CompatibleTargetTypeRuleMessageFormat", _resourceCulture);
             }
         }
         
@@ -83,7 +83,7 @@ namespace Valuify {
         /// </summary>
         public static string CompatibleTargetTypeRuleTitle {
             get {
-                return ResourceManager.GetString("CompatibleTargetTypeRuleTitle", resourceCulture);
+                return ResourceManager.GetString("CompatibleTargetTypeRuleTitle", _resourceCulture);
             }
         }
         
@@ -92,7 +92,7 @@ namespace Valuify {
         /// </summary>
         public static string DefinesPropertiesMessageFormat {
             get {
-                return ResourceManager.GetString("DefinesPropertiesMessageFormat", resourceCulture);
+                return ResourceManager.GetString("DefinesPropertiesMessageFormat", _resourceCulture);
             }
         }
         
@@ -101,7 +101,7 @@ namespace Valuify {
         /// </summary>
         public static string DefinesPropertiesRuleDescription {
             get {
-                return ResourceManager.GetString("DefinesPropertiesRuleDescription", resourceCulture);
+                return ResourceManager.GetString("DefinesPropertiesRuleDescription", _resourceCulture);
             }
         }
         
@@ -110,7 +110,7 @@ namespace Valuify {
         /// </summary>
         public static string DefinesPropertiesTitle {
             get {
-                return ResourceManager.GetString("DefinesPropertiesTitle", resourceCulture);
+                return ResourceManager.GetString("DefinesPropertiesTitle", _resourceCulture);
             }
         }
         
@@ -119,7 +119,7 @@ namespace Valuify {
         /// </summary>
         public static string EqualityGuarenteeMessageFormat {
             get {
-                return ResourceManager.GetString("EqualityGuarenteeMessageFormat", resourceCulture);
+                return ResourceManager.GetString("EqualityGuarenteeMessageFormat", _resourceCulture);
             }
         }
         
@@ -128,7 +128,7 @@ namespace Valuify {
         /// </summary>
         public static string EqualityGuarenteeRuleDescription {
             get {
-                return ResourceManager.GetString("EqualityGuarenteeRuleDescription", resourceCulture);
+                return ResourceManager.GetString("EqualityGuarenteeRuleDescription", _resourceCulture);
             }
         }
         
@@ -137,7 +137,7 @@ namespace Valuify {
         /// </summary>
         public static string EqualityGuarenteeTitle {
             get {
-                return ResourceManager.GetString("EqualityGuarenteeTitle", resourceCulture);
+                return ResourceManager.GetString("EqualityGuarenteeTitle", _resourceCulture);
             }
         }
         
@@ -146,7 +146,7 @@ namespace Valuify {
         /// </summary>
         public static string PartialTypeRuleDescription {
             get {
-                return ResourceManager.GetString("PartialTypeRuleDescription", resourceCulture);
+                return ResourceManager.GetString("PartialTypeRuleDescription", _resourceCulture);
             }
         }
         
@@ -155,7 +155,7 @@ namespace Valuify {
         /// </summary>
         public static string PartialTypeRuleMessageFormat {
             get {
-                return ResourceManager.GetString("PartialTypeRuleMessageFormat", resourceCulture);
+                return ResourceManager.GetString("PartialTypeRuleMessageFormat", _resourceCulture);
             }
         }
         
@@ -164,7 +164,7 @@ namespace Valuify {
         /// </summary>
         public static string PartialTypeRuleTitle {
             get {
-                return ResourceManager.GetString("PartialTypeRuleTitle", resourceCulture);
+                return ResourceManager.GetString("PartialTypeRuleTitle", _resourceCulture);
             }
         }
     }

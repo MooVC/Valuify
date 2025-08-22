@@ -6,7 +6,7 @@ using Valuify.Snippets.Declarations;
 
 public sealed class WhenExecuted
 {
-    private static readonly Type[] generators =
+    private static readonly Type[] _generators =
     [
         typeof(HashCodeGenerator),
         typeof(SequenceEqualityComparerGenerator),
@@ -17,7 +17,7 @@ public sealed class WhenExecuted
     public async Task GivenAnAssemblyThenTheClassIsGenerated(ReferenceAssemblies assemblies, LanguageVersion language)
     {
         // Arrange
-        var test = new GeneratorTest<SequenceEqualityComparerGenerator>(assemblies, language, generators: generators);
+        var test = new GeneratorTest<SequenceEqualityComparerGenerator>(assemblies, language, generators: _generators);
 
         Internal.HashCode.IsExpectedIn(test.TestState);
         Internal.SequenceEqualityComparer.IsExpectedIn(test.TestState);

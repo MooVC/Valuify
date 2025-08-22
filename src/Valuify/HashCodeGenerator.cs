@@ -20,12 +20,12 @@ public sealed class HashCodeGenerator
 
             internal static class HashCode
             {
-                private const int HashSeed = 0x1505;
-                private const int HashPrime = -1521134295;
+                private const int _hashSeed = 0x1505;
+                private const int _hashPrime = -1521134295;
 
                 public static int Combine(params object[] values)
                 {
-                    int hash = HashSeed;
+                    int hash = _hashSeed;
 
                     foreach (object value in values)
                     {
@@ -53,7 +53,7 @@ public sealed class HashCodeGenerator
 
                     unchecked
                     {
-                        return (other * HashPrime) + hash;
+                        return (other * _hashPrime) + hash;
                     }
                 }
 

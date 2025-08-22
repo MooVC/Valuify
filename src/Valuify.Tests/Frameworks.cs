@@ -26,17 +26,17 @@ internal static class Frameworks
         (ReferenceAssemblies.NetStandard.NetStandard21, LanguageVersion.CSharp8, DateOnly.MaxValue),
     ];
 
-    private static readonly LanguageVersion[] languages;
+    private static readonly LanguageVersion[] _languages;
 
     [SuppressMessage("Minor Code Smell", "S3963:\"static\" fields should be initialized inline", Justification = "It cannot be initialized inline.")]
     static Frameworks()
     {
-        languages = Enum.GetValues<LanguageVersion>();
+        _languages = Enum.GetValues<LanguageVersion>();
     }
 
     public static IEnumerable<object[]> All(LanguageVersion minimum, Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare = default)
     {
-        return Filter(InScope, maximum => languages.Where(language => language >= minimum && language <= maximum), prepare);
+        return Filter(InScope, maximum => _languages.Where(language => language >= minimum && language <= maximum), prepare);
     }
 
     public static IEnumerable<object[]> Supported(LanguageVersion minimum, Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare = default)

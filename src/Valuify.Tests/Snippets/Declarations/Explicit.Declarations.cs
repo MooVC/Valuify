@@ -9,13 +9,13 @@ internal static partial class Explicit
         public static readonly Content CSharp1Body = new(
             """
                 {
-                    private int age;
-                    private string name;
+                    private int _age;
+                    private string _name;
 
                     public int Age
                     {
-                        get { return age; }
-                        set { age = value; }
+                        get { return _age; }
+                        set { _age = value; }
                     }
         
                     public bool IsAdult
@@ -25,8 +25,8 @@ internal static partial class Explicit
         
                     public string Name
                     {
-                        get { return name; }
-                        set { name = value; }
+                        get { return _name; }
+                        set { _name = value; }
                     }
 
                     string INamed.Name

@@ -8,7 +8,7 @@ using Valuify.Model;
 internal sealed class EquatableStrategy
     : IStrategy
 {
-    private const string Conditional = "\r\n            && ";
+    private const string _conditional = "\r\n            && ";
 
     /// <inheritdoc/>
     public IEnumerable<Source> Generate(Subject subject)
@@ -46,7 +46,7 @@ internal sealed class EquatableStrategy
                 .Where(property => !property.IsIgnored)
                 .Select(property => $"{GetComparer(property)}.Default.Equals({property.Name}, other.{property.Name})");
 
-            conditions = string.Join(Conditional, properties);
+            conditions = string.Join(_conditional, properties);
         }
 
         string code = $$"""

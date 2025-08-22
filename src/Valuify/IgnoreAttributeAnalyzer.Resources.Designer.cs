@@ -24,9 +24,9 @@ namespace Valuify {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class IgnoreAttributeAnalyzer_Resources {
         
-        private static global::System.Resources.ResourceManager resourceMan;
-        
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        private static global::System.Resources.ResourceManager _resourceMan;
+
+        private static global::System.Globalization.CultureInfo _resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal IgnoreAttributeAnalyzer_Resources() {
@@ -38,11 +38,11 @@ namespace Valuify {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+                if (object.ReferenceEquals(_resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.IgnoreAttributeAnalyzer.Resources", typeof(IgnoreAttributeAnalyzer_Resources).Assembly);
-                    resourceMan = temp;
+                    _resourceMan = temp;
                 }
-                return resourceMan;
+                return _resourceMan;
             }
         }
         
@@ -53,10 +53,10 @@ namespace Valuify {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {
             get {
-                return resourceCulture;
+                return _resourceCulture;
             }
             set {
-                resourceCulture = value;
+                _resourceCulture = value;
             }
         }
         
@@ -65,7 +65,7 @@ namespace Valuify {
         /// </summary>
         internal static string MissingValuifyRuleDescription {
             get {
-                return ResourceManager.GetString("MissingValuifyRuleDescription", resourceCulture);
+                return ResourceManager.GetString("MissingValuifyRuleDescription", _resourceCulture);
             }
         }
         
@@ -74,7 +74,7 @@ namespace Valuify {
         /// </summary>
         internal static string MissingValuifyRuleMessageFormat {
             get {
-                return ResourceManager.GetString("MissingValuifyRuleMessageFormat", resourceCulture);
+                return ResourceManager.GetString("MissingValuifyRuleMessageFormat", _resourceCulture);
             }
         }
         
@@ -83,7 +83,7 @@ namespace Valuify {
         /// </summary>
         internal static string MissingValuifyRuleTitle {
             get {
-                return ResourceManager.GetString("MissingValuifyRuleTitle", resourceCulture);
+                return ResourceManager.GetString("MissingValuifyRuleTitle", _resourceCulture);
             }
         }
     }
