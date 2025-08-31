@@ -12,12 +12,12 @@ public sealed class SnippetsAttribute
 {
 #if CI
 
-    private const Extensions _defaultExtensions = All;
+    private const Extensions DefaultExtensions = All;
     private static readonly GetFrameworks _frameworks = Frameworks.All;
 
 #else
 
-    private const Extensions _defaultExtensions = None;
+    private const Extensions DefaultExtensions = None;
     private static readonly GetFrameworks _frameworks = Frameworks.Supported;
 
 #endif
@@ -26,7 +26,7 @@ public sealed class SnippetsAttribute
     private static readonly Type[] _declarations = FindDeclarations();
     private static readonly LanguageVersion[] _languages = FindLanguages();
 
-    public SnippetsAttribute(Type[]? exclusions = default, Extensions extensions = _defaultExtensions, Type[]? inclusions = default)
+    public SnippetsAttribute(Type[]? exclusions = default, Extensions extensions = DefaultExtensions, Type[]? inclusions = default)
     {
         Assemblies = _assemblies;
         Extensions = extensions;

@@ -8,7 +8,7 @@ using System.Text;
 /// </summary>
 internal static partial class StringExtensions
 {
-    private const string _default = "    ";
+    private const string Default = "    ";
 
     /// <summary>
     /// Adds the specified <paramref name="whitespace"/> to the beginning of each non-blank line in the input string.
@@ -25,7 +25,7 @@ internal static partial class StringExtensions
     /// <returns>
     /// A new string with <paramref name="whitespace"/> added to the start of each non-blank line.
     /// </returns>
-    public static string Indent(this string input, int skip = 1, string whitespace = _default)
+    public static string Indent(this string input, int skip = 1, string whitespace = Default)
     {
         var reader = new StringReader(input);
         var builder = new StringBuilder();

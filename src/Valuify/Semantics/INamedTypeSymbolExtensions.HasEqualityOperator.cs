@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 /// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
-    private const string _equalityOperatorName = "op_Equality";
+    private const string EqualityOperatorName = "op_Equality";
 
     /// <summary>
     /// Determines whether or not the <paramref name="class"/> declares an its own equals operator.
@@ -20,6 +20,6 @@ internal static partial class INamedTypeSymbolExtensions
     /// </returns>
     public static bool HasEqualityOperator(this INamedTypeSymbol @class)
     {
-        return @class.HasOperator(_equalityOperatorName);
+        return @class.HasOperator(EqualityOperatorName);
     }
 }

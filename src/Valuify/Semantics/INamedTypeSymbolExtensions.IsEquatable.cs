@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 /// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
-    private const string _equatableTypeName = "System.IEquatable`1";
+    private const string EquatableTypeName = "System.IEquatable`1";
 
     /// <summary>
     /// Determines whether or not the <paramref name="class"/> implements <see cref="IEquatable{T}"/>.
@@ -26,7 +26,7 @@ internal static partial class INamedTypeSymbolExtensions
     /// </remarks>
     public static bool IsEquatable(this INamedTypeSymbol @class, Compilation compilation)
     {
-        INamedTypeSymbol? equatable = compilation.GetTypeByMetadataName(_equatableTypeName);
+        INamedTypeSymbol? equatable = compilation.GetTypeByMetadataName(EquatableTypeName);
 
         if (equatable is null)
         {

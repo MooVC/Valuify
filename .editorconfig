@@ -175,9 +175,15 @@ dotnet_naming_rule.non_field_members_should_be_pascal_case.severity = error
 dotnet_naming_rule.non_field_members_should_be_pascal_case.symbols = non_field_members
 dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
 
+dotnet_naming_rule.private_constant_fields_should_be_pascal_case.severity = error
+dotnet_naming_rule.private_constant_fields_should_be_pascal_case.symbols = private_constant_fields
+dotnet_naming_rule.private_constant_fields_should_be_pascal_case.style = pascal_case
+dotnet_naming_rule.private_constant_fields_should_be_pascal_case.priority = 1
+
 dotnet_naming_rule.private_fields_should_be_camel_case_with_underscore_prefix.severity = error
 dotnet_naming_rule.private_fields_should_be_camel_case_with_underscore_prefix.symbols = private_fields
 dotnet_naming_rule.private_fields_should_be_camel_case_with_underscore_prefix.style = camel_case_underscore_prefix
+dotnet_naming_rule.private_fields_should_be_camel_case_with_underscore_prefix.priority = 2
 
 # Symbol specifications
 
@@ -196,6 +202,10 @@ dotnet_naming_symbols.non_field_members.required_modifiers =
 dotnet_naming_symbols.private_fields.applicable_kinds = field
 dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 dotnet_naming_symbols.private_fields.required_modifiers =
+
+dotnet_naming_symbols.private_constant_fields.applicable_kinds = field
+dotnet_naming_symbols.private_constant_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_constant_fields.required_modifiers = const
 
 # Naming styles
 
