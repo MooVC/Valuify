@@ -13,7 +13,7 @@ using Valuify.Syntax;
 public sealed class ClassGenerator
     : IIncrementalGenerator
 {
-    private static readonly IReadOnlyList<IStrategy> strategies =
+    private static readonly IReadOnlyList<IStrategy> _strategies =
     [
         new EqualityStrategy(),
         new EqualsStrategy(),
@@ -43,7 +43,7 @@ public sealed class ClassGenerator
     {
         if (subject is not null)
         {
-            foreach (IStrategy strategy in strategies)
+            foreach (IStrategy strategy in _strategies)
             {
                 IEnumerable<Source> sources = strategy.Generate(subject);
 
