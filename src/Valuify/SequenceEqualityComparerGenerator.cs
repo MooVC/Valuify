@@ -44,7 +44,23 @@ public sealed class SequenceEqualityComparerGenerator
                         return 0;
                     }
 
-                    return HashCode.Combine(enumerable);
+                    var hash = 17;
+                    var enumerator = enumerable.GetEnumerator();
+
+                    try
+                    {
+                        while (enumerator.MoveNext())
+                        {
+                            var element = enumerator.Current;
+                            hash = unchecked(hash * 31 + (element?.GetHashCode() ?? 0));
+                        }
+                    }
+                    finally
+                    {
+                        (enumerator as IDisposable)?.Dispose();
+                    }
+
+                    return hash;
                 }
 
                 private static bool Equals(IEnumerator left, IEnumerator right)
