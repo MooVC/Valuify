@@ -29,35 +29,48 @@ public sealed class SequenceEqualityComparerGenerator
                         return true;
                     }
 
-                    if (ReferenceEquals(left, null) || ReferenceEquals(null, right))
+                    if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
                     {
                         return false;
                     }
 
                     return Equals(left.GetEnumerator(), right.GetEnumerator());
                 }
-        
+
                 public int GetHashCode(IEnumerable enumerable)
                 {
+                    if (ReferenceEquals(enumerable, null))
+                    {
+                        return 0;
+                    }
+
                     return HashCode.Combine(enumerable);
                 }
 
                 private static bool Equals(IEnumerator left, IEnumerator right)
                 {
-                    while (left.MoveNext())
+                    try
                     {
-                        if (!right.MoveNext())
+                        while (left.MoveNext())
                         {
-                            return false;
+                            if (!right.MoveNext())
+                            {
+                                return false;
+                            }
+
+                            if (!Equals(left.Current, right.Current))
+                            {
+                                return false;
+                            }
                         }
-        
-                        if (!Equals(left.Current, right.Current))
-                        {
-                            return false;
-                        }
+
+                        return !right.MoveNext();
                     }
-        
-                    return !right.MoveNext();
+                    finally
+                    {
+                        (left as IDisposable)?.Dispose();
+                        (right as IDisposable)?.Dispose();
+                    }
                 }
             }
         }
