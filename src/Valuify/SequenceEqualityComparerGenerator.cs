@@ -29,35 +29,64 @@ public sealed class SequenceEqualityComparerGenerator
                         return true;
                     }
 
-                    if (ReferenceEquals(left, null) || ReferenceEquals(null, right))
+                    if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
                     {
                         return false;
                     }
 
                     return Equals(left.GetEnumerator(), right.GetEnumerator());
                 }
-        
+
                 public int GetHashCode(IEnumerable enumerable)
                 {
-                    return HashCode.Combine(enumerable);
+                    if (ReferenceEquals(enumerable, null))
+                    {
+                        return 0;
+                    }
+
+                    var hash = 17;
+                    var enumerator = enumerable.GetEnumerator();
+
+                    try
+                    {
+                        while (enumerator.MoveNext())
+                        {
+                            var element = enumerator.Current;
+                            hash = unchecked(hash * 31 + (element?.GetHashCode() ?? 0));
+                        }
+                    }
+                    finally
+                    {
+                        (enumerator as IDisposable)?.Dispose();
+                    }
+
+                    return hash;
                 }
 
                 private static bool Equals(IEnumerator left, IEnumerator right)
                 {
-                    while (left.MoveNext())
+                    try
                     {
-                        if (!right.MoveNext())
+                        while (left.MoveNext())
                         {
-                            return false;
+                            if (!right.MoveNext())
+                            {
+                                return false;
+                            }
+
+                            if (!Equals(left.Current, right.Current))
+                            {
+                                return false;
+                            }
                         }
-        
-                        if (!Equals(left.Current, right.Current))
-                        {
-                            return false;
-                        }
+
+                        return !right.MoveNext();
                     }
-        
-                    return !right.MoveNext();
+                    finally
+                    {
+                        (left as IDisposable)?.Dispose();
+                        (right as IDisposable)?.Dispose();
+                    }
                 }
             }
         }
