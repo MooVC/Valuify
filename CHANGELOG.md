@@ -4,6 +4,14 @@ All notable changes to Valuify will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - TBC
+
+## Changed
+- Reverted Microsoft.CodeAnalysis.Analyzers to Version 3.11.0 to maximize compatibility with Visual Studio 2022.
+- Reverted Microsoft.CodeAnalysis.CSharp to Version 4.0.1 to maximize compatibility with Visual Studio 2022.
+- Reverted Microsoft.CodeAnalysis.CSharp.Workspaces Version 4.0.1 to maximize compatibility with Visual Studio 2022.
+- Reverted Microsoft.CodeAnalysis.Workspaces.Common Version 4.0.1 to maximize compatibility with Visual Studio 2022.
+
 ## [1.4.0] - 2025-02-24
 
 ## Added

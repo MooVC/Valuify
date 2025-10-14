@@ -16,10 +16,7 @@ public sealed class IgnoreAttributeAnalyzer
     : AttributeAnalyzer<IgnoreAttributeAnalyzer_Resources>
 {
     /// <inheritdoc/>
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-    [
-        MissingValuifyRule,
-    ];
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(MissingValuifyRule);
 
     /// <summary>
     /// Gets the descriptor associated with the missing valuify rule (VALFY04).

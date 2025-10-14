@@ -1,6 +1,5 @@
 ﻿namespace Valuify;
 
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
 
@@ -10,9 +9,9 @@ internal static class Frameworks
     [
         (ReferenceAssemblies.Net.Net50, LanguageVersion.CSharp9, new DateOnly(2022, 5, 10)),
         (ReferenceAssemblies.Net.Net60, LanguageVersion.CSharp10, new DateOnly(2024, 11, 12)),
-        (ReferenceAssemblies.Net.Net70, LanguageVersion.CSharp11, new DateOnly(2024, 5, 14)),
-        (ReferenceAssemblies.Net.Net80, LanguageVersion.CSharp12, new DateOnly(2026, 11, 10)),
-        (ReferenceAssemblies.Net.Net90, LanguageVersion.CSharp13, new DateOnly(2026, 5, 12)),
+        (ReferenceAssemblies.Net.Net70, LanguageVersion.CSharp10, new DateOnly(2024, 5, 14)),
+        (ReferenceAssemblies.Net.Net80, LanguageVersion.CSharp10, new DateOnly(2026, 11, 10)),
+        (ReferenceAssemblies.Net.Net90, LanguageVersion.CSharp10, new DateOnly(2026, 5, 12)),
         (ReferenceAssemblies.NetCore.NetCoreApp20, LanguageVersion.CSharp7_3, new DateOnly(2018, 10, 1)),
         (ReferenceAssemblies.NetCore.NetCoreApp21, LanguageVersion.CSharp7_3, new DateOnly(2021, 8, 21)),
         (ReferenceAssemblies.NetCore.NetCoreApp30, LanguageVersion.CSharp8, new DateOnly(2020, 3, 3)),
@@ -28,7 +27,6 @@ internal static class Frameworks
 
     private static readonly LanguageVersion[] _languages;
 
-    [SuppressMessage("Minor Code Smell", "S3963:\"static\" fields should be initialized inline", Justification = "It cannot be initialized inline.")]
     static Frameworks()
     {
         _languages = Enum.GetValues<LanguageVersion>();
