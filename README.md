@@ -4,6 +4,11 @@ Valuify is a .NET Roslyn Source Generator designed to enable record-like behavio
 
 While Valuify is primarily designed with Roslyn Source Generators in mind, it also benefits legacy codebases that lack access to the record type introduced in C# 9.0. When used alongside [Fluentify](https://github.com/MooVC/Fluentify), a complimentary Roslyn Source Generator that provides extension methods for creating projections, classes gain functionality equivalent to the `with` expression in records, preserving immutability while also providing for value-based equality.
 
+## Requirements
+
+- C# v2.0 or later.
+- Visual Studio 2022 v17.0 or later, or any compatible IDE that supports Roslyn source generators.
+
 ## Installation
 
 To install Valuify, use the following command in your package manager console:
