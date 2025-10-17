@@ -1,5 +1,6 @@
 ﻿namespace Valuify;
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
 
@@ -27,6 +28,8 @@ internal static class Frameworks
 
     private static readonly LanguageVersion[] _languages;
 
+    [SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "The removal suggestion is a false positive.")]
+    [SuppressMessage("Minor Code Smell", "S3963:\"static\" fields should be initialized inline", Justification = "It cannot be initialized inline.")]
     static Frameworks()
     {
         _languages = Enum.GetValues<LanguageVersion>();
