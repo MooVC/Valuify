@@ -18,13 +18,11 @@ public sealed class ValuifyAttributeAnalyzer
     : AttributeAnalyzer<ValuifyAttributeAnalyzer_Resources>
 {
     /// <inheritdoc/>
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-    [
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(
         CompatibleTargetTypeRule,
         PartialTypeRule,
         DefinesPropertiesRule,
-        EqualityGuarenteeRule,
-    ];
+        EqualityGuarenteeRule);
 
     /// <summary>
     /// Gets the descriptor associated with the compatible target type rule (VALFY01).

@@ -36,7 +36,7 @@ internal static partial class Inherited
                 __BODY__
                 }
                 """,
-                LanguageVersion.CSharp11);
+                LanguageVersion.CSharp10);
         }
     }
 }
