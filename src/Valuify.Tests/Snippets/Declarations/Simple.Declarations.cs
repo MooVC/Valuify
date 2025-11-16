@@ -22,11 +22,16 @@ internal static partial class Simple
                     {
                         get { return Age >= 18; }
                     }
-        
+
                     public string Name
                     {
                         get { return _name; }
                         set { _name = value; }
+                    }
+
+                    public static string Species
+                    {
+                        get { return "Human"; }
                     }
                 }
             """,
@@ -41,8 +46,10 @@ internal static partial class Simple
                     {
                         get { return Age >= 18; }
                     }
-        
+
                     public string Name { get; set; }
+
+                    public static string Species { get; private set; }
                 }
             """,
             LanguageVersion.CSharp3);
@@ -53,8 +60,10 @@ internal static partial class Simple
                     public int Age { get; }
         
                     public bool IsAdult => Age >= 18;
-        
+
                     public string Name { get; }
+
+                    public static string Species { get; } = "Human";
                 }
             """,
             LanguageVersion.CSharp6);
@@ -65,8 +74,10 @@ internal static partial class Simple
                     public int Age { get; init; }
         
                     public bool IsAdult => Age >= 18;
-        
+
                     public string Name { get; init; }
+
+                    public static string Species { get; init; } = "Human";
                 }
             """,
             LanguageVersion.CSharp9);
