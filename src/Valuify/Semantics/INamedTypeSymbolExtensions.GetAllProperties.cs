@@ -28,8 +28,7 @@ internal static partial class INamedTypeSymbolExtensions
             IEnumerable<IPropertySymbol> properties = current
                 .GetMembers()
                 .OfType<IPropertySymbol>()
-                .Where(property => property.ExplicitInterfaceImplementations.Length == 0)
-                .Where(property => !property.IsStatic);
+                .Where(property => !property.IsStatic && property.ExplicitInterfaceImplementations.Length == 0);
 
             foreach (IPropertySymbol property in properties)
             {
