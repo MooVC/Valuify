@@ -12,6 +12,11 @@ internal static partial class Simple
                     private int _age;
                     private string _name;
 
+                    public static string Species
+                    {
+                        get { return "Human"; }
+                    }
+
                     public int Age
                     {
                         get { return _age; }
@@ -28,11 +33,6 @@ internal static partial class Simple
                         get { return _name; }
                         set { _name = value; }
                     }
-
-                    public static string Species
-                    {
-                        get { return "Human"; }
-                    }
                 }
             """,
             LanguageVersion.CSharp1);
@@ -40,16 +40,16 @@ internal static partial class Simple
         public static readonly Content CSharp3Body = new(
             """
                 {
-                    public int Age { get; set; }
+                    public static string Species { get; } = "Human";
         
+                    public int Age { get; set; }
+
                     public bool IsAdult
                     {
                         get { return Age >= 18; }
                     }
 
                     public string Name { get; set; }
-
-                    public static string Species { get; private set; }
                 }
             """,
             LanguageVersion.CSharp3);
@@ -57,13 +57,13 @@ internal static partial class Simple
         public static readonly Content CSharp6Body = new(
             """
                 {
-                    public int Age { get; }
+                    public static string Species { get; } = "Human";
         
+                    public int Age { get; }
+
                     public bool IsAdult => Age >= 18;
 
                     public string Name { get; }
-
-                    public static string Species { get; } = "Human";
                 }
             """,
             LanguageVersion.CSharp6);
@@ -71,13 +71,13 @@ internal static partial class Simple
         public static readonly Content CSharp9Body = new(
             """
                 {
-                    public int Age { get; init; }
+                    public static string Species { get; } = "Human";
         
+                    public int Age { get; init; }
+
                     public bool IsAdult => Age >= 18;
 
                     public string Name { get; init; }
-
-                    public static string Species { get; init; } = "Human";
                 }
             """,
             LanguageVersion.CSharp9);
