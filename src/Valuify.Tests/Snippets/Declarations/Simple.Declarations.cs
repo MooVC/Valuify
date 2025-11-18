@@ -22,7 +22,7 @@ internal static partial class Simple
                         get { return _age; }
                         set { _age = value; }
                     }
-        
+
                     public bool IsAdult
                     {
                         get { return Age >= 18; }
@@ -40,8 +40,8 @@ internal static partial class Simple
         public static readonly Content CSharp3Body = new(
             """
                 {
-                    public static string Species { get; } = "Human";
-        
+                    public static string Species { get; private set; }
+
                     public int Age { get; set; }
 
                     public bool IsAdult
@@ -58,7 +58,7 @@ internal static partial class Simple
             """
                 {
                     public static string Species { get; } = "Human";
-        
+
                     public int Age { get; }
 
                     public bool IsAdult => Age >= 18;
@@ -72,7 +72,7 @@ internal static partial class Simple
             """
                 {
                     public static string Species { get; } = "Human";
-        
+
                     public int Age { get; init; }
 
                     public bool IsAdult => Age >= 18;
