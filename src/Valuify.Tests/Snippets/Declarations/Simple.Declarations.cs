@@ -12,17 +12,22 @@ internal static partial class Simple
                     private int _age;
                     private string _name;
 
+                    public static string Species
+                    {
+                        get { return "Human"; }
+                    }
+
                     public int Age
                     {
                         get { return _age; }
                         set { _age = value; }
                     }
-        
+
                     public bool IsAdult
                     {
                         get { return Age >= 18; }
                     }
-        
+
                     public string Name
                     {
                         get { return _name; }
@@ -35,13 +40,15 @@ internal static partial class Simple
         public static readonly Content CSharp3Body = new(
             """
                 {
+                    public static string Species { get; private set; }
+
                     public int Age { get; set; }
-        
+
                     public bool IsAdult
                     {
                         get { return Age >= 18; }
                     }
-        
+
                     public string Name { get; set; }
                 }
             """,
@@ -50,10 +57,12 @@ internal static partial class Simple
         public static readonly Content CSharp6Body = new(
             """
                 {
+                    public static string Species { get; } = "Human";
+
                     public int Age { get; }
-        
+
                     public bool IsAdult => Age >= 18;
-        
+
                     public string Name { get; }
                 }
             """,
@@ -62,10 +71,12 @@ internal static partial class Simple
         public static readonly Content CSharp9Body = new(
             """
                 {
+                    public static string Species { get; } = "Human";
+
                     public int Age { get; init; }
-        
+
                     public bool IsAdult => Age >= 18;
-        
+
                     public string Name { get; init; }
                 }
             """,
