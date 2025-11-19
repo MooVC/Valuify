@@ -86,13 +86,9 @@ internal static partial class Inherited
                             {
                                 return true;
                             }
-                
-                            if (ReferenceEquals(other, null))
-                            {
-                                return false;
-                            }
-                
-                            return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(Age, other.Age)
+
+                            return !ReferenceEquals(other, null)
+                                && global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(Age, other.Age)
                                 && global::System.Collections.Generic.EqualityComparer<bool>.Default.Equals(IsAdult, other.IsAdult)
                                 && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Name, other.Name);
                         }

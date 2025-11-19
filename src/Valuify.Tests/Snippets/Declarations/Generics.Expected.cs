@@ -105,22 +105,18 @@ internal static partial class Generics
 
                 partial class Generics<T1, T2>
                 {
-                    public bool Equals(Generics<T1, T2> other)
-                    {
-                        if (ReferenceEquals(this, other))
+                        public bool Equals(Generics<T1, T2> other)
                         {
-                            return true;
-                        }
-            
-                        if (ReferenceEquals(other, null))
-                        {
-                            return false;
-                        }
+                            if (ReferenceEquals(this, other))
+                            {
+                                return true;
+                            }
 
-                        return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(Age, other.Age)
-                            && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(Name, other.Name);
+                            return !ReferenceEquals(other, null)
+                                && global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(Age, other.Age)
+                                && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(Name, other.Name);
+                        }
                     }
-                }
 
                 #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                 #nullable restore

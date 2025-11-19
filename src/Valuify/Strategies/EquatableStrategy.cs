@@ -1,5 +1,6 @@
 ﻿namespace Valuify.Strategies;
 
+using System.Linq;
 using Valuify.Model;
 
 /// <summary>
@@ -38,7 +39,7 @@ internal sealed class EquatableStrategy
 
     private static Source GenerateImplementation(Subject subject)
     {
-        string conditions = "true";
+        string conditions = "!ReferenceEquals(other, null)";
 
         if (subject.Properties.Count > 0)
         {
@@ -46,7 +47,9 @@ internal sealed class EquatableStrategy
                 .Where(property => !property.IsIgnored)
                 .Select(property => $"{GetComparer(property)}.Default.Equals({property.Name}, other.{property.Name})");
 
-            conditions = string.Join(Conditional, properties);
+            conditions = string.Join(Conditional, Enumerable
+                .Repeat(conditions, 1)
+                .Concat(properties));
         }
 
         string code = $$"""
@@ -58,12 +61,7 @@ internal sealed class EquatableStrategy
                     {
                         return true;
                     }
-            
-                    if (ReferenceEquals(other, null))
-                    {
-                        return false;
-                    }
-            
+
                     return {{conditions}};
                 }
             }

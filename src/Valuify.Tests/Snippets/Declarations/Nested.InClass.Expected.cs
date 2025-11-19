@@ -124,13 +124,9 @@ internal static partial class Nested
                                 {
                                     return true;
                                 }
-                
-                                if (ReferenceEquals(other, null))
-                                {
-                                    return false;
-                                }
-                
-                                return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(Age, other.Age)
+
+                                return !ReferenceEquals(other, null)
+                                    && global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(Age, other.Age)
                                     && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(Name, other.Name);
                             }
                         }
