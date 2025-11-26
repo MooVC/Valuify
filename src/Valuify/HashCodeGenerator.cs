@@ -29,18 +29,34 @@ public sealed class HashCodeGenerator
 
                     foreach (object value in values)
                     {
-                        if (value is IEnumerable && !(value is string))
+                        IEnumerable enumerable = value as IEnumerable;
+
+                        if (enumerable != null && !(value is string))
                         {
-                            IEnumerable enumerable = (IEnumerable)value;
-        
-                            foreach (object element in enumerable)
-                            {
-                                hash = PerformCombine(hash, element);
-                            }
+                            hash = CombineEnumerable(hash, enumerable);
                         }
                         else
                         {
                             hash = PerformCombine(hash, value);
+                        }
+                    }
+
+                    return hash;
+                }
+
+                private static int CombineEnumerable(int hash, IEnumerable values)
+                {
+                    foreach (object element in values)
+                    {
+                        IEnumerable enumerable = element as IEnumerable;
+
+                        if (enumerable != null && !(element is string))
+                        {
+                            hash = CombineEnumerable(hash, enumerable);
+                        }
+                        else
+                        {
+                            hash = PerformCombine(hash, element);
                         }
                     }
 
@@ -53,7 +69,7 @@ public sealed class HashCodeGenerator
 
                     unchecked
                     {
-                        return (other * HashPrime) + hash;
+                        return (hash * HashPrime) + other;
                     }
                 }
 
