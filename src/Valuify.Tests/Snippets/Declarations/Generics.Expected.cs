@@ -199,7 +199,7 @@ internal static partial class Generics
                 {
                     public override string ToString()
                     {
-                        return string.Format("Generics { Age = {0}, Name = {1} }", Age, Name);
+                        return string.Format("Generics {{ Age = {0}, Name = {1} }}", Age, Name);
                     }
                 }
         
