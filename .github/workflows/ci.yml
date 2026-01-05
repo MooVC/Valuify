@@ -17,7 +17,7 @@ on:
 env:
   configuration: 'Debug'
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
-  solution: 'Valuify.sln'
+  solution: 'Valuify.slnx'
 
 permissions:
   contents: read

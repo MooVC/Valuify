@@ -15,7 +15,7 @@ env:
   configuration: 'Release'
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
   PACKAGE_ID: 'Valuify'
-  solution: 'Valuify.sln'
+  solution: 'Valuify.slnx'
 
 permissions:
   packages: write
