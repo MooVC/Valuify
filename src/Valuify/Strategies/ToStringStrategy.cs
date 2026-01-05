@@ -24,14 +24,9 @@ internal sealed class ToStringStrategy
 
         if (properties.Length > 0)
         {
-            IEnumerable<string> values = properties.Select((property, index) => $"{property.Name} = {{{index}}}");
+            IEnumerable<string> values = properties.Select(property => $"{property.Name} = {{{property.Name}}}");
 
-            value = $"{subject.Name} {{ {string.Join(", ", values)} }}";
-
-            IEnumerable<string> names = properties.Select(property => property.Name);
-            string parameters = string.Join(", ", names);
-
-            value = $"string.Format(\"{value}\", {parameters})";
+            value = $"$\"{subject.Name} {{{{ {string.Join(", ", values)} }}}}\"";
         }
 
         string code = $$"""
