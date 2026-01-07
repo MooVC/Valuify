@@ -26,12 +26,12 @@ internal sealed class ToStringStrategy
         {
             IEnumerable<string> values = properties.Select((property, index) => $"{property.Name} = {{{index}}}");
 
-            value = $"{subject.Name} {{ {string.Join(", ", values)} }}";
+            string format = $"{subject.Name} {{{{ {string.Join(", ", values)} }}}}";
 
             IEnumerable<string> names = properties.Select(property => property.Name);
             string parameters = string.Join(", ", names);
 
-            value = $"string.Format(\"{value}\", {parameters})";
+            value = $"string.Format(\"{format}\", {parameters})";
         }
 
         string code = $$"""

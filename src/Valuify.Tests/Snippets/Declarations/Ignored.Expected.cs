@@ -199,7 +199,7 @@ internal static partial class Ignored
                     {
                         public override string ToString()
                         {
-                            return string.Format("Ignored { Age = {0}, IsAdult = {1} }", Age, IsAdult);
+                            return string.Format("Ignored {{ Age = {0}, IsAdult = {1} }}", Age, IsAdult);
                         }
                     }
         

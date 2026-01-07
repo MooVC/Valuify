@@ -221,7 +221,7 @@ internal static partial class Nested
                         {
                             public override string ToString()
                             {
-                                return string.Format("Inner { Age = {0}, Name = {1} }", Age, Name);
+                                return string.Format("Inner {{ Age = {0}, Name = {1} }}", Age, Name);
                             }
                         }
                     }

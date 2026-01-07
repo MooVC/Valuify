@@ -200,7 +200,7 @@ internal static partial class Explicit
                     {
                         public override string ToString()
                         {
-                            return string.Format("Explicit { Age = {0}, IsAdult = {1}, Name = {2} }", Age, IsAdult, Name);
+                            return string.Format("Explicit {{ Age = {0}, IsAdult = {1}, Name = {2} }}", Age, IsAdult, Name);
                         }
                     }
         

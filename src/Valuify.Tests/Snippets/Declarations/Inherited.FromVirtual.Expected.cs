@@ -202,7 +202,7 @@ internal static partial class Inherited
                     {
                         public override string ToString()
                         {
-                            return string.Format("Inherited { Age = {0}, IsAdult = {1}, Name = {2} }", Age, IsAdult, Name);
+                            return string.Format("Inherited {{ Age = {0}, IsAdult = {1}, Name = {2} }}", Age, IsAdult, Name);
                         }
                     }
         

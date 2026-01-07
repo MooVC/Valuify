@@ -200,7 +200,7 @@ internal static partial class Simple
                     {
                         public override string ToString()
                         {
-                            return string.Format("Simple { Age = {0}, IsAdult = {1}, Name = {2} }", Age, IsAdult, Name);
+                            return string.Format("Simple {{ Age = {0}, IsAdult = {1}, Name = {2} }}", Age, IsAdult, Name);
                         }
                     }
         
