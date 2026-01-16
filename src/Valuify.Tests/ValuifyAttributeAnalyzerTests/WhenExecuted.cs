@@ -90,19 +90,52 @@ public sealed class WhenExecuted
     public async Task GivenATypeWhenMissingPropertiesThenDefinesPropertiesRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
     {
         // Arrange
-        var test = new AnalyzerTest(assembly, language)
-        {
-            TestCode = """
+        const string className = "Empty";
+        const string testCode = """
             using Valuify;
 
             [Valuify]
             public partial class Empty
             {
             }
-            """,
+            """;
+
+        var test = new AnalyzerTest(assembly, language)
+        {
+            TestCode = testCode,
         };
 
-        test.ExpectedDiagnostics.Add(GetExpectedDefinesPropertiesRule(new LinePosition(2, 1), "Empty"));
+        test.ExpectedDiagnostics.Add(GetExpectedDefinesPropertiesRule(new LinePosition(2, 1), className));
+
+        // Act
+        Func<Task> act = () => test.RunAsync();
+
+        // Assert
+        await act.ShouldNotThrowAsync();
+    }
+
+    [Theory]
+    [Frameworks]
+    public async Task GivenATypeWithOnlyIndexerThenDefinesPropertiesRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
+    {
+        // Arrange
+        const string className = "WithIndexer";
+        const string testCode = """
+            using Valuify;
+
+            [Valuify]
+            public partial class WithIndexer
+            {
+                public int this[int index] => index;
+            }
+            """;
+
+        var test = new AnalyzerTest(assembly, language)
+        {
+            TestCode = testCode,
+        };
+
+        test.ExpectedDiagnostics.Add(GetExpectedDefinesPropertiesRule(new LinePosition(2, 1), className));
 
         // Act
         Func<Task> act = () => test.RunAsync();
