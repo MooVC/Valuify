@@ -16,11 +16,15 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
   </Folder>
+  <Folder Name="/Code/">
+    <Project Path="src/Valuify/Valuify.csproj" />
+  </Folder>
   <Folder Name="/Configuration/">
     <File Path=".filenesting.json" />
     <File Path=".github/CODEOWNERS" />
     <File Path=".gitignore" />
     <File Path=".runsettings" />
+    <File Path="AGENTS.md" />
     <File Path="codecov.yml" />
     <File Path="nuget.config" />
   </Folder>
@@ -44,8 +48,9 @@
     <File Path=".github/ISSUE_TEMPLATE/feature_request.md" />
     <File Path=".github/pull_request_template.md" />
   </Folder>
-  <Project Path="src/Valuify.Console.Tests/Valuify.Console.Tests.csproj" />
-  <Project Path="src/Valuify.Console/Valuify.Console.csproj" />
-  <Project Path="src/Valuify.Tests/Valuify.Tests.csproj" />
-  <Project Path="src/Valuify/Valuify.csproj" />
+  <Folder Name="/Tests/">
+    <Project Path="src/Valuify.Console.Tests/Valuify.Console.Tests.csproj" />
+    <Project Path="src/Valuify.Console/Valuify.Console.csproj" />
+    <Project Path="src/Valuify.Tests/Valuify.Tests.csproj" />
+  </Folder>
 </Solution>
