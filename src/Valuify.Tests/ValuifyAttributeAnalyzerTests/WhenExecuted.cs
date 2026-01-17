@@ -115,7 +115,7 @@ public sealed class WhenExecuted
     }
 
     [Theory]
-    [Frameworks]
+    [Frameworks(Language = LanguageVersion.CSharp5)]
     public async Task GivenATypeWithOnlyIndexerThenDefinesPropertiesRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
     {
         // Arrange
