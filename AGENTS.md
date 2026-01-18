@@ -23,10 +23,10 @@ The project enforces strong C# coding conventions through `.editorconfig`, [Styl
 - Use discards (`_`) for unused values.
 - Organize extension methods so each file is named `{TypeName}Extensions.{MethodName}.cs`.
 - Use resource files for all user-facing strings with names `{TypeName}.Resources.{locale}.resx` and keys formatted as `{Context}{Subject}{Purpose}`.
+- Avoid placing a newline character at the end of files.
 - Avoid `#region` pragmas.
 - Avoid abrieviations in names, except for well-known acronyms (e.g., `Http`, `Xml`).
 - Avoid single-letter names, even for loop variables.
-- Avoid qualified types, use `using` directives instead or an alias if necessary.
 - Use `var` for local variables when the type is clear from the right-hand side.
 - Use `nameof` for member names in exceptions and logging.
 - Use `string.Empty` instead of `""` for empty strings.
