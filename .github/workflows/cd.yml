@@ -23,7 +23,9 @@ permissions:
 jobs:
   build:
     name: Build, Test & Publish
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:10.0
 
     outputs:
       semantic: ${{ steps.extract-version.outputs.semantic }}
