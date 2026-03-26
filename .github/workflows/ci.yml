@@ -36,6 +36,11 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Install GPG
+      run: |
+        apt-get update
+        apt-get install --yes --no-install-recommends gpg
+
     - name: Use .NET SDKs
       uses: actions/setup-dotnet@v5
       with:
