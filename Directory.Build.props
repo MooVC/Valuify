@@ -12,7 +12,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MooVC/valuify</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>Analyzer;Analyzers;CSharp;DDD;Domain;Dotnet;Generator;Record;Roslyn;Source;Value;ValueType</PackageTags>
+    <PackageTags>Analyzer;Analyzers;CSharp;CodeGeneration;DDD;Domain;Dotnet;Equality;Generator;GetHashCode;IEquatable;Incremental;IncrementalGenerator;Record;Roslyn;RoslynSourceGenerator;Source;SourceGenerator;Value;ValueType</PackageTags>
     <Product>Valuify</Product>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
