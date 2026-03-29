@@ -21,7 +21,7 @@ internal abstract class Value<TSelf>
     /// The second instance to compare.
     /// </param>
     /// <returns>
-    /// <see langword="true"/> if <paramref name="left"/> and <paramref name="right"/> represent the same value; otherwise, false.
+    /// <see langword="true"/> if <paramref name="left"/> and <paramref name="right"/> represent the same value; otherwise, <see langword="false"/>.
     /// </returns>
     public static bool operator ==(Value<TSelf>? left, Value<TSelf>? right)
     {
@@ -38,7 +38,7 @@ internal abstract class Value<TSelf>
     /// The second instance to compare.
     /// </param>
     /// <returns>
-    /// <see langword="true"/> if <paramref name="left"/> and <paramref name="right"/> do not represent the same value; otherwise, false.
+    /// <see langword="true"/> if <paramref name="left"/> and <paramref name="right"/> do not represent the same value; otherwise, <see langword="false"/>.
     /// </returns>
     public static bool operator !=(Value<TSelf>? left, Value<TSelf>? right)
     {
@@ -52,7 +52,7 @@ internal abstract class Value<TSelf>
     /// The object to compare with the current instance.
     /// </param>
     /// <returns>
-    /// <see langword="true"/> if the specified object is equal to the current instance; otherwise, false.
+    /// <see langword="true"/> if the specified object is equal to the current instance; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
     /// This method overrides <see cref="object.Equals(object)"/> to provide a way to compare two <see cref="Value{TSelf}"/> instances.
@@ -69,7 +69,7 @@ internal abstract class Value<TSelf>
     /// An instance of <see cref="TSelf"/> to compare with this instance.
     /// </param>
     /// <returns>
-    /// <see langword="true"/> if the current instance is equal to the <paramref name="other"/> parameter; otherwise, false.
+    /// <see langword="true"/> if the current instance is equal to the <paramref name="other"/> parameter; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
     /// This method implements the <see cref="IEquatable{T}"/> interface and provides a type-safe way to compare two <see cref="TSelf"/> instances.
