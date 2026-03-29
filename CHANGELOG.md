@@ -4,6 +4,13 @@ All notable changes to Valuify will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [Unreleased]
+
+## Changed
+
+- Refined package and repository messaging to better highlight Valuify as a record-like class semantics solution for Roslyn `IIncrementalGenerator` engineers.
+- Expanded NuGet package tags to improve discovery for engineers searching for Roslyn source generation, incremental caching, and value-semantics tooling.
+
 # [1.7.4] - 2026-01-16
 
 ## Fixed

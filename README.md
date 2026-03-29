@@ -1,8 +1,33 @@
 # Valuify [![NuGet](https://img.shields.io/nuget/v/Valuify?logo=nuget)](https://www.nuget.org/packages/Valuify/) [![GitHub](https://img.shields.io/github/license/MooVC/Valuify)](LICENSE.md)
 
-Valuify is a .NET Roslyn Source Generator designed to enable record-like behavior for classes in projects using C# versions prior to 9.0. Valuify was created primarily to simplify the engineering associated with the creation of Roslyn Source Generators, with a focus on the caching capabilities associated with the `IIncrementalGenerator`. Valuify ensures that two distinct instances of a given type are considered equal based on their property values, allowing the generator to skip redundant code generation when input states remain unchanged, enhancing performance and reducing the overall footprint of code to be engineered and maintained.
+Valuify is a .NET Roslyn source generator that gives regular `class` types record-like behavior (value equality, stable hashing, and descriptive `ToString`) without requiring C# 9+ records. It is intentionally optimized for engineers building `IIncrementalGenerator` pipelines where deterministic equality is critical for cache keys, memoized transforms, and repeatable outputs.
 
-While Valuify is primarily designed with Roslyn Source Generators in mind, it also benefits legacy codebases that lack access to the record type introduced in C# 9.0. When used alongside [Fluentify](https://github.com/MooVC/Fluentify), a complimentary Roslyn Source Generator that provides extension methods for creating projections, classes gain functionality equivalent to the `with` expression in records, preserving immutability while also providing for value-based equality.
+While Valuify is primarily designed with Roslyn source generators in mind, it also benefits legacy codebases that lack access to the record type introduced in C# 9.0. When used alongside [Fluentify](https://github.com/MooVC/Fluentify), a complementary Roslyn source generator that provides extension methods for creating projections, classes gain functionality equivalent to the `with` expression in records while preserving immutability and value-based equality.
+
+## Why engineers choose Valuify for Roslyn generators
+
+- **Deterministic incremental caching**: generated equality semantics help ensure generator inputs with equivalent values are treated as equal by incremental steps.
+- **Record-like semantics on classes**: generates `IEquatable<T>`, `Equals`, `GetHashCode`, `==`, `!=`, and `ToString` for supported partial classes.
+- **Low adoption cost**: annotate a type with `[Valuify]` and continue using your existing class model.
+- **Analyzer guidance included**: bundled diagnostics guide correct usage and avoid unsupported declarations.
+
+## Quick start for generator authors
+
+1. Install Valuify in your generator project.
+2. Mark cache-key or model classes as `partial` and add `[Valuify]`.
+3. Use those types in your incremental pipeline (`Select`, `Combine`, `Collect`) to improve cache hit behavior based on values, not object identity.
+
+```csharp
+using Valuify;
+
+[Valuify]
+public partial class GenerationInput
+{
+    public string HintName { get; set; }
+
+    public IReadOnlyList<string> Usings { get; set; }
+}
+```
 
 ## Requirements
 
@@ -36,7 +61,7 @@ Valuify will generate the following code for the above example:
 
 ### Equality Operator (==)
 
-The Equality Operator provides the code neccessary to ensure that two instances are deemed equal based on their property values when checked using the == operator. When the type of a property is a scalar, the `global::System.Collections.Generic.EqualityComparer<T>.Default` instance is used t check for equality. When the type of a property implements `System.Collections.IEnumerable`, the `global::Valuify.Internal.SequenceEqualityComparer` is used, when ensures the instance associated with the property is checked for equality based on its contents, rather than its reference.
+The Equality Operator provides the code necessary to ensure that two instances are deemed equal based on their property values when checked using the == operator. When the type of a property is a scalar, the `global::System.Collections.Generic.EqualityComparer<T>.Default` instance is used to check for equality. When the type of a property implements `System.Collections.IEnumerable`, the `global::Valuify.Internal.SequenceEqualityComparer` is used, which ensures the instance associated with the property is checked for equality based on its contents, rather than its reference.
 
 The following demonstrates the Equality Operator (==) code generated for `Property` type:
 
@@ -68,7 +93,7 @@ The Equality Operator (==) will not be generated if the type explicitly defines 
 
 ### Equals Method Override
 
-The Equals Method Override provides the code neccessary to route calls directed towards the `object.Equals(object)` method to the `IEquatable<T>.Equals(T)` method.
+The Equals Method Override provides the code necessary to route calls directed towards the `object.Equals(object)` method to the `IEquatable<T>.Equals(T)` method.
 
 The following demonstrates the Equals Method Override code generated for `Property` type:
 
@@ -90,7 +115,7 @@ The Equals Method Override will not be generated if the type explicitly defines 
 
 ### Equatable Interface Annotation
 
-The Equatable Interface Annotation provides the code neccessary to ensure the type declares that it implements `System.IEquatable<T>`.
+The Equatable Interface Annotation provides the code necessary to ensure the type declares that it implements `System.IEquatable<T>`.
 
 The following demonstrates the Equatable Interface Annotation code generated for `Property` type:
 
@@ -109,7 +134,7 @@ The Equatable Interface Annotation will not be generated if the type already dec
 
 ### Equatable Implementation
 
-The Equatable Implementation provides the code neccessary to implement the `IEquatable<T>.Equals(T)` method, which serves to route calls to the Equality Operator (==) for the type.
+The Equatable Implementation provides the code necessary to implement the `IEquatable<T>.Equals(T)` method, which serves to route calls to the Equality Operator (==) for the type.
 
 The following demonstrates the Equatable Implementation code generated for `Property` type:
 
@@ -142,7 +167,7 @@ The Equatable Implementation will not be generated if the type explicitly define
 
 ### GetHashCode Method Override
 
-The GetHashCode Method Override provides the code neccessary to override the base `object.GetHashCode()` method to generate a unique, or near-unique hash, based on the values for each property declared by the type. When the type of a property implements `System.Collections.IEnumerable`, the hash will account for the contents, rather than the collection reference. This is achieves using a custom implementation provided by `global::Valuify.Internal.HashCode.Combine(object[])`, which is akin to the [HashCode.Combine](https://learn.microsoft.com/en-us/dotnet/api/system.hashcode.combine?view=net-8.0) implementation, introduced in C# 8.0.
+The GetHashCode Method Override provides the code necessary to override the base `object.GetHashCode()` method to generate a unique, or near-unique hash, based on the values for each property declared by the type. When the type of a property implements `System.Collections.IEnumerable`, the hash will account for the contents, rather than the collection reference. This is achieved using a custom implementation provided by `global::Valuify.Internal.HashCode.Combine(object[])`, which is akin to the [HashCode.Combine](https://learn.microsoft.com/en-us/dotnet/api/system.hashcode.combine?view=net-8.0) implementation, introduced in C# 8.0.
 
 The following demonstrates the GetHashCode Method Override code generated for `Property` type:
 
@@ -164,7 +189,7 @@ The GetHashCode Method Override will not be generated if the type explicitly def
 
 ### Inequality Operator (!=)
 
-The Inequality Operator (!=) provides the code neccessary to ensure that two instances are deemed inequal based on differences in their property values when checked using the != operator. The implementation serves to route calls to the Equality Operator (==).
+The Inequality Operator (!=) provides the code necessary to ensure that two instances are deemed inequal based on differences in their property values when checked using the != operator. The implementation serves to route calls to the Equality Operator (==).
 
 The following demonstrates the Inequality Operator (!=) code generated for `Property` type:
 
@@ -186,7 +211,7 @@ The Inequality Operator (!=) will not be generated if the type explicitly define
 
 ### ToString Method Override
 
-The ToString Method Override provides the code neccessary to override the base `object.ToString()` method to generate a unique value based on the the values for each property declared by the type. The output is similar to that produced by the record type, introduced in C# 9.0.
+The ToString Method Override provides the code necessary to override the base `object.ToString()` method to generate a unique value based on the values for each property declared by the type. The output is similar to that produced by the record type, introduced in C# 9.0.
 
 The following demonstrates the ToString Method Override code generated for `Property` type:
 
