@@ -2,7 +2,6 @@
 
 public abstract class WhenInequalityIsChecked
 {
-
     [Fact]
     public void GivenADifferentHasEqualityOperatorThenTheyAreNotDeemedEqual()
     {
