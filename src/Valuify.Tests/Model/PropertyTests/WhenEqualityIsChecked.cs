@@ -2,32 +2,6 @@
 
 public abstract class WhenEqualityIsChecked
 {
-    [Fact]
-    public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
-    {
-        // Arrange
-        var instance1 = new Property
-        {
-            IsIgnored = true,
-            IsSequence = true,
-            Name = "PropertyName",
-            Type = "string[]",
-        };
-
-        var instance2 = new Property
-        {
-            IsIgnored = true,
-            IsSequence = true,
-            Name = "PropertyName",
-            Type = "string[]",
-        };
-
-        // Act
-        bool areEqual = AreEqual(instance1, instance2);
-
-        // Assert
-        areEqual.ShouldBeTrue();
-    }
 
     [Fact]
     public void GivenADifferentIsIgnoredThenTheyAreNotDeemedEqual()
@@ -111,6 +85,20 @@ public abstract class WhenEqualityIsChecked
     }
 
     [Fact]
+    public void GivenBothInstancesAreNullThenTheyAreDeemedEqual()
+    {
+        // Arrange
+        Property? instance1 = default;
+        Property? instance2 = default;
+
+        // Act
+        bool areEqual = AreEqual(instance1, instance2);
+
+        // Assert
+        areEqual.ShouldBeTrue();
+    }
+
+    [Fact]
     public void GivenDifferentTypeThenTheyAreDeemedNotEqual()
     {
         // Arrange
@@ -138,6 +126,33 @@ public abstract class WhenEqualityIsChecked
     }
 
     [Fact]
+    public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
+    {
+        // Arrange
+        var instance1 = new Property
+        {
+            IsIgnored = true,
+            IsSequence = true,
+            Name = "PropertyName",
+            Type = "string[]",
+        };
+
+        var instance2 = new Property
+        {
+            IsIgnored = true,
+            IsSequence = true,
+            Name = "PropertyName",
+            Type = "string[]",
+        };
+
+        // Act
+        bool areEqual = AreEqual(instance1, instance2);
+
+        // Assert
+        areEqual.ShouldBeTrue();
+    }
+
+    [Fact]
     public void GivenOneInstanceIsNullThenTheyAreDeemedNotEqual()
     {
         // Arrange
@@ -154,20 +169,6 @@ public abstract class WhenEqualityIsChecked
 
         // Assert
         areEqual.ShouldBeFalse();
-    }
-
-    [Fact]
-    public void GivenBothInstancesAreNullThenTheyAreDeemedEqual()
-    {
-        // Arrange
-        Property? instance1 = default;
-        Property? instance2 = default;
-
-        // Act
-        bool areEqual = AreEqual(instance1, instance2);
-
-        // Assert
-        areEqual.ShouldBeTrue();
     }
 
     [Fact]
