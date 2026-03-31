@@ -3,53 +3,11 @@
 public abstract class WhenInequalityIsChecked
 {
     [Fact]
-    public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
-    {
-        // Arrange
-        Subject instance1 = Create();
-        Subject instance2 = Create();
-
-        // Act
-        bool areNotEqual = AreNotEqual(instance1, instance2);
-
-        // Assert
-        areNotEqual.ShouldBeFalse();
-    }
-
-    [Fact]
     public void GivenADifferentCanOverrideEqualsThenTheyAreNotDeemedEqual()
     {
         // Arrange
         Subject instance1 = Create(subject => subject.CanOverrideEquals = true);
         Subject instance2 = Create(subject => subject.CanOverrideEquals = false);
-
-        // Act
-        bool areNotEqual = AreNotEqual(instance1, instance2);
-
-        // Assert
-        areNotEqual.ShouldBeTrue();
-    }
-
-    [Fact]
-    public void GivenADifferentHasGetHashCodeOverrideThenTheyAreNotDeemedEqual()
-    {
-        // Arrange
-        Subject instance1 = Create(subject => subject.CanOverrideGetHashCode = true);
-        Subject instance2 = Create(subject => subject.CanOverrideGetHashCode = false);
-
-        // Act
-        bool areNotEqual = AreNotEqual(instance1, instance2);
-
-        // Assert
-        areNotEqual.ShouldBeTrue();
-    }
-
-    [Fact]
-    public void GivenADifferentHasToStringOverrideThenTheyAreNotDeemedEqual()
-    {
-        // Arrange
-        Subject instance1 = Create(subject => subject.CanOverrideToString = true);
-        Subject instance2 = Create(subject => subject.CanOverrideToString = false);
 
         // Act
         bool areNotEqual = AreNotEqual(instance1, instance2);
@@ -87,11 +45,39 @@ public abstract class WhenInequalityIsChecked
     }
 
     [Fact]
+    public void GivenADifferentHasGetHashCodeOverrideThenTheyAreNotDeemedEqual()
+    {
+        // Arrange
+        Subject instance1 = Create(subject => subject.CanOverrideGetHashCode = true);
+        Subject instance2 = Create(subject => subject.CanOverrideGetHashCode = false);
+
+        // Act
+        bool areNotEqual = AreNotEqual(instance1, instance2);
+
+        // Assert
+        areNotEqual.ShouldBeTrue();
+    }
+
+    [Fact]
     public void GivenADifferentHasInequalityOperatorThenTheyAreNotDeemedEqual()
     {
         // Arrange
         Subject instance1 = Create(subject => subject.HasInequalityOperator = true);
         Subject instance2 = Create(subject => subject.HasInequalityOperator = false);
+
+        // Act
+        bool areNotEqual = AreNotEqual(instance1, instance2);
+
+        // Assert
+        areNotEqual.ShouldBeTrue();
+    }
+
+    [Fact]
+    public void GivenADifferentHasToStringOverrideThenTheyAreNotDeemedEqual()
+    {
+        // Arrange
+        Subject instance1 = Create(subject => subject.CanOverrideToString = true);
+        Subject instance2 = Create(subject => subject.CanOverrideToString = false);
 
         // Act
         bool areNotEqual = AreNotEqual(instance1, instance2);
@@ -185,19 +171,6 @@ public abstract class WhenInequalityIsChecked
     }
 
     [Fact]
-    public void GivenOneInstanceIsNullThenTheyAreDeemedNotEqual()
-    {
-        // Arrange
-        Subject instance = Create();
-
-        // Act
-        bool areNotEqual = AreNotEqual(instance, default);
-
-        // Assert
-        areNotEqual.ShouldBeTrue();
-    }
-
-    [Fact]
     public void GivenBothInstancesAreNullThenTheyAreDeemedEqual()
     {
         // Arrange
@@ -209,6 +182,33 @@ public abstract class WhenInequalityIsChecked
 
         // Assert
         areNotEqual.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
+    {
+        // Arrange
+        Subject instance1 = Create();
+        Subject instance2 = Create();
+
+        // Act
+        bool areNotEqual = AreNotEqual(instance1, instance2);
+
+        // Assert
+        areNotEqual.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenOneInstanceIsNullThenTheyAreDeemedNotEqual()
+    {
+        // Arrange
+        Subject instance = Create();
+
+        // Act
+        bool areNotEqual = AreNotEqual(instance, default);
+
+        // Assert
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]

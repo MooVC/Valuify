@@ -3,20 +3,6 @@
 public abstract class WhenInequalityIsChecked
 {
     [Fact]
-    public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
-    {
-        // Arrange
-        Subject instance1 = Create();
-        Subject instance2 = Create();
-
-        // Act
-        bool areNotEqual = AreNotEqual(instance1, instance2);
-
-        // Assert
-        areNotEqual.ShouldBeFalse();
-    }
-
-    [Fact]
     public void GivenADifferentHasEqualityOperatorThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -185,19 +171,6 @@ public abstract class WhenInequalityIsChecked
     }
 
     [Fact]
-    public void GivenOneInstanceIsNullThenTheyAreDeemedNotEqual()
-    {
-        // Arrange
-        Subject instance = Create();
-
-        // Act
-        bool areNotEqual = AreNotEqual(instance, default);
-
-        // Assert
-        areNotEqual.ShouldBeTrue();
-    }
-
-    [Fact]
     public void GivenBothInstancesAreNullThenTheyAreDeemedEqual()
     {
         // Arrange
@@ -209,6 +182,33 @@ public abstract class WhenInequalityIsChecked
 
         // Assert
         areNotEqual.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
+    {
+        // Arrange
+        Subject instance1 = Create();
+        Subject instance2 = Create();
+
+        // Act
+        bool areNotEqual = AreNotEqual(instance1, instance2);
+
+        // Assert
+        areNotEqual.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenOneInstanceIsNullThenTheyAreDeemedNotEqual()
+    {
+        // Arrange
+        Subject instance = Create();
+
+        // Act
+        bool areNotEqual = AreNotEqual(instance, default);
+
+        // Assert
+        areNotEqual.ShouldBeTrue();
     }
 
     [Fact]

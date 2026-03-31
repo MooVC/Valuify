@@ -27,6 +27,24 @@ public sealed class WhenExecuted
     }
 
     [Theory]
+    [Snippets(inclusions: [typeof(FromSealed)])]
+    public async Task GivenATypeWhenBaseIsSealedThenEqualityGuarenteeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
+    {
+        // Arrange
+        var test = new AnalyzerTest(assembly, language, typeof(ClassGenerator), typeof(IgnoreAttributeGenerator), typeof(ValuifyAttributeGenerator));
+
+        test.ExpectedDiagnostics.Add(GetExpectedEqualityGuarenteeRule(new LinePosition(20, 5), nameof(Inherited), nameof(Equals)));
+        test.ExpectedDiagnostics.Add(GetExpectedEqualityGuarenteeRule(new LinePosition(20, 5), nameof(Inherited), nameof(GetHashCode)));
+        expectations.IsDeclaredIn(test.TestState);
+
+        // Act
+        Func<Task> act = () => test.RunAsync();
+
+        // Assert
+        await act.ShouldNotThrowAsync();
+    }
+
+    [Theory]
     [Frameworks(Language = LanguageVersion.CSharp9)]
     public async Task GivenATypeWhenIncompatibleThenCompatibleTargetTypeRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
     {
@@ -42,41 +60,6 @@ public sealed class WhenExecuted
         };
 
         test.ExpectedDiagnostics.Add(GetExpectedCompatibleTargetTypeRule(new LinePosition(2, 1)));
-
-        // Act
-        Func<Task> act = () => test.RunAsync();
-
-        // Assert
-        await act.ShouldNotThrowAsync();
-    }
-
-    [Theory]
-    [Snippets(inclusions: [typeof(Unsupported)])]
-    public async Task GivenATypeWhenNotPartialThenPartialTypeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
-    {
-        // Arrange
-        var test = new AnalyzerTest(assembly, language);
-
-        test.ExpectedDiagnostics.Add(GetExpectedPartialThePartialTypeRule(new LinePosition(2, 5), nameof(Unsupported)));
-        expectations.IsDeclaredIn(test.TestState);
-
-        // Act
-        Func<Task> act = () => test.RunAsync();
-
-        // Assert
-        await act.ShouldNotThrowAsync();
-    }
-
-    [Theory]
-    [Snippets(inclusions: [typeof(FromSealed)])]
-    public async Task GivenATypeWhenBaseIsSealedThenEqualityGuarenteeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
-    {
-        // Arrange
-        var test = new AnalyzerTest(assembly, language, typeof(ClassGenerator), typeof(IgnoreAttributeGenerator), typeof(ValuifyAttributeGenerator));
-
-        test.ExpectedDiagnostics.Add(GetExpectedEqualityGuarenteeRule(new LinePosition(20, 5), nameof(Inherited), nameof(Equals)));
-        test.ExpectedDiagnostics.Add(GetExpectedEqualityGuarenteeRule(new LinePosition(20, 5), nameof(Inherited), nameof(GetHashCode)));
-        expectations.IsDeclaredIn(test.TestState);
 
         // Act
         Func<Task> act = () => test.RunAsync();
@@ -106,6 +89,23 @@ public sealed class WhenExecuted
         };
 
         test.ExpectedDiagnostics.Add(GetExpectedDefinesPropertiesRule(new LinePosition(2, 1), className));
+
+        // Act
+        Func<Task> act = () => test.RunAsync();
+
+        // Assert
+        await act.ShouldNotThrowAsync();
+    }
+
+    [Theory]
+    [Snippets(inclusions: [typeof(Unsupported)])]
+    public async Task GivenATypeWhenNotPartialThenPartialTypeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
+    {
+        // Arrange
+        var test = new AnalyzerTest(assembly, language);
+
+        test.ExpectedDiagnostics.Add(GetExpectedPartialThePartialTypeRule(new LinePosition(2, 5), nameof(Unsupported)));
+        expectations.IsDeclaredIn(test.TestState);
 
         // Act
         Func<Task> act = () => test.RunAsync();

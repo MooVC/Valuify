@@ -3,31 +3,6 @@
 public abstract class WhenEqualityIsChecked
 {
     [Fact]
-    public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
-    {
-        // Arrange
-        var instance1 = new Nesting
-        {
-            Declaration = "partial class",
-            Name = "Simple",
-            Qualification = "Complex",
-        };
-
-        var instance2 = new Nesting
-        {
-            Declaration = "partial class",
-            Name = "Simple",
-            Qualification = "Complex",
-        };
-
-        // Act
-        bool areEqual = AreEqual(instance1, instance2);
-
-        // Assert
-        areEqual.ShouldBeTrue();
-    }
-
-    [Fact]
     public void GivenADifferentNameThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -78,6 +53,20 @@ public abstract class WhenEqualityIsChecked
     }
 
     [Fact]
+    public void GivenBothInstancesAreNullThenTheyAreDeemedEqual()
+    {
+        // Arrange
+        Nesting? instance1 = default;
+        Nesting? instance2 = default;
+
+        // Act
+        bool areEqual = AreEqual(instance1, instance2);
+
+        // Assert
+        areEqual.ShouldBeTrue();
+    }
+
+    [Fact]
     public void GivenDifferentTypeThenTheyAreDeemedNotEqual()
     {
         // Arrange
@@ -103,6 +92,31 @@ public abstract class WhenEqualityIsChecked
     }
 
     [Fact]
+    public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
+    {
+        // Arrange
+        var instance1 = new Nesting
+        {
+            Declaration = "partial class",
+            Name = "Simple",
+            Qualification = "Complex",
+        };
+
+        var instance2 = new Nesting
+        {
+            Declaration = "partial class",
+            Name = "Simple",
+            Qualification = "Complex",
+        };
+
+        // Act
+        bool areEqual = AreEqual(instance1, instance2);
+
+        // Assert
+        areEqual.ShouldBeTrue();
+    }
+
+    [Fact]
     public void GivenOneInstanceIsNullThenTheyAreDeemedNotEqual()
     {
         // Arrange
@@ -118,20 +132,6 @@ public abstract class WhenEqualityIsChecked
 
         // Assert
         areEqual.ShouldBeFalse();
-    }
-
-    [Fact]
-    public void GivenBothInstancesAreNullThenTheyAreDeemedEqual()
-    {
-        // Arrange
-        Nesting? instance1 = default;
-        Nesting? instance2 = default;
-
-        // Act
-        bool areEqual = AreEqual(instance1, instance2);
-
-        // Assert
-        areEqual.ShouldBeTrue();
     }
 
     [Fact]
