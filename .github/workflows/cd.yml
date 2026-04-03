@@ -87,11 +87,11 @@ jobs:
         path: ./artifacts/*.nupkg
 
     - name: Publish Packages to GitHub
-      if: ${{ github.event_name != 'workflow_dispatch' || inputs.deprecate_only != 'true' }}
-      run: dotnet nuget push **/Valuify*.nupkg --source "https://nuget.pkg.github.com/Valuify/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+      if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_pack_and_publish  == 'true') }}
+      run: dotnet nuget push **/Valuify*.nupkg --source "https://nuget.pkg.github.com/MooVC/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+
     - name: Publish Packages to NuGet
       if: ${{ github.event_name != 'workflow_dispatch' || inputs.deprecate_only != 'true' }}
       run: dotnet nuget push **/Valuify*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
