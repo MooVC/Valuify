@@ -28,7 +28,7 @@ internal static partial class Nested
                     }
                 }
                 """,
-                LanguageVersion.CSharp3);
+                LanguageVersion.CSharp2);
         }
     }
 }
