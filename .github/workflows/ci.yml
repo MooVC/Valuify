@@ -55,7 +55,13 @@ jobs:
       run: dotnet restore ${{ env.solution }}
 
     - name: Build Solution
-      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
+      shell: bash
+      run: |
+        if [ "$GITHUB_EVENT_NAME" = "pull_request" ] || [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+          dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} -p:DefineConstants="CI" --no-restore
+        else
+          dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
+        fi
 
     - name: Test Solution
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
