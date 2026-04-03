@@ -146,12 +146,12 @@ internal static partial class Nested
                                         {
                                             return true;
                                         }
-                
+
                                         if (ReferenceEquals(other, null))
                                         {
                                             return false;
                                         }
-                
+
                                         return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(Age, other.Age)
                                             && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(Name, other.Name);
                                     }
@@ -178,7 +178,7 @@ internal static partial class Nested
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable disable
                     #endif
-        
+
                     partial class First<T1>
                     {
                         partial class Second
@@ -231,7 +231,7 @@ internal static partial class Nested
                             }
                         }
                     }
-        
+
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable restore
                     #endif
@@ -261,13 +261,13 @@ internal static partial class Nested
                                 {
                                     public override string ToString()
                                     {
-                                        return string.Format("Fourth { Age = {0}, Name = {1} }", Age, Name);
+                                        return string.Format("Fourth {{ Age = {0}, Name = {1} }}", Age, Name);
                                     }
                                 }
                             }
                         }
                     }
-        
+
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable restore
                     #endif

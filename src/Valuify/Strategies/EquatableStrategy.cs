@@ -33,7 +33,7 @@ internal sealed class EquatableStrategy
             }
             """;
 
-        return new Source(code, nameof(IEquatable<Subject>));
+        return new Source(code, nameof(IEquatable<>));
     }
 
     private static Source GenerateImplementation(Subject subject)
@@ -69,7 +69,7 @@ internal sealed class EquatableStrategy
             }
             """;
 
-        return new Source(code, $"{nameof(IEquatable<Subject>)}.{nameof(Equals)}");
+        return new Source(code, $"{nameof(IEquatable<>)}.{nameof(Equals)}");
     }
 
     private static string GetComparer(Property property)

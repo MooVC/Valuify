@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [Unreleased]
 
-## Changed
+# [1.7.5] - 2026-04-04
 
-- Refined package and repository messaging to better highlight Valuify as a record-like class semantics solution for Roslyn `IIncrementalGenerator` engineers.
-- Expanded NuGet package tags to improve discovery for engineers searching for Roslyn source generation, incremental caching, and value-semantics tooling.
+## Fixed
+
+- Deeply nested classes are now ordered correctly by Valuify.
 
 # [1.7.4] - 2026-01-16
 
