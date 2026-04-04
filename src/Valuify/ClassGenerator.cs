@@ -65,7 +65,6 @@ public sealed class ClassGenerator
         if (subject.Nesting.Count > 0)
         {
             IEnumerable<string> names = subject.Nesting
-                .Reverse()
                 .Select(parent => parent.Name)
                 .Union([name]);
 
@@ -87,7 +86,7 @@ public sealed class ClassGenerator
 
     private static string Nest(string code, Subject subject)
     {
-        foreach (Nesting parent in subject.Nesting)
+        foreach (Nesting parent in subject.Nesting.Reverse())
         {
             code = code.Indent();
 
