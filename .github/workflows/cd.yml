@@ -73,7 +73,7 @@ jobs:
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
 
     - name: Upload Code Coverage
-      uses: codecov/codecov-action@1af58845a975a7985b0beb0cbe6fbbb71a41dbad
+      uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
 
@@ -81,7 +81,7 @@ jobs:
       run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts -p:Version=${{ env.semantic }}
 
     - name: Upload Packages
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: nuget-packages
         path: ./artifacts/*.nupkg
@@ -115,7 +115,7 @@ jobs:
       shell: pwsh
 
     - name: Download Packages
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: nuget-packages
         path: ./artifacts
