@@ -18,6 +18,14 @@ internal sealed class Property
     public bool IsIgnored { get; set; }
 
     /// <summary>
+    /// Gets or sets a value indicating whether or not the type associated with the property implements <see cref="IEquatable{T}"/>.
+    /// </summary>
+    /// <value>
+    /// The value indicating whether or not the type associated with the property implements <see cref="IEquatable{T}"/>.
+    /// </value>
+    public bool IsEquatable { get; set; }
+
+    /// <summary>
     /// Gets or sets a value indicating whether or not the type associated with the property is deemed to be a sequence.
     /// </summary>
     /// <value>
@@ -44,6 +52,7 @@ internal sealed class Property
     /// <inheritdoc/>
     protected override IEnumerable<object> GetProperties()
     {
+        yield return IsEquatable;
         yield return IsIgnored;
         yield return IsSequence;
         yield return Name;

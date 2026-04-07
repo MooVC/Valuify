@@ -8,12 +8,17 @@ using Valuify.Model;
 /// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
-    private static IEnumerable<Property> GetAllProperties(this INamedTypeSymbol @class)
+    private static IEnumerable<Property> GetAllProperties(this INamedTypeSymbol @class, Compilation compilation)
     {
         static bool IsEnumerable(INamedTypeSymbol @interface)
         {
             return @interface.OriginalDefinition.SpecialType == SpecialType.System_Collections_Generic_IEnumerable_T
                 || @interface.SpecialType == SpecialType.System_Collections_IEnumerable;
+        }
+
+        static bool IsEquatable(ITypeSymbol type, Compilation subjectCompilation)
+        {
+            return type is INamedTypeSymbol namedType && namedType.IsEquatable(subjectCompilation);
         }
 
         static bool IsSequence(ITypeSymbol type)
@@ -35,6 +40,7 @@ internal static partial class INamedTypeSymbolExtensions
             {
                 yield return new Property
                 {
+                    IsEquatable = IsEquatable(property.Type, compilation),
                     IsIgnored = property.HasIgnore(),
                     IsSequence = IsSequence(property.Type),
                     Name = property.Name,
