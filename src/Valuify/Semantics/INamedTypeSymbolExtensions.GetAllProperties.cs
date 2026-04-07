@@ -16,14 +16,14 @@ internal static partial class INamedTypeSymbolExtensions
                 || @interface.SpecialType == SpecialType.System_Collections_IEnumerable;
         }
 
-        static bool IsEquatable(ITypeSymbol type, Compilation subjectCompilation)
-        {
-            return type is INamedTypeSymbol namedType && namedType.IsEquatable(subjectCompilation);
-        }
-
         static bool IsSequence(ITypeSymbol type)
         {
             return type.SpecialType != SpecialType.System_String && (type is IArrayTypeSymbol || type.AllInterfaces.Any(IsEnumerable));
+        }
+
+        bool IsEquatable(ITypeSymbol type)
+        {
+            return type is INamedTypeSymbol namedType && namedType.IsEquatable(compilation);
         }
 
         INamedTypeSymbol? current = @class;
@@ -40,7 +40,7 @@ internal static partial class INamedTypeSymbolExtensions
             {
                 yield return new Property
                 {
-                    IsEquatable = IsEquatable(property.Type, compilation),
+                    IsEquatable = IsEquatable(property.Type),
                     IsIgnored = property.HasIgnore(),
                     IsSequence = IsSequence(property.Type),
                     Name = property.Name,

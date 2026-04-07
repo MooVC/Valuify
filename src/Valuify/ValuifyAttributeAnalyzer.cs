@@ -145,7 +145,7 @@ public sealed class ValuifyAttributeAnalyzer
         identifier = @class.Identifier.Text;
         symbol = context.SemanticModel.GetDeclaredSymbol(@class, cancellationToken: context.CancellationToken);
 
-        return symbol is null || !symbol.HasProperties(property => !property.IsIgnored);
+        return symbol is null || !symbol.HasProperties(context.Compilation, property => !property.IsIgnored);
     }
 
     private static bool IsViolatingCompatibleTargetTypeRule(AttributeSyntax attribute, out ClassDeclarationSyntax? @class)
