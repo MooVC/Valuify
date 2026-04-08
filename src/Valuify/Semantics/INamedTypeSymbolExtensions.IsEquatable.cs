@@ -40,6 +40,13 @@ internal static partial class INamedTypeSymbolExtensions
                 && @interface.TypeArguments[0].Equals(@class, SymbolEqualityComparer.Default);
         }
 
-        return @class.AllInterfaces.Any(IsEquatable);
+        return @class.AllInterfaces.Any(IsEquatable)
+            || IsValuifiedInCurrentAssembly(@class, compilation);
+    }
+
+    private static bool IsValuifiedInCurrentAssembly(INamedTypeSymbol @class, Compilation compilation)
+    {
+        return SymbolEqualityComparer.Default.Equals(@class.ContainingAssembly, compilation.Assembly)
+            && @class.HasValuify();
     }
 }
