@@ -20,11 +20,9 @@ internal static partial class INamedTypeSymbolExtensions
                 .Where(property => !(property.IsStatic || property.IsIndexer)
                     && property.ExplicitInterfaceImplementations.Length == 0);
 
-            foreach (var property in properties
-                .Select(property => new { Symbol = property, Type = property.Type as INamedTypeSymbol })
-                .Where(property => property.Type is not null))
+            foreach (IPropertySymbol property in properties)
             {
-                yield return Parse(compilation, property.Symbol, property.Type!);
+                yield return Parse(compilation, property);
             }
 
             current = current.BaseType;
@@ -32,7 +30,7 @@ internal static partial class INamedTypeSymbolExtensions
         while (current is not null);
     }
 
-    private static Property Parse(Compilation compilation, IPropertySymbol symbol, INamedTypeSymbol type)
+    private static Property Parse(Compilation compilation, IPropertySymbol symbol)
     {
         static bool IsEnumerable(INamedTypeSymbol @interface)
         {
@@ -47,17 +45,23 @@ internal static partial class INamedTypeSymbolExtensions
 
         var property = new Property
         {
-            IsEquatable = type.IsEquatable(compilation),
-            IsImmutableArray = type.IsImmutableArray(compilation),
             IsIgnored = symbol.HasIgnore(),
-            IsSequence = IsSequence(type),
+            IsSequence = IsSequence(symbol.Type),
             Name = symbol.Name,
-            Type = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+            Type = symbol.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
         };
+
+        if (symbol.Type is not INamedTypeSymbol named)
+        {
+            return property;
+        }
+
+        property.IsEquatable = named.IsEquatable(compilation);
+        property.IsImmutableArray = named.IsImmutableArray(compilation);
 
         if (!property.IsEquatable)
         {
-            property.HasValuify = type.HasValuify(compilation);
+            property.HasValuify = named.HasValuify(compilation);
         }
 
         return property;

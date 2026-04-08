@@ -17,7 +17,7 @@ public sealed class WhenExecuted
     ];
 
     [Theory]
-    [Snippets(inclusions: [typeof(AnnotatedEquatable)])]
+    [Snippets]
     public async Task GivenAClassTheExpectedSourceIsGenerated(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
