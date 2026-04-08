@@ -21,7 +21,7 @@ internal static partial class AnnotatedEquatable
                 using System.Collections.Generic;
 
                 [Valuify]
-                public sealed class AnnotatedEquatableCollection
+                public sealed partial class AnnotatedEquatableCollection
                     : List<int>
                 {
                 }

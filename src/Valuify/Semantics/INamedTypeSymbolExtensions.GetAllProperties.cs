@@ -10,6 +10,30 @@ internal static partial class INamedTypeSymbolExtensions
 {
     private static IEnumerable<Property> GetAllProperties(this INamedTypeSymbol @class, Compilation compilation)
     {
+        INamedTypeSymbol? current = @class;
+
+        do
+        {
+            IEnumerable<IPropertySymbol> properties = current
+                .GetMembers()
+                .OfType<IPropertySymbol>()
+                .Where(property => !(property.IsStatic || property.IsIndexer)
+                    && property.ExplicitInterfaceImplementations.Length == 0);
+
+            foreach (var property in properties
+                .Select(property => new { Symbol = property, Type = property.Type as INamedTypeSymbol })
+                .Where(property => property.Type is not null))
+            {
+                yield return Parse(compilation, property.Symbol, property.Type!);
+            }
+
+            current = current.BaseType;
+        }
+        while (current is not null);
+    }
+
+    private static Property Parse(Compilation compilation, IPropertySymbol symbol, INamedTypeSymbol type)
+    {
         static bool IsEnumerable(INamedTypeSymbol @interface)
         {
             return @interface.OriginalDefinition.SpecialType == SpecialType.System_Collections_Generic_IEnumerable_T
@@ -21,31 +45,21 @@ internal static partial class INamedTypeSymbolExtensions
             return type.SpecialType != SpecialType.System_String && (type is IArrayTypeSymbol || type.AllInterfaces.Any(IsEnumerable));
         }
 
-        INamedTypeSymbol? current = @class;
-
-        do
+        var property = new Property
         {
-            IEnumerable<IPropertySymbol> properties = current
-                .GetMembers()
-                .OfType<IPropertySymbol>()
-                .Where(property => !(property.IsStatic || property.IsIndexer)
-                    && property.ExplicitInterfaceImplementations.Length == 0);
+            IsEquatable = type.IsEquatable(compilation),
+            IsImmutableArray = type.IsImmutableArray(compilation),
+            IsIgnored = symbol.HasIgnore(),
+            IsSequence = IsSequence(type),
+            Name = symbol.Name,
+            Type = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+        };
 
-            foreach (IPropertySymbol property in properties)
-            {
-                yield return new Property
-                {
-                    IsEquatable = property.Type is INamedTypeSymbol namedType && namedType.IsEquatable(compilation),
-                    IsImmutableArray = property.Type.IsImmutableArray(compilation),
-                    IsIgnored = property.HasIgnore(),
-                    IsSequence = IsSequence(property.Type),
-                    Name = property.Name,
-                    Type = property.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                };
-            }
-
-            current = current.BaseType;
+        if (!property.IsEquatable)
+        {
+            property.HasValuify = type.HasValuify(compilation);
         }
-        while (current is not null);
+
+        return property;
     }
 }

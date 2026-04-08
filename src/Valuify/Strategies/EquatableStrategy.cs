@@ -81,6 +81,6 @@ internal sealed class EquatableStrategy
 
     private static bool ShouldUseSequenceComparer(Property property)
     {
-        return property.IsSequence && (!property.IsEquatable || property.IsImmutableArray);
+        return property.IsSequence && (property.IsImmutableArray || !(property.IsEquatable || property.HasValuify));
     }
 }

@@ -9,6 +9,8 @@ using System.Collections.Generic;
 internal sealed class Property
     : Value<Property>
 {
+    public bool HasValuify { get; set; }
+
     /// <summary>
     /// Gets or sets a value indicating whether or not the property is marked as ignored.
     /// </summary>
@@ -60,6 +62,7 @@ internal sealed class Property
     /// <inheritdoc/>
     protected override IEnumerable<object> GetProperties()
     {
+        yield return HasValuify;
         yield return IsEquatable;
         yield return IsIgnored;
         yield return IsImmutableArray;

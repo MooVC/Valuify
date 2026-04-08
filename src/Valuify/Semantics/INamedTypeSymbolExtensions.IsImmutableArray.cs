@@ -21,15 +21,15 @@ internal static partial class INamedTypeSymbolExtensions
     /// <returns>
     /// <see langword="true"/> if the <paramref name="type"/> is an <see cref="System.Collections.Immutable.ImmutableArray{T}"/>, otherwise <see langword="false"/>.
     /// </returns>
-    public static bool IsImmutableArray(this ITypeSymbol type, Compilation compilation)
+    public static bool IsImmutableArray(this INamedTypeSymbol type, Compilation compilation)
     {
         INamedTypeSymbol? immutableArray = compilation.GetTypeByMetadataName(ImmutableArrayTypeName);
 
-        if (immutableArray is null || type is not INamedTypeSymbol namedType)
+        if (immutableArray is null)
         {
             return false;
         }
 
-        return namedType.ConstructedFrom.Equals(immutableArray, SymbolEqualityComparer.Default);
+        return type.ConstructedFrom.Equals(immutableArray, SymbolEqualityComparer.Default);
     }
 }
