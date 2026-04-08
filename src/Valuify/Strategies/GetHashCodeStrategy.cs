@@ -18,7 +18,7 @@ internal sealed class GetHashCodeStrategy
 
         IEnumerable<string> properties = subject.Properties
             .Where(property => !property.IsIgnored)
-            .Select(property => property.Name);
+            .Select(Format);
 
         string combine = string.Join(", ", properties);
 
@@ -33,5 +33,15 @@ internal sealed class GetHashCodeStrategy
             """;
 
         yield return new Source(code, nameof(GetHashCode));
+    }
+
+    private static string Format(Property property)
+    {
+        if (property.IsSequence && !property.IsImmutableArray && (property.IsEquatable || property.HasValuify))
+        {
+            return $"global::Valuify.Internal.HashCode.GetHashCode({property.Name})";
+        }
+
+        return property.Name;
     }
 }

@@ -144,7 +144,7 @@ internal static partial class EquatableSequence
                     {
                         public override int GetHashCode()
                         {
-                            return global::Valuify.Internal.HashCode.Combine(Values);
+                            return global::Valuify.Internal.HashCode.Combine(global::Valuify.Internal.HashCode.GetHashCode(Values));
                         }
                     }
 

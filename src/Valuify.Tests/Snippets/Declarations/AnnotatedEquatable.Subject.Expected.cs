@@ -146,7 +146,7 @@ internal static partial class AnnotatedEquatable
                         {
                             public override int GetHashCode()
                             {
-                                return global::Valuify.Internal.HashCode.Combine(Values);
+                                return global::Valuify.Internal.HashCode.Combine(global::Valuify.Internal.HashCode.GetHashCode(Values));
                             }
                         }
 
