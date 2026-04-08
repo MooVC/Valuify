@@ -74,8 +74,13 @@ internal sealed class EquatableStrategy
 
     private static string GetComparer(Property property)
     {
-        return property.IsSequence && !property.IsEquatable
+        return ShouldUseSequenceComparer(property)
             ? $"global::Valuify.Internal.SequenceEqualityComparer"
             : $"global::System.Collections.Generic.EqualityComparer<{property.Type}>";
+    }
+
+    private static bool ShouldUseSequenceComparer(Property property)
+    {
+        return property.IsSequence && (!property.IsEquatable || property.IsImmutableArray);
     }
 }

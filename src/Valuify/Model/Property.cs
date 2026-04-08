@@ -10,6 +10,14 @@ internal sealed class Property
     : Value<Property>
 {
     /// <summary>
+    /// Gets or sets a value indicating whether or not the type associated with the property is <see cref="System.Collections.Immutable.ImmutableArray{T}"/>.
+    /// </summary>
+    /// <value>
+    /// The value indicating whether or not the type associated with the property is <see cref="System.Collections.Immutable.ImmutableArray{T}"/>.
+    /// </value>
+    public bool IsImmutableArray { get; set; }
+
+    /// <summary>
     /// Gets or sets a value indicating whether or not the property is marked as ignored.
     /// </summary>
     /// <value>
@@ -53,6 +61,7 @@ internal sealed class Property
     protected override IEnumerable<object> GetProperties()
     {
         yield return IsEquatable;
+        yield return IsImmutableArray;
         yield return IsIgnored;
         yield return IsSequence;
         yield return Name;
