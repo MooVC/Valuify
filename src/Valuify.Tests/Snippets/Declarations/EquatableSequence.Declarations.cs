@@ -2,7 +2,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 
-internal static partial class EquatableSequenceProperty
+internal static partial class EquatableSequence
 {
     public static class Declarations
     {
@@ -22,7 +22,8 @@ internal static partial class EquatableSequenceProperty
                 using System.Collections.Generic;
 
                 public sealed class EquatableCollection
-                    : List<int>, IEquatable<EquatableCollection>
+                    : List<int>,
+                      IEquatable<EquatableCollection>
                 {
                     public bool Equals(EquatableCollection other)
                     {
@@ -31,7 +32,7 @@ internal static partial class EquatableSequenceProperty
                 }
 
                 [Valuify]
-                public sealed partial class EquatableSequenceProperty
+                public sealed partial class EquatableSequence
             __BODY__
             }
             """,

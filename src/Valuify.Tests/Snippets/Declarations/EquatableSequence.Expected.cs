@@ -1,6 +1,6 @@
 ﻿namespace Valuify.Snippets.Declarations;
 
-internal static partial class EquatableSequenceProperty
+internal static partial class EquatableSequence
 {
     public static class Expected
     {
@@ -15,9 +15,9 @@ internal static partial class EquatableSequenceProperty
                     #nullable disable
                     #endif
 
-                    partial class EquatableSequenceProperty
+                    partial class EquatableSequence
                     {
-                        public static bool operator ==(EquatableSequenceProperty left, EquatableSequenceProperty right)
+                        public static bool operator ==(EquatableSequence left, EquatableSequence right)
                         {
                             if (ReferenceEquals(left, right))
                             {
@@ -39,7 +39,7 @@ internal static partial class EquatableSequenceProperty
                 }
                 """,
             Extensions.HasEqualityOperator,
-            "Valuify.Classes.Testing.EquatableSequenceProperty.Equality");
+            "Valuify.Classes.Testing.EquatableSequence.Equality");
 
         public static new readonly Generated Equals = new(
             """
@@ -52,11 +52,11 @@ internal static partial class EquatableSequenceProperty
                     #nullable disable
                     #endif
 
-                    partial class EquatableSequenceProperty
+                    partial class EquatableSequence
                     {
                         public override bool Equals(object other)
                         {
-                            return Equals(other as EquatableSequenceProperty);
+                            return Equals(other as EquatableSequence);
                         }
                     }
 
@@ -66,7 +66,7 @@ internal static partial class EquatableSequenceProperty
                 }
                 """,
             Extensions.HasEqualsOverride,
-            "Valuify.Classes.Testing.EquatableSequenceProperty.Equals");
+            "Valuify.Classes.Testing.EquatableSequence.Equals");
 
         public static readonly Generated EquatableContract = new(
             """
@@ -79,8 +79,8 @@ internal static partial class EquatableSequenceProperty
                     #nullable disable
                     #endif
 
-                    partial class EquatableSequenceProperty
-                        : IEquatable<EquatableSequenceProperty>
+                    partial class EquatableSequence
+                        : IEquatable<EquatableSequence>
                     {
                     }
 
@@ -90,7 +90,7 @@ internal static partial class EquatableSequenceProperty
                 }
                 """,
             Extensions.IsEquatable,
-            "Valuify.Classes.Testing.EquatableSequenceProperty.IEquatable");
+            "Valuify.Classes.Testing.EquatableSequence.IEquatable");
 
         public static readonly Generated EquatableImplementation = new(
             """
@@ -103,9 +103,9 @@ internal static partial class EquatableSequenceProperty
                     #nullable disable
                     #endif
 
-                    partial class EquatableSequenceProperty
+                    partial class EquatableSequence
                     {
-                        public bool Equals(EquatableSequenceProperty other)
+                        public bool Equals(EquatableSequence other)
                         {
                             if (ReferenceEquals(this, other))
                             {
@@ -127,7 +127,7 @@ internal static partial class EquatableSequenceProperty
                 }
                 """,
             Extensions.HasEquatable,
-            "Valuify.Classes.Testing.EquatableSequenceProperty.IEquatable.Equals");
+            "Valuify.Classes.Testing.EquatableSequence.IEquatable.Equals");
 
         public static new readonly Generated GetHashCode = new(
             """
@@ -140,7 +140,7 @@ internal static partial class EquatableSequenceProperty
                     #nullable disable
                     #endif
         
-                    partial class EquatableSequenceProperty
+                    partial class EquatableSequence
                     {
                         public override int GetHashCode()
                         {
@@ -154,7 +154,7 @@ internal static partial class EquatableSequenceProperty
                 }
                 """,
             Extensions.HasGetHashCodeOverride,
-            "Valuify.Classes.Testing.EquatableSequenceProperty.GetHashCode");
+            "Valuify.Classes.Testing.EquatableSequence.GetHashCode");
 
         public static readonly Generated Inequality = new(
             """
@@ -167,9 +167,9 @@ internal static partial class EquatableSequenceProperty
                     #nullable disable
                     #endif
 
-                    partial class EquatableSequenceProperty
+                    partial class EquatableSequence
                     {
-                        public static bool operator !=(EquatableSequenceProperty left, EquatableSequenceProperty right)
+                        public static bool operator !=(EquatableSequence left, EquatableSequence right)
                         {
                             return !(left == right);
                         }
@@ -181,7 +181,7 @@ internal static partial class EquatableSequenceProperty
                 }
                 """,
             Extensions.HasInequalityOperator,
-            "Valuify.Classes.Testing.EquatableSequenceProperty.Inequality");
+            "Valuify.Classes.Testing.EquatableSequence.Inequality");
 
         public static new readonly Generated ToString = new(
             """
@@ -194,11 +194,11 @@ internal static partial class EquatableSequenceProperty
                     #nullable disable
                     #endif
 
-                    partial class EquatableSequenceProperty
+                    partial class EquatableSequence
                     {
                         public override string ToString()
                         {
-                            return string.Format("EquatableSequenceProperty {{ Values = {0} }}", Values);
+                            return string.Format("EquatableSequence {{ Values = {0} }}", Values);
                         }
                     }
         
@@ -208,6 +208,6 @@ internal static partial class EquatableSequenceProperty
                 }
                 """,
             Extensions.HasToStringOverride,
-            "Valuify.Classes.Testing.EquatableSequenceProperty.ToString");
+            "Valuify.Classes.Testing.EquatableSequence.ToString");
     }
 }

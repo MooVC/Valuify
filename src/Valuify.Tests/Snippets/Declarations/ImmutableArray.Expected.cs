@@ -1,6 +1,6 @@
 namespace Valuify.Snippets.Declarations;
 
-internal static partial class ImmutableArrayProperty
+internal static partial class ImmutableArray
 {
     public static class Expected
     {
@@ -9,15 +9,15 @@ internal static partial class ImmutableArrayProperty
                 namespace Valuify.Classes.Testing
                 {
                     using System;
-                    using System.Collections.Immutable;
+                    using System.Collections.Generic;
 
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable disable
                     #endif
 
-                    partial class ImmutableArrayProperty
+                    partial class ImmutableArray
                     {
-                        public static bool operator ==(ImmutableArrayProperty left, ImmutableArrayProperty right)
+                        public static bool operator ==(ImmutableArray left, ImmutableArray right)
                         {
                             if (ReferenceEquals(left, right))
                             {
@@ -39,24 +39,24 @@ internal static partial class ImmutableArrayProperty
                 }
                 """,
             Extensions.HasEqualityOperator,
-            "Valuify.Classes.Testing.ImmutableArrayProperty.Equality");
+            "Valuify.Classes.Testing.ImmutableArray.Equality");
 
         public static new readonly Generated Equals = new(
             """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
-                    using System.Collections.Immutable;
+                    using System.Collections.Generic;
 
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable disable
                     #endif
 
-                    partial class ImmutableArrayProperty
+                    partial class ImmutableArray
                     {
                         public override bool Equals(object other)
                         {
-                            return Equals(other as ImmutableArrayProperty);
+                            return Equals(other as ImmutableArray);
                         }
                     }
 
@@ -66,21 +66,21 @@ internal static partial class ImmutableArrayProperty
                 }
                 """,
             Extensions.HasEqualsOverride,
-            "Valuify.Classes.Testing.ImmutableArrayProperty.Equals");
+            "Valuify.Classes.Testing.ImmutableArray.Equals");
 
         public static readonly Generated EquatableContract = new(
             """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
-                    using System.Collections.Immutable;
+                    using System.Collections.Generic;
 
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable disable
                     #endif
 
-                    partial class ImmutableArrayProperty
-                        : IEquatable<ImmutableArrayProperty>
+                    partial class ImmutableArray
+                        : IEquatable<ImmutableArray>
                     {
                     }
 
@@ -90,22 +90,22 @@ internal static partial class ImmutableArrayProperty
                 }
                 """,
             Extensions.IsEquatable,
-            "Valuify.Classes.Testing.ImmutableArrayProperty.IEquatable");
+            "Valuify.Classes.Testing.ImmutableArray.IEquatable");
 
         public static readonly Generated EquatableImplementation = new(
             """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
-                    using System.Collections.Immutable;
+                    using System.Collections.Generic;
 
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable disable
                     #endif
 
-                    partial class ImmutableArrayProperty
+                    partial class ImmutableArray
                     {
-                        public bool Equals(ImmutableArrayProperty other)
+                        public bool Equals(ImmutableArray other)
                         {
                             if (ReferenceEquals(this, other))
                             {
@@ -127,20 +127,20 @@ internal static partial class ImmutableArrayProperty
                 }
                 """,
             Extensions.HasEquatable,
-            "Valuify.Classes.Testing.ImmutableArrayProperty.IEquatable.Equals");
+            "Valuify.Classes.Testing.ImmutableArray.IEquatable.Equals");
 
         public static new readonly Generated GetHashCode = new(
             """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
-                    using System.Collections.Immutable;
+                    using System.Collections.Generic;
 
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable disable
                     #endif
         
-                    partial class ImmutableArrayProperty
+                    partial class ImmutableArray
                     {
                         public override int GetHashCode()
                         {
@@ -154,22 +154,22 @@ internal static partial class ImmutableArrayProperty
                 }
                 """,
             Extensions.HasGetHashCodeOverride,
-            "Valuify.Classes.Testing.ImmutableArrayProperty.GetHashCode");
+            "Valuify.Classes.Testing.ImmutableArray.GetHashCode");
 
         public static readonly Generated Inequality = new(
             """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
-                    using System.Collections.Immutable;
+                    using System.Collections.Generic;
 
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable disable
                     #endif
 
-                    partial class ImmutableArrayProperty
+                    partial class ImmutableArray
                     {
-                        public static bool operator !=(ImmutableArrayProperty left, ImmutableArrayProperty right)
+                        public static bool operator !=(ImmutableArray left, ImmutableArray right)
                         {
                             return !(left == right);
                         }
@@ -181,24 +181,24 @@ internal static partial class ImmutableArrayProperty
                 }
                 """,
             Extensions.HasInequalityOperator,
-            "Valuify.Classes.Testing.ImmutableArrayProperty.Inequality");
+            "Valuify.Classes.Testing.ImmutableArray.Inequality");
 
         public static new readonly Generated ToString = new(
             """
                 namespace Valuify.Classes.Testing
                 {
                     using System;
-                    using System.Collections.Immutable;
+                    using System.Collections.Generic;
 
                     #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     #nullable disable
                     #endif
 
-                    partial class ImmutableArrayProperty
+                    partial class ImmutableArray
                     {
                         public override string ToString()
                         {
-                            return string.Format("ImmutableArrayProperty {{ Values = {0} }}", Values);
+                            return string.Format("ImmutableArray {{ Values = {0} }}", Values);
                         }
                     }
         
@@ -208,6 +208,6 @@ internal static partial class ImmutableArrayProperty
                 }
                 """,
             Extensions.HasToStringOverride,
-            "Valuify.Classes.Testing.ImmutableArrayProperty.ToString");
+            "Valuify.Classes.Testing.ImmutableArray.ToString");
     }
 }

@@ -2,7 +2,7 @@ namespace Valuify.Snippets.Declarations;
 
 using Microsoft.CodeAnalysis.CSharp;
 
-internal static partial class ImmutableArrayProperty
+internal static partial class ImmutableArray
 {
     public static class Declarations
     {
@@ -22,7 +22,7 @@ internal static partial class ImmutableArrayProperty
                 using System.Collections.Immutable;
 
                 [Valuify]
-                public sealed partial class ImmutableArrayProperty
+                public sealed partial class ImmutableArray
             __BODY__
             }
             """,

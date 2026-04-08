@@ -1,6 +1,6 @@
-namespace Valuify.Snippets.Declarations;
+﻿namespace Valuify.Snippets.Declarations;
 
-internal static partial class ImmutableArrayProperty
+internal static partial class EquatableSequence
 {
     public static readonly Snippets Declaration = new(
         [
@@ -25,5 +25,5 @@ internal static partial class ImmutableArrayProperty
             new(Expected.Inequality.Content, Extensions.HasInequalityOperator),
             new(Expected.ToString.Content, Extensions.HasToStringOverride),
         ],
-        nameof(ImmutableArrayProperty));
+        nameof(EquatableSequence));
 }
