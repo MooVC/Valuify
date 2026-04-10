@@ -53,7 +53,7 @@ public sealed class HashCodeGenerator
 
                     if (value is int)
                     {
-                        return (int)code;
+                        return (int)value;
                     }
 
                     return value.GetHashCode();
