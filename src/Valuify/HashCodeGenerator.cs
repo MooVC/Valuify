@@ -51,9 +51,9 @@ public sealed class HashCodeGenerator
                         return 0;
                     }
 
-                    if (value is int code)
+                    if (value is int)
                     {
-                        return code;
+                        return (int)code;
                     }
 
                     return value.GetHashCode();
