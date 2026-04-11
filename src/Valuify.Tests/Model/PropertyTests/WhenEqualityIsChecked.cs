@@ -3,6 +3,35 @@
 public abstract class WhenEqualityIsChecked
 {
     [Fact]
+    public void GivenADifferentIsImmutableArrayThenTheyAreNotDeemedEqual()
+    {
+        // Arrange
+        var instance1 = new Property
+        {
+            IsIgnored = true,
+            IsImmutableArray = true,
+            IsSequence = true,
+            Name = "PropertyName",
+            Type = "string[]",
+        };
+
+        var instance2 = new Property
+        {
+            IsIgnored = true,
+            IsImmutableArray = false,
+            IsSequence = true,
+            Name = "PropertyName",
+            Type = "string[]",
+        };
+
+        // Act
+        bool areEqual = AreEqual(instance1, instance2);
+
+        // Assert
+        areEqual.ShouldBeFalse();
+    }
+
+    [Fact]
     public void GivenADifferentIsIgnoredThenTheyAreNotDeemedEqual()
     {
         // Arrange

@@ -41,7 +41,7 @@ internal static partial class INamedTypeSymbolExtensions
             Name = @class.Name,
             Namespace = @namespace,
             Nesting = nesting,
-            Properties = @class.GetProperties(),
+            Properties = @class.GetProperties(compilation),
             Qualification = @class.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
         };
     }

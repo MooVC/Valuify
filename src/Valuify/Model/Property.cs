@@ -9,6 +9,8 @@ using System.Collections.Generic;
 internal sealed class Property
     : Value<Property>
 {
+    public bool HasValuify { get; set; }
+
     /// <summary>
     /// Gets or sets a value indicating whether or not the property is marked as ignored.
     /// </summary>
@@ -16,6 +18,22 @@ internal sealed class Property
     /// The value indicating whether or not the property is marked as ignored.
     /// </value>
     public bool IsIgnored { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the type associated with the property implements <see cref="IEquatable{T}"/>.
+    /// </summary>
+    /// <value>
+    /// The value indicating whether or not the type associated with the property implements <see cref="IEquatable{T}"/>.
+    /// </value>
+    public bool IsEquatable { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the type associated with the property is <see cref="System.Collections.Immutable.ImmutableArray{T}"/>.
+    /// </summary>
+    /// <value>
+    /// The value indicating whether or not the type associated with the property is <see cref="System.Collections.Immutable.ImmutableArray{T}"/>.
+    /// </value>
+    public bool IsImmutableArray { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether or not the type associated with the property is deemed to be a sequence.
@@ -44,7 +62,10 @@ internal sealed class Property
     /// <inheritdoc/>
     protected override IEnumerable<object> GetProperties()
     {
+        yield return HasValuify;
+        yield return IsEquatable;
         yield return IsIgnored;
+        yield return IsImmutableArray;
         yield return IsSequence;
         yield return Name;
         yield return Type;

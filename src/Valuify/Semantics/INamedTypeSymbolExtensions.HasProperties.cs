@@ -14,16 +14,19 @@ internal static partial class INamedTypeSymbolExtensions
     /// <param name="class">
     /// The class to check for compatible properties.
     /// </param>
+    /// <param name="compilation">
+    /// Used to determine characteristics of the properties, such as whether or not they are equatable.
+    /// </param>
     /// <param name="predicate">
     /// The predicate to apply to the properties.
     /// </param>
     /// <returns>
     /// <see langword="true"/> if the <paramref name="class"/> defines compatible properties, otherwise <see langword="false"/>.
     /// </returns>
-    public static bool HasProperties(this INamedTypeSymbol @class, Func<Property, bool> predicate)
+    public static bool HasProperties(this INamedTypeSymbol @class, Compilation compilation, Func<Property, bool> predicate)
     {
         return @class
-            .GetAllProperties()
+            .GetAllProperties(compilation)
             .Any(predicate);
     }
 }

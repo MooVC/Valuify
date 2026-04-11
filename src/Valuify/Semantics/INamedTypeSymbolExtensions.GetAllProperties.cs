@@ -8,19 +8,8 @@ using Valuify.Model;
 /// </summary>
 internal static partial class INamedTypeSymbolExtensions
 {
-    private static IEnumerable<Property> GetAllProperties(this INamedTypeSymbol @class)
+    private static IEnumerable<Property> GetAllProperties(this INamedTypeSymbol @class, Compilation compilation)
     {
-        static bool IsEnumerable(INamedTypeSymbol @interface)
-        {
-            return @interface.OriginalDefinition.SpecialType == SpecialType.System_Collections_Generic_IEnumerable_T
-                || @interface.SpecialType == SpecialType.System_Collections_IEnumerable;
-        }
-
-        static bool IsSequence(ITypeSymbol type)
-        {
-            return type.SpecialType != SpecialType.System_String && (type is IArrayTypeSymbol || type.AllInterfaces.Any(IsEnumerable));
-        }
-
         INamedTypeSymbol? current = @class;
 
         do
@@ -33,17 +22,48 @@ internal static partial class INamedTypeSymbolExtensions
 
             foreach (IPropertySymbol property in properties)
             {
-                yield return new Property
-                {
-                    IsIgnored = property.HasIgnore(),
-                    IsSequence = IsSequence(property.Type),
-                    Name = property.Name,
-                    Type = property.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                };
+                yield return Parse(compilation, property);
             }
 
             current = current.BaseType;
         }
         while (current is not null);
+    }
+
+    private static Property Parse(Compilation compilation, IPropertySymbol symbol)
+    {
+        static bool IsEnumerable(INamedTypeSymbol @interface)
+        {
+            return @interface.OriginalDefinition.SpecialType == SpecialType.System_Collections_Generic_IEnumerable_T
+                || @interface.SpecialType == SpecialType.System_Collections_IEnumerable;
+        }
+
+        static bool IsSequence(ITypeSymbol type)
+        {
+            return type.SpecialType != SpecialType.System_String && (type is IArrayTypeSymbol || type.AllInterfaces.Any(IsEnumerable));
+        }
+
+        var property = new Property
+        {
+            IsIgnored = symbol.HasIgnore(),
+            IsSequence = IsSequence(symbol.Type),
+            Name = symbol.Name,
+            Type = symbol.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+        };
+
+        if (symbol.Type is not INamedTypeSymbol named)
+        {
+            return property;
+        }
+
+        property.IsEquatable = named.IsEquatable(compilation);
+        property.IsImmutableArray = named.IsImmutableArray(compilation);
+
+        if (!property.IsEquatable)
+        {
+            property.HasValuify = named.HasValuify(compilation);
+        }
+
+        return property;
     }
 }

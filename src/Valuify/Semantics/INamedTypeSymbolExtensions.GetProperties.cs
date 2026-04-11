@@ -17,10 +17,10 @@ internal static partial class INamedTypeSymbolExtensions
     /// <returns>
     /// The collection of <see cref="Property"/> for each property belonging to <paramref name="class"/>.
     /// </returns>
-    public static IReadOnlyList<Property> GetProperties(this INamedTypeSymbol @class)
+    public static IReadOnlyList<Property> GetProperties(this INamedTypeSymbol @class, Compilation compilation)
     {
         return @class
-            .GetAllProperties()
+            .GetAllProperties(compilation)
             .ToArray();
     }
 }

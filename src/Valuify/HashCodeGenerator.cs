@@ -44,6 +44,21 @@ public sealed class HashCodeGenerator
                     return hash;
                 }
 
+                public static int GetHashCode(object value)
+                {
+                    if (value == null)
+                    {
+                        return 0;
+                    }
+
+                    if (value is int)
+                    {
+                        return (int)value;
+                    }
+
+                    return value.GetHashCode();
+                }
+
                 private static int CombineEnumerable(int hash, IEnumerable values)
                 {
                     foreach (object element in values)
@@ -62,7 +77,7 @@ public sealed class HashCodeGenerator
 
                     return hash;
                 }
-        
+
                 private static int PerformCombine(int hash, object value)
                 {
                     int other = GetHashCode(value);
@@ -71,18 +86,6 @@ public sealed class HashCodeGenerator
                     {
                         return (hash * HashPrime) + other;
                     }
-                }
-
-                private static int GetHashCode(object value)
-                {
-                    int code = 0;
-
-                    if (value != null)
-                    {
-                        code = value.GetHashCode();
-                    }
-
-                    return code;
                 }
             }
         }

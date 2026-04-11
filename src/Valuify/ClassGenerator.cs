@@ -43,6 +43,9 @@ public sealed class ClassGenerator
     {
         if (subject is not null)
         {
+#if DEBUG
+            Dictionary<string, string> files = new();
+#endif
             foreach (IStrategy strategy in _strategies)
             {
                 IEnumerable<Source> sources = strategy.Generate(subject);
@@ -51,6 +54,10 @@ public sealed class ClassGenerator
                 {
                     string code = Wrap(source.Code, subject);
                     string hint = GetHint(source, subject);
+
+#if DEBUG
+                    files[hint] = code;
+#endif
 
                     context.AddSource(hint, code);
                 }

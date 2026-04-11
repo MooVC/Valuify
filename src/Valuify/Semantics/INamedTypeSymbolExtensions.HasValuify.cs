@@ -20,4 +20,19 @@ internal static partial class INamedTypeSymbolExtensions
     {
         return symbol.HasAttribute(attribute => attribute.AttributeClass.IsValuify());
     }
+
+    /// <summary>
+    /// Determines whether or not a type HasValuify, and that the type is declared within the same assembly as the provided
+    /// <paramref name="compilation"/>.
+    /// </summary>
+    /// <param name="class">The class to check.</param>
+    /// <param name="compilation">The compilation within which the class resides.</param>
+    /// <returns>
+    /// <see langword="true"/> if the type is annotated with Valuify and is within the same assembly, otherwise <see langword="false"/>.
+    /// </returns>
+    public static bool HasValuify(this INamedTypeSymbol @class, Compilation compilation)
+    {
+        return SymbolEqualityComparer.Default.Equals(@class.ContainingAssembly, compilation.Assembly)
+            && @class.HasValuify();
+    }
 }

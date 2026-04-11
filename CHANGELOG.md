@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [Unreleased]
 
+# [1.8.0] - 2026-04-10
+
+## Changed
+
+- Equality generation now prefers `IEquatable<T>.Equals` for sequence-like properties when available, instead of always using `SequenceEqualityComparer`.
+
 # [1.7.5] - 2026-04-04
 
 ## Fixed
