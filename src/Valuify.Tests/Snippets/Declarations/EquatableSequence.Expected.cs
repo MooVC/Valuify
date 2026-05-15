@@ -11,10 +11,6 @@ internal static partial class EquatableSequence
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class EquatableSequence
                     {
                         public static bool operator ==(EquatableSequence left, EquatableSequence right)
@@ -32,10 +28,6 @@ internal static partial class EquatableSequence
                             return left.Equals(right);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasEqualityOperator,
@@ -48,10 +40,6 @@ internal static partial class EquatableSequence
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class EquatableSequence
                     {
                         public override bool Equals(object other)
@@ -59,10 +47,6 @@ internal static partial class EquatableSequence
                             return Equals(other as EquatableSequence);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasEqualsOverride,
@@ -75,18 +59,10 @@ internal static partial class EquatableSequence
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class EquatableSequence
                         : IEquatable<EquatableSequence>
                     {
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.IsEquatable,
@@ -98,10 +74,6 @@ internal static partial class EquatableSequence
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class EquatableSequence
                     {
@@ -120,10 +92,6 @@ internal static partial class EquatableSequence
                             return global::System.Collections.Generic.EqualityComparer<global::Valuify.Classes.Testing.EquatableCollection>.Default.Equals(Values, other.Values);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasEquatable,
@@ -135,10 +103,6 @@ internal static partial class EquatableSequence
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
         
                     partial class EquatableSequence
                     {
@@ -147,10 +111,6 @@ internal static partial class EquatableSequence
                             return global::Valuify.Internal.HashCode.Combine(global::Valuify.Internal.HashCode.GetHashCode(Values));
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasGetHashCodeOverride,
@@ -163,10 +123,6 @@ internal static partial class EquatableSequence
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class EquatableSequence
                     {
                         public static bool operator !=(EquatableSequence left, EquatableSequence right)
@@ -174,10 +130,6 @@ internal static partial class EquatableSequence
                             return !(left == right);
                         }
                     }
-        
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasInequalityOperator,
@@ -190,10 +142,6 @@ internal static partial class EquatableSequence
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class EquatableSequence
                     {
                         public override string ToString()
@@ -201,10 +149,6 @@ internal static partial class EquatableSequence
                             return string.Format("EquatableSequence {{ Values = {0} }}", Values);
                         }
                     }
-        
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasToStringOverride,

@@ -11,10 +11,6 @@ internal static partial class ImmutableArray
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class ImmutableArray
                     {
                         public static bool operator ==(ImmutableArray left, ImmutableArray right)
@@ -32,10 +28,6 @@ internal static partial class ImmutableArray
                             return left.Equals(right);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasEqualityOperator,
@@ -48,10 +40,6 @@ internal static partial class ImmutableArray
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class ImmutableArray
                     {
                         public override bool Equals(object other)
@@ -59,10 +47,6 @@ internal static partial class ImmutableArray
                             return Equals(other as ImmutableArray);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasEqualsOverride,
@@ -75,18 +59,10 @@ internal static partial class ImmutableArray
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class ImmutableArray
                         : IEquatable<ImmutableArray>
                     {
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.IsEquatable,
@@ -98,10 +74,6 @@ internal static partial class ImmutableArray
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class ImmutableArray
                     {
@@ -120,10 +92,6 @@ internal static partial class ImmutableArray
                             return global::Valuify.Internal.SequenceEqualityComparer.Default.Equals(Values, other.Values);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasEquatable,
@@ -135,10 +103,6 @@ internal static partial class ImmutableArray
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
         
                     partial class ImmutableArray
                     {
@@ -147,10 +111,6 @@ internal static partial class ImmutableArray
                             return global::Valuify.Internal.HashCode.Combine(Values);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasGetHashCodeOverride,
@@ -163,10 +123,6 @@ internal static partial class ImmutableArray
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class ImmutableArray
                     {
                         public static bool operator !=(ImmutableArray left, ImmutableArray right)
@@ -174,10 +130,6 @@ internal static partial class ImmutableArray
                             return !(left == right);
                         }
                     }
-        
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasInequalityOperator,
@@ -190,10 +142,6 @@ internal static partial class ImmutableArray
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class ImmutableArray
                     {
                         public override string ToString()
@@ -201,10 +149,6 @@ internal static partial class ImmutableArray
                             return string.Format("ImmutableArray {{ Values = {0} }}", Values);
                         }
                     }
-        
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasToStringOverride,

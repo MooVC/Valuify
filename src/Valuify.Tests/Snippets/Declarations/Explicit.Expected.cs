@@ -11,10 +11,6 @@ internal static partial class Explicit
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class Explicit
                     {
                         public static bool operator ==(Explicit left, Explicit right)
@@ -32,10 +28,6 @@ internal static partial class Explicit
                             return left.Equals(right);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasEqualityOperator,
@@ -48,10 +40,6 @@ internal static partial class Explicit
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class Explicit
                     {
                         public override bool Equals(object other)
@@ -59,10 +47,6 @@ internal static partial class Explicit
                             return Equals(other as Explicit);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasEqualsOverride,
@@ -75,18 +59,10 @@ internal static partial class Explicit
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class Explicit
                         : IEquatable<Explicit>
                     {
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.IsEquatable,
@@ -98,10 +74,6 @@ internal static partial class Explicit
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class Explicit
                     {
@@ -122,10 +94,6 @@ internal static partial class Explicit
                                 && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Name, other.Name);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasEquatable,
@@ -137,10 +105,6 @@ internal static partial class Explicit
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
         
                     partial class Explicit
                     {
@@ -149,10 +113,6 @@ internal static partial class Explicit
                             return global::Valuify.Internal.HashCode.Combine(Age, IsAdult, Name);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasGetHashCodeOverride,
@@ -165,10 +125,6 @@ internal static partial class Explicit
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class Explicit
                     {
                         public static bool operator !=(Explicit left, Explicit right)
@@ -176,10 +132,6 @@ internal static partial class Explicit
                             return !(left == right);
                         }
                     }
-        
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasInequalityOperator,
@@ -192,10 +144,6 @@ internal static partial class Explicit
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class Explicit
                     {
                         public override string ToString()
@@ -203,10 +151,6 @@ internal static partial class Explicit
                             return string.Format("Explicit {{ Age = {0}, IsAdult = {1}, Name = {2} }}", Age, IsAdult, Name);
                         }
                     }
-        
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
             Extensions.HasToStringOverride,

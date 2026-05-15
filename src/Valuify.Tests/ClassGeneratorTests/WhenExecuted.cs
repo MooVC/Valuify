@@ -25,10 +25,10 @@ public sealed class WhenExecuted
 
         expectations.IsDeclaredIn(test.TestState);
 
-        Attributes.Ignore.IsExpectedIn(test.TestState);
-        Attributes.Valuify.IsExpectedIn(test.TestState);
         Internal.HashCode.IsExpectedIn(test.TestState);
+        Attributes.Ignore.IsExpectedIn(test.TestState);
         Internal.SequenceEqualityComparer.IsExpectedIn(test.TestState);
+        Attributes.Valuify.IsExpectedIn(test.TestState);
 
         // Act
         Func<Task> act = () => test.RunAsync();

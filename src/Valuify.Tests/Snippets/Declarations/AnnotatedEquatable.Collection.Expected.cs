@@ -13,10 +13,6 @@ internal static partial class AnnotatedEquatable
                         using System;
                         using System.Collections.Generic;
 
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable disable
-                        #endif
-
                         partial class AnnotatedEquatableCollection
                         {
                             public static bool operator ==(AnnotatedEquatableCollection left, AnnotatedEquatableCollection right)
@@ -34,10 +30,6 @@ internal static partial class AnnotatedEquatable
                                 return left.Equals(right);
                             }
                         }
-
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable restore
-                        #endif
                     }
                     """,
                 Extensions.HasEqualityOperator,
@@ -50,10 +42,6 @@ internal static partial class AnnotatedEquatable
                         using System;
                         using System.Collections.Generic;
 
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable disable
-                        #endif
-
                         partial class AnnotatedEquatableCollection
                         {
                             public override bool Equals(object other)
@@ -61,10 +49,6 @@ internal static partial class AnnotatedEquatable
                                 return Equals(other as AnnotatedEquatableCollection);
                             }
                         }
-
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable restore
-                        #endif
                     }
                     """,
                 Extensions.HasEqualsOverride,
@@ -77,18 +61,10 @@ internal static partial class AnnotatedEquatable
                         using System;
                         using System.Collections.Generic;
 
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable disable
-                        #endif
-
                         partial class AnnotatedEquatableCollection
                             : IEquatable<AnnotatedEquatableCollection>
                         {
                         }
-
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable restore
-                        #endif
                     }
                     """,
                 Extensions.IsEquatable,
@@ -100,10 +76,6 @@ internal static partial class AnnotatedEquatable
                     {
                         using System;
                         using System.Collections.Generic;
-
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable disable
-                        #endif
 
                         partial class AnnotatedEquatableCollection
                         {
@@ -123,10 +95,6 @@ internal static partial class AnnotatedEquatable
                                     && global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(Count, other.Count);
                             }
                         }
-
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable restore
-                        #endif
                     }
                     """,
                 Extensions.HasEquatable,
@@ -139,10 +107,6 @@ internal static partial class AnnotatedEquatable
                         using System;
                         using System.Collections.Generic;
 
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable disable
-                        #endif
-
                         partial class AnnotatedEquatableCollection
                         {
                             public override int GetHashCode()
@@ -150,10 +114,6 @@ internal static partial class AnnotatedEquatable
                                 return global::Valuify.Internal.HashCode.Combine(Capacity, Count);
                             }
                         }
-
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable restore
-                        #endif
                     }
                     """,
                 Extensions.HasGetHashCodeOverride,
@@ -166,10 +126,6 @@ internal static partial class AnnotatedEquatable
                         using System;
                         using System.Collections.Generic;
 
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable disable
-                        #endif
-
                         partial class AnnotatedEquatableCollection
                         {
                             public static bool operator !=(AnnotatedEquatableCollection left, AnnotatedEquatableCollection right)
@@ -177,10 +133,6 @@ internal static partial class AnnotatedEquatable
                                 return !(left == right);
                             }
                         }
-
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable restore
-                        #endif
                     }
                     """,
                 Extensions.HasInequalityOperator,
@@ -193,10 +145,6 @@ internal static partial class AnnotatedEquatable
                         using System;
                         using System.Collections.Generic;
 
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable disable
-                        #endif
-
                         partial class AnnotatedEquatableCollection
                         {
                             public override string ToString()
@@ -204,10 +152,6 @@ internal static partial class AnnotatedEquatable
                                 return string.Format("AnnotatedEquatableCollection {{ Capacity = {0}, Count = {1} }}", Capacity, Count);
                             }
                         }
-
-                        #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                        #nullable restore
-                        #endif
                     }
                     """,
                 Extensions.HasToStringOverride,
