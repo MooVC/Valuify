@@ -13,10 +13,6 @@ internal static partial class Nested
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class First<T1>
                     {
                         partial class Second
@@ -43,10 +39,6 @@ internal static partial class Nested
                             }
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.HasEqualityOperator,
@@ -58,10 +50,6 @@ internal static partial class Nested
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class First<T1>
                     {
@@ -79,10 +67,6 @@ internal static partial class Nested
                             }
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.HasEqualsOverride,
@@ -94,10 +78,6 @@ internal static partial class Nested
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class First<T1>
                     {
@@ -112,10 +92,6 @@ internal static partial class Nested
                             }
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.IsEquatable,
@@ -127,10 +103,6 @@ internal static partial class Nested
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class First<T1>
                     {
@@ -159,10 +131,6 @@ internal static partial class Nested
                             }
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.HasEquatable,
@@ -174,10 +142,6 @@ internal static partial class Nested
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class First<T1>
                     {
@@ -195,10 +159,6 @@ internal static partial class Nested
                             }
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.HasGetHashCodeOverride,
@@ -210,10 +170,6 @@ internal static partial class Nested
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class First<T1>
                     {
@@ -231,10 +187,6 @@ internal static partial class Nested
                             }
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.HasInequalityOperator,
@@ -246,10 +198,6 @@ internal static partial class Nested
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class First<T1>
                     {
@@ -267,10 +215,6 @@ internal static partial class Nested
                             }
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.HasToStringOverride,

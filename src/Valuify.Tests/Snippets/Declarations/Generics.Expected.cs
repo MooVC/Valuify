@@ -11,10 +11,6 @@ internal static partial class Generics
                 using System;
                 using System.Collections.Generic;
 
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable disable
-                #endif
-
                 partial class Generics<T1, T2>
                 {
                     public static bool operator ==(Generics<T1, T2> left, Generics<T1, T2> right)
@@ -32,10 +28,6 @@ internal static partial class Generics
                         return left.Equals(right);
                     }
                 }
-
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable restore
-                #endif
             }
             """,
             Extensions.HasEqualityOperator,
@@ -48,10 +40,6 @@ internal static partial class Generics
                 using System;
                 using System.Collections.Generic;
 
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable disable
-                #endif
-
                 partial class Generics<T1, T2>
                 {
                     public override bool Equals(object other)
@@ -59,10 +47,6 @@ internal static partial class Generics
                         return Equals(other as Generics<T1, T2>);
                     }
                 }
-
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable restore
-                #endif
             }
             """,
             Extensions.HasEqualsOverride,
@@ -75,18 +59,10 @@ internal static partial class Generics
                 using System;
                 using System.Collections.Generic;
 
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable disable
-                #endif
-
                 partial class Generics<T1, T2>
                     : IEquatable<Generics<T1, T2>>
                 {
                 }
-
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable restore
-                #endif
             }
             """,
             Extensions.IsEquatable,
@@ -98,10 +74,6 @@ internal static partial class Generics
             {
                 using System;
                 using System.Collections.Generic;
-
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable disable
-                #endif
 
                 partial class Generics<T1, T2>
                 {
@@ -121,10 +93,6 @@ internal static partial class Generics
                             && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(Name, other.Name);
                     }
                 }
-
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable restore
-                #endif
             }
             """,
             Extensions.HasEquatable,
@@ -136,10 +104,6 @@ internal static partial class Generics
             {
                 using System;
                 using System.Collections.Generic;
-
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable disable
-                #endif
         
                 partial class Generics<T1, T2>
                 {
@@ -148,10 +112,6 @@ internal static partial class Generics
                         return global::Valuify.Internal.HashCode.Combine(Age, Name);
                     }
                 }
-
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable restore
-                #endif
             }
             """,
             Extensions.HasGetHashCodeOverride,
@@ -164,10 +124,6 @@ internal static partial class Generics
                 using System;
                 using System.Collections.Generic;
 
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable disable
-                #endif
-
                 partial class Generics<T1, T2>
                 {
                     public static bool operator !=(Generics<T1, T2> left, Generics<T1, T2> right)
@@ -175,10 +131,6 @@ internal static partial class Generics
                         return !(left == right);
                     }
                 }
-        
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable restore
-                #endif
             }
             """,
             Extensions.HasInequalityOperator,
@@ -191,10 +143,6 @@ internal static partial class Generics
                 using System;
                 using System.Collections.Generic;
 
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable disable
-                #endif
-
                 partial class Generics<T1, T2>
                 {
                     public override string ToString()
@@ -202,10 +150,6 @@ internal static partial class Generics
                         return string.Format("Generics {{ Age = {0}, Name = {1} }}", Age, Name);
                     }
                 }
-        
-                #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                #nullable restore
-                #endif
             }
             """,
             Extensions.HasToStringOverride,

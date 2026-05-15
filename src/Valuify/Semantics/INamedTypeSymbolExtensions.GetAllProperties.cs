@@ -18,7 +18,8 @@ internal static partial class INamedTypeSymbolExtensions
                 .GetMembers()
                 .OfType<IPropertySymbol>()
                 .Where(property => !(property.IsStatic || property.IsIndexer)
-                    && property.ExplicitInterfaceImplementations.Length == 0);
+                    && property.ExplicitInterfaceImplementations.Length == 0)
+                .Distinct(PropertyNameEqualityComparer.Instance);
 
             foreach (IPropertySymbol property in properties)
             {

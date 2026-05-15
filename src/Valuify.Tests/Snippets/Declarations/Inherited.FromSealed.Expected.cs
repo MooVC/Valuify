@@ -13,10 +13,6 @@ internal static partial class Inherited
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class Inherited
                     {
                         public static bool operator ==(Inherited left, Inherited right)
@@ -34,10 +30,6 @@ internal static partial class Inherited
                             return left.Equals(right);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.HasEqualityOperator,
@@ -50,18 +42,10 @@ internal static partial class Inherited
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class Inherited
                         : IEquatable<Inherited>
                     {
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.IsEquatable,
@@ -73,10 +57,6 @@ internal static partial class Inherited
                 {
                     using System;
                     using System.Collections.Generic;
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
 
                     partial class Inherited
                     {
@@ -97,10 +77,6 @@ internal static partial class Inherited
                                 && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Name, other.Name);
                         }
                     }
-
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.HasEquatable,
@@ -113,10 +89,6 @@ internal static partial class Inherited
                     using System;
                     using System.Collections.Generic;
 
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable disable
-                    #endif
-
                     partial class Inherited
                     {
                         public static bool operator !=(Inherited left, Inherited right)
@@ -124,10 +96,6 @@ internal static partial class Inherited
                             return !(left == right);
                         }
                     }
-        
-                    #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    #nullable restore
-                    #endif
                 }
                 """,
                 Extensions.HasInequalityOperator,
