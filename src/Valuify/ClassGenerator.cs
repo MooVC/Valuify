@@ -1,6 +1,7 @@
 ﻿namespace Valuify;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Valuify.Model;
 using Valuify.Strategies;
@@ -33,34 +34,35 @@ public sealed class ClassGenerator
 
         IncrementalValuesProvider<Subject?> subjects = classes
            .Combine(context.CompilationProvider)
-           .Select(static (match, cancellationToken) => match.Left.ToSubject(match.Right, cancellationToken))
-           .Where(subject => subject is not null);
+           .Select(static (match, cancellationToken) => match.Left.ToSubject(match.Right, cancellationToken));
 
         context.RegisterSourceOutput(subjects, Generate);
     }
 
     private static void Generate(SourceProductionContext context, Subject? subject)
     {
-        if (subject is not null)
+        if (subject is null)
         {
+            return;
+        }
+
 #if DEBUG
-            Dictionary<string, string> files = new();
+        Dictionary<string, string> files = new();
 #endif
-            foreach (IStrategy strategy in _strategies)
+        foreach (IStrategy strategy in _strategies)
+        {
+            IEnumerable<Source> sources = strategy.Generate(subject);
+
+            foreach (Source source in sources)
             {
-                IEnumerable<Source> sources = strategy.Generate(subject);
-
-                foreach (Source source in sources)
-                {
-                    string code = Wrap(source.Code, subject);
-                    string hint = GetHint(source, subject);
+                string code = Wrap(source.Code, subject);
+                string hint = GetHint(source, subject);
 
 #if DEBUG
-                    files[hint] = code;
+                files[hint] = code;
 #endif
 
-                    context.AddSource(hint, code);
-                }
+                context.AddSource(hint, code);
             }
         }
     }
@@ -116,15 +118,7 @@ public sealed class ClassGenerator
             using System;
             using System.Collections.Generic;
 
-            #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-            #nullable disable
-            #endif
-            
             {{code}}
-            
-            #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-            #nullable restore
-            #endif
             """;
 
         if (subject.IsGlobal)
