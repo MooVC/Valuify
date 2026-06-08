@@ -1,10 +1,5 @@
 namespace Valuify
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-
     /// <summary>
     /// Represents a unit of source code to be added to the output.
     /// </summary>

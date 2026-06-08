@@ -2,8 +2,6 @@ namespace Valuify.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
 
     /// <summary>
     /// The definition of the <see cref="Property"/> type, which is used to capture information relating to a property that

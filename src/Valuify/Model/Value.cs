@@ -2,8 +2,6 @@ namespace Valuify.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
 
     /// <summary>
     /// The definition of the <see cref="Value"/> type, serving as a base for any type that is deemed equal based on its properties.

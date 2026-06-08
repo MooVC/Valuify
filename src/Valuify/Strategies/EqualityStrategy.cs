@@ -1,9 +1,6 @@
 namespace Valuify.Strategies
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
     using Valuify.Model;
     using static Valuify.Strategies.EqualityStrategy_Resources;
 
