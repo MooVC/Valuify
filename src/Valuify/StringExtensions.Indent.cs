@@ -1,50 +1,56 @@
-﻿namespace Valuify;
-
-using System.IO;
-using System.Text;
-
-/// <summary>
-/// Provides extensions relating to <see cref="string"/>.
-/// </summary>
-internal static partial class StringExtensions
+namespace Valuify
 {
-    private const string Default = "    ";
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
 
     /// <summary>
-    /// Adds the specified <paramref name="whitespace"/> to the beginning of each non-blank line in the input string.
+    /// Provides extensions relating to <see cref="string"/>.
     /// </summary>
-    /// <param name="input">
-    /// The input string to process.
-    /// </param>
-    /// <param name="skip">
-    /// The number of initial lines to skip when considering the application of whitespace.
-    /// </param>
-    /// <param name="whitespace">
-    /// The whitespace to apply when indenting.
-    /// </param>
-    /// <returns>
-    /// A new string with <paramref name="whitespace"/> added to the start of each non-blank line.
-    /// </returns>
-    public static string Indent(this string input, int skip = 1, string whitespace = Default)
+    internal static partial class StringExtensions
     {
-        var reader = new StringReader(input);
-        var builder = new StringBuilder();
-        string line;
-        int offset = 0;
+        private const string Default = "    ";
 
-        while ((line = reader.ReadLine()) is not null)
+        /// <summary>
+        /// Adds the specified <paramref name="whitespace"/> to the beginning of each non-blank line in the input string.
+        /// </summary>
+        /// <param name="input">
+        /// The input string to process.
+        /// </param>
+        /// <param name="skip">
+        /// The number of initial lines to skip when considering the application of whitespace.
+        /// </param>
+        /// <param name="whitespace">
+        /// The whitespace to apply when indenting.
+        /// </param>
+        /// <returns>
+        /// A new string with <paramref name="whitespace"/> added to the start of each non-blank line.
+        /// </returns>
+        public static string Indent(this string input, int skip = 1, string whitespace = Default)
         {
-            if (++offset > skip && !string.IsNullOrWhiteSpace(line))
+            var reader = new StringReader(input);
+            var builder = new StringBuilder();
+            string line = reader.ReadLine();
+            int offset = 0;
+
+            while (!(line is null))
             {
-                builder = builder.Append(whitespace);
+                if (++offset > skip && !string.IsNullOrWhiteSpace(line))
+                {
+                    builder = builder.Append(whitespace);
+                }
+
+                builder = builder.Append(line);
+                builder = builder.AppendLine();
+                line = reader.ReadLine();
             }
 
-            builder = builder.Append(line);
-            builder = builder.AppendLine();
+            return builder
+                .ToString()
+                .TrimEnd();
         }
-
-        return builder
-            .ToString()
-            .TrimEnd();
     }
 }

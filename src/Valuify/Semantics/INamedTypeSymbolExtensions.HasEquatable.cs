@@ -1,28 +1,33 @@
-﻿namespace Valuify.Semantics;
-
-using Microsoft.CodeAnalysis;
-
-/// <summary>
-/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
-/// </summary>
-internal static partial class INamedTypeSymbolExtensions
+namespace Valuify.Semantics
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.CodeAnalysis;
+
     /// <summary>
-    /// Determines whether or not the <paramref name="class"/> declares an implementaton for Equals.
+    /// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
     /// </summary>
-    /// <param name="class">
-    /// The <paramref name="class"/> to be checked.
-    /// </param>
-    /// <returns>
-    /// <see langword="true"/> if the <paramref name="class"/> implements Equals, otherwise <see langword="false"/>.
-    /// </returns>
-    public static bool HasEquatable(this INamedTypeSymbol @class)
+    internal static partial class INamedTypeSymbolExtensions
     {
-        return @class
-            .GetMembers(nameof(Equals))
-            .OfType<IMethodSymbol>()
-            .Any(method => method.ReturnType.SpecialType == SpecialType.System_Boolean
-                        && method.Parameters.Length == 1
-                        && SymbolEqualityComparer.Default.Equals(method.Parameters[0].Type.OriginalDefinition, @class));
+        /// <summary>
+        /// Determines whether or not the <paramref name="class"/> declares an implementaton for Equals.
+        /// </summary>
+        /// <param name="class">
+        /// The <paramref name="class"/> to be checked.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the <paramref name="class"/> implements Equals, otherwise <see langword="false"/>.
+        /// </returns>
+        public static bool HasEquatable(this INamedTypeSymbol @class)
+        {
+            return @class
+                .GetMembers(nameof(Equals))
+                .OfType<IMethodSymbol>()
+                .Any(method => method.ReturnType.SpecialType == SpecialType.System_Boolean
+                            && method.Parameters.Length == 1
+                            && SymbolEqualityComparer.Default.Equals(method.Parameters[0].Type.OriginalDefinition, @class));
+        }
     }
 }

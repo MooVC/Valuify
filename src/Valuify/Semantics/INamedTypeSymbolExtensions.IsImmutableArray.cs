@@ -1,35 +1,40 @@
-﻿namespace Valuify.Semantics;
-
-using Microsoft.CodeAnalysis;
-
-/// <summary>
-/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
-/// </summary>
-internal static partial class INamedTypeSymbolExtensions
+namespace Valuify.Semantics
 {
-    private const string ImmutableArrayTypeName = "System.Collections.Immutable.ImmutableArray`1";
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.CodeAnalysis;
 
     /// <summary>
-    /// Determines whether or not the <paramref name="type"/> is an <see cref="System.Collections.Immutable.ImmutableArray{T}"/>.
+    /// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
     /// </summary>
-    /// <param name="type">
-    /// The symbol for the type to be checked.
-    /// </param>
-    /// <param name="compilation">
-    /// The <see cref="Compilation"/> used to source the symbol for <see cref="System.Collections.Immutable.ImmutableArray{T}"/>.
-    /// </param>
-    /// <returns>
-    /// <see langword="true"/> if the <paramref name="type"/> is an <see cref="System.Collections.Immutable.ImmutableArray{T}"/>, otherwise <see langword="false"/>.
-    /// </returns>
-    public static bool IsImmutableArray(this INamedTypeSymbol type, Compilation compilation)
+    internal static partial class INamedTypeSymbolExtensions
     {
-        INamedTypeSymbol? immutableArray = compilation.GetTypeByMetadataName(ImmutableArrayTypeName);
+        private const string ImmutableArrayTypeName = "System.Collections.Immutable.ImmutableArray`1";
 
-        if (immutableArray is null)
+        /// <summary>
+        /// Determines whether or not the <paramref name="type"/> is an <see cref="System.Collections.Immutable.ImmutableArray{T}"/>.
+        /// </summary>
+        /// <param name="type">
+        /// The symbol for the type to be checked.
+        /// </param>
+        /// <param name="compilation">
+        /// The <see cref="Compilation"/> used to source the symbol for <see cref="System.Collections.Immutable.ImmutableArray{T}"/>.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the <paramref name="type"/> is an <see cref="System.Collections.Immutable.ImmutableArray{T}"/>, otherwise <see langword="false"/>.
+        /// </returns>
+        public static bool IsImmutableArray(this INamedTypeSymbol type, Compilation compilation)
         {
-            return false;
-        }
+            INamedTypeSymbol immutableArray = compilation.GetTypeByMetadataName(ImmutableArrayTypeName);
 
-        return type.ConstructedFrom.Equals(immutableArray, SymbolEqualityComparer.Default);
+            if (immutableArray is null)
+            {
+                return false;
+            }
+
+            return type.ConstructedFrom.Equals(immutableArray, SymbolEqualityComparer.Default);
+        }
     }
 }

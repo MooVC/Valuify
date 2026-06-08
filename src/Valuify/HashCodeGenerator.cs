@@ -1,99 +1,27 @@
-﻿namespace Valuify;
-
-using Microsoft.CodeAnalysis;
-
-/// <summary>
-/// Generates an internal HashCode static class that is used to support hash code generation.
-/// </summary>
-[Generator(LanguageNames.CSharp)]
-public sealed class HashCodeGenerator
-    : IIncrementalGenerator
+namespace Valuify
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.CodeAnalysis;
+
     /// <summary>
-    /// The source code that will be output by the generator.
+    /// Generates an internal HashCode static class that is used to support hash code generation.
     /// </summary>
-    public const string Content = $$"""
-        namespace Valuify.Internal
-        {
-            using System;
-            using System.Collections;
-
-            internal static class HashCode
-            {
-                private const int HashSeed = 0x1505;
-                private const int HashPrime = -1521134295;
-
-                public static int Combine(params object[] values)
-                {
-                    int hash = HashSeed;
-
-                    foreach (object value in values)
-                    {
-                        IEnumerable enumerable = value as IEnumerable;
-
-                        if (enumerable != null && !(value is string))
-                        {
-                            hash = CombineEnumerable(hash, enumerable);
-                        }
-                        else
-                        {
-                            hash = PerformCombine(hash, value);
-                        }
-                    }
-
-                    return hash;
-                }
-
-                public static int GetHashCode(object value)
-                {
-                    if (value == null)
-                    {
-                        return 0;
-                    }
-
-                    if (value is int)
-                    {
-                        return (int)value;
-                    }
-
-                    return value.GetHashCode();
-                }
-
-                private static int CombineEnumerable(int hash, IEnumerable values)
-                {
-                    foreach (object element in values)
-                    {
-                        IEnumerable enumerable = element as IEnumerable;
-
-                        if (enumerable != null && !(element is string))
-                        {
-                            hash = CombineEnumerable(hash, enumerable);
-                        }
-                        else
-                        {
-                            hash = PerformCombine(hash, element);
-                        }
-                    }
-
-                    return hash;
-                }
-
-                private static int PerformCombine(int hash, object value)
-                {
-                    int other = GetHashCode(value);
-
-                    unchecked
-                    {
-                        return (hash * HashPrime) + other;
-                    }
-                }
-            }
-        }
-        """;
-
-    /// <inheritdoc/>
-    public void Initialize(IncrementalGeneratorInitializationContext context)
+    [Generator(LanguageNames.CSharp)]
+    public sealed class HashCodeGenerator
+        : IIncrementalGenerator
     {
-        context.RegisterPostInitializationOutput(context => context.AddSource("Valuify.Internal.HashCode.g.cs", Content));
+        /// <summary>
+        /// The source code that will be output by the generator.
+        /// </summary>
+        public static readonly string Content = HashCodeGenerator_Resources.Content;
+
+        /// <inheritdoc/>
+        public void Initialize(IncrementalGeneratorInitializationContext context)
+        {
+            context.RegisterPostInitializationOutput(initialization => initialization.AddSource("Valuify.Internal.HashCode.g.cs", Content));
+        }
     }
 }

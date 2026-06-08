@@ -1,26 +1,31 @@
-﻿namespace Valuify.Semantics;
-
-using Microsoft.CodeAnalysis;
-
-/// <summary>
-/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
-/// </summary>
-internal static partial class INamedTypeSymbolExtensions
+namespace Valuify.Semantics
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.CodeAnalysis;
+
     /// <summary>
-    /// Determines whether or not the <paramref name="class"/> inherits a sealed override for the <see cref="object.Equals(object)"/> method.
+    /// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
     /// </summary>
-    /// <param name="class">
-    /// The <paramref name="class"/> to be checked.
-    /// </param>
-    /// <returns>
-    /// <see langword="true"/> if the <paramref name="class"/> inherits a sealed override for the <see cref="object.Equals(object)"/>, otherwise <see langword="false"/>.
-    /// </returns>
-    public static bool InheritsSealedEquals(this INamedTypeSymbol @class)
+    internal static partial class INamedTypeSymbolExtensions
     {
-        return @class.InheritsSealed(
-            nameof(Equals),
-            SpecialType.System_Boolean,
-            predicate: method => method.Parameters.Length == 1 && method.Parameters[0].Type.SpecialType == SpecialType.System_Object);
+        /// <summary>
+        /// Determines whether or not the <paramref name="class"/> inherits a sealed override for the <see cref="object.Equals(object)"/> method.
+        /// </summary>
+        /// <param name="class">
+        /// The <paramref name="class"/> to be checked.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the <paramref name="class"/> inherits a sealed override for the <see cref="object.Equals(object)"/>, otherwise <see langword="false"/>.
+        /// </returns>
+        public static bool InheritsSealedEquals(this INamedTypeSymbol @class)
+        {
+            return @class.InheritsSealed(
+                nameof(Equals),
+                SpecialType.System_Boolean,
+                predicate: method => method.Parameters.Length == 1 && method.Parameters[0].Type.SpecialType == SpecialType.System_Object);
+        }
     }
 }

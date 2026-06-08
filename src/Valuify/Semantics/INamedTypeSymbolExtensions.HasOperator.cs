@@ -1,33 +1,38 @@
-﻿namespace Valuify.Semantics;
-
-using Microsoft.CodeAnalysis;
-
-/// <summary>
-/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
-/// </summary>
-internal static partial class INamedTypeSymbolExtensions
+namespace Valuify.Semantics
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.CodeAnalysis;
+
     /// <summary>
-    /// Determines whether or not the <paramref name="class"/> declares an its own operator named <paramref name="operator"/>.
+    /// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
     /// </summary>
-    /// <param name="class">
-    /// The <paramref name="class"/> to be checked.
-    /// </param>
-    /// <param name="operator">
-    /// The name of the operator to check.
-    /// </param>
-    /// <returns>
-    /// <see langword="true"/> if the <paramref name="class"/> declares the operator, otherwise <see langword="false"/>.
-    /// </returns>
-    private static bool HasOperator(this INamedTypeSymbol @class, string @operator)
+    internal static partial class INamedTypeSymbolExtensions
     {
-        return @class
-            .GetMembers()
-            .OfType<IMethodSymbol>()
-            .Any(method => method.MethodKind == MethodKind.UserDefinedOperator
-                        && method.Name == @operator
-                        && method.Parameters.Length == 2
-                        && SymbolEqualityComparer.Default.Equals(method.Parameters[0].Type, @class)
-                        && SymbolEqualityComparer.Default.Equals(method.Parameters[1].Type, @class));
+        /// <summary>
+        /// Determines whether or not the <paramref name="class"/> declares an its own operator named <paramref name="operator"/>.
+        /// </summary>
+        /// <param name="class">
+        /// The <paramref name="class"/> to be checked.
+        /// </param>
+        /// <param name="operator">
+        /// The name of the operator to check.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the <paramref name="class"/> declares the operator, otherwise <see langword="false"/>.
+        /// </returns>
+        private static bool HasOperator(this INamedTypeSymbol @class, string @operator)
+        {
+            return @class
+                .GetMembers()
+                .OfType<IMethodSymbol>()
+                .Any(method => method.MethodKind == MethodKind.UserDefinedOperator
+                            && method.Name == @operator
+                            && method.Parameters.Length == 2
+                            && SymbolEqualityComparer.Default.Equals(method.Parameters[0].Type, @class)
+                            && SymbolEqualityComparer.Default.Equals(method.Parameters[1].Type, @class));
+        }
     }
 }

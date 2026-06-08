@@ -1,86 +1,70 @@
-﻿namespace Valuify.Strategies;
-
-using Valuify.Model;
-
-/// <summary>
-/// Generates the source needed to support <see cref="IEquatable{T}"/>.
-/// </summary>
-internal sealed class EquatableStrategy
-    : IStrategy
+namespace Valuify.Strategies
 {
-    private const string Conditional = "\r\n            && ";
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Valuify.Model;
+    using static Valuify.Strategies.EquatableStrategy_Resources;
 
-    /// <inheritdoc/>
-    public IEnumerable<Source> Generate(Subject subject)
+    /// <summary>
+    /// Generates the source needed to support <see cref="IEquatable{T}"/>.
+    /// </summary>
+    internal sealed class EquatableStrategy
+        : IStrategy
     {
-        if (!subject.IsEquatable)
-        {
-            yield return GenerateContract(subject);
-        }
+        private static readonly string _conditional = string.Concat(SyntaxFactory.ElasticCarriageReturnLineFeed, "            && ");
 
-        if (!subject.HasEquatable)
+        /// <inheritdoc/>
+        public IEnumerable<Source> Generate(Subject subject)
         {
-            yield return GenerateImplementation(subject);
-        }
-    }
-
-    private static Source GenerateContract(Subject subject)
-    {
-        string code = $$"""
-            partial class {{subject.Qualification}}
-                : IEquatable<{{subject.Qualification}}>
+            if (!subject.IsEquatable)
             {
+                yield return GenerateContract(subject);
             }
-            """;
 
-        return new Source(code, nameof(IEquatable<>));
-    }
-
-    private static Source GenerateImplementation(Subject subject)
-    {
-        string conditions = "true";
-
-        if (subject.Properties.Count > 0)
-        {
-            IEnumerable<string> properties = subject.Properties
-                .Where(property => !property.IsIgnored)
-                .Select(property => $"{GetComparer(property)}.Default.Equals({property.Name}, other.{property.Name})");
-
-            conditions = string.Join(Conditional, properties);
+            if (!subject.HasEquatable)
+            {
+                yield return GenerateImplementation(subject);
+            }
         }
 
-        string code = $$"""
-            partial class {{subject.Qualification}}
+        private static Source GenerateContract(Subject subject)
+        {
+            string code = string.Format(Contract, subject.Qualification);
+
+            return new Source(code, "IEquatable");
+        }
+
+        private static Source GenerateImplementation(Subject subject)
+        {
+            string conditions = "true";
+
+            if (subject.Properties.Count > 0)
             {
-                public bool Equals({{subject.Qualification}} other)
-                {
-                    if (ReferenceEquals(this, other))
-                    {
-                        return true;
-                    }
-            
-                    if (ReferenceEquals(other, null))
-                    {
-                        return false;
-                    }
-            
-                    return {{conditions}};
-                }
+                IEnumerable<string> properties = subject.Properties
+                    .Where(property => !property.IsIgnored)
+                    .Select(property => string.Format(PropertyCondition, GetComparer(property), property.Name));
+
+                conditions = string.Join(_conditional, properties);
             }
-            """;
 
-        return new Source(code, $"{nameof(IEquatable<>)}.{nameof(Equals)}");
-    }
+            string code = string.Format(Implementation, subject.Qualification, conditions);
 
-    private static string GetComparer(Property property)
-    {
-        return ShouldUseSequenceComparer(property)
-            ? $"global::Valuify.Internal.SequenceEqualityComparer"
-            : $"global::System.Collections.Generic.EqualityComparer<{property.Type}>";
-    }
+            return new Source(code, string.Concat("IEquatable.", nameof(Equals)));
+        }
 
-    private static bool ShouldUseSequenceComparer(Property property)
-    {
-        return property.IsSequence && (property.IsImmutableArray || !(property.IsEquatable || property.HasValuify));
+        private static string GetComparer(Property property)
+        {
+            return ShouldUseSequenceComparer(property)
+                ? SequenceComparer
+                : string.Format(EqualityComparer, property.Type);
+        }
+
+        private static bool ShouldUseSequenceComparer(Property property)
+        {
+            return property.IsSequence && (property.IsImmutableArray || !(property.IsEquatable || property.HasValuify));
+        }
     }
 }

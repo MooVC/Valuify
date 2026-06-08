@@ -1,106 +1,117 @@
-﻿namespace Valuify.Semantics;
-
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Valuify.Model;
-using Valuify.Syntax;
-
-/// <summary>
-/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
-/// </summary>
-internal static partial class INamedTypeSymbolExtensions
+namespace Valuify.Semantics
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Valuify.Model;
+    using Valuify.Syntax;
+
     /// <summary>
-    /// Determines whether or not the <paramref name="symbol"/> provided is supported by Valuify.
+    /// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
     /// </summary>
-    /// <param name="symbol">
-    /// The symbol for the type to be checked for Valuify support.
-    /// </param>
-    /// <param name="nesting">
-    /// The declaration syntax for the parents of the <paramref name="syntax"/>.
-    /// </param>
-    /// <returns>
-    /// <see langword="true"/> if the type is annotated and partial, otherwise <see langword="false"/>.
-    /// </returns>
-    public static bool IsSupported(this INamedTypeSymbol symbol, Stack<Nesting> nesting)
+    internal static partial class INamedTypeSymbolExtensions
     {
-        if (!symbol.HasValuify())
+        /// <summary>
+        /// Determines whether or not the <paramref name="symbol"/> provided is supported by Valuify.
+        /// </summary>
+        /// <param name="symbol">
+        /// The symbol for the type to be checked for Valuify support.
+        /// </param>
+        /// <param name="nesting">
+        /// The declaration syntax for the parents of the <paramref name="syntax"/>.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the type is annotated and partial, otherwise <see langword="false"/>.
+        /// </returns>
+        public static bool IsSupported(this INamedTypeSymbol symbol, Stack<Nesting> nesting)
         {
-            return false;
-        }
-
-        INamedTypeSymbol? current = symbol;
-
-        do
-        {
-            current = current.ContainingType;
-
-            if (current is null)
-            {
-                return true;
-            }
-
-            bool isPartial = current.DeclaringSyntaxReferences
-                .OfType<TypeDeclarationSyntax>()
-                .All(type => type.IsPartial());
-
-            if (!(isPartial && current.IsSupported(out string declaration)))
+            if (!symbol.HasValuify())
             {
                 return false;
             }
 
-            var parent = new Nesting
+            INamedTypeSymbol current = symbol;
+
+            do
             {
-                Declaration = declaration,
-                Name = current.Name,
-                Qualification = current.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
-            };
+                current = current.ContainingType;
 
-            nesting.Push(parent);
+                if (current is null)
+                {
+                    return true;
+                }
+
+                bool isPartial = current.DeclaringSyntaxReferences
+                    .OfType<TypeDeclarationSyntax>()
+                    .All(type => type.IsPartial());
+
+                if (!(isPartial && current.IsSupported(out string declaration)))
+                {
+                    return false;
+                }
+
+                var parent = new Nesting
+                {
+                    Declaration = declaration,
+                    Name = current.Name,
+                    Qualification = current.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                };
+
+                nesting.Push(parent);
+            }
+            while (true);
         }
-        while (true);
-    }
 
-    private static string IdentifyPrefix(this INamedTypeSymbol symbol)
-    {
-        string @ref = symbol.IsRefLikeType
-            ? "ref"
-            : string.Empty;
-
-        string @readonly = symbol.IsReadOnly
-            ? "readonly"
-            : string.Empty;
-
-        return string
-            .Join(" ", @readonly, @ref)
-            .Trim();
-    }
-
-    private static string IdentifyType(this INamedTypeSymbol symbol)
-    {
-        return symbol.TypeKind switch
+        private static string IdentifyPrefix(this INamedTypeSymbol symbol)
         {
-            TypeKind.Class => symbol.IsRecord
-                ? "record"
-                : "class",
-            TypeKind.Struct => symbol.IsRecord
-                ? "record struct"
-                : "struct",
-            TypeKind.Interface => "interface",
-            _ => string.Empty,
-        };
-    }
+            string @ref = symbol.IsRefLikeType
+                ? "ref"
+                : string.Empty;
 
-    private static bool IsSupported(this INamedTypeSymbol symbol, out string declaration)
-    {
-        string prefix = symbol.IdentifyPrefix();
-        string type = symbol.IdentifyType();
+            string @readonly = symbol.IsReadOnly
+                ? "readonly"
+                : string.Empty;
 
-        declaration = string
-            .Join(" ", prefix, "partial", type)
-            .TrimStart();
+            return string
+                .Join(" ", @readonly, @ref)
+                .Trim();
+        }
 
-        return !string.IsNullOrEmpty(declaration);
+        private static string IdentifyType(this INamedTypeSymbol symbol)
+        {
+            switch (symbol.TypeKind)
+            {
+                case TypeKind.Class:
+
+                    return symbol.IsRecord ? "record" : "class";
+
+                case TypeKind.Struct:
+
+                    return symbol.IsRecord ? "record struct" : "struct";
+
+                case TypeKind.Interface:
+
+                    return "interface";
+
+                default:
+
+                    return string.Empty;
+            }
+        }
+
+        private static bool IsSupported(this INamedTypeSymbol symbol, out string declaration)
+        {
+            string prefix = symbol.IdentifyPrefix();
+            string type = symbol.IdentifyType();
+
+            declaration = string
+                .Join(" ", prefix, "partial", type)
+                .TrimStart();
+
+            return !string.IsNullOrEmpty(declaration);
+        }
     }
 }

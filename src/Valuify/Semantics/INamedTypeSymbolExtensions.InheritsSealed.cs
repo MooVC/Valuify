@@ -1,54 +1,55 @@
-﻿namespace Valuify.Semantics;
-
-using Microsoft.CodeAnalysis;
-
-/// <summary>
-/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
-/// </summary>
-internal static partial class INamedTypeSymbolExtensions
+namespace Valuify.Semantics
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.CodeAnalysis;
+
     /// <summary>
-    /// Determines whether or not the <paramref name="class"/> inherits a sealed override for the method denoted by <paramref name="name"/>.
+    /// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
     /// </summary>
-    /// <param name="class">
-    /// The <paramref name="class"/> to be checked.
-    /// </param>
-    /// <param name="name">
-    /// The name of the method to locate.
-    /// </param>
-    /// <param name="return">
-    /// The return type for the method denoted by <paramref name="name"/>.
-    /// </param>
-    /// <param name="predicate">
-    /// Allows for the specification of an optional parameter check on the override method.
-    /// </param>
-    /// <returns>
-    /// <see langword="true"/> if the <paramref name="class"/> inherits a sealed override to the method denoted by <paramref name="name"/>, otherwise <see langword="false"/>.
-    /// </returns>
-    /// <remarks>
-    /// When no <paramref name="predicate"/> is specified, it is assumed that the method accepts no parameters.
-    /// </remarks>
-    public static bool InheritsSealed(
-        this INamedTypeSymbol @class,
-        string name,
-        SpecialType @return,
-        Predicate<IMethodSymbol>? predicate = default)
+    internal static partial class INamedTypeSymbolExtensions
     {
-        predicate ??= method => method.Parameters.Length == 0;
-
-        for (INamedTypeSymbol? @base = @class.BaseType; @base is not null && @base.SpecialType != SpecialType.System_Object; @base = @base.BaseType)
+        /// <summary>
+        /// Determines whether or not the <paramref name="class"/> inherits a sealed override for the method denoted by <paramref name="name"/>.
+        /// </summary>
+        /// <param name="class">
+        /// The <paramref name="class"/> to be checked.
+        /// </param>
+        /// <param name="name">
+        /// The name of the method to locate.
+        /// </param>
+        /// <param name="return">
+        /// The return type for the method denoted by <paramref name="name"/>.
+        /// </param>
+        /// <param name="predicate">
+        /// Allows for the specification of an optional parameter check on the override method.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the <paramref name="class"/> inherits a sealed override to the method denoted by <paramref name="name"/>, otherwise <see langword="false"/>.
+        /// </returns>
+        /// <remarks>
+        /// When no <paramref name="predicate"/> is specified, it is assumed that the method accepts no parameters.
+        /// </remarks>
+        public static bool InheritsSealed(this INamedTypeSymbol @class, string name, SpecialType @return, Predicate<IMethodSymbol> predicate = default)
         {
-            bool InheritsSealed(IMethodSymbol method)
+            predicate = predicate ?? (method => method.Parameters.Length == 0);
+
+            for (INamedTypeSymbol @base = @class.BaseType; !(@base is null || @base.SpecialType == SpecialType.System_Object); @base = @base.BaseType)
             {
-                return method.IsSealed && predicate(method);
+                bool InheritsSealed(IMethodSymbol method)
+                {
+                    return method.IsSealed && predicate(method);
+                }
+
+                if (@base.HasOverride(name, @return, InheritsSealed))
+                {
+                    return true;
+                }
             }
 
-            if (@base.HasOverride(name, @return, InheritsSealed))
-            {
-                return true;
-            }
+            return false;
         }
-
-        return false;
     }
 }

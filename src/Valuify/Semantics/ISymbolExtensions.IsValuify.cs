@@ -1,23 +1,28 @@
-﻿namespace Valuify.Semantics;
-
-using Microsoft.CodeAnalysis;
-
-/// <summary>
-/// Provides extensions relating to <see cref="ISymbol"/>.
-/// </summary>
-internal static partial class ISymbolExtensions
+namespace Valuify.Semantics
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.CodeAnalysis;
+
     /// <summary>
-    /// Determines whether or not the <paramref name="symbol"/> represents the Valuify attribute.
+    /// Provides extensions relating to <see cref="ISymbol"/>.
     /// </summary>
-    /// <param name="symbol">
-    /// The symbol to check.
-    /// </param>
-    /// <returns>
-    /// <see langword="true"/> if the <paramref name="symbol"/> is the Valuify attribute, otherwise <see langword="false"/>.
-    /// </returns>
-    public static bool IsValuify(this ISymbol? symbol)
+    internal static partial class ISymbolExtensions
     {
-        return symbol.IsAttribute(ValuifyAttributeGenerator.Name);
+        /// <summary>
+        /// Determines whether or not the <paramref name="symbol"/> represents the Valuify attribute.
+        /// </summary>
+        /// <param name="symbol">
+        /// The symbol to check.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the <paramref name="symbol"/> is the Valuify attribute, otherwise <see langword="false"/>.
+        /// </returns>
+        public static bool IsValuify(this ISymbol symbol)
+        {
+            return symbol.IsAttribute(ValuifyAttributeGenerator.Name);
+        }
     }
 }

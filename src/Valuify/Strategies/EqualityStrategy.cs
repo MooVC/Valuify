@@ -1,42 +1,29 @@
-﻿namespace Valuify.Strategies;
-
-using System.Collections.Generic;
-using Valuify.Model;
-
-/// <summary>
-/// Generates the source needed to support the equality operator.
-/// </summary>
-internal sealed class EqualityStrategy
-    : IStrategy
+namespace Valuify.Strategies
 {
-    /// <inheritdoc/>
-    public IEnumerable<Source> Generate(Subject subject)
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Valuify.Model;
+    using static Valuify.Strategies.EqualityStrategy_Resources;
+
+    /// <summary>
+    /// Generates the source needed to support the equality operator.
+    /// </summary>
+    internal sealed class EqualityStrategy
+        : IStrategy
     {
-        if (subject.HasEqualityOperator)
+        /// <inheritdoc/>
+        public IEnumerable<Source> Generate(Subject subject)
         {
-            yield break;
-        }
-
-        string code = $$"""
-            partial class {{subject.Qualification}}
+            if (subject.HasEqualityOperator)
             {
-                public static bool operator ==({{subject.Qualification}} left, {{subject.Qualification}} right)
-                {
-                    if (ReferenceEquals(left, right))
-                    {
-                        return true;
-                    }
-
-                    if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
-                    {
-                        return false;
-                    }
-
-                    return left.Equals(right);
-                }
+                yield break;
             }
-            """;
 
-        yield return new Source(code, "Equality");
+            string code = string.Format(Source, subject.Qualification);
+
+            yield return new Source(code, "Equality");
+        }
     }
 }
