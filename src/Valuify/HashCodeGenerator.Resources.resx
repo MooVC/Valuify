@@ -136,7 +136,7 @@
             {
                 IEnumerable enumerable = value as IEnumerable;
 
-                if (!(enumerable is null) &amp;&amp; !(value is string))
+                if (!ReferenceEquals(enumerable, null) &amp;&amp; !(value is string))
                 {
                     hash = CombineEnumerable(hash, enumerable);
                 }
@@ -151,7 +151,7 @@
 
         public static int GetHashCode(object value)
         {
-            if (value is null)
+            if (ReferenceEquals(value, null))
             {
                 return 0;
             }
@@ -170,7 +170,7 @@
             {
                 IEnumerable enumerable = element as IEnumerable;
 
-                if (!(enumerable is null) &amp;&amp; !(element is string))
+                if (!ReferenceEquals(enumerable, null) &amp;&amp; !(element is string))
                 {
                     hash = CombineEnumerable(hash, enumerable);
                 }
