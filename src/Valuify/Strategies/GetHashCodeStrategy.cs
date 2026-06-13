@@ -1,47 +1,42 @@
-﻿namespace Valuify.Strategies;
-
-using Valuify.Model;
-
-/// <summary>
-/// Generates the source needed to support <see cref="object.Equals(object)"/>.
-/// </summary>
-internal sealed class GetHashCodeStrategy
-    : IStrategy
+namespace Valuify.Strategies
 {
-    /// <inheritdoc/>
-    public IEnumerable<Source> Generate(Subject subject)
+    using System.Collections.Generic;
+    using System.Linq;
+    using Valuify.Model;
+    using static Valuify.Strategies.GetHashCodeStrategy_Resources;
+
+    /// <summary>
+    /// Generates the source needed to support <see cref="object.Equals(object)"/>.
+    /// </summary>
+    internal sealed class GetHashCodeStrategy
+        : IStrategy
     {
-        if (!subject.CanOverrideGetHashCode)
+        /// <inheritdoc/>
+        public IEnumerable<Source> Generate(Subject subject)
         {
-            yield break;
-        }
-
-        IEnumerable<string> properties = subject.Properties
-            .Where(property => !property.IsIgnored)
-            .Select(Format);
-
-        string combine = string.Join(", ", properties);
-
-        string code = $$"""
-            partial class {{subject.Qualification}}
+            if (!subject.CanOverrideGetHashCode)
             {
-                public override int GetHashCode()
-                {
-                    return global::Valuify.Internal.HashCode.Combine({{combine}});
-                }
+                yield break;
             }
-            """;
 
-        yield return new Source(code, nameof(GetHashCode));
-    }
+            IEnumerable<string> properties = subject.Properties
+                .Where(property => !property.IsIgnored)
+                .Select(Format);
 
-    private static string Format(Property property)
-    {
-        if (property.IsSequence && !property.IsImmutableArray && (property.IsEquatable || property.HasValuify))
-        {
-            return $"global::Valuify.Internal.HashCode.GetHashCode({property.Name})";
+            string combine = string.Join(", ", properties);
+            string code = string.Format(Source, subject.Qualification, combine);
+
+            yield return new Source(code, nameof(GetHashCode));
         }
 
-        return property.Name;
+        private static string Format(Property property)
+        {
+            if (property.IsSequence && !property.IsImmutableArray && (property.IsEquatable || property.HasValuify))
+            {
+                return string.Format(SequenceHashCode, property.Name);
+            }
+
+            return property.Name;
+        }
     }
 }

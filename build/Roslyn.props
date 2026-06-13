@@ -4,9 +4,12 @@
     <DevelopmentDependency>true</DevelopmentDependency>
     <EnablePackageValidation>true</EnablePackageValidation>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <ImplicitUsings>disable</ImplicitUsings>
     <IncludeSymbols>true</IncludeSymbols>
     <IsPackable>true</IsPackable>
     <IsRoslynComponent>true</IsRoslynComponent>
+    <LangVersion>7.3</LangVersion>
+    <Nullable>disable</Nullable>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>

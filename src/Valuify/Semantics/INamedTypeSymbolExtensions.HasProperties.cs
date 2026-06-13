@@ -1,32 +1,35 @@
-﻿namespace Valuify.Semantics;
-
-using Microsoft.CodeAnalysis;
-using Valuify.Model;
-
-/// <summary>
-/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
-/// </summary>
-internal static partial class INamedTypeSymbolExtensions
+namespace Valuify.Semantics
 {
+    using System;
+    using System.Linq;
+    using Microsoft.CodeAnalysis;
+    using Valuify.Model;
+
     /// <summary>
-    /// Checks whether or not a <paramref name="class"/> has compatible properties.
+    /// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
     /// </summary>
-    /// <param name="class">
-    /// The class to check for compatible properties.
-    /// </param>
-    /// <param name="compilation">
-    /// Used to determine characteristics of the properties, such as whether or not they are equatable.
-    /// </param>
-    /// <param name="predicate">
-    /// The predicate to apply to the properties.
-    /// </param>
-    /// <returns>
-    /// <see langword="true"/> if the <paramref name="class"/> defines compatible properties, otherwise <see langword="false"/>.
-    /// </returns>
-    public static bool HasProperties(this INamedTypeSymbol @class, Compilation compilation, Func<Property, bool> predicate)
+    internal static partial class INamedTypeSymbolExtensions
     {
-        return @class
-            .GetAllProperties(compilation)
-            .Any(predicate);
+        /// <summary>
+        /// Checks whether or not a <paramref name="class"/> has compatible properties.
+        /// </summary>
+        /// <param name="class">
+        /// The class to check for compatible properties.
+        /// </param>
+        /// <param name="compilation">
+        /// Used to determine characteristics of the properties, such as whether or not they are equatable.
+        /// </param>
+        /// <param name="predicate">
+        /// The predicate to apply to the properties.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if the <paramref name="class"/> defines compatible properties, otherwise <see langword="false"/>.
+        /// </returns>
+        public static bool HasProperties(this INamedTypeSymbol @class, Compilation compilation, Func<Property, bool> predicate)
+        {
+            return @class
+                .GetAllProperties(compilation)
+                .Any(predicate);
+        }
     }
 }

@@ -509,3 +509,7 @@ dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion
 dotnet_style_prefer_conditional_expression_over_return = false:error
 [*.vb]
 dotnet_diagnostic.CA1047.severity=error
+[src/Valuify/**/*.cs]
+csharp_prefer_static_local_function = false:error
+csharp_style_namespace_declarations = block_scoped:error
+csharp_style_prefer_switch_expression = false:error

@@ -1,31 +1,26 @@
-﻿namespace Valuify.Strategies;
-
-using Valuify.Model;
-
-/// <summary>
-/// Generates the source needed to support <see cref="object.Equals(object)"/>.
-/// </summary>
-internal sealed class EqualsStrategy
-    : IStrategy
+namespace Valuify.Strategies
 {
-    /// <inheritdoc/>
-    public IEnumerable<Source> Generate(Subject subject)
+    using System.Collections.Generic;
+    using Valuify.Model;
+    using static Valuify.Strategies.EqualsStrategy_Resources;
+
+    /// <summary>
+    /// Generates the source needed to support <see cref="object.Equals(object)"/>.
+    /// </summary>
+    internal sealed class EqualsStrategy
+        : IStrategy
     {
-        if (!subject.CanOverrideEquals)
+        /// <inheritdoc/>
+        public IEnumerable<Source> Generate(Subject subject)
         {
-            yield break;
-        }
-
-        string code = $$"""
-            partial class {{subject.Qualification}}
+            if (!subject.CanOverrideEquals)
             {
-                public override bool Equals(object other)
-                {
-                    return Equals(other as {{subject.Qualification}});
-                }
+                yield break;
             }
-            """;
 
-        yield return new Source(code, nameof(Equals));
+            string code = string.Format(Source, subject.Qualification);
+
+            yield return new Source(code, nameof(Equals));
+        }
     }
 }

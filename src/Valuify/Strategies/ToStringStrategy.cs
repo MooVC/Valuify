@@ -1,49 +1,43 @@
-﻿namespace Valuify.Strategies;
-
-using Valuify.Model;
-
-/// <summary>
-/// Generates the source needed to support <see cref="object.ToString()"/>.
-/// </summary>
-internal sealed class ToStringStrategy
-    : IStrategy
+namespace Valuify.Strategies
 {
-    /// <inheritdoc/>
-    public IEnumerable<Source> Generate(Subject subject)
+    using System.Collections.Generic;
+    using System.Linq;
+    using Valuify.Model;
+    using static Valuify.Strategies.ToStringStrategy_Resources;
+
+    /// <summary>
+    /// Generates the source needed to support <see cref="object.ToString()"/>.
+    /// </summary>
+    internal sealed class ToStringStrategy
+        : IStrategy
     {
-        if (!subject.CanOverrideToString)
+        /// <inheritdoc/>
+        public IEnumerable<Source> Generate(Subject subject)
         {
-            yield break;
-        }
-
-        string value = $"\"{subject.Name}\"";
-
-        Property[] properties = subject.Properties
-            .Where(property => !property.IsIgnored)
-            .ToArray();
-
-        if (properties.Length > 0)
-        {
-            IEnumerable<string> values = properties.Select((property, index) => $"{property.Name} = {{{index}}}");
-
-            string format = $"{subject.Name} {{{{ {string.Join(", ", values)} }}}}";
-
-            IEnumerable<string> names = properties.Select(property => property.Name);
-            string parameters = string.Join(", ", names);
-
-            value = $"string.Format(\"{format}\", {parameters})";
-        }
-
-        string code = $$"""
-            partial class {{subject.Qualification}}
+            if (!subject.CanOverrideToString)
             {
-                public override string ToString()
-                {
-                    return {{value}};
-                }
+                yield break;
             }
-            """;
 
-        yield return new Source(code, nameof(ToString));
+            string value = string.Format(EmptyValue, subject.Name);
+
+            Property[] properties = subject.Properties
+                .Where(property => !property.IsIgnored)
+                .ToArray();
+
+            if (properties.Length > 0)
+            {
+                IEnumerable<string> values = properties.Select((property, index) => string.Format(PropertyValue, property.Name, index));
+                string format = string.Format(Format, subject.Name, string.Join(", ", values));
+                IEnumerable<string> names = properties.Select(property => property.Name);
+                string parameters = string.Join(", ", names);
+
+                value = string.Format(Value, format, parameters);
+            }
+
+            string code = string.Format(Source, subject.Qualification, value);
+
+            yield return new Source(code, nameof(ToString));
+        }
     }
 }

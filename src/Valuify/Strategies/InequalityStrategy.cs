@@ -1,31 +1,26 @@
-﻿namespace Valuify.Strategies;
-
-using Valuify.Model;
-
-/// <summary>
-/// Generates the source needed to support the inequality operator.
-/// </summary>
-internal sealed class InequalityStrategy
-    : IStrategy
+namespace Valuify.Strategies
 {
-    /// <inheritdoc/>
-    public IEnumerable<Source> Generate(Subject subject)
+    using System.Collections.Generic;
+    using Valuify.Model;
+    using static Valuify.Strategies.InequalityStrategy_Resources;
+
+    /// <summary>
+    /// Generates the source needed to support the inequality operator.
+    /// </summary>
+    internal sealed class InequalityStrategy
+        : IStrategy
     {
-        if (subject.HasInequalityOperator)
+        /// <inheritdoc/>
+        public IEnumerable<Source> Generate(Subject subject)
         {
-            yield break;
-        }
-
-        string code = $$"""
-            partial class {{subject.Qualification}}
+            if (subject.HasInequalityOperator)
             {
-                public static bool operator !=({{subject.Qualification}} left, {{subject.Qualification}} right)
-                {
-                    return !(left == right);
-                }
+                yield break;
             }
-            """;
 
-        yield return new Source(code, "Inequality");
+            string code = string.Format(Source, subject.Qualification);
+
+            yield return new Source(code, "Inequality");
+        }
     }
 }

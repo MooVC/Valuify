@@ -1,26 +1,29 @@
-﻿namespace Valuify.Semantics;
-
-using Microsoft.CodeAnalysis;
-using Valuify.Model;
-
-/// <summary>
-/// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
-/// </summary>
-internal static partial class INamedTypeSymbolExtensions
+namespace Valuify.Semantics
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.CodeAnalysis;
+    using Valuify.Model;
+
     /// <summary>
-    /// Returns a collection of <see cref="Property"/> for each property belonging to <paramref name="class"/>.
+    /// Provides extensions relating to <see cref="INamedTypeSymbol"/>.
     /// </summary>
-    /// <param name="class">
-    /// The class from which the properties are to be retrieved.
-    /// </param>
-    /// <returns>
-    /// The collection of <see cref="Property"/> for each property belonging to <paramref name="class"/>.
-    /// </returns>
-    public static IReadOnlyList<Property> GetProperties(this INamedTypeSymbol @class, Compilation compilation)
+    internal static partial class INamedTypeSymbolExtensions
     {
-        return @class
-            .GetAllProperties(compilation)
-            .ToArray();
+        /// <summary>
+        /// Returns a collection of <see cref="Property"/> for each property belonging to <paramref name="class"/>.
+        /// </summary>
+        /// <param name="class">
+        /// The class from which the properties are to be retrieved.
+        /// </param>
+        /// <returns>
+        /// The collection of <see cref="Property"/> for each property belonging to <paramref name="class"/>.
+        /// </returns>
+        public static IReadOnlyList<Property> GetProperties(this INamedTypeSymbol @class, Compilation compilation)
+        {
+            return @class
+                .GetAllProperties(compilation)
+                .ToArray();
+        }
     }
 }

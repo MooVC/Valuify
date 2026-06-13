@@ -1,27 +1,126 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>A .NET Roslyn source generator for record-like class semantics, ideal for incremental generator cache key models and C# versions prior to 9.0.</Description>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="ClassGenerator.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClassGenerator.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="HashCodeGenerator.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HashCodeGenerator.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="IgnoreAttributeAnalyzer.Resources.Designer.cs">
       <DependentUpon>IgnoreAttributeAnalyzer.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="IgnoreAttributeGenerator.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IgnoreAttributeGenerator.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="SequenceEqualityComparerGenerator.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SequenceEqualityComparerGenerator.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Strategies\EqualityStrategy.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EqualityStrategy.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Strategies\EqualsStrategy.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EqualsStrategy.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Strategies\EquatableStrategy.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EquatableStrategy.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Strategies\GetHashCodeStrategy.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GetHashCodeStrategy.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Strategies\InequalityStrategy.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InequalityStrategy.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Strategies\ToStringStrategy.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ToStringStrategy.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="ValuifyAttributeAnalyzer.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ValuifyAttributeAnalyzer.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="ValuifyAttributeGenerator.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValuifyAttributeGenerator.Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="ClassGenerator.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClassGenerator.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="HashCodeGenerator.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>HashCodeGenerator.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="IgnoreAttributeAnalyzer.Resources.resx">
       <LastGenOutput>IgnoreAttributeAnalyzer.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="IgnoreAttributeGenerator.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IgnoreAttributeGenerator.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SequenceEqualityComparerGenerator.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SequenceEqualityComparerGenerator.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Strategies\EqualityStrategy.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EqualityStrategy.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Strategies\EqualsStrategy.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EqualsStrategy.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Strategies\EquatableStrategy.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EquatableStrategy.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Strategies\GetHashCodeStrategy.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GetHashCodeStrategy.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Strategies\InequalityStrategy.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InequalityStrategy.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Strategies\ToStringStrategy.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ToStringStrategy.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="ValuifyAttributeAnalyzer.Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ValuifyAttributeAnalyzer.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ValuifyAttributeGenerator.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValuifyAttributeGenerator.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>
