@@ -6,13 +6,14 @@ using Microsoft.CodeAnalysis.Testing;
 
 internal static class Frameworks
 {
-    public static readonly IReadOnlyList<(ReferenceAssemblies Assembly, LanguageVersion Maximum, DateOnly SupportTo)> InScope =
+    private static readonly IReadOnlyList<(ReferenceAssemblies Assembly, LanguageVersion Maximum, DateOnly SupportTo)> _inScope =
     [
         (ReferenceAssemblies.Net.Net50, LanguageVersion.CSharp9, new DateOnly(2022, 5, 10)),
         (ReferenceAssemblies.Net.Net60, LanguageVersion.CSharp10, new DateOnly(2024, 11, 12)),
-        (ReferenceAssemblies.Net.Net70, LanguageVersion.CSharp10, new DateOnly(2024, 5, 14)),
-        (ReferenceAssemblies.Net.Net80, LanguageVersion.CSharp10, new DateOnly(2026, 11, 10)),
-        (ReferenceAssemblies.Net.Net90, LanguageVersion.CSharp10, new DateOnly(2026, 5, 12)),
+        (ReferenceAssemblies.Net.Net70, LanguageVersion.CSharp11, new DateOnly(2024, 5, 14)),
+        (ReferenceAssemblies.Net.Net80, LanguageVersion.CSharp12, new DateOnly(2026, 11, 10)),
+        (ReferenceAssemblies.Net.Net90, LanguageVersion.CSharp13, new DateOnly(2026, 11, 10)),
+        (ReferenceAssemblies.Net.Net100, LanguageVersion.CSharp14, new DateOnly(2028, 11, 14)),
         (ReferenceAssemblies.NetCore.NetCoreApp20, LanguageVersion.CSharp7_3, new DateOnly(2018, 10, 1)),
         (ReferenceAssemblies.NetCore.NetCoreApp21, LanguageVersion.CSharp7_3, new DateOnly(2021, 8, 21)),
         (ReferenceAssemblies.NetCore.NetCoreApp30, LanguageVersion.CSharp8, new DateOnly(2020, 3, 3)),
@@ -26,6 +27,7 @@ internal static class Frameworks
         (ReferenceAssemblies.NetStandard.NetStandard21, LanguageVersion.CSharp8, DateOnly.MaxValue),
     ];
 
+#if CI
     private static readonly LanguageVersion[] _languages;
 
     [SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "The removal suggestion is a false positive.")]
@@ -34,36 +36,43 @@ internal static class Frameworks
     {
         _languages = Enum.GetValues<LanguageVersion>();
     }
+#endif
 
-    public static IEnumerable<object[]> All(LanguageVersion minimum, Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare = default)
+    public static IEnumerable<(ReferenceAssemblies Assembly, LanguageVersion Language)> Cases(LanguageVersion minimum)
     {
-        return Filter(InScope, maximum => _languages.Where(language => language >= minimum && language <= maximum), prepare);
-    }
-
-    public static IEnumerable<object[]> Supported(LanguageVersion minimum, Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare = default)
-    {
+#if CI
+        return Filter(_inScope, maximum => _languages.Where(language => language >= minimum && language <= maximum));
+#else
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
 
-        return Filter(InScope.Where(framework => framework.SupportTo >= today && framework.Maximum >= minimum), maximum => [maximum], prepare);
+        return Filter(_inScope.Where(framework => framework.SupportTo >= today && framework.Maximum >= minimum), maximum => [maximum]);
+#endif
     }
 
-    private static IEnumerable<object[]> Filter(
-        IEnumerable<(ReferenceAssemblies Assembly, LanguageVersion Maximum, DateOnly SupportedTo)> frameworks,
-        Func<LanguageVersion, IEnumerable<LanguageVersion>> languages,
-        Func<ReferenceAssemblies, LanguageVersion, object[]?>? prepare)
+    public static IEnumerable<(ReferenceAssemblies Assembly, LanguageVersion Language)> CSharp6Cases()
     {
-        prepare ??= (assembly, language) => [assembly, language];
+        return Cases(LanguageVersion.CSharp6);
+    }
 
+    public static IEnumerable<(ReferenceAssemblies Assembly, LanguageVersion Language)> CSharp9Cases()
+    {
+        return Cases(LanguageVersion.CSharp9);
+    }
+
+    public static IEnumerable<(ReferenceAssemblies Assembly, LanguageVersion Language)> DefaultCases()
+    {
+        return Cases(LanguageVersion.CSharp2);
+    }
+
+    private static IEnumerable<(ReferenceAssemblies Assembly, LanguageVersion Language)> Filter(
+        IEnumerable<(ReferenceAssemblies Assembly, LanguageVersion Maximum, DateOnly SupportedTo)> frameworks,
+        Func<LanguageVersion, IEnumerable<LanguageVersion>> languages)
+    {
         foreach ((ReferenceAssemblies assembly, LanguageVersion maximum, DateOnly _) in frameworks)
         {
             foreach (LanguageVersion language in languages(maximum))
             {
-                object[]? payload = prepare(assembly, language);
-
-                if (payload is not null)
-                {
-                    yield return payload;
-                }
+                yield return (assembly, language);
             }
         }
     }

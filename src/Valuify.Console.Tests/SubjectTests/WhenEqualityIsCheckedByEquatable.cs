@@ -2,6 +2,7 @@
 
 using Valuify.Console;
 
+[InheritsTests]
 public sealed class WhenEqualityIsCheckedByEquatable
     : WhenEqualityIsChecked
 {

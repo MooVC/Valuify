@@ -16,8 +16,13 @@ public sealed class WhenExecuted
         typeof(ValuifyAttributeGenerator),
     ];
 
-    [Theory]
-    [Snippets]
+    public static IEnumerable<TestDataRow<(ReferenceAssemblies Assembly, Expectations Expectations, LanguageVersion Language)>> ClassGenerationCases()
+    {
+        return SnippetCases.Create();
+    }
+
+    [Test]
+    [MethodDataSource(nameof(ClassGenerationCases))]
     public async Task GivenAClassTheExpectedSourceIsGenerated(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange

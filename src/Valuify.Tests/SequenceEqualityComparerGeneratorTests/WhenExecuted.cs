@@ -12,8 +12,8 @@ public sealed class WhenExecuted
         typeof(SequenceEqualityComparerGenerator),
     ];
 
-    [Theory]
-    [Frameworks]
+    [Test]
+    [MethodDataSource(typeof(Frameworks), nameof(Frameworks.DefaultCases))]
     public async Task GivenAnAssemblyThenTheClassIsGenerated(ReferenceAssemblies assemblies, LanguageVersion language)
     {
         // Arrange

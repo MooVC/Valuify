@@ -2,7 +2,7 @@
 
 public abstract class WhenEqualityIsChecked
 {
-    [Fact]
+    [Test]
     public void GivenADifferentHasEqualityOperatorThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -16,7 +16,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentHasEqualsOverrideThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -30,7 +30,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentHasEquatableThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -44,7 +44,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentHasGetHashCodeOverrideThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -58,7 +58,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentHasInequalityOperatorThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -72,7 +72,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentHasToStringOverrideThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -86,7 +86,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentIsEquatableThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -100,7 +100,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentNameThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -114,7 +114,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentNamespaceThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -128,7 +128,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentNestingThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -142,7 +142,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentPropertiesThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -156,7 +156,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentQualificationThenTheyAreNotDeemedEqual()
     {
         // Arrange
@@ -170,7 +170,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenBothInstancesAreNullThenTheyAreDeemedEqual()
     {
         // Arrange
@@ -184,7 +184,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenIdenticalInstancesThenTheyAreDeemedEqual()
     {
         // Arrange
@@ -198,7 +198,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenOneInstanceIsNullThenTheyAreDeemedNotEqual()
     {
         // Arrange
@@ -211,7 +211,7 @@ public abstract class WhenEqualityIsChecked
         areEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenTheyAreDeemedEqual()
     {
         // Arrange

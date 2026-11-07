@@ -10,8 +10,23 @@ using AnalyzerTest = Valuify.AnalyzerTest<Valuify.ValuifyAttributeAnalyzer>;
 
 public sealed class WhenExecuted
 {
-    [Theory]
-    [Snippets(exclusions: [typeof(FromSealed), typeof(Redundant), typeof(Unsupported)], extensions: Extensions.None)]
+    public static IEnumerable<TestDataRow<(ReferenceAssemblies Assembly, Expectations Expectations, LanguageVersion Language)>> CompliantCases()
+    {
+        return SnippetCases.Create(exclusions: [typeof(FromSealed), typeof(Redundant), typeof(Unsupported)], extensions: Extensions.None);
+    }
+
+    public static IEnumerable<TestDataRow<(ReferenceAssemblies Assembly, Expectations Expectations, LanguageVersion Language)>> FromSealedCases()
+    {
+        return SnippetCases.Create(inclusions: [typeof(FromSealed)]);
+    }
+
+    public static IEnumerable<TestDataRow<(ReferenceAssemblies Assembly, Expectations Expectations, LanguageVersion Language)>> NonPartialTypeCases()
+    {
+        return SnippetCases.Create(inclusions: [typeof(Unsupported)]);
+    }
+
+    [Test]
+    [MethodDataSource(nameof(CompliantCases))]
     public async Task GivenAClassWhenCompliantThenNoDiagnosticsAreRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
@@ -26,8 +41,8 @@ public sealed class WhenExecuted
         await act.ShouldNotThrowAsync();
     }
 
-    [Theory]
-    [Snippets(inclusions: [typeof(FromSealed)])]
+    [Test]
+    [MethodDataSource(nameof(FromSealedCases))]
     public async Task GivenATypeWhenBaseIsSealedThenEqualityGuarenteeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
@@ -44,8 +59,8 @@ public sealed class WhenExecuted
         await act.ShouldNotThrowAsync();
     }
 
-    [Theory]
-    [Frameworks(Language = LanguageVersion.CSharp9)]
+    [Test]
+    [MethodDataSource(typeof(Frameworks), nameof(Frameworks.CSharp9Cases))]
     public async Task GivenATypeWhenIncompatibleThenCompatibleTargetTypeRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
     {
         // Arrange
@@ -68,8 +83,8 @@ public sealed class WhenExecuted
         await act.ShouldNotThrowAsync();
     }
 
-    [Theory]
-    [Frameworks]
+    [Test]
+    [MethodDataSource(typeof(Frameworks), nameof(Frameworks.DefaultCases))]
     public async Task GivenATypeWhenMissingPropertiesThenDefinesPropertiesRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
     {
         // Arrange
@@ -97,8 +112,8 @@ public sealed class WhenExecuted
         await act.ShouldNotThrowAsync();
     }
 
-    [Theory]
-    [Snippets(inclusions: [typeof(Unsupported)])]
+    [Test]
+    [MethodDataSource(nameof(NonPartialTypeCases))]
     public async Task GivenATypeWhenNotPartialThenPartialTypeRuleIsRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
@@ -114,8 +129,8 @@ public sealed class WhenExecuted
         await act.ShouldNotThrowAsync();
     }
 
-    [Theory]
-    [Frameworks(Language = LanguageVersion.CSharp6)]
+    [Test]
+    [MethodDataSource(typeof(Frameworks), nameof(Frameworks.CSharp6Cases))]
     public async Task GivenATypeWithOnlyIndexerThenDefinesPropertiesRuleIsRaised(ReferenceAssemblies assembly, LanguageVersion language)
     {
         // Arrange

@@ -9,8 +9,13 @@ using AnalyzerTest = Valuify.AnalyzerTest<Valuify.IgnoreAttributeAnalyzer>;
 
 public sealed class WhenExecuted
 {
-    [Theory]
-    [Snippets(exclusions: [typeof(Unannotated)], extensions: Extensions.None)]
+    public static IEnumerable<TestDataRow<(ReferenceAssemblies Assembly, Expectations Expectations, LanguageVersion Language)>> CompliantCases()
+    {
+        return SnippetCases.Create(exclusions: [typeof(Unannotated)], extensions: Extensions.None);
+    }
+
+    [Test]
+    [MethodDataSource(nameof(CompliantCases))]
     public async Task GivenAClassWhenCompliantThenNoDiagnosticsAreRaised(ReferenceAssemblies assembly, Expectations expectations, LanguageVersion language)
     {
         // Arrange
@@ -25,7 +30,7 @@ public sealed class WhenExecuted
         await act.ShouldNotThrowAsync();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenATypeWhenUnannotatedThenCompatibleTargetTypeRuleIsRaised()
     {
         Dictionary<LanguageVersion, LinePosition> positions = new()
