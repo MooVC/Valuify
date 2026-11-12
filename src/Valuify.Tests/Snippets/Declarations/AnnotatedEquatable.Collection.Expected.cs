@@ -10,23 +10,20 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatableCollection
                         {
-                            public static bool operator ==(AnnotatedEquatableCollection left, AnnotatedEquatableCollection right)
+                            public static bool operator ==(global::Valuify.Classes.Testing.AnnotatedEquatableCollection left, global::Valuify.Classes.Testing.AnnotatedEquatableCollection right)
                             {
-                                if (ReferenceEquals(left, right))
+                                if (global::System.Object.ReferenceEquals(left, right))
                                 {
                                     return true;
                                 }
 
-                                if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+                                if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
                                 {
                                     return false;
                                 }
- 
+
                                 return left.Equals(right);
                             }
                         }
@@ -39,14 +36,11 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatableCollection
                         {
                             public override bool Equals(object other)
                             {
-                                return Equals(other as AnnotatedEquatableCollection);
+                                return Equals(other as global::Valuify.Classes.Testing.AnnotatedEquatableCollection);
                             }
                         }
                     }
@@ -58,11 +52,8 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatableCollection
-                            : IEquatable<AnnotatedEquatableCollection>
+                            : global::System.IEquatable<global::Valuify.Classes.Testing.AnnotatedEquatableCollection>
                         {
                         }
                     }
@@ -74,25 +65,22 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatableCollection
                         {
-                            public bool Equals(AnnotatedEquatableCollection other)
+                            public bool Equals(global::Valuify.Classes.Testing.AnnotatedEquatableCollection other)
                             {
-                                if (ReferenceEquals(this, other))
+                                if (global::System.Object.ReferenceEquals(this, other))
                                 {
                                     return true;
                                 }
 
-                                if (ReferenceEquals(other, null))
+                                if (global::System.Object.ReferenceEquals(other, null))
                                 {
                                     return false;
                                 }
 
-                                return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(Capacity, other.Capacity)
-                                    && global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(Count, other.Count);
+                                return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(this.Capacity, other.Capacity)
+                                    && global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(this.Count, other.Count);
                             }
                         }
                     }
@@ -104,9 +92,6 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatableCollection
                         {
                             public override int GetHashCode()
@@ -123,12 +108,9 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatableCollection
                         {
-                            public static bool operator !=(AnnotatedEquatableCollection left, AnnotatedEquatableCollection right)
+                            public static bool operator !=(global::Valuify.Classes.Testing.AnnotatedEquatableCollection left, global::Valuify.Classes.Testing.AnnotatedEquatableCollection right)
                             {
                                 return !(left == right);
                             }
@@ -142,9 +124,6 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatableCollection
                         {
                             public override string ToString()

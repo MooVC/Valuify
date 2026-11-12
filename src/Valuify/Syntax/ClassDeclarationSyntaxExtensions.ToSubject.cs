@@ -3,6 +3,7 @@ namespace Valuify.Syntax
     using System.Collections.Generic;
     using System.Threading;
     using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Valuify.Model;
     using Valuify.Semantics;
@@ -49,7 +50,27 @@ namespace Valuify.Syntax
                 return default;
             }
 
-            return @class.ToSubject(compilation, nesting.ToArray());
+            string type = GetTypeReference(@class, model, syntax.OpenBraceToken.Span.End);
+
+            return @class.ToSubject(compilation, nesting.ToArray(), type);
+        }
+
+        private static string GetTypeReference(INamedTypeSymbol symbol, SemanticModel model, int position)
+        {
+            string qualified = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+
+            if (symbol.ContainingType?.IsGenericType != true)
+            {
+                return qualified;
+            }
+
+            TypeSyntax syntax = SyntaxFactory.ParseTypeName(qualified);
+            ITypeSymbol resolved = model.GetSpeculativeTypeInfo(position, syntax, SpeculativeBindingOption.BindAsTypeOrNamespace).Type;
+
+            // A nested type can hide an enclosing type parameter used in the qualified name.
+            return SymbolEqualityComparer.Default.Equals(resolved, symbol)
+                ? qualified
+                : symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat);
         }
     }
 }

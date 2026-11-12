@@ -61,23 +61,17 @@ namespace Valuify.Strategies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to partial class {0}
-        ///{{
-        ///    public static bool operator ==({0} left, {0} right)
-        ///    {{
-        ///        if (ReferenceEquals(left, right))
-        ///        {{
-        ///            return true;
-        ///        }}
+        ///   Looks up a localized string similar to if (global::System.Object.ReferenceEquals(left, right))
+        ///{
+        ///    return true;
+        ///}
         ///
-        ///        if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
-        ///        {{
-        ///            return false;
-        ///        }}
+        ///if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
+        ///{
+        ///    return false;
+        ///}
         ///
-        ///        return left.Equals(right);
-        ///    }}
-        ///}}.
+        ///return left.Equals(right);.
         /// </summary>
         internal static string Source {
             get {

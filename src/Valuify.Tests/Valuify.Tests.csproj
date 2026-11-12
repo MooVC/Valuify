@@ -1,5 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <!-- Tests deliberately use a newer Roslyn than the generator targets. -->
+    <NoWarn>$(NoWarn);NU1608</NoWarn>
     <RoslynVersion>5.9.0</RoslynVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -8,6 +10,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" VersionOverride="$(RoslynVersion)" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" VersionOverride="$(RoslynVersion)" PrivateAssets="all" />
+    <PackageReference Include="MooVC.Syntax.CSharp" PrivateAssets="all" />
     <Compile Update="Snippets/Declarations/AnnotatedEquatable.Collection.Expected.cs">
       <DependentUpon>Snippets/Declarations/AnnotatedEquatable.cs</DependentUpon>
     </Compile>

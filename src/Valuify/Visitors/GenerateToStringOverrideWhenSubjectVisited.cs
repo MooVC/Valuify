@@ -1,19 +1,25 @@
-namespace Valuify.Strategies
+namespace Valuify.Visitors
 {
     using System.Collections.Generic;
     using System.Linq;
+    using MooVC.Syntax.CSharp;
     using Valuify.Model;
+    using Valuify.Syntax;
+
     using static Valuify.Strategies.ToStringStrategy_Resources;
+    using Property = Valuify.Model.Property;
 
     /// <summary>
     /// Generates the source needed to support <see cref="object.ToString()"/>.
     /// </summary>
-    internal sealed class ToStringStrategy
-        : IStrategy
+    internal sealed class GenerateToStringOverrideWhenSubjectVisited
+        : ISubjectVisitor<Subject.Graph.Self, Source>
     {
         /// <inheritdoc/>
-        public IEnumerable<Source> Generate(Subject subject)
+        public IEnumerable<Source> Observe(Subject.Graph.Self instance)
         {
+            Subject subject = instance._Value;
+
             if (!subject.CanOverrideToString)
             {
                 yield break;
@@ -35,9 +41,13 @@ namespace Valuify.Strategies
                 value = string.Format(Value, format, parameters);
             }
 
-            string code = string.Format(Source, subject.Qualification, value);
+            Method method = Method.Undefined
+                .Named(nameof(ToString))
+                .WithExtensibility(Modifiers.Override)
+                .Returns(Result.Void.OfType(typeof(string)))
+                .WithBody(string.Format(Body, value));
 
-            yield return new Source(code, nameof(ToString));
+            yield return subject.ToSource(nameof(ToString), method);
         }
     }
 }

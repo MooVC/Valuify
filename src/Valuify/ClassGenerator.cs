@@ -1,12 +1,13 @@
 namespace Valuify
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using MooVC.Syntax;
     using Valuify.Model;
-    using Valuify.Strategies;
     using Valuify.Syntax;
 
     /// <summary>
@@ -16,16 +17,7 @@ namespace Valuify
     public sealed class ClassGenerator
         : IIncrementalGenerator
     {
-        private static readonly IReadOnlyList<IStrategy> _strategies =
-        new IStrategy[]
-        {
-            new EqualityStrategy(),
-            new EqualsStrategy(),
-            new EquatableStrategy(),
-            new GetHashCodeStrategy(),
-            new InequalityStrategy(),
-            new ToStringStrategy(),
-        };
+        private static readonly IServiceProvider _services = new GenerationServices();
 
         /// <inheritdoc/>
         public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -49,24 +41,13 @@ namespace Valuify
                 return;
             }
 
-#if DEBUG
-            var files = new Dictionary<string, string>();
-#endif
-            foreach (IStrategy strategy in _strategies)
+            var navigator = new SubjectNavigator(_services);
+
+            foreach (Source source in navigator.Navigate<Source>(subject))
             {
-                IEnumerable<Source> sources = strategy.Generate(subject);
-
-                foreach (Source source in sources)
-                {
-                    string code = Wrap(source.Code, subject);
-                    string hint = GetHint(source, subject);
-
-#if DEBUG
-                    files[hint] = code;
-#endif
-
-                    context.AddSource(hint, code);
-                }
+                Snippet code = Wrap(source.Code, subject);
+                string hint = GetHint(source, subject);
+                context.AddSource(hint, code.ToString());
             }
         }
 
@@ -96,29 +77,14 @@ namespace Valuify
             return context.Node as ClassDeclarationSyntax;
         }
 
-        private static string Nest(string code, Subject subject)
+        private static Snippet Wrap(Snippet code, Subject subject)
         {
             foreach (Nesting parent in subject.Nesting.Reverse())
             {
-                code = code.Indent();
-
-                code = string.Format(ClassGenerator_Resources.Nest, parent.Declaration, parent.Qualification, code);
+                code = code.Block(Configuration.Options, $"{parent.Declaration} {parent.Qualification}");
             }
 
-            return code;
-        }
-
-        private static string Wrap(string code, Subject subject)
-        {
-            code = Nest(code, subject);
-            code = string.Format(ClassGenerator_Resources.Wrap, code);
-
-            if (subject.IsGlobal)
-            {
-                return code;
-            }
-
-            return string.Format(ClassGenerator_Resources.Namespace, subject.Namespace, code.Indent());
+            return subject.IsGlobal ? code : code.Block(Configuration.Options, $"namespace {subject.Namespace}");
         }
     }
 }

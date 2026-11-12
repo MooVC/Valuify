@@ -2,12 +2,14 @@ namespace Valuify.Model
 {
     using System;
     using System.Collections.Generic;
+    using Graphify;
 
     /// <summary>
     /// The definition of the <see cref="Subject"/> type, which is used to capture information relating to a subject
     /// upon which the Valuify attribute has been placed.
     /// </summary>
-    internal sealed class Subject
+    [Graphify(Depth = 1, Mode = Modes.Synchronous, PropertyPrefix = "_")]
+    internal sealed partial class Subject
         : Value<Subject>
     {
         /// <summary>
@@ -16,6 +18,7 @@ namespace Valuify.Model
         /// <value>
         /// A value indicating whether or not the subject can override <see cref="object.Equals(object)"/>.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public bool CanOverrideEquals { get; set; }
 
         /// <summary>
@@ -24,6 +27,7 @@ namespace Valuify.Model
         /// <value>
         /// A value indicating whether or not the subject can override <see cref="object.GetHashCode()"/>.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public bool CanOverrideGetHashCode { get; set; }
 
         /// <summary>
@@ -32,6 +36,7 @@ namespace Valuify.Model
         /// <value>
         /// A value indicating whether or not the subject can override <see cref="object.ToString()"/>.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public bool CanOverrideToString { get; set; }
 
         /// <summary>
@@ -40,6 +45,7 @@ namespace Valuify.Model
         /// <value>
         /// A value indicating whether or not the subject declares an equality operator.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public bool HasEqualityOperator { get; set; }
 
         /// <summary>
@@ -48,6 +54,7 @@ namespace Valuify.Model
         /// <value>
         /// A value indicating whether or not the subject implements <see cref="IEquatable{T}.Equals(T)"/>.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public bool HasEquatable { get; set; }
 
         /// <summary>
@@ -56,6 +63,7 @@ namespace Valuify.Model
         /// <value>
         /// A value indicating whether or not the subject declares an inequality operator.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public bool HasInequalityOperator { get; set; }
 
         /// <summary>
@@ -64,6 +72,7 @@ namespace Valuify.Model
         /// <value>
         /// A value indicating whether or not the subject implements <see cref="IEquatable{T}"/>.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public bool IsEquatable { get; set; }
 
         /// <summary>
@@ -72,6 +81,7 @@ namespace Valuify.Model
         /// <value>
         /// A value indicating whether or not the subject belongs to the global namespace.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public bool IsGlobal => string.IsNullOrEmpty(Namespace);
 
         /// <summary>
@@ -80,6 +90,7 @@ namespace Valuify.Model
         /// <value>
         /// The name of the subject.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
@@ -88,6 +99,7 @@ namespace Valuify.Model
         /// <value>
         /// The globally qualified namespace for the subject.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public string Namespace { get; set; } = string.Empty;
 
         /// <summary>
@@ -96,6 +108,7 @@ namespace Valuify.Model
         /// <value>
         /// The declarations associated with the parent types in order of declaration.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public IReadOnlyList<Nesting> Nesting { get; set; } = Array.Empty<Nesting>();
 
         /// <summary>
@@ -104,6 +117,7 @@ namespace Valuify.Model
         /// <value>
         /// The properties declared within the subject.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public IReadOnlyList<Property> Properties { get; set; } = Array.Empty<Property>();
 
         /// <summary>
@@ -112,7 +126,20 @@ namespace Valuify.Model
         /// <value>
         /// The qualified name of the subject, which includes any generic arguments.
         /// </value>
+        [Traverse(Scope = TraverseScope.None)]
         public string Qualification { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Exposes the whole subject to visitors that generate members.
+        /// </summary>
+        [Traverse(Scope = TraverseScope.Property)]
+        public Subject Self => this;
+
+        /// <summary>
+        /// Gets or sets the type reference used in generated members.
+        /// </summary>
+        [Traverse(Scope = TraverseScope.None)]
+        public string Type { get; set; } = string.Empty;
 
         /// <inheritdoc/>
         protected override IEnumerable<object> GetProperties()
@@ -138,6 +165,7 @@ namespace Valuify.Model
             }
 
             yield return Qualification;
+            yield return Type;
         }
     }
 }

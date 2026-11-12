@@ -117,54 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Content" xml:space="preserve">
-    <value>namespace Valuify.Internal
+  <data name="EqualsEnumerableBody" xml:space="preserve">
+    <value>if (global::System.Object.ReferenceEquals(left, right))
 {
-    using System;
-    using System.Collections;
+    return true;
+}
 
-    internal sealed class SequenceEqualityComparer
+if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(null, right))
+{
+    return false;
+}
+
+return Equals(left.GetEnumerator(), right.GetEnumerator());</value>
+  </data>
+  <data name="GetHashCodeBody" xml:space="preserve">
+    <value>return global::Valuify.Internal.HashCode.Combine(enumerable);</value>
+  </data>
+  <data name="EqualsEnumeratorBody" xml:space="preserve">
+    <value>while (left.MoveNext())
+{
+    if (!right.MoveNext())
     {
-        public static readonly SequenceEqualityComparer Default = new SequenceEqualityComparer();
-
-        public bool Equals(IEnumerable left, IEnumerable right)
-        {
-            if (ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (ReferenceEquals(left, null) || ReferenceEquals(null, right))
-            {
-                return false;
-            }
-
-            return Equals(left.GetEnumerator(), right.GetEnumerator());
-        }
-
-        public int GetHashCode(IEnumerable enumerable)
-        {
-            return HashCode.Combine(enumerable);
-        }
-
-        private static bool Equals(IEnumerator left, IEnumerator right)
-        {
-            while (left.MoveNext())
-            {
-                if (!right.MoveNext())
-                {
-                    return false;
-                }
-
-                if (!Equals(left.Current, right.Current))
-                {
-                    return false;
-                }
-            }
-
-            return !right.MoveNext();
-        }
+        return false;
     }
-}</value>
+
+    if (!global::System.Object.Equals(left.Current, right.Current))
+    {
+        return false;
+    }
+}
+
+return !right.MoveNext();</value>
   </data>
 </root>

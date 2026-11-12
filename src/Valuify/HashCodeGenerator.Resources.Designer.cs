@@ -61,29 +61,87 @@ namespace Valuify {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to namespace Valuify.Internal
+        ///   Looks up a localized string similar to const int HashSeed = 0x1505;
+        ///
+        ///int hash = HashSeed;
+        ///
+        ///foreach (object value in values)
         ///{
-        ///    using System;
-        ///    using System.Collections;
+        ///    global::System.Collections.IEnumerable enumerable = value as global::System.Collections.IEnumerable;
         ///
-        ///    internal static class HashCode
+        ///    if (!global::System.Object.ReferenceEquals(enumerable, null) &amp;&amp; !(value is string))
         ///    {
-        ///        private const int HashSeed = 0x1505;
-        ///        private const int HashPrime = -1521134295;
+        ///        hash = CombineEnumerable(hash, enumerable);
+        ///    }
+        ///    else
+        ///    {
+        ///        hash = PerformCombine(hash, value);
+        ///    }
+        ///}
         ///
-        ///        public static int Combine(params object[] values)
-        ///        {
-        ///            int hash = HashSeed;
-        ///
-        ///            foreach (object value in values)
-        ///            {
-        ///                IEnumerable enumerable = value as IEnumerable;
-        ///
-        ///                if (!(enumerable is null) &amp;&amp; !(value  [rest of string was truncated]&quot;;.
+        ///return hash;.
         /// </summary>
-        internal static string Content {
+        internal static string CombineBody {
             get {
-                return ResourceManager.GetString("Content", resourceCulture);
+                return ResourceManager.GetString("CombineBody", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to foreach (object element in values)
+        ///{
+        ///    global::System.Collections.IEnumerable enumerable = element as global::System.Collections.IEnumerable;
+        ///
+        ///    if (!global::System.Object.ReferenceEquals(enumerable, null) &amp;&amp; !(element is string))
+        ///    {
+        ///        hash = CombineEnumerable(hash, enumerable);
+        ///    }
+        ///    else
+        ///    {
+        ///        hash = PerformCombine(hash, element);
+        ///    }
+        ///}
+        ///
+        ///return hash;.
+        /// </summary>
+        internal static string CombineEnumerableBody {
+            get {
+                return ResourceManager.GetString("CombineEnumerableBody", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to if (global::System.Object.ReferenceEquals(value, null))
+        ///{
+        ///    return 0;
+        ///}
+        ///
+        ///if (value is int)
+        ///{
+        ///    return (int)value;
+        ///}
+        ///
+        ///return value.GetHashCode();.
+        /// </summary>
+        internal static string GetHashCodeBody {
+            get {
+                return ResourceManager.GetString("GetHashCodeBody", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to const int HashPrime = -1521134295;
+        ///
+        ///int other = GetHashCode(value);
+        ///
+        ///unchecked
+        ///{
+        ///    return (hash * HashPrime) + other;
+        ///}.
+        /// </summary>
+        internal static string PerformCombineBody {
+            get {
+                return ResourceManager.GetString("PerformCombineBody", resourceCulture);
             }
         }
     }

@@ -61,13 +61,7 @@ namespace Valuify.Strategies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to partial class {0}
-        ///{{
-        ///    public override bool Equals(object other)
-        ///    {{
-        ///        return Equals(other as {1});
-        ///    }}
-        ///}}.
+        ///   Looks up a localized string similar to return Equals(other as {0});.
         /// </summary>
         internal static string Source {
             get {

@@ -10,23 +10,20 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatable
                         {
-                            public static bool operator ==(AnnotatedEquatable left, AnnotatedEquatable right)
+                            public static bool operator ==(global::Valuify.Classes.Testing.AnnotatedEquatable left, global::Valuify.Classes.Testing.AnnotatedEquatable right)
                             {
-                                if (ReferenceEquals(left, right))
+                                if (global::System.Object.ReferenceEquals(left, right))
                                 {
                                     return true;
                                 }
-                
-                                if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+
+                                if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
                                 {
                                     return false;
                                 }
-                
+
                                 return left.Equals(right);
                             }
                         }
@@ -39,14 +36,11 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatable
                         {
                             public override bool Equals(object other)
                             {
-                                return Equals(other as AnnotatedEquatable);
+                                return Equals(other as global::Valuify.Classes.Testing.AnnotatedEquatable);
                             }
                         }
                     }
@@ -58,11 +52,8 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatable
-                            : IEquatable<AnnotatedEquatable>
+                            : global::System.IEquatable<global::Valuify.Classes.Testing.AnnotatedEquatable>
                         {
                         }
                     }
@@ -74,24 +65,21 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatable
                         {
-                            public bool Equals(AnnotatedEquatable other)
+                            public bool Equals(global::Valuify.Classes.Testing.AnnotatedEquatable other)
                             {
-                                if (ReferenceEquals(this, other))
+                                if (global::System.Object.ReferenceEquals(this, other))
                                 {
                                     return true;
                                 }
-                
-                                if (ReferenceEquals(other, null))
+
+                                if (global::System.Object.ReferenceEquals(other, null))
                                 {
                                     return false;
                                 }
-                
-                                return global::System.Collections.Generic.EqualityComparer<global::Valuify.Classes.Testing.AnnotatedEquatableCollection>.Default.Equals(Values, other.Values);
+
+                                return global::System.Collections.Generic.EqualityComparer<global::Valuify.Classes.Testing.AnnotatedEquatableCollection>.Default.Equals(this.Values, other.Values);
                             }
                         }
                     }
@@ -103,9 +91,6 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-        
                         partial class AnnotatedEquatable
                         {
                             public override int GetHashCode()
@@ -122,12 +107,9 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatable
                         {
-                            public static bool operator !=(AnnotatedEquatable left, AnnotatedEquatable right)
+                            public static bool operator !=(global::Valuify.Classes.Testing.AnnotatedEquatable left, global::Valuify.Classes.Testing.AnnotatedEquatable right)
                             {
                                 return !(left == right);
                             }
@@ -141,9 +123,6 @@ internal static partial class AnnotatedEquatable
                 """
                     namespace Valuify.Classes.Testing
                     {
-                        using System;
-                        using System.Collections.Generic;
-
                         partial class AnnotatedEquatable
                         {
                             public override string ToString()

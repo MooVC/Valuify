@@ -1,4 +1,4 @@
-namespace Valuify.Snippets.Declarations;
+﻿namespace Valuify.Snippets.Declarations;
 
 internal static partial class ImmutableArray
 {
@@ -8,23 +8,20 @@ internal static partial class ImmutableArray
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class ImmutableArray
                     {
-                        public static bool operator ==(ImmutableArray left, ImmutableArray right)
+                        public static bool operator ==(global::Valuify.Classes.Testing.ImmutableArray left, global::Valuify.Classes.Testing.ImmutableArray right)
                         {
-                            if (ReferenceEquals(left, right))
+                            if (global::System.Object.ReferenceEquals(left, right))
                             {
                                 return true;
                             }
-                
-                            if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+
+                            if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
                             {
                                 return false;
                             }
-                
+
                             return left.Equals(right);
                         }
                     }
@@ -37,14 +34,11 @@ internal static partial class ImmutableArray
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class ImmutableArray
                     {
                         public override bool Equals(object other)
                         {
-                            return Equals(other as ImmutableArray);
+                            return Equals(other as global::Valuify.Classes.Testing.ImmutableArray);
                         }
                     }
                 }
@@ -56,11 +50,8 @@ internal static partial class ImmutableArray
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class ImmutableArray
-                        : IEquatable<ImmutableArray>
+                        : global::System.IEquatable<global::Valuify.Classes.Testing.ImmutableArray>
                     {
                     }
                 }
@@ -72,24 +63,21 @@ internal static partial class ImmutableArray
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class ImmutableArray
                     {
-                        public bool Equals(ImmutableArray other)
+                        public bool Equals(global::Valuify.Classes.Testing.ImmutableArray other)
                         {
-                            if (ReferenceEquals(this, other))
+                            if (global::System.Object.ReferenceEquals(this, other))
                             {
                                 return true;
                             }
-                
-                            if (ReferenceEquals(other, null))
+
+                            if (global::System.Object.ReferenceEquals(other, null))
                             {
                                 return false;
                             }
-                
-                            return global::Valuify.Internal.SequenceEqualityComparer.Default.Equals(Values, other.Values);
+
+                            return global::Valuify.Internal.SequenceEqualityComparer.Default.Equals(this.Values, other.Values);
                         }
                     }
                 }
@@ -101,9 +89,6 @@ internal static partial class ImmutableArray
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-        
                     partial class ImmutableArray
                     {
                         public override int GetHashCode()
@@ -120,12 +105,9 @@ internal static partial class ImmutableArray
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class ImmutableArray
                     {
-                        public static bool operator !=(ImmutableArray left, ImmutableArray right)
+                        public static bool operator !=(global::Valuify.Classes.Testing.ImmutableArray left, global::Valuify.Classes.Testing.ImmutableArray right)
                         {
                             return !(left == right);
                         }
@@ -139,9 +121,6 @@ internal static partial class ImmutableArray
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class ImmutableArray
                     {
                         public override string ToString()

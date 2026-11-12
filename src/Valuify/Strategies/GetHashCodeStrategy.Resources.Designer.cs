@@ -61,26 +61,20 @@ namespace Valuify.Strategies {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to return global::Valuify.Internal.HashCode.Combine({0});.
+        /// </summary>
+        internal static string Body {
+            get {
+                return ResourceManager.GetString("Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to global::Valuify.Internal.HashCode.GetHashCode({0}).
         /// </summary>
         internal static string SequenceHashCode {
             get {
                 return ResourceManager.GetString("SequenceHashCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to partial class {0}
-        ///{{
-        ///    public override int GetHashCode()
-        ///    {{
-        ///        return global::Valuify.Internal.HashCode.Combine({1});
-        ///    }}
-        ///}}.
-        /// </summary>
-        internal static string Source {
-            get {
-                return ResourceManager.GetString("Source", resourceCulture);
             }
         }
     }

@@ -117,38 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Contract" xml:space="preserve">
-    <value>partial class {0}
-    : IEquatable&lt;{0}&gt;
+  <data name="Body" xml:space="preserve">
+    <value>if (global::System.Object.ReferenceEquals(this, other))
 {{
-}}</value>
-  </data>
-  <data name="Implementation" xml:space="preserve">
-    <value>partial class {0}
+    return true;
+}}
+
+if (global::System.Object.ReferenceEquals(other, null))
 {{
-    public bool Equals({0} other)
-    {{
-        if (ReferenceEquals(this, other))
-        {{
-            return true;
-        }}
+    return false;
+}}
 
-        if (ReferenceEquals(other, null))
-        {{
-            return false;
-        }}
-
-        return {1};
-    }}
-}}</value>
+return {0};</value>
   </data>
   <data name="PropertyCondition" xml:space="preserve">
-    <value>{0}.Default.Equals({1}, other.{1})</value>
-  </data>
-  <data name="SequenceComparer" xml:space="preserve">
-    <value>global::Valuify.Internal.SequenceEqualityComparer</value>
-  </data>
-  <data name="EqualityComparer" xml:space="preserve">
-    <value>global::System.Collections.Generic.EqualityComparer&lt;{0}&gt;</value>
+    <value>{0}.Default.Equals(this.{1}, other.{1})</value>
   </data>
 </root>

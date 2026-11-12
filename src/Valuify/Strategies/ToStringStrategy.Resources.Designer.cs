@@ -61,6 +61,15 @@ namespace Valuify.Strategies {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to return {0};.
+        /// </summary>
+        internal static string Body {
+            get {
+                return ResourceManager.GetString("Body", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;.
         /// </summary>
         internal static string EmptyValue {
@@ -84,21 +93,6 @@ namespace Valuify.Strategies {
         internal static string PropertyValue {
             get {
                 return ResourceManager.GetString("PropertyValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to partial class {0}
-        ///{{
-        ///    public override string ToString()
-        ///    {{
-        ///        return {1};
-        ///    }}
-        ///}}.
-        /// </summary>
-        internal static string Source {
-            get {
-                return ResourceManager.GetString("Source", resourceCulture);
             }
         }
         

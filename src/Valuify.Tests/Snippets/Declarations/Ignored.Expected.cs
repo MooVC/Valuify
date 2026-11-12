@@ -8,23 +8,20 @@ internal static partial class Ignored
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Ignored
                     {
-                        public static bool operator ==(Ignored left, Ignored right)
+                        public static bool operator ==(global::Valuify.Classes.Testing.Ignored left, global::Valuify.Classes.Testing.Ignored right)
                         {
-                            if (ReferenceEquals(left, right))
+                            if (global::System.Object.ReferenceEquals(left, right))
                             {
                                 return true;
                             }
-                
-                            if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+
+                            if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
                             {
                                 return false;
                             }
-                
+
                             return left.Equals(right);
                         }
                     }
@@ -37,14 +34,11 @@ internal static partial class Ignored
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Ignored
                     {
                         public override bool Equals(object other)
                         {
-                            return Equals(other as Ignored);
+                            return Equals(other as global::Valuify.Classes.Testing.Ignored);
                         }
                     }
                 }
@@ -56,11 +50,8 @@ internal static partial class Ignored
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Ignored
-                        : IEquatable<Ignored>
+                        : global::System.IEquatable<global::Valuify.Classes.Testing.Ignored>
                     {
                     }
                 }
@@ -72,25 +63,22 @@ internal static partial class Ignored
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Ignored
                     {
-                        public bool Equals(Ignored other)
+                        public bool Equals(global::Valuify.Classes.Testing.Ignored other)
                         {
-                            if (ReferenceEquals(this, other))
+                            if (global::System.Object.ReferenceEquals(this, other))
                             {
                                 return true;
                             }
-                
-                            if (ReferenceEquals(other, null))
+
+                            if (global::System.Object.ReferenceEquals(other, null))
                             {
                                 return false;
                             }
-                
-                            return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(Age, other.Age)
-                                && global::System.Collections.Generic.EqualityComparer<bool>.Default.Equals(IsAdult, other.IsAdult);
+
+                            return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(this.Age, other.Age)
+                                && global::System.Collections.Generic.EqualityComparer<bool>.Default.Equals(this.IsAdult, other.IsAdult);
                         }
                     }
                 }
@@ -102,9 +90,6 @@ internal static partial class Ignored
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-        
                     partial class Ignored
                     {
                         public override int GetHashCode()
@@ -121,12 +106,9 @@ internal static partial class Ignored
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Ignored
                     {
-                        public static bool operator !=(Ignored left, Ignored right)
+                        public static bool operator !=(global::Valuify.Classes.Testing.Ignored left, global::Valuify.Classes.Testing.Ignored right)
                         {
                             return !(left == right);
                         }
@@ -140,9 +122,6 @@ internal static partial class Ignored
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Ignored
                     {
                         public override string ToString()

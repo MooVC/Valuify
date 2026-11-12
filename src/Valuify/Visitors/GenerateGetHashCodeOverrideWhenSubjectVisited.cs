@@ -1,19 +1,25 @@
-namespace Valuify.Strategies
+namespace Valuify.Visitors
 {
     using System.Collections.Generic;
     using System.Linq;
+    using MooVC.Syntax.CSharp;
     using Valuify.Model;
+    using Valuify.Syntax;
+
     using static Valuify.Strategies.GetHashCodeStrategy_Resources;
+    using Property = Valuify.Model.Property;
 
     /// <summary>
-    /// Generates the source needed to support <see cref="object.Equals(object)"/>.
+    /// Generates the source needed to support <see cref="object.GetHashCode()"/>.
     /// </summary>
-    internal sealed class GetHashCodeStrategy
-        : IStrategy
+    internal sealed class GenerateGetHashCodeOverrideWhenSubjectVisited
+        : ISubjectVisitor<Subject.Graph.Self, Source>
     {
         /// <inheritdoc/>
-        public IEnumerable<Source> Generate(Subject subject)
+        public IEnumerable<Source> Observe(Subject.Graph.Self instance)
         {
+            Subject subject = instance._Value;
+
             if (!subject.CanOverrideGetHashCode)
             {
                 yield break;
@@ -24,9 +30,14 @@ namespace Valuify.Strategies
                 .Select(Format);
 
             string combine = string.Join(", ", properties);
-            string code = string.Format(Source, subject.Qualification, combine);
 
-            yield return new Source(code, nameof(GetHashCode));
+            Method method = Method.Undefined
+                .Named(nameof(GetHashCode))
+                .WithExtensibility(Modifiers.Override)
+                .Returns(Result.Void.OfType(typeof(int)))
+                .WithBody(string.Format(Body, combine));
+
+            yield return subject.ToSource(nameof(GetHashCode), method);
         }
 
         private static string Format(Property property)

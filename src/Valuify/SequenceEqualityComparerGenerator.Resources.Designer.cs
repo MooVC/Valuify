@@ -61,28 +61,52 @@ namespace Valuify {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to namespace Valuify.Internal
+        ///   Looks up a localized string similar to if (global::System.Object.ReferenceEquals(left, right))
         ///{
-        ///    using System;
-        ///    using System.Collections;
+        ///    return true;
+        ///}
         ///
-        ///    internal sealed class SequenceEqualityComparer
-        ///    {
-        ///        public static readonly SequenceEqualityComparer Default = new SequenceEqualityComparer();
+        ///if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(null, right))
+        ///{
+        ///    return false;
+        ///}
         ///
-        ///        public bool Equals(IEnumerable left, IEnumerable right)
-        ///        {
-        ///            if (ReferenceEquals(left, right))
-        ///            {
-        ///                return true;
-        ///            }
-        ///
-        ///            if (ReferenceEquals(left, null) || ReferenceEquals(null, right))
-        ///       [rest of string was truncated]&quot;;.
+        ///return Equals(left.GetEnumerator(), right.GetEnumerator());.
         /// </summary>
-        internal static string Content {
+        internal static string EqualsEnumerableBody {
             get {
-                return ResourceManager.GetString("Content", resourceCulture);
+                return ResourceManager.GetString("EqualsEnumerableBody", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to while (left.MoveNext())
+        ///{
+        ///    if (!right.MoveNext())
+        ///    {
+        ///        return false;
+        ///    }
+        ///
+        ///    if (!global::System.Object.Equals(left.Current, right.Current))
+        ///    {
+        ///        return false;
+        ///    }
+        ///}
+        ///
+        ///return !right.MoveNext();.
+        /// </summary>
+        internal static string EqualsEnumeratorBody {
+            get {
+                return ResourceManager.GetString("EqualsEnumeratorBody", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to return global::Valuify.Internal.HashCode.Combine(enumerable);.
+        /// </summary>
+        internal static string GetHashCodeBody {
+            get {
+                return ResourceManager.GetString("GetHashCodeBody", resourceCulture);
             }
         }
     }

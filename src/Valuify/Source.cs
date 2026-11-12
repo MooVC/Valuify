@@ -1,5 +1,7 @@
 namespace Valuify
 {
+    using MooVC.Syntax;
+
     /// <summary>
     /// Represents a unit of source code to be added to the output.
     /// </summary>
@@ -14,7 +16,7 @@ namespace Valuify
         /// <param name="hint">
         /// The hint name to be used for the source file.
         /// </param>
-        public Source(string code, string hint)
+        public Source(Snippet code, string hint)
         {
             Code = code;
             Hint = hint;
@@ -26,7 +28,7 @@ namespace Valuify
         /// <value>
         /// The contents of the source file.
         /// </value>
-        public string Code { get; }
+        public Snippet Code { get; }
 
         /// <summary>
         /// Gets the hint name to be used for the source file.

@@ -1,13 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <DebugType>embedded</DebugType>
     <Description>A .NET Roslyn source generator for record-like class semantics, ideal for incremental generator cache key models and C# versions prior to 9.0.</Description>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetAnalyzerDependencyTargetPaths</GetTargetPathDependsOn>
+    <!-- Keep the model navigator's generated Graphify contracts in the analyzer load context. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);PackAnalyzerDependencies</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="ClassGenerator.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ClassGenerator.Resources.resx</DependentUpon>
-    </Compile>
+    <PackageReference Include="Graphify" IncludeAssets="build; analyzers; buildtransitive" PrivateAssets="all" />
+    <PackageReference Include="MooVC.Syntax.CSharp" PrivateAssets="all" />
+    <PackageReference Include="System.Collections.Immutable" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="HashCodeGenerator.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -17,11 +25,6 @@
       <DependentUpon>IgnoreAttributeAnalyzer.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="IgnoreAttributeGenerator.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>IgnoreAttributeGenerator.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="SequenceEqualityComparerGenerator.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -63,17 +66,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ValuifyAttributeAnalyzer.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="ValuifyAttributeGenerator.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ValuifyAttributeGenerator.Resources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="ClassGenerator.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ClassGenerator.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="HashCodeGenerator.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>HashCodeGenerator.Resources.Designer.cs</LastGenOutput>
@@ -81,10 +75,6 @@
     <EmbeddedResource Update="IgnoreAttributeAnalyzer.Resources.resx">
       <LastGenOutput>IgnoreAttributeAnalyzer.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="IgnoreAttributeGenerator.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>IgnoreAttributeGenerator.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="SequenceEqualityComparerGenerator.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -118,9 +108,22 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ValuifyAttributeAnalyzer.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="ValuifyAttributeGenerator.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ValuifyAttributeGenerator.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
+  <Target Name="ResolveAnalyzerDependencies" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <_AnalyzerDependency Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'
+                                      AND '%(ReferenceCopyLocalPaths.Filename)' != '$(AssemblyName)'
+                                      AND !$([System.String]::Copy('%(ReferenceCopyLocalPaths.Filename)').StartsWith('Microsoft.CodeAnalysis'))" />
+    </ItemGroup>
+  </Target>
+  <Target Name="GetAnalyzerDependencyTargetPaths" Condition="'$(IncludeAnalyzerDependencies)' == 'true'" DependsOnTargets="ResolveAnalyzerDependencies">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker Include="@(_AnalyzerDependency)" IncludeRuntimeDependency="false" />
+    </ItemGroup>
+  </Target>
+  <Target Name="PackAnalyzerDependencies" DependsOnTargets="ResolveAnalyzerDependencies">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="@(_AnalyzerDependency)" PackagePath="analyzers/dotnet/cs" />
+    </ItemGroup>
+  </Target>
 </Project>

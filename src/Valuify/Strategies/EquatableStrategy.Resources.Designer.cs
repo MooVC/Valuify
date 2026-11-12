@@ -61,53 +61,26 @@ namespace Valuify.Strategies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to partial class {0}
-        ///    : IEquatable&lt;{0}&gt;
+        ///   Looks up a localized string similar to if (global::System.Object.ReferenceEquals(this, other))
         ///{{
-        ///}}.
-        /// </summary>
-        internal static string Contract {
-            get {
-                return ResourceManager.GetString("Contract", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to global::System.Collections.Generic.EqualityComparer&lt;{0}&gt;.
-        /// </summary>
-        internal static string EqualityComparer {
-            get {
-                return ResourceManager.GetString("EqualityComparer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to partial class {0}
+        ///    return true;
+        ///}}
+        ///
+        ///if (global::System.Object.ReferenceEquals(other, null))
         ///{{
-        ///    public bool Equals({0} other)
-        ///    {{
-        ///        if (ReferenceEquals(this, other))
-        ///        {{
-        ///            return true;
-        ///        }}
+        ///    return false;
+        ///}}
         ///
-        ///        if (ReferenceEquals(other, null))
-        ///        {{
-        ///            return false;
-        ///        }}
-        ///
-        ///        return {1};
-        ///    }}
-        ///}}.
+        ///return {0};.
         /// </summary>
-        internal static string Implementation {
+        internal static string Body {
             get {
-                return ResourceManager.GetString("Implementation", resourceCulture);
+                return ResourceManager.GetString("Body", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}.Default.Equals({1}, other.{1}).
+        ///   Looks up a localized string similar to {0}.Default.Equals(this.{1}, other.{1}).
         /// </summary>
         internal static string PropertyCondition {
             get {
@@ -115,13 +88,5 @@ namespace Valuify.Strategies {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to global::Valuify.Internal.SequenceEqualityComparer.
-        /// </summary>
-        internal static string SequenceComparer {
-            get {
-                return ResourceManager.GetString("SequenceComparer", resourceCulture);
-            }
-        }
     }
 }

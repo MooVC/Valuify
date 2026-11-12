@@ -117,82 +117,65 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Content" xml:space="preserve">
-    <value>namespace Valuify.Internal
+  <data name="CombineBody" xml:space="preserve">
+    <value>const int HashSeed = 0x1505;
+
+int hash = HashSeed;
+
+foreach (object value in values)
 {
-    using System;
-    using System.Collections;
+    global::System.Collections.IEnumerable enumerable = value as global::System.Collections.IEnumerable;
 
-    internal static class HashCode
+    if (!global::System.Object.ReferenceEquals(enumerable, null) &amp;&amp; !(value is string))
     {
-        private const int HashSeed = 0x1505;
-        private const int HashPrime = -1521134295;
-
-        public static int Combine(params object[] values)
-        {
-            int hash = HashSeed;
-
-            foreach (object value in values)
-            {
-                IEnumerable enumerable = value as IEnumerable;
-
-                if (!ReferenceEquals(enumerable, null) &amp;&amp; !(value is string))
-                {
-                    hash = CombineEnumerable(hash, enumerable);
-                }
-                else
-                {
-                    hash = PerformCombine(hash, value);
-                }
-            }
-
-            return hash;
-        }
-
-        public static int GetHashCode(object value)
-        {
-            if (ReferenceEquals(value, null))
-            {
-                return 0;
-            }
-
-            if (value is int)
-            {
-                return (int)value;
-            }
-
-            return value.GetHashCode();
-        }
-
-        private static int CombineEnumerable(int hash, IEnumerable values)
-        {
-            foreach (object element in values)
-            {
-                IEnumerable enumerable = element as IEnumerable;
-
-                if (!ReferenceEquals(enumerable, null) &amp;&amp; !(element is string))
-                {
-                    hash = CombineEnumerable(hash, enumerable);
-                }
-                else
-                {
-                    hash = PerformCombine(hash, element);
-                }
-            }
-
-            return hash;
-        }
-
-        private static int PerformCombine(int hash, object value)
-        {
-            int other = GetHashCode(value);
-
-            unchecked
-            {
-                return (hash * HashPrime) + other;
-            }
-        }
+        hash = CombineEnumerable(hash, enumerable);
     }
+    else
+    {
+        hash = PerformCombine(hash, value);
+    }
+}
+
+return hash;</value>
+  </data>
+  <data name="GetHashCodeBody" xml:space="preserve">
+    <value>if (global::System.Object.ReferenceEquals(value, null))
+{
+    return 0;
+}
+
+if (value is int)
+{
+    return (int)value;
+}
+
+return value.GetHashCode();</value>
+  </data>
+  <data name="CombineEnumerableBody" xml:space="preserve">
+    <value>foreach (object element in values)
+{
+    global::System.Collections.IEnumerable enumerable = element as global::System.Collections.IEnumerable;
+
+    if (!global::System.Object.ReferenceEquals(enumerable, null) &amp;&amp; !(element is string))
+    {
+        hash = CombineEnumerable(hash, enumerable);
+    }
+    else
+    {
+        hash = PerformCombine(hash, element);
+    }
+}
+
+return hash;</value>
+  </data>
+  <data name="PerformCombineBody" xml:space="preserve">
+    <value>const int HashPrime = -1521134295;
+
+int other = GetHashCode(value);
+
+unchecked
+{
+    return (hash * HashPrime) + other;
 }</value>
   </data>
 </root>
