@@ -110,7 +110,7 @@ internal static partial class Simple
                     {
                         public override int GetHashCode()
                         {
-                            return global::Valuify.Internal.HashCode.Combine(Age, IsAdult, Name);
+                            return global::Valuify.Internal.HashCode.Combine(global::Valuify.Internal.HashCode.GetHashCode(Age), global::Valuify.Internal.HashCode.GetHashCode(IsAdult), global::Valuify.Internal.HashCode.GetHashCode(Name));
                         }
                     }
                 }

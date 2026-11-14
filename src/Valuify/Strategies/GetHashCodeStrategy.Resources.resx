@@ -127,6 +127,9 @@
 }}</value>
   </data>
   <data name="SequenceHashCode" xml:space="preserve">
+    <value>global::Valuify.Internal.SequenceEqualityComparer.Default.GetHashCode({0})</value>
+  </data>
+  <data name="ValueHashCode" xml:space="preserve">
     <value>global::Valuify.Internal.HashCode.GetHashCode({0})</value>
   </data>
 </root>

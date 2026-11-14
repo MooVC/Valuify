@@ -56,14 +56,9 @@ namespace Valuify.Strategies
 
         private static string GetComparer(Property property)
         {
-            return ShouldUseSequenceComparer(property)
+            return property.UsesSequenceEquality
                 ? SequenceComparer
                 : string.Format(EqualityComparer, property.Type);
-        }
-
-        private static bool ShouldUseSequenceComparer(Property property)
-        {
-            return property.IsSequence && (property.IsImmutableArray || !(property.IsEquatable || property.HasValuify));
         }
     }
 }

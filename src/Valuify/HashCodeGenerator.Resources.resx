@@ -164,20 +164,21 @@
             return value.GetHashCode();
         }
 
+        /// &lt;summary&gt;
+        /// Combines the value hashes of the immediate elements in a sequence.
+        /// &lt;/summary&gt;
+        /// &lt;param name="values"&gt;The sequence to hash.&lt;/param&gt;
+        /// &lt;returns&gt;The combined element hash, or zero for a null sequence.&lt;/returns&gt;
+        public static int GetSequenceHashCode(IEnumerable values)
+        {
+            return ReferenceEquals(values, null) ? 0 : CombineEnumerable(HashSeed, values);
+        }
+
         private static int CombineEnumerable(int hash, IEnumerable values)
         {
             foreach (object element in values)
             {
-                IEnumerable enumerable = element as IEnumerable;
-
-                if (!ReferenceEquals(enumerable, null) &amp;&amp; !(element is string))
-                {
-                    hash = CombineEnumerable(hash, enumerable);
-                }
-                else
-                {
-                    hash = PerformCombine(hash, element);
-                }
+                hash = PerformCombine(hash, element);
             }
 
             return hash;

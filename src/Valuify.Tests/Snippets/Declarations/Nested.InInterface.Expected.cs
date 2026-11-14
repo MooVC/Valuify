@@ -125,7 +125,7 @@ internal static partial class Nested
                         {
                             public override int GetHashCode()
                             {
-                                return global::Valuify.Internal.HashCode.Combine(Age, Name);
+                                return global::Valuify.Internal.HashCode.Combine(global::Valuify.Internal.HashCode.GetHashCode(Age), global::Valuify.Internal.HashCode.GetHashCode(Name));
                             }
                         }
                     }

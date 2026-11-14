@@ -61,7 +61,7 @@ namespace Valuify.Strategies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to global::Valuify.Internal.HashCode.GetHashCode({0}).
+        ///   Looks up a localized string similar to global::Valuify.Internal.SequenceEqualityComparer.Default.GetHashCode({0}).
         /// </summary>
         internal static string SequenceHashCode {
             get {
@@ -81,6 +81,15 @@ namespace Valuify.Strategies {
         internal static string Source {
             get {
                 return ResourceManager.GetString("Source", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to global::Valuify.Internal.HashCode.GetHashCode({0}).
+        /// </summary>
+        internal static string ValueHashCode {
+            get {
+                return ResourceManager.GetString("ValueHashCode", resourceCulture);
             }
         }
     }

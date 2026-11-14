@@ -144,7 +144,7 @@
 
         public int GetHashCode(IEnumerable enumerable)
         {
-            return HashCode.Combine(enumerable);
+            return HashCode.GetSequenceHashCode(enumerable);
         }
 
         private static bool Equals(IEnumerator left, IEnumerator right)

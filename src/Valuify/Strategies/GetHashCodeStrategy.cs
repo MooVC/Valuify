@@ -6,7 +6,7 @@ namespace Valuify.Strategies
     using static Valuify.Strategies.GetHashCodeStrategy_Resources;
 
     /// <summary>
-    /// Generates the source needed to support <see cref="object.Equals(object)"/>.
+    /// Generates the source needed to support <see cref="object.GetHashCode()"/>.
     /// </summary>
     internal sealed class GetHashCodeStrategy
         : IStrategy
@@ -31,12 +31,9 @@ namespace Valuify.Strategies
 
         private static string Format(Property property)
         {
-            if (property.IsSequence && !property.IsImmutableArray && (property.IsEquatable || property.HasValuify))
-            {
-                return string.Format(SequenceHashCode, property.Name);
-            }
+            string format = property.UsesSequenceEquality ? SequenceHashCode : ValueHashCode;
 
-            return property.Name;
+            return string.Format(format, property.Name);
         }
     }
 }

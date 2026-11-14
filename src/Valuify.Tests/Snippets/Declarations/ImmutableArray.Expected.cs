@@ -108,7 +108,7 @@ internal static partial class ImmutableArray
                     {
                         public override int GetHashCode()
                         {
-                            return global::Valuify.Internal.HashCode.Combine(Values);
+                            return global::Valuify.Internal.HashCode.Combine(global::Valuify.Internal.SequenceEqualityComparer.Default.GetHashCode(Values));
                         }
                     }
                 }
