@@ -66,7 +66,7 @@ namespace Valuify.Visitors
 
         private static string GetComparer(Property property)
         {
-            Symbol comparer = ShouldUseSequenceComparer(property)
+            Symbol comparer = property.UsesSequenceEquality
                 ? (Symbol)(Name: "SequenceEqualityComparer", Qualifier: "Valuify.Internal")
                 : MakeGeneric(typeof(EqualityComparer<>), property.Type);
 
@@ -90,11 +90,6 @@ namespace Valuify.Visitors
         private static bool PreservesSpelling(Symbol type, string spelling)
         {
             return string.Equals(type.ToSnippet(Configuration.Options), spelling, StringComparison.Ordinal);
-        }
-
-        private static bool ShouldUseSequenceComparer(Property property)
-        {
-            return property.IsSequence && (property.IsImmutableArray || !(property.IsEquatable || property.HasValuify));
         }
     }
 }

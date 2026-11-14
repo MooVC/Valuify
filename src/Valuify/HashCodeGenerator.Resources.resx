@@ -154,19 +154,15 @@ return value.GetHashCode();</value>
   <data name="CombineEnumerableBody" xml:space="preserve">
     <value>foreach (object element in values)
 {
-    global::System.Collections.IEnumerable enumerable = element as global::System.Collections.IEnumerable;
-
-    if (!global::System.Object.ReferenceEquals(enumerable, null) &amp;&amp; !(element is string))
-    {
-        hash = CombineEnumerable(hash, enumerable);
-    }
-    else
-    {
-        hash = PerformCombine(hash, element);
-    }
+    hash = PerformCombine(hash, element);
 }
 
 return hash;</value>
+  </data>
+  <data name="GetSequenceHashCodeBody" xml:space="preserve">
+    <value>const int HashSeed = 0x1505;
+
+return global::System.Object.ReferenceEquals(values, null) ? 0 : CombineEnumerable(HashSeed, values);</value>
   </data>
   <data name="PerformCombineBody" xml:space="preserve">
     <value>const int HashPrime = -1521134295;

@@ -49,6 +49,12 @@ namespace Valuify
                         .Accepts(parameter => parameter.Named("Value").OfType(typeof(object)))
                         .Returns(Result.Void.OfType(typeof(int)))
                         .WithBody(Snippet.From(Configuration.Options, GetHashCodeBody)))
+                    .WithMethods(getSequenceHashCode => getSequenceHashCode
+                        .Named("GetSequenceHashCode")
+                        .WithExtensibility(Modifiers.Static)
+                        .Accepts(parameter => parameter.Named("Values").OfType(typeof(IEnumerable)))
+                        .Returns(Result.Void.OfType(typeof(int)))
+                        .WithBody(Snippet.From(Configuration.Options, GetSequenceHashCodeBody)))
                     .WithMethods(combineEnumerable => combineEnumerable
                         .Named("CombineEnumerable")
                         .WithScope(Scopes.Private)

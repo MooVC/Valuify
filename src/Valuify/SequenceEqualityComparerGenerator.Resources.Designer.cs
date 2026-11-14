@@ -102,7 +102,7 @@ namespace Valuify {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to return global::Valuify.Internal.HashCode.Combine(enumerable);.
+        ///   Looks up a localized string similar to return global::Valuify.Internal.HashCode.GetSequenceHashCode(enumerable);.
         /// </summary>
         internal static string GetHashCodeBody {
             get {

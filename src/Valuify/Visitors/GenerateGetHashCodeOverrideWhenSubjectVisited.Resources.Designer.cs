@@ -70,11 +70,20 @@ namespace Valuify.Visitors {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to global::Valuify.Internal.HashCode.GetHashCode({0}).
+        ///   Looks up a localized string similar to global::Valuify.Internal.SequenceEqualityComparer.Default.GetHashCode({0}).
         /// </summary>
         internal static string SequenceHashCode {
             get {
                 return ResourceManager.GetString("SequenceHashCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to global::Valuify.Internal.HashCode.GetHashCode({0}).
+        /// </summary>
+        internal static string ValueHashCode {
+            get {
+                return ResourceManager.GetString("ValueHashCode", resourceCulture);
             }
         }
     }

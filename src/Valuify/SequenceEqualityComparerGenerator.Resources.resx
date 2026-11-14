@@ -131,7 +131,7 @@ if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.R
 return Equals(left.GetEnumerator(), right.GetEnumerator());</value>
   </data>
   <data name="GetHashCodeBody" xml:space="preserve">
-    <value>return global::Valuify.Internal.HashCode.Combine(enumerable);</value>
+    <value>return global::Valuify.Internal.HashCode.GetSequenceHashCode(enumerable);</value>
   </data>
   <data name="EqualsEnumeratorBody" xml:space="preserve">
     <value>while (left.MoveNext())

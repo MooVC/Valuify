@@ -96,6 +96,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    # Configure NUGET_USER and the nuget.org trusted publishing policy for MooVC/Valuify and cd.yml.
     - name: Authenticate to NuGet
       if: ${{ github.event_name != 'workflow_dispatch' || !inputs.deprecate_only }}
       uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
@@ -105,18 +106,18 @@ jobs:
 
     - name: Publish Packages to NuGet
       if: ${{ github.event_name != 'workflow_dispatch' || !inputs.deprecate_only }}
-      run: dotnet nuget push **/Valuify*.nupkg --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push './artifacts/Valuify*.nupkg' --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
       env:
         NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
 
   unlist:
     name: Unlist Previous Pre-release Package Versions
     runs-on: windows-latest
-    needs: build
-    if: ${{ needs.build.result == 'success' }}
     permissions:
       contents: read
       id-token: write
+    needs: build
+    if: ${{ needs.build.result == 'success' }}
 
     steps:
     - name: Use .NET SDK
@@ -260,7 +261,7 @@ jobs:
 
         foreach ($package in $packagesToUnlist) {
           Write-Host "Unlisting $($package.PackageId) $($package.Version)."
-          dotnet nuget delete $package.PackageId $package.Version --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json --non-interactive
+          dotnet nuget delete $package.PackageId $package.Version --api-key "$env:NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --non-interactive
           if ($LASTEXITCODE -ne 0) {
             throw "Failed to unlist $($package.PackageId) $($package.Version)."
           }

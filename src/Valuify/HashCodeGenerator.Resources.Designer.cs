@@ -90,16 +90,7 @@ namespace Valuify {
         /// <summary>
         ///   Looks up a localized string similar to foreach (object element in values)
         ///{
-        ///    global::System.Collections.IEnumerable enumerable = element as global::System.Collections.IEnumerable;
-        ///
-        ///    if (!global::System.Object.ReferenceEquals(enumerable, null) &amp;&amp; !(element is string))
-        ///    {
-        ///        hash = CombineEnumerable(hash, enumerable);
-        ///    }
-        ///    else
-        ///    {
-        ///        hash = PerformCombine(hash, element);
-        ///    }
+        ///    hash = PerformCombine(hash, element);
         ///}
         ///
         ///return hash;.
@@ -126,6 +117,17 @@ namespace Valuify {
         internal static string GetHashCodeBody {
             get {
                 return ResourceManager.GetString("GetHashCodeBody", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to const int HashSeed = 0x1505;
+        ///
+        ///return global::System.Object.ReferenceEquals(values, null) ? 0 : CombineEnumerable(HashSeed, values);.
+        /// </summary>
+        internal static string GetSequenceHashCodeBody {
+            get {
+                return ResourceManager.GetString("GetSequenceHashCodeBody", resourceCulture);
             }
         }
 

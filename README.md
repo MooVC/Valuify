@@ -167,7 +167,7 @@ The Equatable Implementation will not be generated if the type explicitly define
 
 ### GetHashCode Method Override
 
-The GetHashCode Method Override provides the code necessary to override the base `object.GetHashCode()` method to generate a unique, or near-unique hash, based on the values for each property declared by the type. When the type of a property implements `System.Collections.IEnumerable`, the hash will account for the contents, rather than the collection reference. This is achieved using a custom implementation provided by `global::Valuify.Internal.HashCode.Combine(object[])`, which is akin to the [HashCode.Combine](https://learn.microsoft.com/en-us/dotnet/api/system.hashcode.combine?view=net-8.0) implementation, introduced in C# 8.0.
+The generated `GetHashCode()` combines a hash for each property that participates in equality. Properties compared as sequences contribute the hash codes of their immediate elements in order. Properties compared as values contribute their own hash code.
 
 The following demonstrates the GetHashCode Method Override code generated for `Property` type:
 
@@ -176,7 +176,9 @@ partial class Property
 {
     public override int GetHashCode()
     {
-        return global::Valuify.Internal.HashCode.Combine(Name, Type);
+        return global::Valuify.Internal.HashCode.Combine(
+            global::Valuify.Internal.HashCode.GetHashCode(Name),
+            global::Valuify.Internal.HashCode.GetHashCode(Type));
     }
 }
 ```
@@ -279,7 +281,7 @@ partial class Property
 {
     public override int GetHashCode()
     {
-        return global::Valuify.Internal.HashCode.Combine(Name);
+        return global::Valuify.Internal.HashCode.Combine(global::Valuify.Internal.HashCode.GetHashCode(Name));
     }
 }
 ```

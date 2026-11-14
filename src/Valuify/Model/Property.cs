@@ -60,6 +60,11 @@ namespace Valuify.Model
         /// </value>
         public string Type { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Gets whether equality and hashing use this property's sequence elements.
+        /// </summary>
+        public bool UsesSequenceEquality => IsSequence && (IsImmutableArray || !(IsEquatable || HasValuify));
+
         /// <inheritdoc/>
         protected override IEnumerable<object> GetProperties()
         {
