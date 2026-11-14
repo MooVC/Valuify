@@ -2,7 +2,7 @@
   <PropertyGroup>
     <!-- Tests deliberately use a newer Roslyn than the generator targets. -->
     <NoWarn>$(NoWarn);NU1608</NoWarn>
-    <RoslynVersion>5.9.0</RoslynVersion>
+    <RoslynVersion>5.12.0</RoslynVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" VersionOverride="$(RoslynVersion)" PrivateAssets="all" />

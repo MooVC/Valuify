@@ -6,7 +6,7 @@ namespace Valuify.Visitors
     using Valuify.Model;
     using Valuify.Syntax;
 
-    using static Valuify.Strategies.ToStringStrategy_Resources;
+    using static Valuify.Visitors.GenerateToStringOverrideWhenSubjectVisited_Resources;
     using Property = Valuify.Model.Property;
 
     /// <summary>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Valuify.Strategies {
+namespace Valuify.Visitors {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Valuify.Strategies {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class EqualsStrategy_Resources {
+    internal class GenerateGetHashCodeOverrideWhenSubjectVisited_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EqualsStrategy_Resources() {
+        internal GenerateGetHashCodeOverrideWhenSubjectVisited_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Valuify.Strategies {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.Strategies.EqualsStrategy.Resources", typeof(EqualsStrategy_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.Visitors.GenerateGetHashCodeOverrideWhenSubjectVisited.Resources", typeof(GenerateGetHashCodeOverrideWhenSubjectVisited_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,20 @@ namespace Valuify.Strategies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to return Equals(other as {0});.
+        ///   Looks up a localized string similar to return global::Valuify.Internal.HashCode.Combine({0});.
         /// </summary>
-        internal static string Source {
+        internal static string Body {
             get {
-                return ResourceManager.GetString("Source", resourceCulture);
+                return ResourceManager.GetString("Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to global::Valuify.Internal.HashCode.GetHashCode({0}).
+        /// </summary>
+        internal static string SequenceHashCode {
+            get {
+                return ResourceManager.GetString("SequenceHashCode", resourceCulture);
             }
         }
     }

@@ -5,7 +5,7 @@ namespace Valuify.Visitors
     using Valuify.Model;
     using Valuify.Syntax;
 
-    using static Valuify.Strategies.InequalityStrategy_Resources;
+    using static Valuify.Visitors.GenerateInequalityOperatorWhenSubjectVisited_Resources;
 
     /// <summary>
     /// Generates the source needed to support the inequality operator.

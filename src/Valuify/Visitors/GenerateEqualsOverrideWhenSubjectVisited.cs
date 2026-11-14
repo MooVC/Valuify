@@ -5,7 +5,7 @@ namespace Valuify.Visitors
     using Valuify.Model;
     using Valuify.Syntax;
 
-    using static Valuify.Strategies.EqualsStrategy_Resources;
+    using static Valuify.Visitors.GenerateEqualsOverrideWhenSubjectVisited_Resources;
 
     /// <summary>
     /// Generates the source needed to support <see cref="object.Equals(object)"/>.

@@ -8,7 +8,7 @@ namespace Valuify.Visitors
     using Valuify.Model;
     using Valuify.Syntax;
 
-    using static Valuify.Strategies.EquatableStrategy_Resources;
+    using static Valuify.Visitors.GenerateEquatableMembersWhenSubjectVisited_Resources;
     using Property = Valuify.Model.Property;
 
     /// <summary>

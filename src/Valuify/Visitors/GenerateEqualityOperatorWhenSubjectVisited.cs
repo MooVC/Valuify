@@ -6,7 +6,7 @@ namespace Valuify.Visitors
     using Valuify.Model;
     using Valuify.Syntax;
 
-    using static Valuify.Strategies.EqualityStrategy_Resources;
+    using static Valuify.Visitors.GenerateEqualityOperatorWhenSubjectVisited_Resources;
 
     /// <summary>
     /// Generates the source needed to support the equality operator.

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Valuify.Strategies {
+namespace Valuify.Visitors {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Valuify.Strategies {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class EqualityStrategy_Resources {
+    internal class GenerateEqualsOverrideWhenSubjectVisited_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EqualityStrategy_Resources() {
+        internal GenerateEqualsOverrideWhenSubjectVisited_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Valuify.Strategies {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.Strategies.EqualityStrategy.Resources", typeof(EqualityStrategy_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.Visitors.GenerateEqualsOverrideWhenSubjectVisited.Resources", typeof(GenerateEqualsOverrideWhenSubjectVisited_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,17 +61,7 @@ namespace Valuify.Strategies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to if (global::System.Object.ReferenceEquals(left, right))
-        ///{
-        ///    return true;
-        ///}
-        ///
-        ///if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
-        ///{
-        ///    return false;
-        ///}
-        ///
-        ///return left.Equals(right);.
+        ///   Looks up a localized string similar to return Equals(other as {0});.
         /// </summary>
         internal static string Source {
             get {

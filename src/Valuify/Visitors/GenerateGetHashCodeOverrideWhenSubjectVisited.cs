@@ -6,7 +6,7 @@ namespace Valuify.Visitors
     using Valuify.Model;
     using Valuify.Syntax;
 
-    using static Valuify.Strategies.GetHashCodeStrategy_Resources;
+    using static Valuify.Visitors.GenerateGetHashCodeOverrideWhenSubjectVisited_Resources;
     using Property = Valuify.Model.Property;
 
     /// <summary>

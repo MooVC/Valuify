@@ -31,35 +31,35 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SequenceEqualityComparerGenerator.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\EqualityStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateEqualityOperatorWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EqualityStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateEqualityOperatorWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\EqualsStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateEqualsOverrideWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EqualsStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateEqualsOverrideWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\EquatableStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateEquatableMembersWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EquatableStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateEquatableMembersWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\GetHashCodeStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateGetHashCodeOverrideWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>GetHashCodeStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateGetHashCodeOverrideWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\InequalityStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateInequalityOperatorWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>InequalityStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateInequalityOperatorWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\ToStringStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateToStringOverrideWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ToStringStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateToStringOverrideWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="ValuifyAttributeAnalyzer.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -80,29 +80,29 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SequenceEqualityComparerGenerator.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\EqualityStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateEqualityOperatorWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EqualityStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateEqualityOperatorWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\EqualsStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateEqualsOverrideWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EqualsStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateEqualsOverrideWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\EquatableStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateEquatableMembersWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EquatableStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateEquatableMembersWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\GetHashCodeStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateGetHashCodeOverrideWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>GetHashCodeStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateGetHashCodeOverrideWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\InequalityStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateInequalityOperatorWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>InequalityStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateInequalityOperatorWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\ToStringStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateToStringOverrideWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ToStringStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateToStringOverrideWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="ValuifyAttributeAnalyzer.Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
