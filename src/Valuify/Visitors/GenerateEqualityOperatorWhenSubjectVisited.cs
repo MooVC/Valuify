@@ -1,6 +1,7 @@
 namespace Valuify.Visitors
 {
     using System.Collections.Generic;
+    using Graphify;
     using MooVC.Syntax;
     using MooVC.Syntax.CSharp;
     using Valuify.Model;
@@ -12,12 +13,12 @@ namespace Valuify.Visitors
     /// Generates the source needed to support the equality operator.
     /// </summary>
     internal sealed class GenerateEqualityOperatorWhenSubjectVisited
-        : ISubjectVisitor<Subject.Graph.Self, Source>
+        : ISubjectVisitor<Subject.Graph, Source>
     {
         /// <inheritdoc/>
-        public IEnumerable<Source> Observe(Subject.Graph.Self instance)
+        public IEnumerable<Source> Observe(Subject.Graph instance)
         {
-            Subject subject = instance._Value;
+            Subject subject = ((IGraph<Subject>)instance).Root;
 
             if (subject.HasEqualityOperator)
             {

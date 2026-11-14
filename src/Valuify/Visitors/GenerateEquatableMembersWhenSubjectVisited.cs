@@ -3,6 +3,7 @@ namespace Valuify.Visitors
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Graphify;
     using MooVC.Syntax;
     using MooVC.Syntax.CSharp;
     using Valuify.Model;
@@ -15,14 +16,14 @@ namespace Valuify.Visitors
     /// Generates the source needed to support <see cref="IEquatable{T}"/>.
     /// </summary>
     internal sealed class GenerateEquatableMembersWhenSubjectVisited
-        : ISubjectVisitor<Subject.Graph.Self, Source>
+        : ISubjectVisitor<Subject.Graph, Source>
     {
         private const string Conditional = "\n    && ";
 
         /// <inheritdoc/>
-        public IEnumerable<Source> Observe(Subject.Graph.Self instance)
+        public IEnumerable<Source> Observe(Subject.Graph instance)
         {
-            Subject subject = instance._Value;
+            Subject subject = ((IGraph<Subject>)instance).Root;
 
             if (!subject.IsEquatable)
             {

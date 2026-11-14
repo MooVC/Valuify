@@ -1,14 +1,13 @@
 namespace Valuify.Model
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// The definition of the <see cref="Property"/> type, which is used to capture information relating to a property that
     /// forms part of the equality calculation for the type.
     /// </summary>
-    internal sealed class Property
-        : Value<Property>
+    [Valuify]
+    internal sealed partial class Property
     {
         public bool HasValuify { get; set; }
 
@@ -63,18 +62,7 @@ namespace Valuify.Model
         /// <summary>
         /// Gets whether equality and hashing use this property's sequence elements.
         /// </summary>
+        [Ignore]
         public bool UsesSequenceEquality => IsSequence && (IsImmutableArray || !(IsEquatable || HasValuify));
-
-        /// <inheritdoc/>
-        protected override IEnumerable<object> GetProperties()
-        {
-            yield return HasValuify;
-            yield return IsEquatable;
-            yield return IsIgnored;
-            yield return IsImmutableArray;
-            yield return IsSequence;
-            yield return Name;
-            yield return Type;
-        }
     }
 }

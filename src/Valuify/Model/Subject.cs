@@ -9,8 +9,8 @@ namespace Valuify.Model
     /// upon which the Valuify attribute has been placed.
     /// </summary>
     [Graphify(Depth = 1, Mode = Modes.Synchronous, PropertyPrefix = "_")]
+    [Valuify]
     internal sealed partial class Subject
-        : Value<Subject>
     {
         /// <summary>
         /// Gets or sets a value indicating whether or not the subject can override <see cref="object.Equals(object)"/>.
@@ -82,6 +82,7 @@ namespace Valuify.Model
         /// A value indicating whether or not the subject belongs to the global namespace.
         /// </value>
         [Traverse(Scope = TraverseScope.None)]
+        [Ignore]
         public bool IsGlobal => string.IsNullOrEmpty(Namespace);
 
         /// <summary>
@@ -130,42 +131,9 @@ namespace Valuify.Model
         public string Qualification { get; set; } = string.Empty;
 
         /// <summary>
-        /// Exposes the whole subject to visitors that generate members.
-        /// </summary>
-        [Traverse(Scope = TraverseScope.Property)]
-        public Subject Self => this;
-
-        /// <summary>
         /// Gets or sets the type reference used in generated members.
         /// </summary>
         [Traverse(Scope = TraverseScope.None)]
         public string Type { get; set; } = string.Empty;
-
-        /// <inheritdoc/>
-        protected override IEnumerable<object> GetProperties()
-        {
-            yield return CanOverrideEquals;
-            yield return CanOverrideGetHashCode;
-            yield return CanOverrideToString;
-            yield return HasEqualityOperator;
-            yield return HasEquatable;
-            yield return HasInequalityOperator;
-            yield return IsEquatable;
-            yield return Name;
-            yield return Namespace;
-
-            foreach (Nesting nesting in Nesting)
-            {
-                yield return nesting;
-            }
-
-            foreach (Property property in Properties)
-            {
-                yield return property;
-            }
-
-            yield return Qualification;
-            yield return Type;
-        }
     }
 }

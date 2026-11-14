@@ -1,6 +1,7 @@
 namespace Valuify.Visitors
 {
     using System.Collections.Generic;
+    using Graphify;
     using MooVC.Syntax.CSharp;
     using Valuify.Model;
     using Valuify.Syntax;
@@ -11,12 +12,12 @@ namespace Valuify.Visitors
     /// Generates the source needed to support the inequality operator.
     /// </summary>
     internal sealed class GenerateInequalityOperatorWhenSubjectVisited
-        : ISubjectVisitor<Subject.Graph.Self, Source>
+        : ISubjectVisitor<Subject.Graph, Source>
     {
         /// <inheritdoc/>
-        public IEnumerable<Source> Observe(Subject.Graph.Self instance)
+        public IEnumerable<Source> Observe(Subject.Graph instance)
         {
-            Subject subject = instance._Value;
+            Subject subject = ((IGraph<Subject>)instance).Root;
 
             if (subject.HasInequalityOperator)
             {

@@ -11,7 +11,7 @@ namespace Valuify
     internal sealed class GenerationServices
         : IServiceProvider
     {
-        private static readonly ISubjectVisitor<Subject.Graph.Self, Source>[] _visitors =
+        private static readonly ISubjectVisitor<Subject.Graph, Source>[] _visitors =
         {
             new GenerateEqualityOperatorWhenSubjectVisited(),
             new GenerateEqualsOverrideWhenSubjectVisited(),
@@ -24,7 +24,7 @@ namespace Valuify
         /// <inheritdoc/>
         public object GetService(Type serviceType)
         {
-            return serviceType == typeof(IEnumerable<ISubjectVisitor<Subject.Graph.Self, Source>>) ? _visitors : null;
+            return serviceType == typeof(IEnumerable<ISubjectVisitor<Subject.Graph, Source>>) ? _visitors : null;
         }
     }
 }
