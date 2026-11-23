@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Valuify.Strategies {
+namespace Valuify.Visitors {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Valuify.Strategies {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class EquatableStrategy_Resources {
+    internal class GenerateToStringOverrideWhenSubjectVisited_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EquatableStrategy_Resources() {
+        internal GenerateToStringOverrideWhenSubjectVisited_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Valuify.Strategies {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.Strategies.EquatableStrategy.Resources", typeof(EquatableStrategy_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.Visitors.GenerateToStringOverrideWhenSubjectVisited.Resources", typeof(GenerateToStringOverrideWhenSubjectVisited_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,66 +61,47 @@ namespace Valuify.Strategies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to partial class {0}
-        ///    : IEquatable&lt;{0}&gt;
-        ///{{
-        ///}}.
+        ///   Looks up a localized string similar to return {0};.
         /// </summary>
-        internal static string Contract {
+        internal static string Body {
             get {
-                return ResourceManager.GetString("Contract", resourceCulture);
+                return ResourceManager.GetString("Body", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to global::System.Collections.Generic.EqualityComparer&lt;{0}&gt;.
+        ///   Looks up a localized string similar to &quot;{0}&quot;.
         /// </summary>
-        internal static string EqualityComparer {
+        internal static string EmptyValue {
             get {
-                return ResourceManager.GetString("EqualityComparer", resourceCulture);
+                return ResourceManager.GetString("EmptyValue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to partial class {0}
-        ///{{
-        ///    public bool Equals({0} other)
-        ///    {{
-        ///        if (ReferenceEquals(this, other))
-        ///        {{
-        ///            return true;
-        ///        }}
-        ///
-        ///        if (ReferenceEquals(other, null))
-        ///        {{
-        ///            return false;
-        ///        }}
-        ///
-        ///        return {1};
-        ///    }}
-        ///}}.
+        ///   Looks up a localized string similar to {0} {{{{ {1} }}}}.
         /// </summary>
-        internal static string Implementation {
+        internal static string Format {
             get {
-                return ResourceManager.GetString("Implementation", resourceCulture);
+                return ResourceManager.GetString("Format", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}.Default.Equals({1}, other.{1}).
+        ///   Looks up a localized string similar to {0} = {{{1}}}.
         /// </summary>
-        internal static string PropertyCondition {
+        internal static string PropertyValue {
             get {
-                return ResourceManager.GetString("PropertyCondition", resourceCulture);
+                return ResourceManager.GetString("PropertyValue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to global::Valuify.Internal.SequenceEqualityComparer.
+        ///   Looks up a localized string similar to string.Format(&quot;{0}&quot;, {1}).
         /// </summary>
-        internal static string SequenceComparer {
+        internal static string Value {
             get {
-                return ResourceManager.GetString("SequenceComparer", resourceCulture);
+                return ResourceManager.GetString("Value", resourceCulture);
             }
         }
     }

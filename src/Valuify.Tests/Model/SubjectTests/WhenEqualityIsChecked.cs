@@ -199,6 +199,20 @@ public abstract class WhenEqualityIsChecked
     }
 
     [Test]
+    public void GivenSeparateInstancesWithEqualValuesThenTheirHashCodesMatch()
+    {
+        // Arrange
+        Subject instance1 = Create();
+        Subject instance2 = Create();
+
+        // Act
+        int hashCode = instance1.GetHashCode();
+
+        // Assert
+        hashCode.ShouldBe(instance2.GetHashCode());
+    }
+
+    [Test]
     public void GivenOneInstanceIsNullThenTheyAreDeemedNotEqual()
     {
         // Arrange

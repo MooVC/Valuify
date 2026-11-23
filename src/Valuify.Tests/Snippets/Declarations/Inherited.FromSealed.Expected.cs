@@ -10,23 +10,20 @@ internal static partial class Inherited
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Inherited
                     {
-                        public static bool operator ==(Inherited left, Inherited right)
+                        public static bool operator ==(global::Valuify.Classes.Testing.Inherited left, global::Valuify.Classes.Testing.Inherited right)
                         {
-                            if (ReferenceEquals(left, right))
+                            if (global::System.Object.ReferenceEquals(left, right))
                             {
                                 return true;
                             }
-                
-                            if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+
+                            if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
                             {
                                 return false;
                             }
-                
+
                             return left.Equals(right);
                         }
                     }
@@ -39,11 +36,8 @@ internal static partial class Inherited
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Inherited
-                        : IEquatable<Inherited>
+                        : global::System.IEquatable<global::Valuify.Classes.Testing.Inherited>
                     {
                     }
                 }
@@ -55,26 +49,23 @@ internal static partial class Inherited
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Inherited
                     {
-                        public bool Equals(Inherited other)
+                        public bool Equals(global::Valuify.Classes.Testing.Inherited other)
                         {
-                            if (ReferenceEquals(this, other))
+                            if (global::System.Object.ReferenceEquals(this, other))
                             {
                                 return true;
                             }
-                
-                            if (ReferenceEquals(other, null))
+
+                            if (global::System.Object.ReferenceEquals(other, null))
                             {
                                 return false;
                             }
-                
-                            return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(Age, other.Age)
-                                && global::System.Collections.Generic.EqualityComparer<bool>.Default.Equals(IsAdult, other.IsAdult)
-                                && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(Name, other.Name);
+
+                            return global::System.Collections.Generic.EqualityComparer<int>.Default.Equals(this.Age, other.Age)
+                                && global::System.Collections.Generic.EqualityComparer<bool>.Default.Equals(this.IsAdult, other.IsAdult)
+                                && global::System.Collections.Generic.EqualityComparer<string>.Default.Equals(this.Name, other.Name);
                         }
                     }
                 }
@@ -86,12 +77,9 @@ internal static partial class Inherited
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class Inherited
                     {
-                        public static bool operator !=(Inherited left, Inherited right)
+                        public static bool operator !=(global::Valuify.Classes.Testing.Inherited left, global::Valuify.Classes.Testing.Inherited right)
                         {
                             return !(left == right);
                         }

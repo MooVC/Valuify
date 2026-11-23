@@ -1,16 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <DebugType>embedded</DebugType>
     <Description>A .NET Roslyn source generator for record-like class semantics, ideal for incremental generator cache key models and C# versions prior to 9.0.</Description>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetAnalyzerDependencyTargetPaths</GetTargetPathDependsOn>
+    <GraphifyBootstrapVersion>1.2.0</GraphifyBootstrapVersion>
+    <!-- Keep the model navigator's generated Graphify contracts in the analyzer load context. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);PackAnalyzerDependencies</TargetsForTfmSpecificContentInPackage>
+    <ValuifyBootstrapVersion>1.9.1</ValuifyBootstrapVersion>
   </PropertyGroup>
   <ItemGroup>
+    <!-- Run the published generator during this build without adding a dependency on Valuify itself. -->
+    <PackageDownload Include="Valuify" Version="[$(ValuifyBootstrapVersion)]" />
+    <Analyzer Include="$(NuGetPackageRoot)/valuify/$(ValuifyBootstrapVersion)/analyzers/dotnet/cs/Valuify.dll" />
+    <!-- Graphify runs as a build-time analyzer. Keep its dependency versions out of the packaged generator. -->
+    <PackageDownload Include="Graphify" Version="[$(GraphifyBootstrapVersion)]" />
+    <Analyzer Include="$(NuGetPackageRoot)/graphify/$(GraphifyBootstrapVersion)/analyzers/dotnet/cs/Graphify.dll" />
+    <PackageReference Include="MooVC.Syntax.CSharp" PrivateAssets="all" />
     <PackageReference Include="System.Collections.Immutable" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="ClassGenerator.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ClassGenerator.Resources.resx</DependentUpon>
-    </Compile>
     <Compile Update="HashCodeGenerator.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -21,62 +33,48 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="IgnoreAttributeGenerator.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>IgnoreAttributeGenerator.Resources.resx</DependentUpon>
-    </Compile>
     <Compile Update="SequenceEqualityComparerGenerator.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SequenceEqualityComparerGenerator.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\EqualityStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateEqualityOperatorWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EqualityStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateEqualityOperatorWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\EqualsStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateEqualsOverrideWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EqualsStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateEqualsOverrideWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\EquatableStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateEquatableMembersWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EquatableStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateEquatableMembersWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\GetHashCodeStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateGetHashCodeOverrideWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>GetHashCodeStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateGetHashCodeOverrideWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\InequalityStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateInequalityOperatorWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>InequalityStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateInequalityOperatorWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Strategies\ToStringStrategy.Resources.Designer.cs">
+    <Compile Update="Visitors\GenerateToStringOverrideWhenSubjectVisited.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ToStringStrategy.Resources.resx</DependentUpon>
+      <DependentUpon>GenerateToStringOverrideWhenSubjectVisited.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="ValuifyAttributeAnalyzer.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ValuifyAttributeAnalyzer.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="ValuifyAttributeGenerator.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ValuifyAttributeGenerator.Resources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="ClassGenerator.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ClassGenerator.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="HashCodeGenerator.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>HashCodeGenerator.Resources.Designer.cs</LastGenOutput>
@@ -85,45 +83,54 @@
       <LastGenOutput>IgnoreAttributeAnalyzer.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="IgnoreAttributeGenerator.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>IgnoreAttributeGenerator.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="SequenceEqualityComparerGenerator.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SequenceEqualityComparerGenerator.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\EqualityStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateEqualityOperatorWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EqualityStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateEqualityOperatorWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\EqualsStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateEqualsOverrideWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EqualsStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateEqualsOverrideWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\EquatableStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateEquatableMembersWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EquatableStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateEquatableMembersWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\GetHashCodeStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateGetHashCodeOverrideWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>GetHashCodeStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateGetHashCodeOverrideWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\InequalityStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateInequalityOperatorWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>InequalityStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateInequalityOperatorWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Strategies\ToStringStrategy.Resources.resx">
+    <EmbeddedResource Update="Visitors\GenerateToStringOverrideWhenSubjectVisited.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ToStringStrategy.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenerateToStringOverrideWhenSubjectVisited.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="ValuifyAttributeAnalyzer.Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ValuifyAttributeAnalyzer.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="ValuifyAttributeGenerator.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ValuifyAttributeGenerator.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
+  <Target Name="ResolveAnalyzerDependencies" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <_AnalyzerDependency Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'
+                                      AND '%(ReferenceCopyLocalPaths.Filename)' != '$(AssemblyName)'
+                                      AND !$([System.String]::Copy('%(ReferenceCopyLocalPaths.Filename)').StartsWith('Microsoft.CodeAnalysis'))" />
+    </ItemGroup>
+  </Target>
+  <Target Name="GetAnalyzerDependencyTargetPaths" Condition="'$(IncludeAnalyzerDependencies)' == 'true'" DependsOnTargets="ResolveAnalyzerDependencies">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker Include="@(_AnalyzerDependency)" IncludeRuntimeDependency="false" />
+    </ItemGroup>
+  </Target>
+  <Target Name="PackAnalyzerDependencies" DependsOnTargets="ResolveAnalyzerDependencies">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="@(_AnalyzerDependency)" PackagePath="analyzers/dotnet/cs" />
+    </ItemGroup>
+  </Target>
 </Project>

@@ -22,6 +22,13 @@ public sealed record Snippets(Content[] Body, Content Declaration, Generated[] E
         }
     }
 
+    private static LanguageVersion Highest(LanguageVersion first, LanguageVersion second)
+    {
+        return first > second
+            ? first
+            : second;
+    }
+
     private IEnumerable<Content> Compose()
     {
         if (Body.Length == 0)
@@ -57,12 +64,5 @@ public sealed record Snippets(Content[] Body, Content Declaration, Generated[] E
 
             yield return new Expectations(contents, expectations, declaration.Minimum);
         }
-    }
-
-    private static LanguageVersion Highest(LanguageVersion first, LanguageVersion second)
-    {
-        return first > second
-            ? first
-            : second;
     }
 }
