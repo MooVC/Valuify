@@ -8,7 +8,7 @@ This repository hosts **Valuify**, a .NET source generator and analyzers solutio
 
 ## Build and Test
 
-- Use the .NET SDK **10.0**. The latest SDK can be found at [dotnet.microsoft.com](https://dotnet.microsoft.com/).
+- Use the .NET SDK **11.0**. The latest SDK can be found at [dotnet.microsoft.com](https://dotnet.microsoft.com/).
 - Restore packages with `dotnet restore`.
 - Run `dotnet test` to execute the test suite. This is the primary check before committing.
 - Tests use TUnit on Microsoft.Testing.Platform. `dotnet test` collects Cobertura coverage using `instrumentation.config.xml`.

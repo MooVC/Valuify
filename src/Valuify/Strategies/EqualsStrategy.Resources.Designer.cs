@@ -65,7 +65,7 @@ namespace Valuify.Strategies {
         ///{{
         ///    public override bool Equals(object other)
         ///    {{
-        ///        return Equals(other as {1});
+        ///        return Equals(other as {0});
         ///    }}
         ///}}.
         /// </summary>

@@ -83,7 +83,7 @@ namespace Valuify.Strategies {
                 return ResourceManager.GetString("Source", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to global::Valuify.Internal.HashCode.GetHashCode({0}).
         /// </summary>

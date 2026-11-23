@@ -63,7 +63,7 @@ namespace Valuify.Strategies {
         /// <summary>
         ///   Looks up a localized string similar to partial class {0}
         ///{{
-        ///    public static bool operator !=({1} left, {2} right)
+        ///    public static bool operator !=({0} left, {0} right)
         ///    {{
         ///        return !(left == right);
         ///    }}

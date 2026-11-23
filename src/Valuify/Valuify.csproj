@@ -3,6 +3,9 @@
     <Description>A .NET Roslyn source generator for record-like class semantics, ideal for incremental generator cache key models and C# versions prior to 9.0.</Description>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="System.Collections.Immutable" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="ClassGenerator.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
