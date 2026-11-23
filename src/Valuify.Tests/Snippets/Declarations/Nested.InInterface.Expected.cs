@@ -10,25 +10,22 @@ internal static partial class Nested
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial interface IOutter<T1>
                     {
                         partial class Inner<T2>
                         {
-                            public static bool operator ==(Inner<T2> left, Inner<T2> right)
+                            public static bool operator ==(global::Valuify.Classes.Testing.IOutter<T1>.Inner<T2> left, global::Valuify.Classes.Testing.IOutter<T1>.Inner<T2> right)
                             {
-                                if (ReferenceEquals(left, right))
+                                if (global::System.Object.ReferenceEquals(left, right))
                                 {
                                     return true;
                                 }
-                
-                                if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+
+                                if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
                                 {
                                     return false;
                                 }
-                
+
                                 return left.Equals(right);
                             }
                         }
@@ -42,16 +39,13 @@ internal static partial class Nested
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial interface IOutter<T1>
                     {
                         partial class Inner<T2>
                         {
                             public override bool Equals(object other)
                             {
-                                return Equals(other as Inner<T2>);
+                                return Equals(other as global::Valuify.Classes.Testing.IOutter<T1>.Inner<T2>);
                             }
                         }
                     }
@@ -64,13 +58,10 @@ internal static partial class Nested
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial interface IOutter<T1>
                     {
                         partial class Inner<T2>
-                            : IEquatable<Inner<T2>>
+                            : global::System.IEquatable<global::Valuify.Classes.Testing.IOutter<T1>.Inner<T2>>
                         {
                         }
                     }
@@ -83,27 +74,24 @@ internal static partial class Nested
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial interface IOutter<T1>
                     {
                         partial class Inner<T2>
                         {
-                            public bool Equals(Inner<T2> other)
+                            public bool Equals(global::Valuify.Classes.Testing.IOutter<T1>.Inner<T2> other)
                             {
-                                if (ReferenceEquals(this, other))
+                                if (global::System.Object.ReferenceEquals(this, other))
                                 {
                                     return true;
                                 }
-                
-                                if (ReferenceEquals(other, null))
+
+                                if (global::System.Object.ReferenceEquals(other, null))
                                 {
                                     return false;
                                 }
-                
-                                return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(Age, other.Age)
-                                    && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(Name, other.Name);
+
+                                return global::System.Collections.Generic.EqualityComparer<T1>.Default.Equals(this.Age, other.Age)
+                                    && global::System.Collections.Generic.EqualityComparer<T2>.Default.Equals(this.Name, other.Name);
                             }
                         }
                     }
@@ -116,9 +104,6 @@ internal static partial class Nested
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-        
                     partial interface IOutter<T1>
                     {
                         partial class Inner<T2>
@@ -138,14 +123,11 @@ internal static partial class Nested
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial interface IOutter<T1>
                     {
                         partial class Inner<T2>
                         {
-                            public static bool operator !=(Inner<T2> left, Inner<T2> right)
+                            public static bool operator !=(global::Valuify.Classes.Testing.IOutter<T1>.Inner<T2> left, global::Valuify.Classes.Testing.IOutter<T1>.Inner<T2> right)
                             {
                                 return !(left == right);
                             }
@@ -160,9 +142,6 @@ internal static partial class Nested
                 """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial interface IOutter<T1>
                     {
                         partial class Inner<T2>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Valuify {
+namespace Valuify.Visitors {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Valuify {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ClassGenerator_Resources {
+    internal class GenerateEqualityOperatorWhenSubjectVisited_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ClassGenerator_Resources() {
+        internal GenerateEqualityOperatorWhenSubjectVisited_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Valuify {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.ClassGenerator.Resources", typeof(ClassGenerator_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.Visitors.GenerateEqualityOperatorWhenSubjectVisited.Resources", typeof(GenerateEqualityOperatorWhenSubjectVisited_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,21 @@ namespace Valuify {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to namespace {0}
-        ///{{
-        ///    {1}
-        ///}}.
-        /// </summary>
-        internal static string Namespace {
-            get {
-                return ResourceManager.GetString("Namespace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} {1}
-        ///{{
-        ///    {2}
-        ///}}.
-        /// </summary>
-        internal static string Nest {
-            get {
-                return ResourceManager.GetString("Nest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to using System;
-        ///using System.Collections.Generic;
+        ///   Looks up a localized string similar to if (global::System.Object.ReferenceEquals(left, right))
+        ///{
+        ///    return true;
+        ///}
         ///
-        ///{0}.
+        ///if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
+        ///{
+        ///    return false;
+        ///}
+        ///
+        ///return left.Equals(right);.
         /// </summary>
-        internal static string Wrap {
+        internal static string Source {
             get {
-                return ResourceManager.GetString("Wrap", resourceCulture);
+                return ResourceManager.GetString("Source", resourceCulture);
             }
         }
     }

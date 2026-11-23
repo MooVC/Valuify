@@ -118,18 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Source" xml:space="preserve">
-    <value>partial class {0}
-{{
-    public override int GetHashCode()
-    {{
-        return global::Valuify.Internal.HashCode.Combine({1});
-    }}
-}}</value>
-  </data>
-  <data name="SequenceHashCode" xml:space="preserve">
-    <value>global::Valuify.Internal.SequenceEqualityComparer.Default.GetHashCode({0})</value>
-  </data>
-  <data name="ValueHashCode" xml:space="preserve">
-    <value>global::Valuify.Internal.HashCode.GetHashCode({0})</value>
+    <value>return Equals(other as {0});</value>
   </data>
 </root>

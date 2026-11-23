@@ -21,10 +21,13 @@ namespace Valuify.Semantics
         /// <param name="nesting">
         /// The declaration syntax for the parents of the <paramref name="syntax"/>.
         /// </param>
+        /// <param name="type">
+        /// The type reference as resolved in the subject's declaration.
+        /// </param>
         /// <returns>
         /// An instance of <see cref="Subject"/> containing the required semantics.
         /// </returns>
-        public static Subject ToSubject(this INamedTypeSymbol @class, Compilation compilation, IReadOnlyList<Nesting> nesting)
+        public static Subject ToSubject(this INamedTypeSymbol @class, Compilation compilation, IReadOnlyList<Nesting> nesting, string type)
         {
             string @namespace = @class.ContainingNamespace.IsGlobalNamespace
                ? string.Empty
@@ -44,6 +47,7 @@ namespace Valuify.Semantics
                 Nesting = nesting,
                 Properties = @class.GetProperties(compilation),
                 Qualification = @class.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                Type = type,
             };
         }
     }

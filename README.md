@@ -31,8 +31,8 @@ public partial class GenerationInput
 
 ## Requirements
 
-- C# v2.0 or later.
-- Visual Studio 2022 v17.0 or later, or any compatible IDE that supports Roslyn source generators.
+- C# 2.0 or later for generated code.
+- .NET 10 or .NET 11 SDK for building projects that reference Valuify.
 
 ## Installation
 

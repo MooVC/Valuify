@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Valuify.Strategies {
+namespace Valuify.Visitors {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Valuify.Strategies {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ToStringStrategy_Resources {
+    internal class GenerateToStringOverrideWhenSubjectVisited_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ToStringStrategy_Resources() {
+        internal GenerateToStringOverrideWhenSubjectVisited_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Valuify.Strategies {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.Strategies.ToStringStrategy.Resources", typeof(ToStringStrategy_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Valuify.Visitors.GenerateToStringOverrideWhenSubjectVisited.Resources", typeof(GenerateToStringOverrideWhenSubjectVisited_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,15 @@ namespace Valuify.Strategies {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to return {0};.
+        /// </summary>
+        internal static string Body {
+            get {
+                return ResourceManager.GetString("Body", resourceCulture);
             }
         }
         
@@ -84,21 +93,6 @@ namespace Valuify.Strategies {
         internal static string PropertyValue {
             get {
                 return ResourceManager.GetString("PropertyValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to partial class {0}
-        ///{{
-        ///    public override string ToString()
-        ///    {{
-        ///        return {1};
-        ///    }}
-        ///}}.
-        /// </summary>
-        internal static string Source {
-            get {
-                return ResourceManager.GetString("Source", resourceCulture);
             }
         }
         

@@ -118,12 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Source" xml:space="preserve">
-    <value>partial class {0}
-{{
-    public static bool operator !=({0} left, {0} right)
-    {{
-        return !(left == right);
-    }}
-}}</value>
+    <value>if (global::System.Object.ReferenceEquals(left, right))
+{
+    return true;
+}
+
+if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
+{
+    return false;
+}
+
+return left.Equals(right);</value>
   </data>
 </root>

@@ -8,23 +8,20 @@ internal static partial class EquatableSequence
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class EquatableSequence
                     {
-                        public static bool operator ==(EquatableSequence left, EquatableSequence right)
+                        public static bool operator ==(global::Valuify.Classes.Testing.EquatableSequence left, global::Valuify.Classes.Testing.EquatableSequence right)
                         {
-                            if (ReferenceEquals(left, right))
+                            if (global::System.Object.ReferenceEquals(left, right))
                             {
                                 return true;
                             }
-                
-                            if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+
+                            if (global::System.Object.ReferenceEquals(left, null) || global::System.Object.ReferenceEquals(right, null))
                             {
                                 return false;
                             }
-                
+
                             return left.Equals(right);
                         }
                     }
@@ -37,14 +34,11 @@ internal static partial class EquatableSequence
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class EquatableSequence
                     {
                         public override bool Equals(object other)
                         {
-                            return Equals(other as EquatableSequence);
+                            return Equals(other as global::Valuify.Classes.Testing.EquatableSequence);
                         }
                     }
                 }
@@ -56,11 +50,8 @@ internal static partial class EquatableSequence
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class EquatableSequence
-                        : IEquatable<EquatableSequence>
+                        : global::System.IEquatable<global::Valuify.Classes.Testing.EquatableSequence>
                     {
                     }
                 }
@@ -72,24 +63,21 @@ internal static partial class EquatableSequence
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class EquatableSequence
                     {
-                        public bool Equals(EquatableSequence other)
+                        public bool Equals(global::Valuify.Classes.Testing.EquatableSequence other)
                         {
-                            if (ReferenceEquals(this, other))
+                            if (global::System.Object.ReferenceEquals(this, other))
                             {
                                 return true;
                             }
-                
-                            if (ReferenceEquals(other, null))
+
+                            if (global::System.Object.ReferenceEquals(other, null))
                             {
                                 return false;
                             }
-                
-                            return global::System.Collections.Generic.EqualityComparer<global::Valuify.Classes.Testing.EquatableCollection>.Default.Equals(Values, other.Values);
+
+                            return global::System.Collections.Generic.EqualityComparer<global::Valuify.Classes.Testing.EquatableCollection>.Default.Equals(this.Values, other.Values);
                         }
                     }
                 }
@@ -101,9 +89,6 @@ internal static partial class EquatableSequence
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-        
                     partial class EquatableSequence
                     {
                         public override int GetHashCode()
@@ -120,12 +105,9 @@ internal static partial class EquatableSequence
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class EquatableSequence
                     {
-                        public static bool operator !=(EquatableSequence left, EquatableSequence right)
+                        public static bool operator !=(global::Valuify.Classes.Testing.EquatableSequence left, global::Valuify.Classes.Testing.EquatableSequence right)
                         {
                             return !(left == right);
                         }
@@ -139,9 +121,6 @@ internal static partial class EquatableSequence
             """
                 namespace Valuify.Classes.Testing
                 {
-                    using System;
-                    using System.Collections.Generic;
-
                     partial class EquatableSequence
                     {
                         public override string ToString()
