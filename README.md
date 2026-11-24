@@ -32,7 +32,7 @@ public partial class GenerationInput
 ## Requirements
 
 - C# 2.0 or later for generated code.
-- .NET 11 SDK or later for building projects that reference Valuify. Generated code can target earlier frameworks.
+- .NET 10 SDK or later for building projects that reference Valuify. Generated code can target earlier frameworks.
 
 ## Installation
 

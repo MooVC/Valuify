@@ -14,22 +14,22 @@ namespace Valuify.Semantics
         /// comparison.
         /// </summary>
         /// <remarks>Two null references are considered equal. Comparison uses StringComparer.Ordinal on the Name property.</remarks>
-        /// <param name="left">The first IPropertySymbol to compare.</param>
-        /// <param name="right">The second IPropertySymbol to compare.</param>
+        /// <param name="x">The first IPropertySymbol to compare.</param>
+        /// <param name="y">The second IPropertySymbol to compare.</param>
         /// <returns>True if both symbols are equal; otherwise, false.</returns>
-        public bool Equals(IPropertySymbol left, IPropertySymbol right)
+        public bool Equals(IPropertySymbol x, IPropertySymbol y)
         {
-            if (ReferenceEquals(left, right))
+            if (ReferenceEquals(x, y))
             {
                 return true;
             }
 
-            if (left is null || right is null)
+            if (x is null || y is null)
             {
                 return false;
             }
 
-            return StringComparer.Ordinal.Equals(left.Name, right.Name);
+            return StringComparer.Ordinal.Equals(x.Name, y.Name);
         }
 
         /// <summary>
@@ -38,11 +38,11 @@ namespace Valuify.Semantics
         /// <remarks>
         /// Computes the hash using StringComparer.Ordinal.GetHashCode on obj.Name. Requires obj and its Name to be non-null.
         /// </remarks>
-        /// <param name="property">The property symbol whose Name is used to compute the hash code.</param>
+        /// <param name="obj">The property symbol whose Name is used to compute the hash code.</param>
         /// <returns>A 32-bit signed integer hash code for the specified property symbol.</returns>
-        public int GetHashCode(IPropertySymbol property)
+        public int GetHashCode(IPropertySymbol obj)
         {
-            return StringComparer.Ordinal.GetHashCode(property.Name);
+            return StringComparer.Ordinal.GetHashCode(obj.Name);
         }
     }
 }
